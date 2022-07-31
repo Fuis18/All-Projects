@@ -2,7 +2,7 @@
 // Variables
 let form = document.querySelector(".form");
 let fragment = document.createDocumentFragment();
-let veces = 16;
+let veces = 17;
 // Funciones
 buildkey = (i) => {
 	h3 = `<h3>${buildH3(i)}</h3>`;
@@ -39,6 +39,7 @@ buildH3 = (i) => {
 	if (i == 14) return "FileRieder, Drag & Drop, Barra de progreso";
 	if (i == 15) return "IndexDB + Drag & Drop";
 	if (i == 16) return "Lazy Load";
+	if (i == 17) return "Bucle Host http";
 }
 // Ejecucción
 for (let i = 1; i <= veces; i++) {
@@ -96,65 +97,132 @@ clickboton2 = () => {
 clickboton3 = () => {
 	let container = document.querySelector(".desarrollo__div");
 	let fragment1 = document.createDocumentFragment();
-	let a = parseInt(prompt("Cantidad"));
-	let b = prompt("Dato que estable: antes de la iteracion");
-	if (a > 500000) {
-		alert("Su operación es muy grande para poder ejecutarla")
-	} else {
-		if (window.confirm("¿Con los numeros?")) {
-			let c = prompt("Dato que estable: luego de la iteracion");
-			let answer;
-			if (window.confirm("¿Con Cero(s) adelante?")) {
-				for (let i = 0; i <= a; i++) {
-					let div = document.createElement("DIV");
-					div.classList.add("div3");
-					let i9_i100 = i > 9 && i < 100;
-					let i99_i1000 = i > 99 && i < 1000;
-					let a99_a1000 = a > 99 && a < 1000;
-					let l999_l10000 = a > 999 && a < 10000;
-					let a9999_a100000 = a > 9999 && a < 100000;
-					let d0 = `<p>${b}0${i}${c}</p>`;
-					let d00 = `<p>${b}00${i}${c}</p>`;
-					let d000 = `<p>${b}000${i}${c}</p>`;
-					// 00 - 99
-					if (i < 10 && a < 100) answer = d0;
-					// 000 - 999
-					else if (i < 10 && a99_a1000) answer = d00;
-					else if (i9_i100 && a99_a1000) answer = d0;
-					// 0000 - 9999
-					else if (i < 10 && l999_l10000) answer = d000;
-					else if (i9_i100 && l999_l10000) answer = d00;
-					else if (i99_i1000 && l999_l10000) answer = d0;
-					// 00000 - 99999
-					else if (i < 10 && a9999_a100000) answer = `<p>${b}0000${i}${c}</p>`;
-					else if (i9_i100 && a9999_a100000) answer = d000;
-					else if (i99_i1000 && a9999_a100000) answer = d00;
-					else if (i > 999 && i < 10000 && a9999_a100000) answer = d0;
-					// last
-					else answer = `<p>${b}${i}${c}</p>`
-					div.innerHTML = answer;
-					fragment1.appendChild(div);
+	validarCantidad = () => {
+		if (document.querySelector(".cantidad__input3").value > 50000) {
+			document.querySelector(".cantidad__mucho-error3").classList.remove("error-inactive3");
+			document.querySelector(".cantidad__mucho-error3").classList.add("error-active3");
+		} else if (document.querySelector(".cantidad__input3").value == 0 || document.querySelector(".cantidad__input3").value == "") {
+			document.querySelector(".cantidad__poco-error3").classList.remove("error-inactive3");
+			document.querySelector(".cantidad__poco-error3").classList.add("error-active3");
+		} else{
+			document.querySelector(".cantidad__poco-error3").classList.remove("error-active3");
+			document.querySelector(".cantidad__poco-error3").classList.add("error-inactive3");
+			document.querySelector(".cantidad__mucho-error3").classList.remove("error-active3");
+			document.querySelector(".cantidad__mucho-error3").classList.add("error-inactive3");
+		}
+	}
+	container.innerHTML = `
+	<div class="container3">
+		<div>Cantidad:</div>
+		<input type="number" class="cantidad__input3" value="0">
+		<div class="cantidad__mucho-error3 error-inactive3">La cantidad no puede ser mayor a 50000</div>
+		<div class="cantidad__poco-error3 error-inactive3">La cantidad debe ser mayor a 0</div>
+		<div>En listado:
+			<input type="checkbox" class="listado__input3">
+		</div>
+		<div>Dato estable antes de la iteración:</div>
+		<input type="text" class="antes__input3">
+		<div>Con números:
+			<div class="numeros__input3 button__inactive3"></div>
+		</div>
+		<div class="luego3 none3">Dato estable luego de la iteración:
+		</div>
+		<input type="text" class="luego__input3 none3">
+		<div class="ceros3 none3">Con Cero(s) adelante:
+			<input type="checkbox" class="ceros__input3">
+		</div>
+		<input type="submit" class="submit3">
+	</div>`;
+	document.querySelector(".numeros__input3").addEventListener("click",()=> {
+		if (document.querySelector(".button__inactive3")) {
+			document.querySelector(".luego3").classList.remove("none3");
+			document.querySelector(".luego__input3").classList.remove("none3");
+			document.querySelector(".ceros3").classList.remove("none3");
+			document.querySelector(".numeros__input3").classList.remove("button__inactive3");
+			document.querySelector(".luego3").classList.add("block3");
+			document.querySelector(".luego__input3").classList.add("block3");
+			document.querySelector(".ceros3").classList.add("block3");
+			document.querySelector(".numeros__input3").classList.add("button__active3");
+		} else {
+			document.querySelector(".luego3").classList.remove("block3");
+			document.querySelector(".luego__input3").classList.remove("block3");
+			document.querySelector(".ceros3").classList.remove("block3");
+			document.querySelector(".numeros__input3").classList.remove("button__active3");
+			document.querySelector(".luego3").classList.add("none3");
+			document.querySelector(".luego__input3").classList.add("none3");
+			document.querySelector(".ceros3").classList.add("none3");
+			document.querySelector(".numeros__input3").classList.add("button__inactive3");
+		}
+	})
+	document.querySelector(".cantidad__input3").addEventListener("keyup", validarCantidad);
+	document.querySelector(".cantidad__input3").addEventListener("blur", validarCantidad);
+	document.querySelector(".submit3").addEventListener("click",()=> {
+		if (document.querySelector(".error-active3") == null && document.querySelector(".cantidad__input3").value != 0) {		
+			let cantidad = document.querySelector(".cantidad__input3").value;
+			let listado = document.querySelector(".listado__input3").checked;
+			let antes = document.querySelector(".antes__input3").value;
+			if (document.querySelector(".numeros__input3").className == "numeros__input3 button__active3") {
+				let answer;
+				let luego = document.querySelector(".luego__input3").value;
+				let ceros = document.querySelector(".ceros__input3").checked;
+				if (ceros) {
+					for (let i = 0; i <= cantidad; i++) {
+						let div = document.createElement("DIV");
+						if (listado) div.classList.add("div3-block");
+						else div.classList.add("div3-inline")
+						let i9_i100 = i > 9 && i < 100;
+						let i99_i1000 = i > 99 && i < 1000;
+						let a99_a1000 = cantidad > 99 && cantidad < 1000;
+						let l999_l10000 = cantidad > 999 && cantidad < 10000;
+						let a9999_a100000 = cantidad > 9999 && cantidad < 100000;
+						let d0 = `${antes}0${i}${luego}`;
+						let d00 = `${antes}00${i}${luego}`;
+						let d000 = `${antes}000${i}${luego}`;
+						// 00 - 99
+						if (i < 10 && cantidad < 100) answer = d0;
+						// 000 - 999
+						else if (i < 10 && a99_a1000) answer = d00;
+						else if (i9_i100 && a99_a1000) answer = d0;
+						// 0000 - 9999
+						else if (i < 10 && l999_l10000) answer = d000;
+						else if (i9_i100 && l999_l10000) answer = d00;
+						else if (i99_i1000 && l999_l10000) answer = d0;
+						// 00000 - 99999
+						else if (i < 10 && a9999_a100000) answer = `${antes}0000${i}${luego}`;
+						else if (i9_i100 && a9999_a100000) answer = d000;
+						else if (i99_i1000 && a9999_a100000) answer = d00;
+						else if (i > 999 && i < 10000 && a9999_a100000) answer = d0;
+						// last
+						else answer = antes + i + luego;
+						div.innerHTML = answer;
+						fragment1.appendChild(div);
+					}
+				} else {
+					for (let i = 0; i <= cantidad; i++) {
+						let div = document.createElement("DIV");
+						if (listado) div.classList.add("div3-block");
+						else div.classList.add("div3-inline")
+						answer = antes + i + luego;
+						div.innerHTML = answer;
+						fragment1.appendChild(div);
+					}
 				}
 			} else {
-				for (let i = 0; i <= a; i++) {
+				for (let i = 0; i <= cantidad; i++) {
 					let div = document.createElement("DIV");
-					div.classList.add("div3");
-					answer = `<p>${b}${i}${c}</p>`
+					if (listado) div.classList.add("div3-block");
+					else div.classList.add("div3-inline")
+					answer = antes;
 					div.innerHTML = answer;
 					fragment1.appendChild(div);
 				}
 			}
+			container.appendChild(fragment1)
+			container.removeChild(document.querySelector(".container3"));
 		} else {
-			for (let i = 0; i <= a; i++) {
-				let div = document.createElement("DIV");
-				div.classList.add("div3");
-				answer = `<p>${b}</p>`
-				div.innerHTML = answer;
-				fragment1.appendChild(div);
-			}
+			console.log("this4")
 		}
-		container.appendChild(fragment1);
-	}
+	})
 }
 // Proyecto 4
 clickboton4 = () => {
@@ -635,7 +703,7 @@ clickboton11 = () => {
 			document.querySelector(".min").textContent = addZeros(time.getMinutes());
 			document.querySelector(".seg").textContent = addZeros(time.getSeconds());
 			document.querySelector(".dia").textContent = addZeros(time.getDate());
-			document.querySelector(".mes").textContent = addZeros(time.getMonth()) + 1;
+			document.querySelector(".mes").textContent = addZeros(time.getMonth() + 1);
 			document.querySelector(".year").textContent = addZeros(time.getYear()) + 1900;
 		}
 	}
@@ -1221,5 +1289,54 @@ clickboton16 = () => {
 }
 // Poryecto 17
 clickboton17 = () => {
+	let container = document.querySelector(".desarrollo__div");
+	const fragment17 = document.createDocumentFragment();
+	container.innerHTML = `
+		<div class="div17">
+			<div>Número de IP:</div>
+			<input type="text" class="number17">
+			<div>Cantidad Deseada:</div>
+			<input type="number" class="amount17">
+			<div class="result17"></div>
+			<div>Rellenar con HTTPS:
+				<input type="checkbox" class="boolean17">
+			</div>
+			<input type="submit" class="button17">
+		</div>`;
+	document.querySelector(".button17").addEventListener("click",()=>{
+		let amount = document.querySelector(".amount17").value;
+		const node = document.createElement("div");
+		for (let i = 0; i < amount; i++) {
+			let number = document.querySelector(".number17").value;
+			let result = prompt("Dime tu URL:");
+			let space = String.fromCharCode(160) + '\xa0' + '\xa0' + '\xa0' + '\xa0' + '\xa0' + '\xa0';
+			let p0 = document.createElement("div");
+			let p1 = document.createElement("div");
+			if (document.querySelector(".boolean17").checked) {
+				p0.textContent = number + space + "https://www." + result;
+				p1.textContent = number + space + "https://" + result;
+			} else {
+				p0.textContent = number + space + "http://www." + result;
+				p1.textContent = number + space + "http://" + result;
+			}
+			let p2 = document.createElement("div");
+			p2.textContent = number + space + "www." + result;
+			let p3 = document.createElement("div");
+			p3.textContent = number + space + result;
+			node.classList.add("div3");
+			node.appendChild(p0);
+			node.appendChild(p1);
+			node.appendChild(p2);
+			node.appendChild(p3);
+			fragment17.appendChild(node);
+		}
+		container.removeChild(document.querySelector(".div17"))
+		container.appendChild(fragment17);
+	})
+}
+// Poryecto 18
+clickboton18 = () => {
+	let container = document.querySelector(".desarrollo__div");
+	const fragment18 = document.createDocumentFragment();
 	container.innerHTML = ``;
 }

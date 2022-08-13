@@ -1513,8 +1513,13 @@ clickboton18 = () => {
 		if (name.length > 0 && amount > 0 && !date == "") {
 		let calculated = calculateMath(year, month, day, amount);
 		let keys = document.querySelectorAll(".f18__update-div");
+		console.log(keys);
 		let key = keys.length - 1;
-		let idKey = parseInt(keys[key].id) + 1;
+		console.log(key);
+		let subKey = keys[key];
+		console.log(subKey);
+		let idKey = parseInt(subKey.id) + 1;
+		console.log(idKey);
 		const fragment = document.createDocumentFragment();
 			if (document.querySelector(".possibly") != undefined) {
 				if (confirm("Hay Elementos sin guardar: ¿Quiéres continuar?")) {

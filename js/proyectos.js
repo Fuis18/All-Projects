@@ -1513,12 +1513,12 @@ clickboton18 = () => {
 		if (name.length > 0 && amount > 0 && !date == "") {
 		let calculated = calculateMath(year, month, day, amount);
 		let keys = document.querySelectorAll(".f18__update-div");
-		let key = keys.length;
+		let key = keys.length - 1;
 		let idKey;
-		if (key == 0) {
+		if (key == -1) {
 			idKey = 0;
 		} else {
-			idKey = parseInt(keys[key].id);
+			idKey = parseInt(keys[key].id + 1);
 		}
 		const fragment = document.createDocumentFragment();
 			if (document.querySelector(".possibly") != undefined) {

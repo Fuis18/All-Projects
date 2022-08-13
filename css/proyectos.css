@@ -6,6 +6,7 @@
 body {
 	min-height: 100vh;
 	padding: 12px;
+	min-width: 210px;
 }
 main {
 	background: #9f9;
@@ -13,76 +14,19 @@ main {
 h1 {
 	text-align: center;
 }
-.container {
-	padding: 12px;
+h2 {
+	text-align: center;
 }
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
 	width: 6px;
 	/*height: 6px;*/
 }
-body::-webkit-scrollbar-thumb {
-    background-color: #555b;
+::-webkit-scrollbar-thumb {
+    background-color: #5558;
 }
-.div1 {
-	display: flex;
-	/*align-items: center;*/
-}
-.container1 {
-	display: grid;
-	grid-template-columns: 70px 70px;
-	max-width: 300px;
-}
-.container1 input {
-	padding: 10px;
-}
-.envio1 {
-	padding: 15px;
-}
-.envio1 button {
-	width: 35px;
-	height: 38px;
-	font-size: 35px;
-}
-.input1-down {
-	grid-column: 1 / 3;
-}
-.div3-inline {
-	display: inline-block;
-	margin: 0 10px;
-	font-family: monospace;
-}
-.div3-block {
-	display: block;
-	margin: 0 10px;
-	font-family: monospace;
-}
-.none3 {
-	display: none;
-}
-.block3 {
-	display: block;
-}
-.numeros__input3 {
-	width: 12px;
-	height: 12px;
-	border-radius: 20%;
-	display: inline-block;
-}
-.button__inactive3 {
-	border:  1px solid #a11;
-	background: #d11;
-}
-.button__active3 {
-	border: 1px solid #11a;
-	background:  #11d;
-}
-.error-active3 {
-	display: block;
-	font-size: 12px;
-	color: #a11;
-}
-.error-inactive3 {
-	display: none;
+/*Desarrollo*/
+.container {
+	padding: 12px;
 }
 .form {
 	display: flex;
@@ -113,49 +57,145 @@ body::-webkit-scrollbar-thumb {
 	height: 30px;
 	margin: auto;
 }
+/*Generalidades*/
+.flex {
+	display: flex;
+}
+/*Proyecto 1*/
+.f1__container {
+	display: grid;
+	grid-template-columns: 70px 70px;
+	max-width: 300px;
+}
+.f1__container input {
+	padding: 10px;
+}
+.f1__answer {
+	padding: 15px;
+}
+.f1__answer button {
+	width: 35px;
+	height: 38px;
+	font-size: 35px;
+}
+.f1__input1-down {
+	grid-column: 1 / 3;
+}
+/*Proyecto 2*/
+.f2 {
+	display: flex;
+	justify-content: space-between;
+	padding: 0 45px;
+}
+.f2__firstValue-input, .f2__secondValue-input, .f2__thirdValue-input, .f2__unknownValue-input {
+	width: 40px;
+}
+.f2__zeroValue-input {
+	width: 13px;
+	height: 13px;
+	border-radius: 20%;
+	display: inline-block;
+}
+.f2__zeroValue-input:hover {
+	cursor: pointer;
+}
+.f2__button-inactive {
+	border:  1px solid #a11;
+	background: #d11;
+}
+.f2__button-active {
+	border: 1px solid #11a;
+	background:  #11d;
+}
+.f2__none {
+	display: none;
+}
+.f2__block {
+	display: block;
+}
+/*Proyecto 3*/
+.f3__div-inline {
+	display: inline-block;
+	margin: 0 10px;
+	font-family: monospace;
+}
+.f3__div-block {
+	display: block;
+	margin: 0 10px;
+	font-family: monospace;
+}
+.f3__none {
+	display: none;
+}
+.f3__block {
+	display: block;
+}
+.f3__numbers-input {
+	width: 13px;
+	height: 13px;
+	border-radius: 20%;
+	display: inline-block;
+}
+.f3__numbers-input:hover {
+	cursor: pointer;;
+}
+.f3__button-inactive {
+	border:  1px solid #a11;
+	background: #d11;
+}
+.f3__button-active {
+	border: 1px solid #11a;
+	background:  #11d;
+}
+.f3__error-active {
+	display: block;
+	font-size: 12px;
+	color: #a11;
+}
+.f3__error-inactive {
+	display: none;
+}
 /*Proyecto 8*/
-.form8 {
+.f8 {
 	display: grid;
 	grid-template-columns: 1fr;
 }
-.from8_display {
+.f8__display {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
-.form8 label {
+.f8 label {
 	margin: 10px;
 	text-align: center;
 }
-.from8_button {
+.f8__button {
 	border-radius: 5px;
 	width: 40px;
 	height: 20px
 }
-.form8__div {
+.f8__div {
 	display: flex;
 	justify-content: space-around;
 }
-#inTemperatur, #inFood, .form8__div {
+#inTemperatur, #inFood, .f8__div {
 	width: 70%;
 }
 /*Proyecto 9*/
-.input9 {
+.f9__input {
 	outline: none;
 	margin:  10px;
 	padding: 5px;
 	border-radius: 10px;
 }
-h2 {
-	text-align: center;
-}
-.reloj {
+/*Proyecto 11*/
+.f11__reloj {
 	background: linear-gradient(#111,#666);
 	border: 1px solid #000;
 	display: inline-flex;
 	border-radius: 8px;
 }
-.reloj div {
+.f11__reloj div {
 	color: #fff;
 	padding: 5px 7px;
 	font-size: 30px;
@@ -163,10 +203,11 @@ h2 {
 	border: 1px solid #000;
 	border-radius: 8px;
 }
-.button11 {
+.f11__button {
 	border-radius: 8px;
 	padding: 5px 7px;
 }
+/*Proyecto 12*/
 .modal-overlay {
 	background: rgba(0, 0, 0, 0.7);
 	width: 100%;
@@ -193,22 +234,7 @@ h2 {
 .remove {
 	display: none;
 }
-@keyframes aparecer {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
-}
-@keyframes desaparecer {
-	from {
-		opacity: 1;
-	}
-	to {
-		opacity: 0;
-	}
-}
+/*Proyecto 13*/
 .textures {
 	margin: 10px;
 	border: 1px solid #000;
@@ -235,6 +261,7 @@ h2 {
 	background: #ddd;
 	height: 200px;
 }
+/*Proyecto 14*/
 .container14, .loading-bar14 {
 	padding: 60px 20px;
 	border: 4px dashed #222;
@@ -356,4 +383,101 @@ h2 {
 }
 .button17 {
 	padding: 5px;
+}
+/*Proyecto 18*/
+.f18 {
+	display: flex;
+}
+.f18__add {
+	flex-grow: 1;
+	margin-right: 18px;
+}
+.f18__update {
+	flex-grow: 10;
+	overflow-y: auto;
+	max-height: 255px; /*55 * 5*/
+}
+.f18__update-div {
+	display: flex;
+	justify-content: space-between;
+}
+.f18__update h3 {
+	text-align-last: center;
+}
+.f18__update-name {
+	margin: auto 0;
+	color: #48e;
+	outline-color: #48e;
+	width: 150px;
+	text-align: center;
+}
+.f18__update-optionsMaths, .f18__update-optionsButtons {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+}
+.f18__update-toUpdate, .f18__update-delete {
+	background: transparent;
+	border: none;
+	margin: 4px 10px;
+	outline: none;
+	cursor: pointer;
+	border-bottom: 2px solid #0006;
+}
+.f18__update-toUpdate:hover {
+	color: #6af;
+	border-bottom: 2px solid #6af;
+}
+.f18__update-delete:hover {
+	color: #999;
+	border-bottom: 2px solid #999;
+}
+/*Responsive*/
+@media screen and (max-width: 570px) {
+	.flex, .f18, .f11__reloj {
+		flex-direction: column;
+	}
+}
+/*Animaciones*/
+@keyframes aparecer {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+@keyframes desaparecer {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+::-webkit-inner-spin-button { 
+  display:none;
+}
+::-webkit-calendar-picker-indicator {
+	background-color:white
+}
+::-webkit-datetime-edit-text {
+	color:#555555
+}
+::-webkit-datetime-edit-month-field {
+	color:#555555 
+}
+::-webkit-datetime-edit-day-field {
+	color: #555555; 
+}
+::-webkit-datetime-edit-year-field {
+	color:#555555; 
+}
+::-webkit-calendar-picker-indicator { 
+  background-image: url(http://icons.iconarchive.com/icons/dakirby309/simply-styled/256/Calendar-icon.png);
+      background-position:center;
+       background-size:20px 20px;
+       background-repeat:no-repeat;
+      color:rgba(204,204,204,0);
 }

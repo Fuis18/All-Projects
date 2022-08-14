@@ -503,9 +503,40 @@ h2 {
 	border-bottom: 2px solid #c84;
 }
 /*Responsive*/
-@media screen and (max-width: 570px) {
+@media screen and (max-width: 900px) {
 	.flex, .f18, .f11__reloj {
 		flex-direction: column;
+	}
+	.f18 {
+		align-items: center;
+	}
+	.f18__add {
+		margin: none;
+	}
+	.f18__update-div {
+		height: 298px;
+		grid-template-columns: none;
+		justify-items: center;
+	}
+	.f18__update {
+		max-height: 889px; /*298 * 3 + 22*/
+	}
+	.f18__update-optionsMaths {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+	}
+	.f18__update-optionsButtons {
+		grid-gap: initial;
+		height: 60px;
+	}
+}
+@media screen and (max-width: 370px) {
+	.f18__update-div {
+		height: 314px;
+	}
+	.f18__update {
+		max-height: 964px; /*314 * 3 + 22*/
 	}
 }
 /*Animaciones*/

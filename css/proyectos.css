@@ -31,7 +31,7 @@ h2 {
 .form {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-evenly;
+	justify-content: space-around;
 	padding: 10px;
 }
 .input {
@@ -395,11 +395,15 @@ h2 {
 .f18__update {
 	flex-grow: 10;
 	overflow-y: auto;
-	max-height: 255px; /*55 * 5*/
+	max-height: 400px; /*126 * 3 + 22*/
 }
 .f18__update-div {
-	display: flex;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: 10fr 1fr;
+	padding: 10px 0;
+	height: 126px;
+	border-top: 1px solid #333;
+	align-items: center;
 }
 .f18__update h3 {
 	text-align-last: center;
@@ -408,30 +412,95 @@ h2 {
 	margin: auto 0;
 	color: #48e;
 	outline-color: #48e;
-	width: 150px;
+	min-width: 150px;
 	text-align: center;
 }
-.f18__update-optionsMaths, .f18__update-optionsButtons {
+.f18__update-percentage {
 	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
+	justify-content: center;
 	align-items: center;
 }
-.f18__update-toUpdate, .f18__update-delete {
+.f18__update-percentageInput {
+	width: 50px;
+	border: none;
+	background: #1115;
+	text-align: end;
+}
+.f18__update-containerProgress {
+	display: flex;
+	grid-column: 1 / 3;
+	background: #343;
+	border-radius: 15px;
+	width: 100%;
+	height: 25px;
+	padding: 0 3px;
+	align-items: center;
+}
+.f18__update-theProgress {
+	height: 19px;
+	border-radius: 15px;
+	background: linear-gradient(90deg, #111, #1d1);
+	animation: upLoad 2s forwards;
+}
+.f18__update-theProgress::before {
+	content: '';
+	display: block;
+    width: 100%;
+    height: 100%;
+    background-size: 30px 30px;
+    background-image: linear-gradient(135deg, #fff2 25%, transparent 25%,
+    	transparent 50%, #fff2 50%, #fff2 75%, transparent 75%, transparent);
+    animation: animate-stripes 0.6s linear infinite;
+    background-color: #000;
+    opacity: 0.75;
+    mix-blend-mode: overlay;
+    border-radius: 50px
+}
+.f18__update-containerProgress:hover {
+	border: 1px solid #999;
+}
+.f18__update-optionsMaths {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 4px 8px;
+	align-items: center;
+}
+.f18__update-optionsButtons {
+	display: grid;
+	grid-template-columns: repeat(2, 70px);
+	align-items: center;
+	grid-gap: 10px 0;
+}
+.f18__update-toUpdate, .f18__update-toUpdated, .f18__update-save, .f18__update-saved, .f18__update-delete {
 	background: transparent;
 	border: none;
-	margin: 4px 10px;
-	outline: none;
+	margin: 0 6px;
 	cursor: pointer;
-	border-bottom: 2px solid #0006;
+	border-bottom: 2px solid #0004;
+}
+.f18__update-toUpdate, .f18__update-toUpdated {
+	grid-column: 1 / 3;
 }
 .f18__update-toUpdate:hover {
-	color: #6af;
-	border-bottom: 2px solid #6af;
+	color: #48c;
+	border-bottom: 2px solid #48c;
+}
+.f18__update-saved, .f18__update-toUpdated {
+	color: #ccc;
+	border-bottom: 2px solid #ccc;
+	cursor: default;
+}
+.f18__update-save {
+	color: #4c8;
+	border-bottom: 2px solid #4c8;
+}
+.f18__update-save:hover {
+	color: #4ec;
+	border-bottom: 2px solid #4ec;
 }
 .f18__update-delete:hover {
-	color: #999;
-	border-bottom: 2px solid #999;
+	color: #c84;
+	border-bottom: 2px solid #c84;
 }
 /*Responsive*/
 @media screen and (max-width: 570px) {
@@ -454,6 +523,19 @@ h2 {
 	}
 	to {
 		opacity: 0;
+	}
+}
+@keyframes upLoad {
+	0% {
+		width: 0;
+	}
+}
+@keyframes animate-stripes {
+	0% {
+	    background-position: 0 0;
+	}
+	100% {
+	    background-position: 60px 0;
 	}
 }
 ::-webkit-inner-spin-button { 

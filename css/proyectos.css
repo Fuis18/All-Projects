@@ -393,15 +393,20 @@ h2 {
 	margin-right: 18px;
 }
 .f18__update {
+	width: 100%;
+}
+.f18__update-container {
+	display: flex;
+	flex-direction: column;
 	flex-grow: 10;
 	overflow-y: auto;
-	max-height: 400px; /*126 * 3 + 22*/
+	max-height: 518px; /*162 * 3 + 22 + 10*/
 }
 .f18__update-div {
 	display: grid;
 	grid-template-columns: 10fr 1fr;
 	padding: 10px 0;
-	height: 126px;
+	height: 162px;
 	border-top: 1px solid #333;
 	align-items: center;
 }
@@ -418,7 +423,6 @@ h2 {
 .f18__update-percentage {
 	display: flex;
 	justify-content: center;
-	align-items: center;
 }
 .f18__update-percentageInput {
 	width: 50px;
@@ -441,6 +445,7 @@ h2 {
 	border-radius: 15px;
 	background: linear-gradient(90deg, #111, #1d1);
 	animation: upLoad 2s forwards;
+    min-width: 18px;
 }
 .f18__update-theProgress::before {
 	content: '';
@@ -459,16 +464,15 @@ h2 {
 .f18__update-containerProgress:hover {
 	border: 1px solid #999;
 }
-.f18__update-optionsMaths {
+.f18__update-optionsMaths, .f18__update-optionsButtons {
 	display: grid;
+	justify-items: center;
 	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 4px 8px;
 	align-items: center;
+	grid-gap: 4px 8px;
 }
 .f18__update-optionsButtons {
-	display: grid;
 	grid-template-columns: repeat(2, 70px);
-	align-items: center;
 	grid-gap: 10px 0;
 }
 .f18__update-toUpdate, .f18__update-toUpdated, .f18__update-save, .f18__update-saved, .f18__update-delete {
@@ -514,12 +518,16 @@ h2 {
 		margin: none;
 	}
 	.f18__update-div {
-		height: 298px;
+		height: 314px;
 		grid-template-columns: none;
 		justify-items: center;
+		margin: 0 10px;
 	}
-	.f18__update {
-		max-height: 889px; /*298 * 3 + 22*/
+	.f18__update-container {
+		max-height: 964px; /*298 * 3 + 22*/
+		flex-direction: row;
+		justify-content: space-around;
+		flex-wrap: wrap;
 	}
 	.f18__update-optionsMaths {
 		display: flex;
@@ -529,14 +537,6 @@ h2 {
 	.f18__update-optionsButtons {
 		grid-gap: initial;
 		height: 60px;
-	}
-}
-@media screen and (max-width: 370px) {
-	.f18__update-div {
-		height: 314px;
-	}
-	.f18__update {
-		max-height: 964px; /*314 * 3 + 22*/
 	}
 }
 /*Animaciones*/

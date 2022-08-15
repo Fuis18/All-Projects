@@ -109,7 +109,7 @@ clickboton2 = () => {
 			<div class="f2__zeroValue">Definir incógnita:
 				<div class="f2__zeroValue-input f2__button-inactive"></div>
 			</div>
-			<div class="f2__unknownValue f2__none">Definir incógnita:
+			<div class="f2__unknownValue f2__none">Incógnita:
 				<input type="number" class="f2__unknownValue-input">
 			</div>
 			<div class="f2__submit">
@@ -826,9 +826,7 @@ clickboton12 = () => {
 		definirIdioma();
 	}
 	else {
-		console.log(`Idioma: ${idioma}`);
 		cerrarModal()
-
 	}
 }
 // Proyecto 13
@@ -897,7 +895,6 @@ clickboton14 = () => {
 		}
 		if (type == "text") {
 			zona.addEventListener("drop", e => {
-				console.log(e);
 				e.preventDefault();
 				changeStyle(e.srcElement, "#888");
 				zona.style.border = "4px solid #888";
@@ -1317,7 +1314,7 @@ clickboton18 = () => {
 		<div class="f18">
 			<div class="f18__add">
 				<h3>Nombre de la lectura</h3>
-				<input type="text" class="f18__add-name">
+				<input type="text" class="f18__add-name" spellcheck="false">
 				<h3>Cantidad de páginas</h3>
 				<input type="number" class="f18__add-amount">
 				<h3>Fecha de entrega</h3>
@@ -1326,6 +1323,7 @@ clickboton18 = () => {
 			</div>
 			<div class="f18__update">
 				<h3>Lecturas</h3>
+				<div class="f18__update-container"></div>
 			</div>
 		</div>`;
 	const addObject = object => {
@@ -1342,7 +1340,7 @@ clickboton18 = () => {
 				let element = buildDiv(curs.nombre, curs.calculo, curs.total, curs.cantidad, curs.tiempo, cursor.result.key, curs.valor);
 				fragment.appendChild(element);
 				cursor.result.continue();
-				document.querySelector(".f18__update").appendChild(fragment);
+				document.querySelector(".f18__update-container").appendChild(fragment);
 			}
 		})
 	}
@@ -1398,6 +1396,8 @@ clickboton18 = () => {
 		let percentageNumber = calculatePorcentaje(amount, value);
 		let container = document.createElement('div');
 		let h4 = document.createElement('h4');
+		let calculateTimeDiv = document.createElement('div');
+		let calculateTimeP = document.createElement('p');
 		let calculateTime = document.createElement('p');
 		let calculateForEachDiv = document.createElement('div');
 		let calculateForEach = document.createElement('p');
@@ -1421,8 +1421,10 @@ clickboton18 = () => {
 		h4.textContent = name;
 		h4.setAttribute("contenteditable","true");
 		h4.setAttribute("spellcheck","false");
+		calculateTimeDiv.classList.add("f18__update-calculateTimeDiv");
+		calculateTimeP.textContent = "Tiempo restante:";
 		calculateTime.classList.add("f18__update-calculateTime");
-		calculateTime.textContent = `Tiempo restante: ${timed}`;
+		calculateTime.textContent = timed;
 		calculateForEachDiv.classList.add("f18__update__calculate-ForEachDiv");
 		calculateForEachDiv.textContent = "Mínimo:";
 		calculateForEach.classList.add("f18__update-calculate-ForEach");
@@ -1453,7 +1455,9 @@ clickboton18 = () => {
 		buttonDelete.classList.add("f18__update-delete");
 		buttonDelete.textContent = "Eliminar";
 		optionsMaths.appendChild(h4);
-		optionsMaths.appendChild(calculateTime);
+		calculateTimeDiv.appendChild(calculateTimeP);
+		calculateTimeDiv.appendChild(calculateTime);
+		optionsMaths.appendChild(calculateTimeDiv);
 		calculateForEachDiv.appendChild(calculateForEach);
 		optionsMaths.appendChild(calculateForEachDiv);
 		percentage.appendChild(percentageInput);
@@ -1470,7 +1474,7 @@ clickboton18 = () => {
 		optionsButtons.appendChild(buttonDelete);
 		container.appendChild(optionsMaths);
 		container.appendChild(optionsButtons);
-
+		console.log(id)
 		h4.addEventListener("keyup",()=>{
 			buttonToSave.classList.replace("f18__update-saved","f18__update-save");
 			buttonToUpdate.classList.replace("f18__update-toUpdate","f18__update-toUpdated");
@@ -1481,6 +1485,7 @@ clickboton18 = () => {
 		})
 		buttonToSave.addEventListener("click",()=>{
 			if (buttonToSave.className == "f18__update-save") {
+				console.log(id)
 				modificarObject(id,{
 					nombre: h4.textContent,
 					calculo: calculate,
@@ -1505,11 +1510,21 @@ clickboton18 = () => {
 			let b = parseInt(date[1]);
 			let c = parseInt(date[0]);
 			let timed = calculateDate(a,b,c);
-			calculateTime.textContent = `Tiempo restante: ${timed}`;
+			calculateTime.textContent = timed;
+			modificarObject(id,{
+					nombre: h4.textContent,
+					calculo: calculate,
+					cantidad: amount,
+					total: timed,
+					tiempo: tiempo,
+					valor: percentageInput.value
+				})
 		})
 		buttonDelete.addEventListener("click",()=>{
-			eliminarObject(id);
-			document.querySelector(".f18__update").removeChild(container);
+			if (window.confirm("¿Seguro que quieres Eliminar una lectura?")) {
+				eliminarObject(id);
+				document.querySelector(".f18__update-container").removeChild(container);
+			}
 		})
 		return container;
 	}
@@ -1536,21 +1551,27 @@ clickboton18 = () => {
 		let todayYear = today.getYear() + 1900;
 		let todayMonth = today.getMonth() + 1;
 		let todayDay = today.getDate();
-		let yearToDay = 0, monthToDay = 0, preNewDay, preNewMonth, preNewYear, newDay, newMonth;
+
+		let yearToDay = 0, monthToDay = 0, preNewDay, preNewMonth, preNewYear, newDay, newMonth, newYear;
+		// Comparar Años
+		if (todayYear <= year) {
+			newYear = year - todayYear;
+		}
+		// Comparar Meses
 		if (todayMonth <= month) {
 			newMonth =  month - todayMonth;
 		} else {
 			newMonth =  month - todayMonth + 12;
-			year--;
+			newYear--;
 		}
+		// Comparar Días
 		if (todayDay <= day) {
 			newDay = day - todayDay;
 		} else {
 			newDay = day - todayDay + checkMonth(month, year);
-			month--;
+			newMonth--;
 		}
 
-		let newYear = year - todayYear;
 
 		for (let i = 0; i < newYear; i++) {
 			yearToDay += checkYear(year);
@@ -1560,6 +1581,7 @@ clickboton18 = () => {
 			monthToDay += checkMonth(month);
 			month++;
 		}
+
 		if (newDay == 1) preNewDay = `${newDay} día, `;
 		else preNewDay = `${newDay} días, `;
 		if (newMonth == 1) preNewMonth = `${newMonth} mes y `;
@@ -1599,8 +1621,8 @@ clickboton18 = () => {
 			month++;
 		}
 
-		let temporal = yearToDay + monthToDay + newDay;
-		let f = new Fraccion(amount,temporal);
+		let temporalTime = yearToDay + monthToDay + newDay;
+		let f = new Fraccion(amount,temporalTime);
 		let arrayFraccionSimple = f.simplifica();
 		let arrayFraccion = arrayFraccionSimple.toString().split("/");
 		let arrayFraccionPro = arrayFraccionSimple;
@@ -1639,6 +1661,19 @@ clickboton18 = () => {
 			else if (i == 12) numeratorPro+=2; //31
 			else if (i == 13) numeratorPro+=6; //37
 		}
+		let temporalEficiency, y;
+		while (temporalProNominator != arrayFraccion[0] && temporalProDenominator != arrayFraccion[1]) {
+			y = (temporalProNominator / denominatorPro) * arrayFraccion[1];
+			if (y > arrayFraccion[0]) {
+				temporalEficiency = temporalProNominator;
+			}
+			if (y < arrayFraccion[1]) {
+				break;
+			}
+			temporalProNominator--;
+		}
+		let arrayFraccionEficiency = new Fraccion(temporalEficiency,denominatorPro);
+		arrayFraccionEficiency = arrayFraccionEficiency.simplifica().toString().split("/");
 
 		if (arrayFraccion[0] == 1) nominator = `${arrayFraccion[0]} página, `;
 		else nominator = `${arrayFraccion[0]} páginas, `;
@@ -1647,10 +1682,10 @@ clickboton18 = () => {
 
 		let forEachPro;
 		if (temporalProNominator != arrayFraccion[0] && temporalProDenominator != arrayFraccion[1]) {
-			if (temporalProNominator - 1 == 1) nominatorPro = `${temporalProNominator - 1} página, `;
-			else nominatorPro = `${temporalProNominator - 1} páginas, `;
-			if (temporalProDenominator == 1) denominatorPro = `cada día`;
-			else denominatorPro = `cada ${temporalProDenominator} días`;
+			if (arrayFraccionEficiency[0] == 1) nominatorPro = `${arrayFraccionEficiency[0]} página, `;
+			else nominatorPro = `${arrayFraccionEficiency[0]} páginas, `;
+			if (arrayFraccionEficiency[1] == 1) denominatorPro = `cada día`;
+			else denominatorPro = `cada ${arrayFraccionEficiency[1]} días`;
 			forEachPro = nominatorPro + denominatorPro;
 		} else {
 			forEachPro = "No hay recomendaciones."
@@ -1681,13 +1716,15 @@ clickboton18 = () => {
 			let timed = calculateDate(year, month, day);
 			let keys = document.querySelectorAll(".f18__update-div");
 			let key = keys.length - 1;
+			console.log(key)
 			let idKey;
 			if (key == -1) {
 				idKey = 0;
 			} else {
-				idKey = parseInt(keys[key].id + 1);
+				idKey = parseInt(keys[key].id) + 1;
 			}
 			const fragment = document.createDocumentFragment();
+			console.log(idKey)
 			if (document.querySelector(".possibly") != undefined) {
 				if (confirm("Hay Elementos sin guardar: ¿Quiéres continuar?")) {
 					addObject({
@@ -1701,11 +1738,9 @@ clickboton18 = () => {
 					document.querySelector(".f18__add-name").value = "";
 					document.querySelector(".f18__add-amount").value = "";
 					document.querySelector(".f18__add-date").value = "";
-					console.log(name, calculated, amount, [day, month, year], idKey)
 					let element = buildDiv(name, calculated, amount, [day, month, year], idKey, 0);
-					console.log(element)
 					fragment.appendChild(element);
-					document.querySelector(".f18__update").appendChild(fragment);
+					document.querySelector(".f18__update-container").appendChild(fragment);
 				}
 				else {
 					addObject({
@@ -1721,7 +1756,7 @@ clickboton18 = () => {
 					document.querySelector(".f18__add-date").value = "";
 					let element = buildDiv(name, calculated, amount, [day, month, year] , idKey, 0);
 					fragment.appendChild(element);
-					document.querySelector(".f18__update").appendChild(fragment);
+					document.querySelector(".f18__update-container").appendChild(fragment);
 				}
 			}
 			else {
@@ -1738,7 +1773,7 @@ clickboton18 = () => {
 				document.querySelector(".f18__add-date").value = "";
 				let element = buildDiv(name, calculated, timed, amount, [day, month, year], idKey, 0);
 				fragment.appendChild(element);
-				document.querySelector(".f18__update").appendChild(fragment);
+				document.querySelector(".f18__update-container").appendChild(fragment);
 			}
 		}
 	})

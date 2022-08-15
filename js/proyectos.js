@@ -1499,6 +1499,7 @@ clickboton18 = () => {
 			}
 		})
 		buttonToUpdate.addEventListener("click",()=>{
+			console.log(id)
 			if (buttonToSave.className == "f18__update-saved") {
 				let percentageNumber = calculatePorcentaje(amount, percentageInput.value);
 				theProgress.style.width = `${percentageNumber}%`;
@@ -1572,7 +1573,6 @@ clickboton18 = () => {
 			newMonth--;
 		}
 
-
 		for (let i = 0; i < newYear; i++) {
 			yearToDay += checkYear(year);
 			year++;
@@ -1599,19 +1599,25 @@ clickboton18 = () => {
 		let yearToDay = 0, monthToDay = 0, newDay, newMonth;
 		let nominator, denominator, nominatorPro, denominatorPro;
 
+		// Comparar Años
+		if (todayYear <= year) {
+			newYear = year - todayYear;
+		}
+		// Comparar Meses
 		if (todayMonth <= month) {
 			newMonth =  month - todayMonth;
 		} else {
 			newMonth =  month - todayMonth + 12;
-			year--;
+			newYear--;
 		}
+		// Comparar Días
 		if (todayDay <= day) {
 			newDay = day - todayDay;
 		} else {
 			newDay = day - todayDay + checkMonth(month, year);
-			month--;
+			newMonth--;
 		}
-		let newYear = year - todayYear;
+
 		for (let i = 0; i < newYear; i++) {
 			yearToDay += checkYear(year);
 			year++;
@@ -1622,10 +1628,10 @@ clickboton18 = () => {
 		}
 
 		let temporalTime = yearToDay + monthToDay + newDay;
+		console.log(amount,temporalTime);
 		let f = new Fraccion(amount,temporalTime);
-		let arrayFraccionSimple = f.simplifica();
-		let arrayFraccion = arrayFraccionSimple.toString().split("/");
-		let arrayFraccionPro = arrayFraccionSimple;
+		let arrayFraccion = f.simplifica().toString().split("/");
+		let arrayFraccionPro = f.simplifica();
 		numeratorPro = arrayFraccionPro.numerador;
 		denominatorPro = arrayFraccionPro.denominador;
 		let i = 1;
@@ -1716,7 +1722,6 @@ clickboton18 = () => {
 			let timed = calculateDate(year, month, day);
 			let keys = document.querySelectorAll(".f18__update-div");
 			let key = keys.length - 1;
-			console.log(key)
 			let idKey;
 			if (key == -1) {
 				idKey = 0;
@@ -1724,7 +1729,6 @@ clickboton18 = () => {
 				idKey = parseInt(keys[key].id) + 1;
 			}
 			const fragment = document.createDocumentFragment();
-			console.log(idKey)
 			if (document.querySelector(".possibly") != undefined) {
 				if (confirm("Hay Elementos sin guardar: ¿Quiéres continuar?")) {
 					addObject({

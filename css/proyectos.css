@@ -389,8 +389,43 @@ h2 {
 	display: flex;
 }
 .f18__add {
-	flex-grow: 1;
-	margin-right: 18px;
+	width: 233px;
+	margin-right: 15px;
+}
+.f18__add-Div {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.f18__add-Div input {
+    padding: 5px 8px;
+    /*font-size: 16px;*/
+    border-radius: 18px;
+    border: 1px solid #333;
+    width: 187px;
+}
+.f18__add-Div input:focus-visible {
+    outline-style: none;
+}
+.f18__add-date {
+	text-align: center;
+}
+.f18__add-Div input[type="submit"] {
+	margin: 4px 1px;
+	border: none;
+	width: 57.5px;
+}
+.f18__add-submit:hover {
+	background: #bbb;
+}
+.f18__add-error, .f18__add-error h3, .f18__add__errorActive {
+	color: #a11;
+}
+.f18__add-error input {
+	border-color: #a11;
+}
+.f18__add__errorInactive {
+	display: none;
 }
 .f18__update {
 	width: 100%;
@@ -398,20 +433,34 @@ h2 {
 .f18__update-container {
 	display: flex;
 	flex-direction: column;
-	flex-grow: 10;
 	overflow-y: auto;
-	max-height: 518px; /*162 * 3 + 22 + 10*/
+	min-height: 126px;
+	max-height: 378px; /*126 * 3*/
 }
 .f18__update-div {
 	display: grid;
 	grid-template-columns: 10fr 1fr;
 	padding: 10px 0;
-	height: 162px;
+	height: 108px;
 	border-top: 1px solid #333;
 	align-items: center;
 }
 .f18__update h3 {
 	text-align-last: center;
+}
+.f18__update-main {
+	display: flex;
+}
+.f18__update-finish {
+	height: 22px;
+	width: 22px;
+}
+.f18__update-unLock, .f18__update-lock {
+	fill: #ccc;
+	transform: scale(2.2);
+	stroke-width: .3;
+	stroke : #000;
+
 }
 .f18__update-name {
 	margin: auto 0;
@@ -433,7 +482,7 @@ h2 {
 .f18__update-containerProgress {
 	display: flex;
 	grid-column: 1 / 3;
-	background: #343;
+	background: #253;
 	border-radius: 15px;
 	width: 100%;
 	height: 25px;
@@ -444,8 +493,8 @@ h2 {
 	height: 19px;
 	border-radius: 15px;
 	background: linear-gradient(90deg, #111, #1d1);
-	animation: upLoad 2s forwards;
-    min-width: 18px;
+	animation: upLoad 3s forwards;
+    min-width: 16px;
 }
 .f18__update-theProgress::before {
 	content: '';
@@ -462,7 +511,7 @@ h2 {
     border-radius: 50px
 }
 .f18__update-containerProgress:hover {
-	border: 1px solid #999;
+	border: 1px solid #000;
 }
 .f18__update-optionsMaths, .f18__update-optionsButtons {
 	display: grid;
@@ -515,7 +564,8 @@ h2 {
 		align-items: center;
 	}
 	.f18__add {
-		margin: none;
+		margin: initial;
+		text-align: center;
 	}
 	.f18__update-div {
 		height: 314px;
@@ -524,7 +574,7 @@ h2 {
 		margin: 0 10px;
 	}
 	.f18__update-container {
-		max-height: 964px; /*298 * 3 + 22*/
+		max-height: 628px; /*314 * 2*/
 		flex-direction: row;
 		justify-content: space-around;
 		flex-wrap: wrap;
@@ -537,6 +587,14 @@ h2 {
 	.f18__update-optionsButtons {
 		grid-gap: initial;
 		height: 60px;
+	}
+}
+@media screen and (max-width: 935px) {
+	.f18__update-div {
+		min-height: 126px;
+	}
+	.f18__update-container {
+		max-height: 378px; /*126 * 3*/
 	}
 }
 /*Animaciones*/

@@ -1308,48 +1308,6 @@ clickboton18 = () => {
 	let container = document.querySelector(".desarrollo__div");
 	const fragment18 = document.createDocumentFragment();
 	const IDBRequest = indexedDB.open("reader",2);
-	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("books",{autoIncrement: true}))
-	IDBRequest.addEventListener("success",() => readObject())
-	container.innerHTML = `
-		<div class="f18">
-			<div class="f18__add">
-				<div class="f18__add-Div">
-					<h3>Nombre de la lectura</h3>
-					<input type="text" class="f18__add-name" spellcheck="false">
-					<p class="f18__add__errorInactive">El nombre esta incompleto</p>
-				</div>
-				<div class="f18__add-Div">
-					<h3>Cantidad de páginas</h3>
-					<input type="number" class="f18__add-amount">
-					<p class="f18__add__errorInactive">La cantidad esta incompleta</p>
-					<p class="f18__add__errorInactive">La cantidad no es válida</p>
-				</div>
-				<div class="f18__add-Div">
-					<h3>Fecha de entrega</h3>
-					<input type="date" class="f18__add-date">
-					<p class="f18__add__errorInactive">La fecha esta incompleta</p>
-				</div>
-				<div class="f18__add-Div">
-					<h3>Páginas avanzadas</h3>
-					<input type="number" class="f18__add-progress" placeholder="0">
-				</div>
-				<div class="f18__add-Div">
-					<input type="submit" class="f18__add-submit">
-				</div>
-			</div>
-			<div class="f18__update">
-				<h3>Lecturas</h3>
-				<div class="f18__update__title">
-					<div class="f18__update__title-name">Nombre</div>
-					<div class="f18__update__title-calculateTime">Tiempo Restante</div>
-					<div class="f18__update__title-recommendation">Proporción</div>
-					<div class="f18__update__title-time">Restante</div>
-					<div class="f18__update__title-percentage">Porcentaje</div>
-					<div class="f18__update__title-options">Opciones</div>
-				</div>
-				<div class="f18__update__container"></div>
-			</div>
-		</div>`;
 	const addObject = object => {
 		const IDBData = transactionOperation("readwrite","Objeto agregado correctamente");
 		IDBData.add(object);
@@ -1695,11 +1653,12 @@ clickboton18 = () => {
 			newDay = day - todayDay + checkMonth(month, year);
 			newMonth--;
 		}
-
+		// Convertir Años en días
 		for (let i = 0; i < newYear; i++) {
 			yearToDay += checkYear(year);
 			year++;
 		}
+		// Convertir Meses en días
 		for (let i = 0; i < newMonth; i++) {
 			monthToDay += checkMonth(month);
 			month++;
@@ -1714,7 +1673,7 @@ clickboton18 = () => {
 		let i = 1;
 		let temporalProNominator = arrayFraccionPro.numerador;
 		let temporalProDenominator = arrayFraccionPro.denominador;
-		// temporal para el menor utilizar
+		// Calcular el rendimiento con iteraciones
 		while (i < 37) {
 			let fPro = new Fraccion(numeratorPro,denominatorPro);
 			arrayFraccionPro = fPro.simplifica().toString().split("/");
@@ -1768,6 +1727,48 @@ clickboton18 = () => {
 		}
 		return result;
 	}
+	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("books",{autoIncrement: true}))
+	IDBRequest.addEventListener("success",() => readObject())
+	container.innerHTML = `
+		<div class="f18">
+			<div class="f18__add">
+				<div class="f18__add-Div">
+					<h3>Nombre de la lectura</h3>
+					<input type="text" class="f18__add-name" spellcheck="false">
+					<p class="f18__add__errorInactive">El nombre esta incompleto</p>
+				</div>
+				<div class="f18__add-Div">
+					<h3>Cantidad de páginas</h3>
+					<input type="number" class="f18__add-amount">
+					<p class="f18__add__errorInactive">La cantidad esta incompleta</p>
+					<p class="f18__add__errorInactive">La cantidad no es válida</p>
+				</div>
+				<div class="f18__add-Div">
+					<h3>Fecha de entrega</h3>
+					<input type="date" class="f18__add-date">
+					<p class="f18__add__errorInactive">La fecha esta incompleta</p>
+				</div>
+				<div class="f18__add-Div">
+					<h3>Páginas avanzadas</h3>
+					<input type="number" class="f18__add-progress" placeholder="0">
+				</div>
+				<div class="f18__add-Div">
+					<input type="submit" class="f18__add-submit">
+				</div>
+			</div>
+			<div class="f18__update">
+				<h3>Lecturas</h3>
+				<div class="f18__update__title">
+					<div class="f18__update__title-name">Nombre</div>
+					<div class="f18__update__title-calculateTime">Tiempo Restante</div>
+					<div class="f18__update__title-recommendation">Proporción</div>
+					<div class="f18__update__title-time">Restante</div>
+					<div class="f18__update__title-percentage">Porcentaje</div>
+					<div class="f18__update__title-options">Opciones</div>
+				</div>
+				<div class="f18__update__container"></div>
+			</div>
+		</div>`;
 	document.querySelector(".f18__add-submit").addEventListener("click",()=>{
 		let name = document.querySelector(".f18__add-name").value;
 		let amount = parseInt(document.querySelector(".f18__add-amount").value);

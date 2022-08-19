@@ -1642,7 +1642,6 @@ clickboton18 = () => {
 		let todayMonth = today.getMonth() + 1;
 		let todayDay = today.getDate();
 		let yearToDay = 0, monthToDay = 0, newDay, newMonth;
-		let nominator, denominator, nominatorPro, denominatorPro;
 
 		// Comparar Años
 		if (todayYear <= year) {
@@ -1672,17 +1671,18 @@ clickboton18 = () => {
 			monthToDay += checkMonth(month);
 			month++;
 		}
-
+		console.log(yearToDay, monthToDay, newYear, newMonth, newDay, todayYear, todayMonth, todayDay);
 		let temporalTime = yearToDay + monthToDay + newDay;
 		let f = new Fraccion(amount,temporalTime);
 		let arrayFraccion = f.simplifica().toString().split("/");
 		let arrayFraccionPro = f.simplifica();
-		numeratorPro = arrayFraccionPro.numerador;
-		denominatorPro = arrayFraccionPro.denominador;
-		let i = 1;
+		console.log(arrayFraccionPro);
+		let numeratorPro = arrayFraccionPro.numerador;
+		let denominatorPro = arrayFraccionPro.denominador;
 		let temporalProNominator = arrayFraccionPro.numerador;
 		let temporalProDenominator = arrayFraccionPro.denominador;
 		// Calcular el rendimiento con iteraciones
+		let i = 1;
 		while (i < 37) {
 			let fPro = new Fraccion(numeratorPro,denominatorPro);
 			arrayFraccionPro = fPro.simplifica().toString().split("/");
@@ -1691,39 +1691,29 @@ clickboton18 = () => {
 			if (temporalProNominator > numeratorPro) {
 				temporalProNominator = numeratorPro;
 			}
+			// Conservar el menor
 			if (temporalProDenominator > denominatorPro) {
 				temporalProDenominator = denominatorPro;
 			}
-			i++;
 			if (denominatorPro == 1) {
 				break;
 			}
+			i++;
 			numeratorPro++;
 		}
-		let temporalEficiency, y;
-		while (temporalProNominator != arrayFraccion[0] && temporalProDenominator != arrayFraccion[1]) {
-			y = (temporalProNominator / denominatorPro) * arrayFraccion[1];
-			if (y > arrayFraccion[0]) {
-				temporalEficiency = temporalProNominator;
-			}
-			if (y < arrayFraccion[1]) {
-				break;
-			}
-			temporalProNominator--;
-		}
-		let arrayFraccionEficiency = new Fraccion(temporalEficiency,denominatorPro);
+		console.log(numeratorPro,denominatorPro,temporalProNominator,temporalProDenominator)
+
+		// Complementaciòn
+		let arrayFraccionEficiency = new Fraccion(numeratorPro,denominatorPro);
 		arrayFraccionEficiency = arrayFraccionEficiency.simplifica().toString().split("/");
 
-		let forEachPro;
-		if (temporalProNominator != arrayFraccion[0] && temporalProDenominator != arrayFraccion[1]) {
-			if (arrayFraccionEficiency[0] == 1) nominatorPro = `${arrayFraccionEficiency[0]} página, `;
-			else nominatorPro = `${arrayFraccionEficiency[0]} páginas, `;
-			if (arrayFraccionEficiency[1] == 1) denominatorPro = `cada día`;
-			else denominatorPro = `cada ${arrayFraccionEficiency[1]} días`;
-			forEachPro = nominatorPro + denominatorPro;
-		} else {
-			forEachPro = "No hay recomendaciones."
-		}
+		// Compilar la estructura
+		if (arrayFraccionEficiency[0] == 1) numeratorPro = `${arrayFraccionEficiency[0]} página, `;
+		else numeratorPro = `${arrayFraccionEficiency[0]} páginas, `;
+		if (arrayFraccionEficiency[1] == 1) denominatorPro = `cada día`;
+		else denominatorPro = `cada ${arrayFraccionEficiency[1]} días`;
+		let forEachPro = numeratorPro + denominatorPro;
+
 		return forEachPro;
 	}
 	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("books",{autoIncrement: true}))
@@ -1780,7 +1770,6 @@ clickboton18 = () => {
 		let month = parseInt(date.substring(5,7));
 		let day = parseInt(date.substring(8,10));
 		if (name.length > 0 && amount > 0 && amount < 10000 && !date == "") {
-			console.log(year, month, day, amount, amountProgress)
 			let calculated = calculateMath(year, month, day, amount, amountProgress);
 			console.log(calculated)
 			let timed = calculateDate(year, month, day);

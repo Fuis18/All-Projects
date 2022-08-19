@@ -1472,7 +1472,6 @@ clickboton18 = () => {
 		optionsButtons.appendChild(buttonDelete);
 		container.appendChild(optionsMaths);
 		container.appendChild(optionsButtons);
-		console.log(name, calculate, timed, amount, tiempo, id, value, block, percentageNumber);
 		if (percentageNumber >= 100) {
 			pathUnlock.style.cursor = "pointer";
 			pathUnlock.style.fill = "#48e";
@@ -1781,8 +1780,11 @@ clickboton18 = () => {
 		let month = parseInt(date.substring(5,7));
 		let day = parseInt(date.substring(8,10));
 		if (name.length > 0 && amount > 0 && amount < 10000 && !date == "") {
+			console.log(year, month, day, amount, amountProgress)
 			let calculated = calculateMath(year, month, day, amount, amountProgress);
+			console.log(calculated)
 			let timed = calculateDate(year, month, day);
+			console.log(timed)
 			let keys = document.querySelectorAll(".f18__update-div");
 			let key = keys.length - 1;
 			let idKey;
@@ -1791,7 +1793,7 @@ clickboton18 = () => {
 			} else {
 				idKey = parseInt(keys[key].id) + 1;
 			}
-			console.log(name, calculated, timed, amount, [day, month, year,], amountProgress, idKey);
+			console.log(idKey)
 			addObject({
 				nombre: name,
 				calculo: calculated,

@@ -430,20 +430,34 @@ h2 {
 .f18__update {
 	width: 100%;
 }
-.f18__update-container {
+.f18__update__container {
 	display: flex;
 	flex-direction: column;
 	overflow-y: auto;
 	min-height: 126px;
-	max-height: 378px; /*126 * 3*/
+	/*max-height: 160px; /*80 * 3*/*/
 }
 .f18__update-div {
 	display: grid;
 	grid-template-columns: 10fr 1fr;
 	padding: 10px 0;
-	height: 108px;
+	height: 80px;
 	border-top: 1px solid #333;
 	align-items: center;
+}
+.f18__update__title {
+	display: grid;
+	justify-items: center;
+	grid-gap: 4px 8px;
+	grid-template-columns: 188px repeat(4, 1fr) 140px;
+	font-weight: 600;
+}
+.f18__update-optionsMaths, .f18__update-optionsButtons {
+	display: grid;
+	justify-items: center;
+	grid-template-columns: repeat(5, 1fr);
+	align-items: center;
+	grid-gap: 4px 8px;
 }
 .f18__update h3 {
 	text-align-last: center;
@@ -453,14 +467,14 @@ h2 {
 }
 .f18__update-finish {
 	height: 22px;
-	width: 22px;
+	width: 28px;
+	margin-left: 10px;
 }
 .f18__update-unLock, .f18__update-lock {
 	fill: #ccc;
 	transform: scale(2.2);
 	stroke-width: .3;
 	stroke : #000;
-
 }
 .f18__update-name {
 	margin: auto 0;
@@ -470,18 +484,33 @@ h2 {
 	text-align: center;
 }
 .f18__update-percentage {
-	display: flex;
-	justify-content: center;
+	display: grid;
+	align-items: center;
+	justify-items: center;
+	grid-template-columns: repeat(2, 1fr);
+}
+.f18__update-percentageEntire {
+	white-space: nowrap;
+}
+.f18__update-time {
+	grid-column: 1 / 3;
 }
 .f18__update-percentageInput {
-	width: 50px;
+	width: 45px;
 	border: none;
 	background: #1115;
 	text-align: end;
 }
+.f18__update-theProgressDiv {
+	width: 100%;
+	padding-right: 8px;
+}
+.f18__update-numberProgress {
+	text-align: right;
+}
 .f18__update-containerProgress {
 	display: flex;
-	grid-column: 1 / 3;
+	/*grid-column: 1 / 3;*/
 	background: #253;
 	border-radius: 15px;
 	width: 100%;
@@ -492,7 +521,7 @@ h2 {
 .f18__update-theProgress {
 	height: 19px;
 	border-radius: 15px;
-	background: linear-gradient(90deg, #111, #1d1);
+	background: linear-gradient(90deg, #454, #1d1);
 	animation: upLoad 3s forwards;
     min-width: 16px;
 }
@@ -512,13 +541,6 @@ h2 {
 }
 .f18__update-containerProgress:hover {
 	border: 1px solid #000;
-}
-.f18__update-optionsMaths, .f18__update-optionsButtons {
-	display: grid;
-	justify-items: center;
-	grid-template-columns: repeat(3, 1fr);
-	align-items: center;
-	grid-gap: 4px 8px;
 }
 .f18__update-optionsButtons {
 	grid-template-columns: repeat(2, 70px);
@@ -568,13 +590,17 @@ h2 {
 		text-align: center;
 	}
 	.f18__update-div {
-		height: 314px;
+		height: 238px;
 		grid-template-columns: none;
 		justify-items: center;
 		margin: 0 10px;
+		width: 200px;
 	}
-	.f18__update-container {
-		max-height: 628px; /*314 * 2*/
+	.f18__update__title {
+		display: none;
+	}
+	.f18__update__container {
+		min-height: 476px; /*238 * 2*/
 		flex-direction: row;
 		justify-content: space-around;
 		flex-wrap: wrap;
@@ -589,12 +615,13 @@ h2 {
 		height: 60px;
 	}
 }
-@media screen and (max-width: 935px) {
+@media screen and (min-width: 535px) {
 	.f18__update-div {
-		min-height: 126px;
+		/*min-height: 126px;*/
 	}
-	.f18__update-container {
-		max-height: 378px; /*126 * 3*/
+	.f18__update__container {
+		min-height: 238px;
+		/*126 * 3*/
 	}
 }
 /*Animaciones*/

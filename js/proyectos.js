@@ -1339,7 +1339,15 @@ clickboton18 = () => {
 			</div>
 			<div class="f18__update">
 				<h3>Lecturas</h3>
-				<div class="f18__update-container"></div>
+				<div class="f18__update__title">
+					<div class="f18__update__title-name">Nombre</div>
+					<div class="f18__update__title-calculateTime">Tiempo Restante</div>
+					<div class="f18__update__title-recommendation">Proporción</div>
+					<div class="f18__update__title-time">Restante</div>
+					<div class="f18__update__title-percentage">Porcentaje</div>
+					<div class="f18__update__title-options">Opciones</div>
+				</div>
+				<div class="f18__update__container"></div>
 			</div>
 		</div>`;
 	const addObject = object => {
@@ -1356,7 +1364,7 @@ clickboton18 = () => {
 				let element = buildDiv(curs.nombre, curs.calculo, curs.total, curs.cantidad, curs.tiempo, cursor.result.key, curs.valor, curs.lock);
 				fragment.appendChild(element);
 				cursor.result.continue();
-				document.querySelector(".f18__update-container").appendChild(fragment);
+				document.querySelector(".f18__update__container").appendChild(fragment);
 			}
 		})
 	}
@@ -1417,14 +1425,13 @@ clickboton18 = () => {
 		let pathLock = document.createElementNS("http://www.w3.org/2000/svg", "path");
 		let h4 = document.createElement('h4');
 		let calculateTimeDiv = document.createElement('div');
-		let calculateTimeP = document.createElement('p');
 		let calculateTime = document.createElement('p');
-		let recommendationDiv = document.createElement('div');
 		let recommendation = document.createElement('p');
 		let percentage = document.createElement('p');
 		let percentageInput = document.createElement('input');
 		let percentageEntire = document.createElement('p');
 		let time = document.createElement('p');
+		let theProgressDiv = document.createElement('div');
 		let containerProgress = document.createElement('div');
 		let theProgress = document.createElement('div');
 		let numberProgress = document.createElement('div');
@@ -1450,11 +1457,8 @@ clickboton18 = () => {
 		h4.setAttribute("contenteditable","true");
 		h4.setAttribute("spellcheck","false");
 		calculateTimeDiv.classList.add("f18__update-calculateTimeDiv");
-		calculateTimeP.textContent = "Tiempo restante:";
 		calculateTime.classList.add("f18__update-calculateTime");
 		calculateTime.textContent = timed;
-		recommendationDiv.classList.add("f18__update-recommendationDiv");
-		recommendationDiv.textContent = "Proporción:";
 		recommendation.classList.add("f18__update-recommendation");
 		recommendation.textContent = calculate;
 		percentage.classList.add("f18__update-percentage");
@@ -1464,8 +1468,9 @@ clickboton18 = () => {
 		percentageEntire.classList.add("f18__update-percentageEntire");
 		percentageEntire.textContent = `\xa0 / ${amount}`;
 		time.classList.add("f18__update-time");
-		time.textContent = `Entrega: ${tiempo[0]}/${tiempo[1]}/${tiempo[2]}`;
+		time.textContent = `${tiempo[0]}/${tiempo[1]}/${tiempo[2]}`;
 		containerProgress.classList.add("f18__update-containerProgress");
+		theProgressDiv.classList.add("f18__update-theProgressDiv");
 		theProgress.classList.add("f18__update-theProgress");
 		theProgress.style.width = `${percentageNumber}%`;
 		numberProgress.classList.add("f18__update-numberProgress");
@@ -1483,18 +1488,18 @@ clickboton18 = () => {
 		divMain.appendChild(finish);
 		divMain.appendChild(h4);
 		optionsMaths.appendChild(divMain);
-		calculateTimeDiv.appendChild(calculateTimeP);
 		calculateTimeDiv.appendChild(calculateTime);
 		optionsMaths.appendChild(calculateTimeDiv);
-		recommendationDiv.appendChild(recommendation);
-		optionsMaths.appendChild(recommendationDiv);
+		optionsMaths.appendChild(recommendation);
 		percentage.appendChild(percentageInput);
 		percentage.appendChild(percentageEntire);
+		percentage.appendChild(time);
 		optionsMaths.appendChild(percentage);
-		optionsMaths.appendChild(time);
+		// optionsMaths.appendChild(time);
 		containerProgress.appendChild(theProgress);
-		optionsMaths.appendChild(containerProgress);
-		optionsMaths.appendChild(numberProgress);
+		theProgressDiv.appendChild(containerProgress);
+		theProgressDiv.appendChild(numberProgress);
+		optionsMaths.appendChild(theProgressDiv);
 		optionsButtons.appendChild(buttonToUpdate);
 		optionsButtons.appendChild(buttonToSave)
 		optionsButtons.appendChild(buttonDelete);
@@ -1507,7 +1512,6 @@ clickboton18 = () => {
 		if (block) {
 			h4.setAttribute("contenteditable","false");
 			percentageInput.setAttribute("disabled","");
-			pathLock.style.cursor = "pointer";
 			pathLock.style.display = "block";
 			pathLock.style.fill = "#a11";
 			pathUnlock.style.display = "none";
@@ -1554,7 +1558,7 @@ clickboton18 = () => {
 				}
 
 			}
-			let date = time.textContent.substring(9).split("/");
+			let date = time.textContent.split("/");
 			let a = parseInt(date[2]);
 			let b = parseInt(date[1]);
 			let c = parseInt(date[0]);
@@ -1573,7 +1577,7 @@ clickboton18 = () => {
 		buttonDelete.addEventListener("click",()=>{
 			if (window.confirm("¿Seguro que quieres Eliminar una lectura?")) {
 				eliminarObject(id);
-				document.querySelector(".f18__update-container").removeChild(container);
+				document.querySelector(".f18__update__container").removeChild(container);
 			}
 		})
 		pathUnlock.addEventListener("click",()=>{
@@ -1802,7 +1806,7 @@ clickboton18 = () => {
 			document.querySelector(".f18__add-progress").value = "";
 			let element = buildDiv(name, calculated, timed, amount, [day, month, year], idKey, amountProgress, false);
 			fragment.appendChild(element);
-			document.querySelector(".f18__update-container").appendChild(fragment);
+			document.querySelector(".f18__update__container").appendChild(fragment);
 		} else {
 			if (name.length == '') {
 				let div = document.querySelectorAll(".f18__add-Div")[0];

@@ -1319,7 +1319,7 @@ clickboton18 = () => {
 		cursor.addEventListener("success",()=>{
 			if (cursor.result) {
 				let curs = cursor.result.value;
-				let element = buildDiv(curs.nombre, curs.calculo, curs.total, curs.cantidad, curs.tiempo, cursor.result.key, curs.valor, curs.lock);
+				let element = buildDiv(curs.nombre,curs.calculo,curs.total,curs.cantidad,curs.tiempo,cursor.result.key,curs.valor,curs.lock);
 				fragment.appendChild(element);
 				cursor.result.continue();
 				document.querySelector(".f18__update__container").appendChild(fragment);
@@ -1373,6 +1373,16 @@ clickboton18 = () => {
 	    toString() {
 	        return `${this.numerador}/${this.denominador}`;
 	    }
+	}
+	calculatePorcentaje = (amount,value) => {
+		let progress, result;
+		if (value == undefined) {
+			progress = document.querySelector(".f18__update-percentageInput").value;
+			result = (progress * 100) / amount;
+		} else {
+			result = (value * 100) / amount;
+		}
+		return result;
 	}
 	buildDiv = (name, calculate, timed, amount, tiempo, id, value, block) => {
 		let percentageNumber = calculatePorcentaje(amount, value);
@@ -1453,7 +1463,6 @@ clickboton18 = () => {
 		percentage.appendChild(percentageEntire);
 		percentage.appendChild(time);
 		optionsMaths.appendChild(percentage);
-		// optionsMaths.appendChild(time);
 		containerProgress.appendChild(theProgress);
 		theProgressDiv.appendChild(containerProgress);
 		theProgressDiv.appendChild(numberProgress);
@@ -1463,6 +1472,7 @@ clickboton18 = () => {
 		optionsButtons.appendChild(buttonDelete);
 		container.appendChild(optionsMaths);
 		container.appendChild(optionsButtons);
+		console.log(name, calculate, timed, amount, tiempo, id, value, block, percentageNumber);
 		if (percentageNumber >= 100) {
 			pathUnlock.style.cursor = "pointer";
 			pathUnlock.style.fill = "#48e";
@@ -1717,16 +1727,6 @@ clickboton18 = () => {
 		}
 		return forEachPro;
 	}
-	calculatePorcentaje = (amount,value) => {
-		let progress, result;
-		if (value == undefined) {
-			progress = document.querySelector(".f18__update-percentageInput").value;
-			result = (progress * 100) / amount;
-		} else {
-			result = (value * 100) / amount;
-		}
-		return result;
-	}
 	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("books",{autoIncrement: true}))
 	IDBRequest.addEventListener("success",() => readObject())
 	container.innerHTML = `
@@ -1791,7 +1791,7 @@ clickboton18 = () => {
 			} else {
 				idKey = parseInt(keys[key].id) + 1;
 			}
-			const fragment = document.createDocumentFragment();
+			console.log(name, calculated, timed, amount, [day, month, year,], amountProgress, idKey);
 			addObject({
 				nombre: name,
 				calculo: calculated,
@@ -1806,8 +1806,7 @@ clickboton18 = () => {
 			document.querySelector(".f18__add-date").value = "";
 			document.querySelector(".f18__add-progress").value = "";
 			let element = buildDiv(name, calculated, timed, amount, [day, month, year], idKey, amountProgress, false);
-			fragment.appendChild(element);
-			document.querySelector(".f18__update__container").appendChild(fragment);
+			document.querySelector(".f18__update__container").appendChild(element);
 		} else {
 			if (name.length == '') {
 				let div = document.querySelectorAll(".f18__add-Div")[0];

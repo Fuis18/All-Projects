@@ -1005,7 +1005,7 @@ clickboton15 = () => {
 	const IDBRequest = indexedDB.open("daltobase",1);
 	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("name",{autoIncrement: true}))
 	IDBRequest.addEventListener("success",() => readObject())
-	IDBRequest.addEventListener("error",() => console.log("ocurrio un error al abrir la base de datos"))
+	IDBRequest.addEventListener("error",() => alert("ocurrio un error al abrir la base de datos"))
 	document.getElementById("add").addEventListener("click",()=> {
 		let name = document.getElementById("name").value;
 		if (name.length > 0) {
@@ -1057,7 +1057,7 @@ clickboton15 = () => {
 		const IDBTransaction = IDBRequest.result.transaction("name",mode);
 		const objectStore = IDBTransaction.objectStore("name");
 		// IDBTransaction.addEventListener("complete",()=>{
-		// 	if (msg) console.log(msg)
+		// 	if (msg) alert.log(msg)
 		// })
 		return objectStore;
 	}
@@ -1671,12 +1671,10 @@ clickboton18 = () => {
 			monthToDay += checkMonth(month);
 			month++;
 		}
-		console.log(yearToDay, monthToDay, newYear, newMonth, newDay, todayYear, todayMonth, todayDay);
 		let temporalTime = yearToDay + monthToDay + newDay;
 		let f = new Fraccion(amount,temporalTime);
 		let arrayFraccion = f.simplifica().toString().split("/");
 		let arrayFraccionPro = f.simplifica();
-		console.log(arrayFraccionPro);
 		let numeratorPro = arrayFraccionPro.numerador;
 		let denominatorPro = arrayFraccionPro.denominador;
 		let temporalProNominator = arrayFraccionPro.numerador;
@@ -1701,7 +1699,6 @@ clickboton18 = () => {
 			i++;
 			numeratorPro++;
 		}
-		console.log(numeratorPro,denominatorPro,temporalProNominator,temporalProDenominator)
 
 		// Complementaciòn
 		let arrayFraccionEficiency = new Fraccion(numeratorPro,denominatorPro);
@@ -1771,9 +1768,7 @@ clickboton18 = () => {
 		let day = parseInt(date.substring(8,10));
 		if (name.length > 0 && amount > 0 && amount < 10000 && !date == "") {
 			let calculated = calculateMath(year, month, day, amount, amountProgress);
-			console.log(calculated)
 			let timed = calculateDate(year, month, day);
-			console.log(timed)
 			let keys = document.querySelectorAll(".f18__update-div");
 			let key = keys.length - 1;
 			let idKey;
@@ -1782,7 +1777,6 @@ clickboton18 = () => {
 			} else {
 				idKey = parseInt(keys[key].id) + 1;
 			}
-			console.log(idKey)
 			addObject({
 				nombre: name,
 				calculo: calculated,

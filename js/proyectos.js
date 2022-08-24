@@ -1667,6 +1667,62 @@ clickboton18 = () => {
 		let newDate = preNewDay + preNewMonth + preNewYear;
 		return newDate;
 	}
+	calculatePerformance = (amount, year, month, day) => {
+		// Total de días
+		let temporalTime = year + month + day;
+
+		let f = new Fraccion(amount,temporalTime);	
+		let arrayFraccionPro = f.simplifica();
+		let numeratorPro = arrayFraccionPro.numerador;
+		let denominatorPro = arrayFraccionPro.denominador;
+		let temporalProNominator = arrayFraccionPro.numerador;
+		let temporalProDenominator = arrayFraccionPro.denominador;
+		// Calcular el rendimiento con iteraciones
+		let i = 1;
+		while (i < 50) {
+			let fPro = new Fraccion(numeratorPro,denominatorPro);
+			arrayFraccionPro = fPro.simplifica();
+			numeratorPro = parseInt(arrayFraccionPro.numerador);
+			denominatorPro = parseInt(arrayFraccionPro.denominador);
+			// Conservar el menor nominador
+			if (temporalProNominator > numeratorPro) {
+				temporalProNominator = numeratorPro;
+			}
+			// Conservar el menor denominador
+			if (temporalProDenominator > denominatorPro) {
+				temporalProDenominator = denominatorPro;
+			}
+			if (denominatorPro == 1) {
+				break;
+			}
+			i++;
+			numeratorPro++;
+		}
+		if (temporalProDenominator == denominatorPro && denominatorPro != 1) {
+			temporalProDenominator++;
+			let j = 1;
+			while (j < 50) {
+				let fPro = new Fraccion(numeratorPro,denominatorPro);
+				arrayFraccionPro = fPro.simplifica();
+				numeratorPro = parseInt(arrayFraccionPro.numerador);
+				denominatorPro = parseInt(arrayFraccionPro.denominador);
+				// Conservar el menor nominador
+				if (temporalProNominator > numeratorPro) {
+					temporalProNominator = numeratorPro;
+				}
+				// Conservar el menor denominador
+				if (temporalProDenominator > denominatorPro) {
+					temporalProDenominator = denominatorPro;
+				}
+				if (denominatorPro == 1) {
+					break;
+				}
+				j++;
+				numeratorPro++;
+			}
+		}
+		return [temporalProNominator, temporalProDenominator]
+	}
 	calculateMath = (year, month, day, amount, amountProgress) => {
 		amount = amount - amountProgress;
 		let today = new Date();
@@ -1703,46 +1759,22 @@ clickboton18 = () => {
 			monthToDay += checkMonth(month);
 			month++;
 		}
-		let temporalTime = yearToDay + monthToDay + newDay;
-		let f = new Fraccion(amount,temporalTime);
-		let arrayFraccion = f.simplifica().toString().split("/");
-		let arrayFraccionPro = f.simplifica();
-		let numeratorPro = arrayFraccionPro.numerador;
-		let denominatorPro = arrayFraccionPro.denominador;
-		let temporalProNominator = arrayFraccionPro.numerador;
-		let temporalProDenominator = arrayFraccionPro.denominador;
-		// Calcular el rendimiento con iteraciones
-		let i = 1;
-		while (i < 37) {
-			let fPro = new Fraccion(numeratorPro,denominatorPro);
-			arrayFraccionPro = fPro.simplifica().toString().split("/");
-			numeratorPro = parseInt(arrayFraccionPro[0]);
-			denominatorPro = parseInt(arrayFraccionPro[1]);
-			if (temporalProNominator > numeratorPro) {
-				temporalProNominator = numeratorPro;
-			}
-			// Conservar el menor
-			if (temporalProDenominator > denominatorPro) {
-				temporalProDenominator = denominatorPro;
-			}
-			if (denominatorPro == 1) {
-				break;
-			}
-			i++;
-			numeratorPro++;
-		}
+		// Calcular el rendimiento
+		let performance = calculatePerformance(amount, yearToDay, monthToDay, newDay);
 
 		// Complementaciòn
-		let arrayFraccionEficiency = new Fraccion(numeratorPro,denominatorPro);
-		arrayFraccionEficiency = arrayFraccionEficiency.simplifica().toString().split("/");
+		let arrayFraccionEficiency = new Fraccion(performance[0],performance[1]);
+		arrayFraccionEficiency = arrayFraccionEficiency.simplifica();
 
 		// Compilar la estructura
-		if (arrayFraccionEficiency[0] == 1) numeratorPro = `${arrayFraccionEficiency[0]} página, `;
-		else numeratorPro = `${arrayFraccionEficiency[0]} páginas, `;
-		if (arrayFraccionEficiency[1] == 1) denominatorPro = `cada día`;
-		else denominatorPro = `cada ${arrayFraccionEficiency[1]} días`;
-		let forEachPro = numeratorPro + denominatorPro;
+		let numerator, denominator;
+		if (arrayFraccionEficiency.numerador == 1) numerator = `${arrayFraccionEficiency.numerador} página, `;
+		else numerator = `${arrayFraccionEficiency.numerador} páginas, `;
+		if (arrayFraccionEficiency.denominador == 1) denominator = `cada día`;
+		else denominator = `cada ${arrayFraccionEficiency.denominador} días`;
 
+		//Retorno
+		let forEachPro = numerator + denominator;
 		return forEachPro;
 	}
 	calculatedCheck = (bollean, origin) => {

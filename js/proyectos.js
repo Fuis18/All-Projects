@@ -1922,6 +1922,7 @@ clickboton18 = () => {
 				document.querySelector(".f18__update__container").removeChild(divs[i]);
 			}
 			document.querySelector(".f18__update__title-circleFront").style.fill = "#ccc";
+			document.querySelector(".f18__update__header-button").style.display = "none";
 		}
 	})
 }

@@ -1388,6 +1388,9 @@ clickboton18 = () => {
 		let percentageNumber = calculatePorcentaje(amount, value);
 		let container = document.createElement('div');
 		let divMain = document.createElement('div');
+		let check = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+		let checkBack = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+		let checkFront = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 		let finish = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 		let pathUnlock = document.createElementNS("http://www.w3.org/2000/svg", "path");
 		let pathLock = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -1410,7 +1413,17 @@ clickboton18 = () => {
 		let buttonDelete = document.createElement('button');
 		container.classList.add("f18__update-div");
 		divMain.classList.add("f18__update-main");
-		container.setAttribute('id',id)
+		container.setAttribute('id',id);
+		checkBack.classList.add("f18__update-checkBack");
+		checkBack.setAttribute('cx','5');
+		checkBack.setAttribute('cy','5');
+		checkBack.setAttribute('r','4.8');
+		checkFront.classList.add("f18__update-checkFront");
+		checkFront.setAttribute('cx','5');
+		checkFront.setAttribute('cy','5');
+		checkFront.setAttribute('r','3.5');
+		checkFront.style.fill = "#ccc";
+		check.classList.add("f18__update-check");
 		pathUnlock.classList.add("f18__update-unLock");
 		pathUnlock.style.display = "block";
 		pathUnlock.setAttribute('d',"M0 5 0 3.5 Q0.5 0 3 0 T6 3.5 L6 4 5 4 5 3.5 Q4.8 1 3 1 T1 3.5 L1 5 6 5 6 10 0 10z");
@@ -1418,8 +1431,6 @@ clickboton18 = () => {
 		pathLock.setAttribute('d',"M0 5 Q0.5 1 3 1 T6 5 M5 5 Q4.5 2 3 2 T1 5 L5 5 M6 5 L6 10 0 10 0 5z");
 		pathLock.style.display = "none";
 		finish.classList.add("f18__update-finish");
-		finish.setAttribute("viewport"," 0 0 100 100");
-		finish.setAttribute("preserveAspectRatio"," none");
 		h4.classList.add("f18__update-name");
 		h4.textContent = name;
 		h4.setAttribute("contenteditable","true");
@@ -1451,6 +1462,9 @@ clickboton18 = () => {
 		buttonToSave.textContent = "Guardar";
 		buttonDelete.classList.add("f18__update-delete");
 		buttonDelete.textContent = "Eliminar";
+		check.appendChild(checkBack);
+		check.appendChild(checkFront);
+		divMain.appendChild(check);
 		finish.appendChild(pathUnlock);
 		finish.appendChild(pathLock);
 		divMain.appendChild(finish);
@@ -1473,8 +1487,9 @@ clickboton18 = () => {
 		container.appendChild(optionsMaths);
 		container.appendChild(optionsButtons);
 		if (percentageNumber >= 100) {
-			pathUnlock.style.cursor = "pointer";
 			pathUnlock.style.fill = "#48e";
+		} else {
+			finish.style.cursor = "default";
 		}
 		if (block) {
 			h4.setAttribute("contenteditable","false");
@@ -1482,8 +1497,22 @@ clickboton18 = () => {
 			pathLock.style.display = "block";
 			pathLock.style.fill = "#a11";
 			pathUnlock.style.display = "none";
+			finish.style.cursor = "default";
 			buttonToUpdate.classList.replace("f18__update-toUpdate","f18__update-toUpdated");
 		}
+		checkFront.addEventListener("click",()=>{
+			if (checkFront.style.fill == "rgb(204, 204, 204)") {
+				checkFront.style.fill = "#000";
+				calculatedCheck(true, checkFront);
+				document.querySelector(".f18__update__header-button").style.display = "block";
+			} else {
+				checkFront.style.fill = "#ccc";
+				calculatedCheck(false, checkFront);
+				if (document.querySelector(".f18__update__title-circleFront").style.fill == "rgb(204, 204, 204)") {
+					document.querySelector(".f18__update__header-button").style.display = "none";
+				}
+			}
+		})
 		h4.addEventListener("keyup",()=>{
 			if (!block) {
 				buttonToSave.classList.replace("f18__update-saved","f18__update-save");
@@ -1516,11 +1545,13 @@ clickboton18 = () => {
 				let percentageNumber = calculatePorcentaje(amount, percentageInput.value);
 				theProgress.style.width = `${percentageNumber}%`;
 				numberProgress.textContent = `${Math.trunc(percentageNumber)}%`;
+				calculate = calculateMath(tiempo[2], tiempo[1], tiempo[1], amount, percentageInput.value);
+				recommendation.textContent = calculate;
 				if (percentageNumber >= 100) {
-					pathUnlock.style.cursor = "pointer";
+					finish.style.cursor = "pointer";
 					pathUnlock.style.fill = "#48e";
 				} else {
-					pathUnlock.style.cursor = "default";
+					finish.style.cursor = "default";
 					pathUnlock.style.fill = "#ccc";
 				}
 
@@ -1556,6 +1587,7 @@ clickboton18 = () => {
 					pathLock.style.display = "block";
 					pathLock.style.fill = "#a11";
 					pathUnlock.style.display = "none";
+					finish.style.cursor = "default";
 					block = true;
 					modificarObject(id,{
 						nombre: h4.textContent,
@@ -1713,6 +1745,36 @@ clickboton18 = () => {
 
 		return forEachPro;
 	}
+	calculatedCheck = (bollean, origin) => {
+		let allDivs = document.querySelectorAll('.f18__update-div');
+		if (origin.className.animVal == "f18__update__title-circleFront") {
+			for (let i = allDivs.length - 1; i >= 0; i--) {
+				let divCheck = allDivs[i].querySelector(".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront");
+				if (bollean) {
+					divCheck.style.fill = "#000";
+				} else {
+					divCheck.style.fill = "#ccc";
+				}
+			}
+		} else {
+			let div = document.querySelector(".f18__update-checkFront");
+			for (let i = allDivs.length - 1; i >= 0; i--) {
+				let divCheck = allDivs[i].querySelector(".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront");
+				if (divCheck.style.fill == "rgb(204, 204, 204)") {
+					bollean = false;
+				} else {
+					bollean = true;
+					break;
+				}
+			}
+			if (bollean) {
+				document.querySelector(".f18__update__title-circleFront").style.fill = "#000";
+			} else {
+				document.querySelector(".f18__update__title-circleFront").style.fill = "#ccc";
+				document.querySelector(".f18__update__header-button").style.display = "block";
+			}
+		}
+	}
 	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("books",{autoIncrement: true}))
 	IDBRequest.addEventListener("success",() => readObject())
 	container.innerHTML = `
@@ -1743,8 +1805,15 @@ clickboton18 = () => {
 				</div>
 			</div>
 			<div class="f18__update">
-				<h3>Lecturas</h3>
+				<div class="f18__update__header">
+					<h3>Lecturas</h3>
+					<button class="f18__update__header-button" style="display: none">Eliminar</button>
+				</div>
 				<div class="f18__update__title">
+					<svg class="f18__update__title-svg">
+						<circle class="f18__update__title-circleBack" cx="5" cy="5" r="4.8"></circle>
+						<circle class="f18__update__title-circleFront" cx="5" cy="5" r="3.5" style="fill:#ccc"></circle>
+					</svg>
 					<div class="f18__update__title-name">Nombre</div>
 					<div class="f18__update__title-calculateTime">Tiempo Restante</div>
 					<div class="f18__update__title-recommendation">Proporción</div>
@@ -1816,6 +1885,43 @@ clickboton18 = () => {
 				error.classList.replace("f18__add__errorInactive","f18__add__errorActive");
 				div.classList.add("f18__add-error");
 			}
+		}
+	})
+	document.querySelector(".f18__update__title-circleFront").addEventListener("click",()=>{
+		if (document.querySelector(".f18__update__title-circleFront").style.fill == "rgb(204, 204, 204)") {
+			document.querySelector(".f18__update__title-circleFront").style.fill = "#000";
+			document.querySelector(".f18__update__header-button").style.display = "block";
+			calculatedCheck(true, document.querySelector(".f18__update__title-circleFront"));
+		} else {
+			document.querySelector(".f18__update__title-circleFront").style.fill = "#ccc";
+			document.querySelector(".f18__update__header-button").style.display = "none";
+			calculatedCheck(false, document.querySelector(".f18__update__title-circleFront"));
+		}
+	})
+	document.querySelector(".f18__update__header-button").addEventListener("click",()=>{
+		let allDivs = document.querySelectorAll('.f18__update-div');
+		let arr = [];
+		let divs = [];
+		for (let i = allDivs.length - 1; i >= 0; i--) {
+			let divCheck = allDivs[i].querySelector(".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront");
+			if (divCheck.style.fill == "rgb(0, 0, 0)") {
+				let key = allDivs[i].getAttribute("id");
+				arr.push(key)
+			}
+		}
+		if (window.confirm("¿Seguro que quieres proceder a Eliminar?")) {
+			for (let i = allDivs.length - 1; i >= 0; i--) {
+				for (let j = arr.length - 1; j >= 0; j--) {
+					if (allDivs[i].getAttribute("id") == arr[j]) {
+						divs.push(allDivs[i])
+					}
+				}
+			}
+			for (let i = arr.length - 1; i >= 0; i--) {
+				eliminarObject(arr[i]);
+				document.querySelector(".f18__update__container").removeChild(divs[i]);
+			}
+			document.querySelector(".f18__update__title-circleFront").style.fill = "#ccc";
 		}
 	})
 }

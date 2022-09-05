@@ -1,62 +1,3 @@
-* {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-}
-body {
-	min-height: 100vh;
-	padding: 12px;
-	min-width: 210px;
-}
-main {
-	background: #9f9;
-}
-h1 {
-	text-align: center;
-}
-h2 {
-	text-align: center;
-}
-::-webkit-scrollbar {
-	width: 6px;
-	/*height: 6px;*/
-}
-::-webkit-scrollbar-thumb {
-    background-color: #5558;
-}
-/*Desarrollo*/
-.container {
-	padding: 12px;
-}
-.form {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	padding: 10px;
-}
-.input {
-	padding: 2px;
-	white-space: pre-wrap;
-}
-.form__div {
-	min-width: 160px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin: 6px;
-	padding: 6px;
-	border: 1px solid #8be;
-}
-.desarrollo__div {
-	border: 1px solid #000;
-	padding: 20px;
-}
-.button {
-	border-radius: 5px;
-	width: 30px;
-	height: 30px;
-	margin: auto;
-}
 /*Generalidades*/
 .flex {
 	display: flex;
@@ -430,12 +371,12 @@ h2 {
 .f18__update {
 	width: 100%;
 }
-.f18__update__container {
+.f18__update__head-container, .f18__update__saved-content {
 	display: flex;
 	flex-direction: column;
 	overflow-y: auto;
-	max-height: 225px;
-	/*75 * 3*/
+	max-height: 150px;
+	/*75 * 2*/
 }
 .f18__update-div {
 	display: grid;
@@ -451,14 +392,14 @@ h2 {
 	justify-items: center;
 	margin: 5px 0;
 }
-.f18__update__title {
+.f18__update__title, .f18__update__save__title {
 	display: grid;
 	justify-items: center;
 	align-items: center;
 	grid-gap: 4px 8px;
 	grid-template-columns: 28px 160px repeat(4, 1fr) 140px;
 }
-.f18__update__title, .f18__update__header-button {
+.f18__update__title, .f18__update__header-save, .f18__update__header-delete, .f18__update__save-save, .f18__update__save-delete {
 	font-weight: 600;
 }
 .f18__update-optionsMaths, .f18__update-optionsButtons {
@@ -471,6 +412,10 @@ h2 {
 .f18__update__header h3 {
 	text-align-last: center;
 	grid-column: 2 / 3;
+}
+.f18__update__header-buttons {
+	display: flex;
+	justify-content: space-between;
 }
 .f18__update-main {
 	display: grid;
@@ -487,17 +432,18 @@ h2 {
 	stroke-width: .3;
 	stroke: #000;
 }
-.f18__update__title-circleBack, .f18__update__title-circleFront, .f18__update-checkBack, .f18__update-checkFront {
+.f18__update-circleBack, .f18__update__save-circleBack, .f18__update-checkBack {
 	fill: #ccc;
 	transform: scale(1.8);
 	stroke-width: .3;
 	stroke: #000;
 }
-.f18__update__title-circleFront, .f18__update-checkFront {
+.f18__update-circleFront, .f18__update__save-circleFront, .f18__update-checkFront {
+	transform: scale(1.8);
 	stroke: none;
 	fill: #000;
 }
-.f18__update__title-circleFront:active, .f18__update-checkFront:active {
+.f18__update-circleFront:active, .f18__update__save-circleFront:active, .f18__update-checkFront:active {
 	fill: #aaa;
 }
 .f18__update-name {
@@ -572,7 +518,7 @@ h2 {
 	grid-template-columns: repeat(2, 70px);
 	grid-gap: 10px 0;
 }
-.f18__update__header-button, .f18__update-toUpdate, .f18__update-toUpdated, .f18__update-save, .f18__update-saved, .f18__update-delete {
+.f18__update__header-buttons button, .f18__update-toUpdate, .f18__update-toUpdated, .f18__update-save, .f18__update-saved, .f18__update-delete {
 	background: transparent;
 	border: none;
 	margin: 0 6px;
@@ -582,12 +528,16 @@ h2 {
 .f18__update-toUpdate, .f18__update-toUpdated {
 	grid-column: 1 / 3;
 }
-.f18__update__header-button:hover, .f18__update-delete:hover {
+.f18__update__header-buttons button, .f18__update__header-buttons button:hover {
+	border: none;
+}
+.f18__update__header-save:hover, .f18__update__save-save:hover .f18__update-save:hover {
+	color: #4c8;
+	border-bottom: 2px solid #4c8;
+}
+.f18__update__header-delete:hover, .f18__update__save-delete:hover, .f18__update-delete:hover {
 	color: #c84;
 	border-bottom: 2px solid #c84;
-}
-.f18__update__header-button, .f18__update__header-button:hover {
-	border: none;
 }
 .f18__update-toUpdate:hover {
 	color: #48c;
@@ -602,9 +552,15 @@ h2 {
 	color: #4c8;
 	border-bottom: 2px solid #4c8;
 }
-.f18__update-save:hover {
-	color: #4ec;
-	border-bottom: 2px solid #4ec;
+.f18__update__saved {
+	display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  margin: 5px 0;
+}
+.f18__update__saved h3 {
+	text-align-last: center;
+	grid-column: 2 / 3;
 }
 /*Responsive*/
 @media screen and (max-width: 942px) {
@@ -625,10 +581,10 @@ h2 {
 		margin: 0 10px;
 		width: 200px;
 	}
-	.f18__update__title {
+	.f18__update__title, .f18__update__save__title {
 		display: none;
 	}
-	.f18__update__container {
+	.f18__update__head-container, .f18__update__saved-content {
 		min-height: 476px;
 		/*238 * 2*/
 		flex-direction: row;
@@ -701,9 +657,16 @@ h2 {
 	color:#555555; 
 }
 ::-webkit-calendar-picker-indicator { 
-  background-image: url(http://icons.iconarchive.com/icons/dakirby309/simply-styled/256/Calendar-icon.png);
+  background-image: url(../img/Calendar-icon.png);
       background-position:center;
        background-size:20px 20px;
        background-repeat:no-repeat;
       color:rgba(204,204,204,0);
+}
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #5558;
 }

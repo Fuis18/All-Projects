@@ -1,68 +1,6 @@
 "strict mode";
-// Variables
-let form = document.querySelector(".form");
-let fragment = document.createDocumentFragment();
-let veces = 18;
-// Funciones
-// Contrucción de cada botton para los proyectos
-buildkey = (i) => {
-	let h3 = document.createElement("h3");
-	let input = document.createElement("input");
-	let textH3 = document.createTextNode(buildH3(i));
-	h3.appendChild(textH3);
-	input.classList.add("input");
-	input.classList.add("input-" + i);
-	input.setAttribute("type","button");
-	input.setAttribute("value",buildH3(i));
-	input.setAttribute("onclick",`javascript:
-		if (document.querySelector(".desarrollo__div").hasChildNodes() == false) clickboton${i}();
-		else remove();`)
-	return [h3, input];
-}
-buildH3 = (i) => {
-	if (i == 1) return "Regla de 3 simple";
-	if (i == 2) return "Función Cuadratica";
-	if (i == 3) return "Bucle";
-	if (i == 4) return "Calculadora";
-	if (i == 5) return "Asistencias por 30 días";
-	if (i == 6) return "Intervalo de tiempo";
-	if (i == 7) return "Cursos";
-	if (i == 8) return "Temperatura y Comida";
-	if (i == 9) return "Selección de tu input";
-	if (i == 10) return "Conteo rápido y normal";
-	if (i == 11) return "Reloj";
-	if (i == 12) return "Idioma";
-	if (i == 13) return "Texturizador";
-	if (i == 14) return "FileRieder, Drag & Drop, Barra de progreso";
-	if (i == 15) return "IndexDB + Drag & Drop";
-	if (i == 16) return "Lazy Load";
-	if (i == 17) return "Bucle Host http";
-	if (i == 18) return "Eficiencia lectora";
-}
-remove = () => {
-	let a = document.createElement("H2");
-	let text = document.createTextNode("Desarrollo del proyecto");
-	a.appendChild(text);
-	let b = document.createElement("DIV");
-	b.classList.add("desarrollo__div");
-	document.querySelector(".desarrollo").removeChild(document.querySelector(".desarrollo h2"));
-	document.querySelector(".desarrollo").removeChild(document.querySelector(".desarrollo__div"));
-	document.querySelector(".desarrollo").appendChild(a);
-	document.querySelector(".desarrollo").appendChild(b);
-}
-// Ejecucción
-for (let i = 1; i <= veces; i++) {
-	let div = document.createElement("DIV");
-	div.classList.add("form__div");
-	let key = buildkey(i);
-	div.appendChild(key[0]);
-	div.appendChild(key[1]);
-	fragment.appendChild(div);
-}
-form.appendChild(fragment);
 // Proyecto 1
 clickboton1 = () => {
-	let container = document.querySelector(".desarrollo__div");
 	container.innerHTML = `
 	<div class="flex">
 		<div class="f1__container">
@@ -75,9 +13,7 @@ clickboton1 = () => {
 		</div>
 		<div class="result1">Resultado: </div>
 	</div>`;
-	let num1 = 1;
-	let num2 = 1;
-	let num3 = 1;
+	let num1 = 1, num2 = 1, num3 = 1;
 	document.querySelector(".f1__answer button").addEventListener("click",()=>{
 		if (document.querySelector(".f1__input1-left").value != '') num1 = document.querySelector(".f1__input1-left").value;
 		if (document.querySelector(".f1__input1-right").value != '') num2 = document.querySelector(".f1__input1-right").value;
@@ -130,9 +66,7 @@ clickboton2 = () => {
 		}
 	})
 	document.querySelector(".f2__submit-input").addEventListener("click",()=>{
-		let a = 1;
-		let b = 1;
-		let c = 0;
+		let a = 1, b = 1, c = 0;
 		if (document.querySelector(".f2__firstValue-input").value !== '') {
 			a = document.querySelector(".f2__firstValue-input").value;
 		}
@@ -1320,9 +1254,12 @@ clickboton18 = () => {
 			if (cursor.result) {
 				let curs = cursor.result.value;
 				let element = buildDiv(curs.nombre,curs.calculo,curs.total,curs.cantidad,curs.tiempo,cursor.result.key,curs.valor,curs.lock);
-				fragment.appendChild(element);
+				if (curs.lock[0] == true) {
+					document.querySelector(".f18__update__saved-content").appendChild(element);
+				} else {
+					document.querySelector(".f18__update__head-container").appendChild(element);
+				}
 				cursor.result.continue();
-				document.querySelector(".f18__update__container").appendChild(fragment);
 			}
 		})
 	}
@@ -1385,6 +1322,7 @@ clickboton18 = () => {
 		return result;
 	}
 	buildDiv = (name, calculate, timed, amount, tiempo, id, value, block) => {
+		let nameClass = "f18__update";
 		let percentageNumber = calculatePorcentaje(amount, value);
 		let container = document.createElement('div');
 		let divMain = document.createElement('div');
@@ -1411,56 +1349,56 @@ clickboton18 = () => {
 		let buttonToUpdate = document.createElement('button');
 		let buttonToSave = document.createElement('button');
 		let buttonDelete = document.createElement('button');
-		container.classList.add("f18__update-div");
-		divMain.classList.add("f18__update-main");
+		container.classList.add(nameClass + "-div");
+		divMain.classList.add(nameClass + "-main");
 		container.setAttribute('id',id);
-		checkBack.classList.add("f18__update-checkBack");
+		checkBack.classList.add(nameClass + "-checkBack");
 		checkBack.setAttribute('cx','5');
 		checkBack.setAttribute('cy','5');
 		checkBack.setAttribute('r','4.8');
-		checkFront.classList.add("f18__update-checkFront");
+		checkFront.classList.add(nameClass + "-checkFront");
 		checkFront.setAttribute('cx','5');
 		checkFront.setAttribute('cy','5');
 		checkFront.setAttribute('r','3.5');
 		checkFront.style.fill = "#ccc";
-		check.classList.add("f18__update-check");
-		pathUnlock.classList.add("f18__update-unLock");
+		check.classList.add(nameClass + "-check");
+		pathUnlock.classList.add(nameClass + "-unLock");
 		pathUnlock.style.display = "block";
 		pathUnlock.setAttribute('d',"M0 5 0 3.5 Q0.5 0 3 0 T6 3.5 L6 4 5 4 5 3.5 Q4.8 1 3 1 T1 3.5 L1 5 6 5 6 10 0 10z");
-		pathLock.classList.add("f18__update-lock");
+		pathLock.classList.add(nameClass + "-lock");
 		pathLock.setAttribute('d',"M0 5 Q0.5 1 3 1 T6 5 M5 5 Q4.5 2 3 2 T1 5 L5 5 M6 5 L6 10 0 10 0 5z");
 		pathLock.style.display = "none";
-		finish.classList.add("f18__update-finish");
-		h4.classList.add("f18__update-name");
+		finish.classList.add(nameClass + "-finish");
+		h4.classList.add(nameClass + "-name");
 		h4.textContent = name;
 		h4.setAttribute("contenteditable","true");
 		h4.setAttribute("spellcheck","false");
-		calculateTimeDiv.classList.add("f18__update-calculateTimeDiv");
-		calculateTime.classList.add("f18__update-calculateTime");
+		calculateTimeDiv.classList.add(nameClass + "-calculateTimeDiv");
+		calculateTime.classList.add(nameClass + "-calculateTime");
 		calculateTime.textContent = timed;
-		recommendation.classList.add("f18__update-recommendation");
+		recommendation.classList.add(nameClass + "-recommendation");
 		recommendation.textContent = calculate;
-		percentage.classList.add("f18__update-percentage");
-		percentageInput.classList.add("f18__update-percentageInput");
+		percentage.classList.add(nameClass + "-percentage");
+		percentageInput.classList.add(nameClass + "-percentageInput");
 		percentageInput.setAttribute("type","number");
 		percentageInput.setAttribute("value", value);
-		percentageEntire.classList.add("f18__update-percentageEntire");
+		percentageEntire.classList.add(nameClass + "-percentageEntire");
 		percentageEntire.textContent = `\xa0 / ${amount}`;
-		time.classList.add("f18__update-time");
+		time.classList.add(nameClass + "-time");
 		time.textContent = `${tiempo[0]}/${tiempo[1]}/${tiempo[2]}`;
-		containerProgress.classList.add("f18__update-containerProgress");
-		theProgressDiv.classList.add("f18__update-theProgressDiv");
-		theProgress.classList.add("f18__update-theProgress");
+		containerProgress.classList.add(nameClass + "-containerProgress");
+		theProgressDiv.classList.add(nameClass + "-theProgressDiv");
+		theProgress.classList.add(nameClass + "-theProgress");
 		theProgress.style.width = `${percentageNumber}%`;
-		numberProgress.classList.add("f18__update-numberProgress");
+		numberProgress.classList.add(nameClass + "-numberProgress");
 		numberProgress.textContent = `${Math.trunc(percentageNumber)}%`;
-		optionsMaths.classList.add("f18__update-optionsMaths");
-		optionsButtons.classList.add("f18__update-optionsButtons");
-		buttonToUpdate.classList.add("f18__update-toUpdate");
+		optionsMaths.classList.add(nameClass + "-optionsMaths");
+		optionsButtons.classList.add(nameClass + "-optionsButtons");
+		buttonToUpdate.classList.add(nameClass + "-toUpdate");
 		buttonToUpdate.textContent = "Actualizar";
-		buttonToSave.classList.add("f18__update-saved");
+		buttonToSave.classList.add(nameClass + "-saved");
 		buttonToSave.textContent = "Guardar";
-		buttonDelete.classList.add("f18__update-delete");
+		buttonDelete.classList.add(nameClass + "-delete");
 		buttonDelete.textContent = "Eliminar";
 		check.appendChild(checkBack);
 		check.appendChild(checkFront);
@@ -1491,7 +1429,7 @@ clickboton18 = () => {
 		} else {
 			finish.style.cursor = "default";
 		}
-		if (block) {
+		if (block[1]) {
 			h4.setAttribute("contenteditable","false");
 			percentageInput.setAttribute("disabled","");
 			pathLock.style.display = "block";
@@ -1503,24 +1441,34 @@ clickboton18 = () => {
 		checkFront.addEventListener("click",()=>{
 			if (checkFront.style.fill == "rgb(204, 204, 204)") {
 				checkFront.style.fill = "#000";
-				calculatedCheck(true, checkFront);
-				document.querySelector(".f18__update__header-button").style.display = "block";
+				calculatedCheck(true, checkFront, block[0]);
+				if (!block[0]) {
+					document.querySelector(".f18__update__header-delete").style.display = "block";
+					document.querySelector(".f18__update__header-save").style.display = "block";
+				} else {
+					document.querySelector(".f18__update__save-delete").style.display = "block";
+					document.querySelector(".f18__update__save-save").style.display = "block";
+				}
 			} else {
 				checkFront.style.fill = "#ccc";
-				calculatedCheck(false, checkFront);
-				if (document.querySelector(".f18__update__title-circleFront").style.fill == "rgb(204, 204, 204)") {
-					document.querySelector(".f18__update__header-button").style.display = "none";
+				calculatedCheck(false, checkFront, block[0]);
+				if (document.querySelector(".f18__update-circleFront").style.fill == "rgb(204, 204, 204)" && !block[0]) {
+					document.querySelector(".f18__update__header-delete").style.display = "none";
+					document.querySelector(".f18__update__header-save").style.display = "none";
+				} else {
+					document.querySelector(".f18__update__save-save").style.display = "none";
+					document.querySelector(".f18__update__save-delete").style.display = "none";
 				}
 			}
 		})
 		h4.addEventListener("keyup",()=>{
-			if (!block) {
+			if (!block[1]) {
 				buttonToSave.classList.replace("f18__update-saved","f18__update-save");
 				buttonToUpdate.classList.replace("f18__update-toUpdate","f18__update-toUpdated");
 			}
 		})
 		percentageInput.addEventListener("keyup",()=>{
-			if (!block) {
+			if (!block[1]) {
 				buttonToSave.classList.replace("f18__update-saved","f18__update-save");
 				buttonToUpdate.classList.replace("f18__update-toUpdate","f18__update-toUpdated");
 			}
@@ -1562,6 +1510,18 @@ clickboton18 = () => {
 			let c = parseInt(date[0]);
 			let timed = calculateDate(a,b,c);
 			calculateTime.textContent = timed;
+			if (block[0] == undefined) {
+				block = [false, block]
+				if (block[1]) {
+					h4.setAttribute("contenteditable","false");
+					percentageInput.setAttribute("disabled","");
+					pathLock.style.display = "block";
+					pathLock.style.fill = "#a11";
+					pathUnlock.style.display = "none";
+					finish.style.cursor = "default";
+					buttonToUpdate.classList.replace("f18__update-toUpdate","f18__update-toUpdated");
+				}
+			}
 			modificarObject(id,{
 					nombre: h4.textContent,
 					calculo: calculate,
@@ -1575,7 +1535,7 @@ clickboton18 = () => {
 		buttonDelete.addEventListener("click",()=>{
 			if (window.confirm("¿Seguro que quieres Eliminar una lectura?")) {
 				eliminarObject(id);
-				document.querySelector(".f18__update__container").removeChild(container);
+				document.querySelector(".f18__update__head-container").removeChild(container);
 			}
 		})
 		pathUnlock.addEventListener("click",()=>{
@@ -1588,7 +1548,7 @@ clickboton18 = () => {
 					pathLock.style.fill = "#a11";
 					pathUnlock.style.display = "none";
 					finish.style.cursor = "default";
-					block = true;
+					block[1] = true;
 					modificarObject(id,{
 						nombre: h4.textContent,
 						calculo: calculate,
@@ -1777,11 +1737,12 @@ clickboton18 = () => {
 		let forEachPro = numerator + denominator;
 		return forEachPro;
 	}
-	calculatedCheck = (bollean, origin) => {
-		let allDivs = document.querySelectorAll('.f18__update-div');
-		if (origin.className.animVal == "f18__update__title-circleFront") {
+	calculatedCheck = (bollean, origin, space) => {
+		let allDivs = document.querySelectorAll('.f18__update__head-container .f18__update-div');
+		if (space) allDivs = document.querySelectorAll('.f18__update__saved-content .f18__update-div');
+		if (origin.className.animVal == "f18__update-circleFront" || origin.className.animVal == "f18__update__save-circleFront") {
 			for (let i = allDivs.length - 1; i >= 0; i--) {
-				let divCheck = allDivs[i].querySelector(".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront");
+			let divCheck = allDivs[i].querySelector(".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront");
 				if (bollean) {
 					divCheck.style.fill = "#000";
 				} else {
@@ -1789,9 +1750,8 @@ clickboton18 = () => {
 				}
 			}
 		} else {
-			let div = document.querySelector(".f18__update-checkFront");
 			for (let i = allDivs.length - 1; i >= 0; i--) {
-				let divCheck = allDivs[i].querySelector(".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront");
+			let divCheck = allDivs[i].querySelector(".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront");
 				if (divCheck.style.fill == "rgb(204, 204, 204)") {
 					bollean = false;
 				} else {
@@ -1800,11 +1760,78 @@ clickboton18 = () => {
 				}
 			}
 			if (bollean) {
-				document.querySelector(".f18__update__title-circleFront").style.fill = "#000";
+				if (!space) document.querySelector(".f18__update-circleFront").style.fill = "#000";
+				else document.querySelector(".f18__update__save-circleFront").style.fill = "#000";
 			} else {
-				document.querySelector(".f18__update__title-circleFront").style.fill = "#ccc";
-				document.querySelector(".f18__update__header-button").style.display = "block";
+				if (!space) {
+					document.querySelector(".f18__update-circleFront").style.fill = "#ccc";
+					document.querySelector(".f18__update__header-delete").style.display = "block";
+					document.querySelector(".f18__update__header-save").style.display = "block";
+				} else {
+					document.querySelector(".f18__update__save-circleFront").style.fill = "#ccc";
+					document.querySelector(".f18__update__save-delete").style.display = "block";
+					document.querySelector(".f18__update__save-save").style.display = "block";
+				}
 			}
+		}
+	}
+	selectCheck = type => {
+		let allDivs = document.querySelectorAll('.f18__update-div');
+		let arr = [];
+		let divs = [];
+		let text;
+		for (let i = allDivs.length - 1; i >= 0; i--) {
+			let divCheck = allDivs[i].querySelector(".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront");
+			if (divCheck.style.fill == "rgb(0, 0, 0)") {
+				let key = allDivs[i].getAttribute("id");
+				arr.push(key)
+			}
+		}
+		if (type == 0) text = "¿Seguro que quieres proceder a Eliminar?";
+		else text = "¿Seguro que quieres proceder a Guardar?";
+		if (window.confirm(text)) {
+			for (let i = allDivs.length - 1; i >= 0; i--) {
+				for (let j = arr.length - 1; j >= 0; j--) {
+					if (allDivs[i].getAttribute("id") == arr[j]) {
+						divs.push(allDivs[i])
+					}
+				}
+			}
+			for (let i = arr.length - 1; i >= 0; i--) {
+				if (type == 0) {
+					eliminarObject(arr[i]);
+					document.querySelector(".f18__update__head-container").removeChild(divs[i]);
+				}
+				if (type == 1) {
+					let obj = [];					
+					obj.push(divs[i].querySelector(".f18__update-name").textContent);
+					obj.push(divs[i].querySelector(".f18__update-recommendation").textContent);
+					let temporal = divs[i].querySelector(".f18__update-percentageEntire").textContent.split("/");
+					obj.push(parseInt(temporal[1]));
+					obj.push(divs[i].querySelector(".f18__update-calculateTime").textContent);
+					temporal = divs[i].querySelector(".f18__update-time").textContent.split("/");
+					temporal = [parseInt(temporal[0]),parseInt(temporal[1]),parseInt(temporal[2])]
+					obj.push(temporal);
+					obj.push(divs[i].querySelector(".f18__update-percentageInput").value);
+					if (divs[i].querySelector(".f18__update-lock").style.display == "block") temporal = true;
+					else temporal = false;
+					obj.push(temporal);
+					modificarObject(parseInt(arr[i]),{
+						nombre: obj[0],
+						calculo: obj[1],
+						cantidad: obj[2],
+						total: obj[3],
+						tiempo: obj[4],
+						valor: obj[5],
+						lock: [true, obj[6]]
+					})
+					divs[i].querySelector(".f18__update-checkFront").style.fill = "#ccc";
+					document.querySelector(".f18__update__head-container").removeChild(divs[i]);
+					document.querySelector(".f18__update__saved-content").appendChild(divs[i]);
+				}
+			}
+			document.querySelector(".f18__update__title-circleFront").style.fill = "#ccc";
+			document.querySelector(".f18__update__header-delete").style.display = "none";
 		}
 	}
 	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("books",{autoIncrement: true}))
@@ -1837,23 +1864,50 @@ clickboton18 = () => {
 				</div>
 			</div>
 			<div class="f18__update">
-				<div class="f18__update__header">
-					<h3>Lecturas</h3>
-					<button class="f18__update__header-button" style="display: none">Eliminar</button>
+				<div class="f18__update__head">
+					<div class="f18__update__header">
+						<h3>Lecturas</h3>
+						<div class="f18__update__header-buttons">
+							<button class="f18__update__header-save" style="display: none">Archivar</button>
+							<button class="f18__update__header-delete" style="display: none">Eliminar</button>
+						</div>
+					</div>
+					<div class="f18__update__title">
+						<svg class="f18__update__title-svg">
+							<circle class="f18__update-circleBack" cx="5" cy="5" r="4.8"></circle>
+							<circle class="f18__update-circleFront" cx="5" cy="5" r="3.5" style="fill:#ccc"></circle>
+						</svg>
+						<div class="f18__update__title-name">Nombre</div>
+						<div class="f18__update__title-calculateTime">Tiempo Restante</div>
+						<div class="f18__update__title-recommendation">Proporción</div>
+						<div class="f18__update__title-time">Restante</div>
+						<div class="f18__update__title-percentage">Porcentaje</div>
+						<div class="f18__update__title-options">Opciones</div>
+					</div>
+				<div class="f18__update__head-container"></div>
 				</div>
-				<div class="f18__update__title">
-					<svg class="f18__update__title-svg">
-						<circle class="f18__update__title-circleBack" cx="5" cy="5" r="4.8"></circle>
-						<circle class="f18__update__title-circleFront" cx="5" cy="5" r="3.5" style="fill:#ccc"></circle>
-					</svg>
-					<div class="f18__update__title-name">Nombre</div>
-					<div class="f18__update__title-calculateTime">Tiempo Restante</div>
-					<div class="f18__update__title-recommendation">Proporción</div>
-					<div class="f18__update__title-time">Restante</div>
-					<div class="f18__update__title-percentage">Porcentaje</div>
-					<div class="f18__update__title-options">Opciones</div>
+				<div class="f18__update__save">
+					<div class="f18__update__saved">
+						<h3>Archivados</h3>
+						<div class="f18__update__header-buttons">
+							<button class="f18__update__save-save" style="display: none">Desarchivar</button>
+							<button class="f18__update__save-delete" style="display: none">Eliminar</button>
+						</div>
+					</div>
+					<div class="f18__update__save__title">
+						<svg class="f18__update__title-svg">
+							<circle class="f18__update__save-circleBack" cx="5" cy="5" r="4.8"></circle>
+							<circle class="f18__update__save-circleFront" cx="5" cy="5" r="3.5" style="fill:#ccc"></circle>
+						</svg>
+						<div class="f18__update__save__title-name">Nombre</div>
+						<div class="f18__update__save__title-calculateTime">Tiempo Restante</div>
+						<div class="f18__update__save__title-recommendation">Proporción</div>
+						<div class="f18__update__save__title-time">Restante</div>
+						<div class="f18__update__save__title-percentage">Porcentaje</div>
+						<div class="f18__update__save__title-options">Opciones</div>
+					</div>
+					<div class="f18__update__saved-content"></div>
 				</div>
-				<div class="f18__update__container"></div>
 			</div>
 		</div>`;
 	document.querySelector(".f18__add-submit").addEventListener("click",()=>{
@@ -1885,14 +1939,14 @@ clickboton18 = () => {
 				cantidad: amount,
 				tiempo: [day, month, year],
 				valor: amountProgress,
-				lock: false
+				lock: [false, false]
 			});
 			document.querySelector(".f18__add-name").value = "";
 			document.querySelector(".f18__add-amount").value = "";
 			document.querySelector(".f18__add-date").value = "";
 			document.querySelector(".f18__add-progress").value = "";
 			let element = buildDiv(name, calculated, timed, amount, [day, month, year], idKey, amountProgress, false);
-			document.querySelector(".f18__update__container").appendChild(element);
+			document.querySelector(".f18__update__head-container").appendChild(element);
 		} else {
 			if (name.length == '') {
 				let div = document.querySelectorAll(".f18__add-Div")[0];
@@ -1919,42 +1973,32 @@ clickboton18 = () => {
 			}
 		}
 	})
-	document.querySelector(".f18__update__title-circleFront").addEventListener("click",()=>{
-		if (document.querySelector(".f18__update__title-circleFront").style.fill == "rgb(204, 204, 204)") {
-			document.querySelector(".f18__update__title-circleFront").style.fill = "#000";
-			document.querySelector(".f18__update__header-button").style.display = "block";
-			calculatedCheck(true, document.querySelector(".f18__update__title-circleFront"));
+	document.querySelector(".f18__update-circleFront").addEventListener("click",()=>{
+		if (document.querySelector(".f18__update-circleFront").style.fill == "rgb(204, 204, 204)") {
+			document.querySelector(".f18__update-circleFront").style.fill = "#000";
+			document.querySelector(".f18__update__header-delete").style.display = "block";
+			document.querySelector(".f18__update__header-save").style.display = "block";
+			calculatedCheck(true, document.querySelector(".f18__update-circleFront"), false);
 		} else {
-			document.querySelector(".f18__update__title-circleFront").style.fill = "#ccc";
-			document.querySelector(".f18__update__header-button").style.display = "none";
-			calculatedCheck(false, document.querySelector(".f18__update__title-circleFront"));
+			document.querySelector(".f18__update-circleFront").style.fill = "#ccc";
+			document.querySelector(".f18__update__header-delete").style.display = "none";
+			document.querySelector(".f18__update__header-save").style.display = "none";
+			calculatedCheck(false, document.querySelector(".f18__update-circleFront"), false);
 		}
 	})
-	document.querySelector(".f18__update__header-button").addEventListener("click",()=>{
-		let allDivs = document.querySelectorAll('.f18__update-div');
-		let arr = [];
-		let divs = [];
-		for (let i = allDivs.length - 1; i >= 0; i--) {
-			let divCheck = allDivs[i].querySelector(".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront");
-			if (divCheck.style.fill == "rgb(0, 0, 0)") {
-				let key = allDivs[i].getAttribute("id");
-				arr.push(key)
-			}
-		}
-		if (window.confirm("¿Seguro que quieres proceder a Eliminar?")) {
-			for (let i = allDivs.length - 1; i >= 0; i--) {
-				for (let j = arr.length - 1; j >= 0; j--) {
-					if (allDivs[i].getAttribute("id") == arr[j]) {
-						divs.push(allDivs[i])
-					}
-				}
-			}
-			for (let i = arr.length - 1; i >= 0; i--) {
-				eliminarObject(arr[i]);
-				document.querySelector(".f18__update__container").removeChild(divs[i]);
-			}
-			document.querySelector(".f18__update__title-circleFront").style.fill = "#ccc";
-			document.querySelector(".f18__update__header-button").style.display = "none";
+	document.querySelector(".f18__update__save-circleFront").addEventListener("click",()=>{
+		if (document.querySelector(".f18__update__save-circleFront").style.fill == "rgb(204, 204, 204)") {
+			document.querySelector(".f18__update__save-circleFront").style.fill = "#000";
+			document.querySelector(".f18__update__save-delete").style.display = "block";
+			document.querySelector(".f18__update__save-save").style.display = "block";
+			calculatedCheck(true, document.querySelector(".f18__update-circleFront"), true);
+		} else {
+			document.querySelector(".f18__update__save-circleFront").style.fill = "#ccc";
+			document.querySelector(".f18__update__save-delete").style.display = "none";
+			document.querySelector(".f18__update__save-save").style.display = "none";
+			calculatedCheck(false, document.querySelector(".f18__update-circleFront"), true);
 		}
 	})
+	document.querySelector(".f18__update__header-delete").addEventListener("click",()=> selectCheck(0));
+	document.querySelector(".f18__update__header-save").addEventListener("click",() => selectCheck(1));
 }

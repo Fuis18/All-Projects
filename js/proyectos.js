@@ -1,6 +1,7 @@
 "strict mode";
 // Proyecto 1
 clickboton1 = () => {
+	let container = document.querySelector(".desarrollo__div");
 	container.innerHTML = `
 	<div class="flex">
 		<div class="f1__container">
@@ -1535,7 +1536,8 @@ clickboton18 = () => {
 		buttonDelete.addEventListener("click",()=>{
 			if (window.confirm("¿Seguro que quieres Eliminar una lectura?")) {
 				eliminarObject(id);
-				document.querySelector(".f18__update__head-container").removeChild(container);
+				if (block[0] == false) document.querySelector(".f18__update__head-container").removeChild(container);
+				else document.querySelector(".f18__update__saved-content").removeChild(container);
 			}
 		})
 		pathUnlock.addEventListener("click",()=>{
@@ -1775,21 +1777,24 @@ clickboton18 = () => {
 			}
 		}
 	}
-	selectCheck = type => {
-		let allDivs = document.querySelectorAll('.f18__update-div');
-		let arr = [];
-		let divs = [];
+	selectCheck = (space,type) => {
 		let text;
-		for (let i = allDivs.length - 1; i >= 0; i--) {
-			let divCheck = allDivs[i].querySelector(".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront");
-			if (divCheck.style.fill == "rgb(0, 0, 0)") {
-				let key = allDivs[i].getAttribute("id");
-				arr.push(key)
-			}
-		}
 		if (type == 0) text = "¿Seguro que quieres proceder a Eliminar?";
-		else text = "¿Seguro que quieres proceder a Guardar?";
+		else if (type == 1 && space == 0) text = "¿Seguro que quieres proceder a Archivar?";
+		else text = "¿Seguro que quieres proceder a Desarchivar?";
 		if (window.confirm(text)) {
+			let arr = [], divs = [], allDivs;
+			if (space == 0) allDivs = document.querySelectorAll('.f18__update__head-container .f18__update-div');
+			else allDivs = document.querySelectorAll('.f18__update__saved-content .f18__update-div');
+			// Recoge todos los ids seleccionados
+			for (let i = allDivs.length - 1; i >= 0; i--) {
+				let divCheck = allDivs[i].querySelector(".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront");
+				if (divCheck.style.fill == "rgb(0, 0, 0)") {
+					let key = allDivs[i].getAttribute("id");
+					arr.push(key)
+				}
+			}
+			// Recoge los los divs seleccionados
 			for (let i = allDivs.length - 1; i >= 0; i--) {
 				for (let j = arr.length - 1; j >= 0; j--) {
 					if (allDivs[i].getAttribute("id") == arr[j]) {
@@ -1797,12 +1802,22 @@ clickboton18 = () => {
 					}
 				}
 			}
+			// MOdifica cada uno
 			for (let i = arr.length - 1; i >= 0; i--) {
+				// Elimina
 				if (type == 0) {
 					eliminarObject(arr[i]);
-					document.querySelector(".f18__update__head-container").removeChild(divs[i]);
+					if (space == 0) {
+						document.querySelector(".f18__update__head-container").removeChild(divs[i]);
+						document.querySelector(".f18__update-circleFront").style.fill = "#ccc";
+					}
+					else {
+						document.querySelector(".f18__update__saved-content").removeChild(divs[i]);
+						document.querySelector(".f18__update__save-circleFront").style.fill = "#ccc";
+					}
 				}
-				if (type == 1) {
+				// Archiva
+				else if (type == 1) {
 					let obj = [];					
 					obj.push(divs[i].querySelector(".f18__update-name").textContent);
 					obj.push(divs[i].querySelector(".f18__update-recommendation").textContent);
@@ -1813,6 +1828,9 @@ clickboton18 = () => {
 					temporal = [parseInt(temporal[0]),parseInt(temporal[1]),parseInt(temporal[2])]
 					obj.push(temporal);
 					obj.push(divs[i].querySelector(".f18__update-percentageInput").value);
+					if (space == 0) temporal = true;
+					else temporal = false;
+					obj.push(temporal);
 					if (divs[i].querySelector(".f18__update-lock").style.display == "block") temporal = true;
 					else temporal = false;
 					obj.push(temporal);
@@ -1823,15 +1841,25 @@ clickboton18 = () => {
 						total: obj[3],
 						tiempo: obj[4],
 						valor: obj[5],
-						lock: [true, obj[6]]
+						lock: [obj[6], obj[7]]
 					})
 					divs[i].querySelector(".f18__update-checkFront").style.fill = "#ccc";
+				}
+				if (space == 0 && type == 1) {
+					document.querySelector(".f18__update-circleFront").style.fill = "#ccc";
 					document.querySelector(".f18__update__head-container").removeChild(divs[i]);
 					document.querySelector(".f18__update__saved-content").appendChild(divs[i]);
+					document.querySelector(".f18__update__header-save").style.display = "none";
+					document.querySelector(".f18__update__header-delete").style.display = "none";
+				}
+				else if (space == 1 && type == 1) {
+					document.querySelector(".f18__update__save-circleFront").style.fill = "#ccc";
+					document.querySelector(".f18__update__saved-content").removeChild(divs[i]);
+					document.querySelector(".f18__update__head-container").appendChild(divs[i]);
+					document.querySelector(".f18__update__save-save").style.display = "none";
+					document.querySelector(".f18__update__save-delete").style.display = "none";
 				}
 			}
-			document.querySelector(".f18__update__title-circleFront").style.fill = "#ccc";
-			document.querySelector(".f18__update__header-delete").style.display = "none";
 		}
 	}
 	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("books",{autoIncrement: true}))
@@ -1910,6 +1938,7 @@ clickboton18 = () => {
 				</div>
 			</div>
 		</div>`;
+	// Añadir
 	document.querySelector(".f18__add-submit").addEventListener("click",()=>{
 		let name = document.querySelector(".f18__add-name").value;
 		let amount = parseInt(document.querySelector(".f18__add-amount").value);
@@ -1921,17 +1950,15 @@ clickboton18 = () => {
 		let year = parseInt(date.substring(0,4));
 		let month = parseInt(date.substring(5,7));
 		let day = parseInt(date.substring(8,10));
+		// Validación
 		if (name.length > 0 && amount > 0 && amount < 10000 && !date == "") {
 			let calculated = calculateMath(year, month, day, amount, amountProgress);
 			let timed = calculateDate(year, month, day);
-			let keys = document.querySelectorAll(".f18__update-div");
-			let key = keys.length - 1;
+			let key = document.querySelectorAll(".f18__update-div").length - 1;
 			let idKey;
 			if (key == -1) {
 				idKey = 0;
-			} else {
-				idKey = parseInt(keys[key].id) + 1;
-			}
+			} else idKey = parseInt(document.querySelectorAll(".f18__update-div")[key].id) + 1;
 			addObject({
 				nombre: name,
 				calculo: calculated,
@@ -1945,9 +1972,10 @@ clickboton18 = () => {
 			document.querySelector(".f18__add-amount").value = "";
 			document.querySelector(".f18__add-date").value = "";
 			document.querySelector(".f18__add-progress").value = "";
-			let element = buildDiv(name, calculated, timed, amount, [day, month, year], idKey, amountProgress, false);
+			let element = buildDiv(name, calculated, timed, amount, [day, month, year], idKey, amountProgress, [false, false]);
 			document.querySelector(".f18__update__head-container").appendChild(element);
 		} else {
+			// Manejo de errores en la validación
 			if (name.length == '') {
 				let div = document.querySelectorAll(".f18__add-Div")[0];
 				let error = div.children[2]
@@ -1973,6 +2001,7 @@ clickboton18 = () => {
 			}
 		}
 	})
+	// Check list primero
 	document.querySelector(".f18__update-circleFront").addEventListener("click",()=>{
 		if (document.querySelector(".f18__update-circleFront").style.fill == "rgb(204, 204, 204)") {
 			document.querySelector(".f18__update-circleFront").style.fill = "#000";
@@ -1986,6 +2015,7 @@ clickboton18 = () => {
 			calculatedCheck(false, document.querySelector(".f18__update-circleFront"), false);
 		}
 	})
+	// Check list segundo
 	document.querySelector(".f18__update__save-circleFront").addEventListener("click",()=>{
 		if (document.querySelector(".f18__update__save-circleFront").style.fill == "rgb(204, 204, 204)") {
 			document.querySelector(".f18__update__save-circleFront").style.fill = "#000";
@@ -1999,6 +2029,8 @@ clickboton18 = () => {
 			calculatedCheck(false, document.querySelector(".f18__update-circleFront"), true);
 		}
 	})
-	document.querySelector(".f18__update__header-delete").addEventListener("click",()=> selectCheck(0));
-	document.querySelector(".f18__update__header-save").addEventListener("click",() => selectCheck(1));
+	document.querySelector(".f18__update__header-delete").addEventListener("click",()=> selectCheck(0, 0));
+	document.querySelector(".f18__update__header-save").addEventListener("click",() => selectCheck(0, 1));
+	document.querySelector(".f18__update__save-delete").addEventListener("click",()=> selectCheck(1, 0));
+	document.querySelector(".f18__update__save-save").addEventListener("click",() => selectCheck(1, 1));
 }

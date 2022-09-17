@@ -9,9 +9,7 @@ clickboton1 = () => {
 			<input type="number" class="f1__input1-right" placeholder="1">
 			<input type="number" class="f1__input1-down" placeholder="1">
 		</div>
-		<div class="f1__answer">
-			<button>=</button>
-		</div>
+		<div class="f1__answer"><button>=</button></div>
 		<div class="result1">Resultado: </div>
 	</div>`;
 	let num1 = 1, num2 = 1, num3 = 1;
@@ -68,18 +66,10 @@ clickboton2 = () => {
 	})
 	document.querySelector(".f2__submit-input").addEventListener("click",()=>{
 		let a = 1, b = 1, c = 0;
-		if (document.querySelector(".f2__firstValue-input").value !== '') {
-			a = document.querySelector(".f2__firstValue-input").value;
-		}
-		if (document.querySelector(".f2__secondValue-input").value !== '') {
-			b = document.querySelector(".f2__secondValue-input").value;
-		}
-		if (document.querySelector(".f2__thirdValue-input").value !== '') {
-			c = document.querySelector(".f2__thirdValue-input").value;
-		}
-		if (typeof c === "string") {
-			c = parseInt(c)
-		}
+		if (document.querySelector(".f2__firstValue-input").value !== '') a = document.querySelector(".f2__firstValue-input").value;
+		if (document.querySelector(".f2__secondValue-input").value !== '') b = document.querySelector(".f2__secondValue-input").value;
+		if (document.querySelector(".f2__thirdValue-input").value !== '') c = document.querySelector(".f2__thirdValue-input").value;
+		if (typeof c === "string") c = parseInt(c);
 		if (document.querySelector(".f2__button-inactive")) {
 			let answerPositive, answerNegative;
 			let preAnswer = b * b - (4 * a * c)
@@ -530,106 +520,32 @@ clickboton8 = () => {
 		]
 	}
 	const validarForm = () => {
-		if (e[0].value == 1 && e[1].value == 1) {
-			e[3].innerHTML = "<p>Muerto por congelamiento e Intoxicado</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 2 && e[1].value == 1) {
-			e[3].innerHTML = "<p>Muerto por gripe</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 3 && e[1].value == 1) {
-			e[3].innerHTML = "<p>Muerto por Envenamiento</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 4 && e[1].value == 1) {
-			e[3].innerHTML = "<p>Muerto por Fiebre</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 5 && e[1].value == 1) {
-			e[3].innerHTML = "<p>Muerto por calentamiento y Envenenamiento</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 1 && e[1].value == 2) {
-			e[3].innerHTML = "<p>Muerto por congelamiento</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 2 && e[1].value == 2) {
-			e[3].innerHTML = "<p>Adaptación al frio con fátiga</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 3 && e[1].value == 2) {
-			e[3].innerHTML = "<p>Vómitos, diarrea, nauseas</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 4 && e[1].value == 2) {
-			e[3].innerHTML = "<p>Adaptación al calor con cansancio</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 5 && e[1].value == 2) {
-			e[3].innerHTML = "<p>Muerto por calentamiento</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 1 && e[1].value == 3) {
-			e[3].innerHTML = "<p>Muerto por congelamiento</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 2 && e[1].value == 3) {
-			e[3].innerHTML = "<p>Adaptación al frio</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 3 && e[1].value == 3) {
-			e[3].innerHTML = "<p>Estado optimo</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 4 && e[1].value == 3) {
-			e[3].innerHTML = "<p>Adaptación al calor</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 5 && e[1].value == 3) {
-			e[3].innerHTML = "<p>Muerto por calentamiento</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 1 && e[1].value == 4) {
-			e[3].innerHTML = "<p>Muerto por congelamiento</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 2 && e[1].value == 4) {
-			e[3].innerHTML = "<p>Adaptación al frio</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 3 && e[1].value == 4) {
-			e[3].innerHTML = "<p>Sedentarismo</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 4 && e[1].value == 4) {
-			e[3].innerHTML = "<p>Sedentario</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 5 && e[1].value == 4) {
-			e[3].innerHTML = "<p>Muerto por calentamiento</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 1 && e[1].value == 5) {
-			e[3].innerHTML = "<p>Muerto por congelamiento</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 2 && e[1].value == 5) {
-			e[3].innerHTML = "<p>Adaptación al frio</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 3 && e[1].value == 5) {
-			e[3].innerHTML = "<p>Obesidad</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 4 && e[1].value == 5) {
-			e[3].innerHTML = "<p>Desidratación</p>";
-			container.appendChild(e[3]);
-		}
-		if (e[0].value == 5 && e[1].value == 5) {
-			e[3].innerHTML = "<p>Muerto por calentamiento</p>";
-			container.appendChild(e[3]);
-		}
+		if (e[0].value == 1 && e[1].value == 1) e[3].innerHTML = "<p>Muerto por congelamiento e Intoxicado</p>";
+		if (e[0].value == 2 && e[1].value == 1) e[3].innerHTML = "<p>Muerto por gripe</p>";
+		if (e[0].value == 3 && e[1].value == 1) e[3].innerHTML = "<p>Muerto por Envenamiento</p>";
+		if (e[0].value == 4 && e[1].value == 1) e[3].innerHTML = "<p>Muerto por Fiebre</p>";
+		if (e[0].value == 5 && e[1].value == 1) e[3].innerHTML = "<p>Muerto por calentamiento y Envenenamiento</p>";
+		if (e[0].value == 1 && e[1].value == 2) e[3].innerHTML = "<p>Muerto por congelamiento</p>";
+		if (e[0].value == 2 && e[1].value == 2) e[3].innerHTML = "<p>Adaptación al frio con fátiga</p>";
+		if (e[0].value == 3 && e[1].value == 2) e[3].innerHTML = "<p>Vómitos, diarrea, nauseas</p>";
+		if (e[0].value == 4 && e[1].value == 2) e[3].innerHTML = "<p>Adaptación al calor con cansancio</p>";
+		if (e[0].value == 5 && e[1].value == 2) e[3].innerHTML = "<p>Muerto por calentamiento</p>";
+		if (e[0].value == 1 && e[1].value == 3) e[3].innerHTML = "<p>Muerto por congelamiento</p>";
+		if (e[0].value == 2 && e[1].value == 3) e[3].innerHTML = "<p>Adaptación al frio</p>";
+		if (e[0].value == 3 && e[1].value == 3) e[3].innerHTML = "<p>Estado optimo</p>";
+		if (e[0].value == 4 && e[1].value == 3) e[3].innerHTML = "<p>Adaptación al calor</p>";
+		if (e[0].value == 5 && e[1].value == 3) e[3].innerHTML = "<p>Muerto por calentamiento</p>";
+		if (e[0].value == 1 && e[1].value == 4) e[3].innerHTML = "<p>Muerto por congelamiento</p>";
+		if (e[0].value == 2 && e[1].value == 4) e[3].innerHTML = "<p>Adaptación al frio</p>";
+		if (e[0].value == 3 && e[1].value == 4) e[3].innerHTML = "<p>Sedentarismo</p>";
+		if (e[0].value == 4 && e[1].value == 4) e[3].innerHTML = "<p>Sedentario</p>";
+		if (e[0].value == 5 && e[1].value == 4) e[3].innerHTML = "<p>Muerto por calentamiento</p>";
+		if (e[0].value == 1 && e[1].value == 5) e[3].innerHTML = "<p>Muerto por congelamiento</p>";
+		if (e[0].value == 2 && e[1].value == 5) e[3].innerHTML = "<p>Adaptación al frio</p>";
+		if (e[0].value == 3 && e[1].value == 5) e[3].innerHTML = "<p>Obesidad</p>";
+		if (e[0].value == 4 && e[1].value == 5) e[3].innerHTML = "<p>Desidratación</p>";
+		if (e[0].value == 5 && e[1].value == 5) e[3].innerHTML = "<p>Muerto por calentamiento</p>";
+		container.appendChild(e[3]);
 	}
 	// Ejecución
 	let e = buildForm();
@@ -1277,6 +1193,8 @@ clickboton18 = () => {
 		const objectStore = IDBTransaction.objectStore("books");
 		return objectStore;
 	}
+	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("books",{autoIncrement: true}))
+	IDBRequest.addEventListener("success",() => readObject())
 	class Fraccion {
 		constructor(numerador, denominador) {
 	        this.setNumerador(numerador);
@@ -1312,14 +1230,13 @@ clickboton18 = () => {
 	        return `${this.numerador}/${this.denominador}`;
 	    }
 	}
+	// Porcentaje de avance entre lo leído y lo no leido
 	calculatePorcentaje = (amount,value) => {
 		let progress, result;
 		if (value == undefined) {
 			progress = document.querySelector(".f18__update-percentageInput").value;
 			result = (progress * 100) / amount;
-		} else {
-			result = (value * 100) / amount;
-		}
+		} else result = (value * 100) / amount;
 		return result;
 	}
 	buildDiv = (name, calculate, timed, amount, tiempo, id, value, block) => {
@@ -1425,11 +1342,8 @@ clickboton18 = () => {
 		optionsButtons.appendChild(buttonDelete);
 		container.appendChild(optionsMaths);
 		container.appendChild(optionsButtons);
-		if (percentageNumber >= 100) {
-			pathUnlock.style.fill = "#48e";
-		} else {
-			finish.style.cursor = "default";
-		}
+		if (percentageNumber >= 100) pathUnlock.style.fill = "#48e";
+		else finish.style.cursor = "default";
 		if (block[1]) {
 			h4.setAttribute("contenteditable","false");
 			percentageInput.setAttribute("disabled","");
@@ -1494,7 +1408,7 @@ clickboton18 = () => {
 				let percentageNumber = calculatePorcentaje(amount, percentageInput.value);
 				theProgress.style.width = `${percentageNumber}%`;
 				numberProgress.textContent = `${Math.trunc(percentageNumber)}%`;
-				calculate = calculateMath(tiempo[2], tiempo[1], tiempo[1], amount, percentageInput.value);
+				calculate = calculateMath(tiempo[2], tiempo[1], tiempo[0], amount, percentageInput.value);
 				recommendation.textContent = calculate;
 				if (percentageNumber >= 100) {
 					finish.style.cursor = "pointer";
@@ -1568,22 +1482,14 @@ clickboton18 = () => {
 		return container;
 	}
 	checkMonth = (month, year) => {
-		if (month == 1 || month == 3 || month == 5 || month == 7  || month == 8  || month == 10  || month == 12) {
-			return 31;
-		} else if (month == 4 || month == 6 || month == 9 || month == 11) {
-			return 30;
-		} else if (month == 2 && year%4 == 0 && year%400 == 0 && !year%100 == 0) {
-			return 29;
-		} else {
-			return 28;
-		}
+		if (month == 1 || month == 3 || month == 5 || month == 7  || month == 8  || month == 10  || month == 12) return 31;
+		else if (month == 4 || month == 6 || month == 9 || month == 11) return 30;
+		else if (month == 2 && year%4 == 0 && year%400 == 0 && !year%100 == 0) return 29;
+		else return 28;
 	}
 	checkYear = year => {
-		if (year%4 == 0 && year%400 == 0 && !year%100 == 0) {
-			return 366;
-		} else {
-			return 365;
-		}
+		if (year%4 == 0 && year%400 == 0 && !year%100 == 0) return 366;
+		else return 365;
 	}
 	calculateDate = (year, month, day) => {
 		let today = new Date();
@@ -1593,20 +1499,16 @@ clickboton18 = () => {
 
 		let yearToDay = 0, monthToDay = 0, preNewDay, preNewMonth, preNewYear, newDay, newMonth, newYear;
 		// Comparar Años
-		if (todayYear <= year) {
-			newYear = year - todayYear;
-		}
+		if (todayYear <= year) newYear = year - todayYear;
 		// Comparar Meses
-		if (todayMonth <= month) {
-			newMonth =  month - todayMonth;
-		} else {
+		if (todayMonth <= month) newMonth =  month - todayMonth;
+		else {
 			newMonth =  month - todayMonth + 12;
 			newYear--;
 		}
 		// Comparar Días
-		if (todayDay <= day) {
-			newDay = day - todayDay;
-		} else {
+		if (todayDay <= day) newDay = day - todayDay;
+		else {
 			newDay = day - todayDay + checkMonth(month, year);
 			newMonth--;
 		}
@@ -1647,16 +1549,10 @@ clickboton18 = () => {
 			numeratorPro = parseInt(arrayFraccionPro.numerador);
 			denominatorPro = parseInt(arrayFraccionPro.denominador);
 			// Conservar el menor nominador
-			if (temporalProNominator > numeratorPro) {
-				temporalProNominator = numeratorPro;
-			}
+			if (temporalProNominator > numeratorPro) temporalProNominator = numeratorPro;
 			// Conservar el menor denominador
-			if (temporalProDenominator > denominatorPro) {
-				temporalProDenominator = denominatorPro;
-			}
-			if (denominatorPro == 1) {
-				break;
-			}
+			if (temporalProDenominator > denominatorPro) temporalProDenominator = denominatorPro;
+			if (denominatorPro == 1) break;
 			i++;
 			numeratorPro++;
 		}
@@ -1669,16 +1565,10 @@ clickboton18 = () => {
 				numeratorPro = parseInt(arrayFraccionPro.numerador);
 				denominatorPro = parseInt(arrayFraccionPro.denominador);
 				// Conservar el menor nominador
-				if (temporalProNominator > numeratorPro) {
-					temporalProNominator = numeratorPro;
-				}
+				if (temporalProNominator > numeratorPro) temporalProNominator = numeratorPro;
 				// Conservar el menor denominador
-				if (temporalProDenominator > denominatorPro) {
-					temporalProDenominator = denominatorPro;
-				}
-				if (denominatorPro == 1) {
-					break;
-				}
+				if (temporalProDenominator > denominatorPro) temporalProDenominator = denominatorPro;
+				if (denominatorPro == 1) break;
 				j++;
 				numeratorPro++;
 			}
@@ -1796,11 +1686,7 @@ clickboton18 = () => {
 			}
 			// Recoge los los divs seleccionados
 			for (let i = allDivs.length - 1; i >= 0; i--) {
-				for (let j = arr.length - 1; j >= 0; j--) {
-					if (allDivs[i].getAttribute("id") == arr[j]) {
-						divs.push(allDivs[i])
-					}
-				}
+				for (let j = arr.length - 1; j >= 0; j--) if (allDivs[i].getAttribute("id") == arr[j]) divs.push(allDivs[i]);
 			}
 			// MOdifica cada uno
 			for (let i = arr.length - 1; i >= 0; i--) {
@@ -1862,8 +1748,32 @@ clickboton18 = () => {
 			}
 		}
 	}
-	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("books",{autoIncrement: true}))
-	IDBRequest.addEventListener("success",() => readObject())
+	contractDiv = svg => {
+		let css = svg.style;
+		if (css.transform == "rotateZ(0deg)") {
+			css.transform = "rotateZ(-90deg)";
+			if (svg.className.animVal == "f18__update__header-svg") {
+				document.querySelector(".f18__update__title").style.display = "none";
+				document.querySelector(".f18__update__head-container").style.display = "none";
+			} else {
+				document.querySelector(".f18__update__save__title").style.display = "none";
+				document.querySelector(".f18__update__saved-content").style.display = "none";
+			}
+		} else {
+			css.transform = "rotateZ(0deg)";
+			if (svg.className.animVal == "f18__update__header-svg") {
+				if (document.querySelector(".desarrollo__div").clientWidth >= 886) {
+					document.querySelector(".f18__update__title").style.display = "grid";
+				}
+				document.querySelector(".f18__update__head-container").style.display = "grid";
+			} else {
+				if (document.querySelector(".desarrollo__div").clientWidth >= 886) {
+					document.querySelector(".f18__update__save__title").style.display = "grid";
+				}
+				document.querySelector(".f18__update__saved-content").style.display = "grid";
+			}
+		}
+	}
 	container.innerHTML = `
 		<div class="f18">
 			<div class="f18__add">
@@ -1894,6 +1804,9 @@ clickboton18 = () => {
 			<div class="f18__update">
 				<div class="f18__update__head">
 					<div class="f18__update__header">
+						<svg class="f18__update__header-svg" viewbox="0 0 10 10" class="svg">
+							<polygon points=".8,2.5 5,10 9.2,2.5"fill="black"/>
+						</sgv>
 						<h3>Lecturas</h3>
 						<div class="f18__update__header-buttons">
 							<button class="f18__update__header-save" style="display: none">Archivar</button>
@@ -1916,13 +1829,16 @@ clickboton18 = () => {
 				</div>
 				<div class="f18__update__save">
 					<div class="f18__update__saved">
+						<svg class="f18__update__saved-svg" viewbox="0 0 10 10" class="svg">
+							<polygon points=".8,2.5 5,10 9.2,2.5"fill="black"/>
+						</sgv>
 						<h3>Archivados</h3>
 						<div class="f18__update__header-buttons">
 							<button class="f18__update__save-save" style="display: none">Desarchivar</button>
 							<button class="f18__update__save-delete" style="display: none">Eliminar</button>
 						</div>
 					</div>
-					<div class="f18__update__save__title">
+					<div class="f18__update__save__title" style="display: none">
 						<svg class="f18__update__title-svg">
 							<circle class="f18__update__save-circleBack" cx="5" cy="5" r="4.8"></circle>
 							<circle class="f18__update__save-circleFront" cx="5" cy="5" r="3.5" style="fill:#ccc"></circle>
@@ -1934,7 +1850,7 @@ clickboton18 = () => {
 						<div class="f18__update__save__title-percentage">Porcentaje</div>
 						<div class="f18__update__save__title-options">Opciones</div>
 					</div>
-					<div class="f18__update__saved-content"></div>
+					<div class="f18__update__saved-content" style="display: none"></div>
 				</div>
 			</div>
 		</div>`;
@@ -2033,4 +1949,11 @@ clickboton18 = () => {
 	document.querySelector(".f18__update__header-save").addEventListener("click",() => selectCheck(0, 1));
 	document.querySelector(".f18__update__save-delete").addEventListener("click",()=> selectCheck(1, 0));
 	document.querySelector(".f18__update__save-save").addEventListener("click",() => selectCheck(1, 1));
+
+	document.querySelector(".f18__update__header-svg").addEventListener("click",() => {
+		contractDiv(document.querySelector(".f18__update__header-svg"));
+	});
+	document.querySelector(".f18__update__saved-svg").addEventListener("click",() => {
+		contractDiv(document.querySelector(".f18__update__saved-svg"));
+	});
 }

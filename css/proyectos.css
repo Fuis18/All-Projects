@@ -1,7 +1,3 @@
-/*Generalidades*/
-.flex {
-	display: flex;
-}
 /*Proyecto 1*/
 .f1__container {
 	display: grid;
@@ -78,7 +74,7 @@
 	display: inline-block;
 }
 .f3__numbers-input:hover {
-	cursor: pointer;;
+	cursor: pointer;
 }
 .f3__button-inactive {
 	border:  1px solid #a11;
@@ -235,6 +231,7 @@
 .img14 {
 	margin: auto;
 }
+/*Proyecto 15*/
 .names {
 	max-width: 800px;
 	margin: auto;
@@ -282,6 +279,7 @@
 .noMore {
 	padding: 30px;
 }
+/*Proyecto 16*/
 .publicacion {
 	text-align: left;
 	margin: 20px;
@@ -322,6 +320,7 @@
 	color: #bcf;
 	text-shadow: none;
 }
+/*Proyecto 17*/
 .button17 {
 	padding: 5px;
 }
@@ -399,7 +398,7 @@
 	grid-gap: 4px 8px;
 	grid-template-columns: 28px 160px repeat(4, 1fr) 140px;
 }
-.f18__update__title, .f18__update__header-save, .f18__update__header-delete, .f18__update__save-save, .f18__update__save-delete {
+.f18__update__title, .f18__update__save__title, .f18__update__header-save, .f18__update__header-delete, .f18__update__save-save, .f18__update__save-delete {
 	font-weight: 600;
 }
 .f18__update-optionsMaths, .f18__update-optionsButtons {
@@ -411,7 +410,6 @@
 }
 .f18__update__header h3 {
 	text-align-last: center;
-	grid-column: 2 / 3;
 }
 .f18__update__header-buttons {
 	display: flex;
@@ -421,10 +419,17 @@
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 }
-.f18__update__title-svg, .f18__update-finish, .f18__update-check {
+.f18__update__header-svg, .f18__update__saved-svg, .f18__update__title-svg, .f18__update-finish, .f18__update-check {
 	cursor: pointer;
 	height: 22px;
 	width: 28px;
+}
+.f18__update__saved-svg {
+	transform: rotateZ(-90deg);
+}
+.f18__update__header-svg, .f18__update__saved-svg {
+	justify-self: self-start;
+	transition: transform .5s;
 }
 .f18__update-unLock, .f18__update-lock {
 	fill: #ccc;
@@ -554,13 +559,12 @@
 }
 .f18__update__saved {
 	display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  justify-items: center;
-  margin: 5px 0;
+	grid-template-columns: repeat(3, 1fr);
+	justify-items: center;
+	margin: 5px 0;
 }
 .f18__update__saved h3 {
 	text-align-last: center;
-	grid-column: 2 / 3;
 }
 /*Responsive*/
 @media screen and (max-width: 942px) {
@@ -585,7 +589,8 @@
 		display: none;
 	}
 	.f18__update__head-container, .f18__update__saved-content {
-		min-height: 476px;
+		min-height: 238px;
+		max-height: 476px;
 		/*238 * 2*/
 		flex-direction: row;
 		justify-content: space-around;
@@ -638,35 +643,11 @@
 	    background-position: 60px 0;
 	}
 }
-::-webkit-inner-spin-button { 
-  display:none;
-}
-::-webkit-calendar-picker-indicator {
-	background-color:white
-}
-::-webkit-datetime-edit-text {
-}
-	color:#555555
-::-webkit-datetime-edit-month-field {
-	color:#555555 
-}
-::-webkit-datetime-edit-day-field {
-	color: #555555; 
-}
-::-webkit-datetime-edit-year-field {
-	color:#555555; 
-}
-::-webkit-calendar-picker-indicator { 
-  background-image: url(../img/Calendar-icon.png);
-      background-position:center;
-       background-size:20px 20px;
-       background-repeat:no-repeat;
-      color:rgba(204,204,204,0);
-}
-::-webkit-scrollbar {
-	width: 6px;
-	height: 6px;
-}
-::-webkit-scrollbar-thumb {
-    background-color: #5558;
+@keyframes animate-rotate {
+	from {
+	    transform: rotateZ(0deg);
+	}
+	to {
+		transform: rotateZ(200deg);
+	}
 }

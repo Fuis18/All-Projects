@@ -51,8 +51,9 @@ clickboton2 = () => {
 				<input type="submit" class="f2__submit-input">
 			</div>
 		</div>
-		<div class="f2__history">
-			<h4></h4><!--Historial-->
+		<div class="f2__history__content">
+			<h4>Historial</h4>
+			<div class="f2__history"></div>
 		</div>
 	</div>`;
 	document.querySelector(".f2__zeroValue-input").addEventListener("click",()=>{
@@ -64,31 +65,85 @@ clickboton2 = () => {
 			document.querySelector(".f2__unknownValue").classList.replace("f2__block","f2__none");
 		}
 	})
+	calculated = num => {
+		let arr = [];
+		// Divisivilidad
+		for (let i = 1; i <= num; i++) {
+			if (num%i == 0 && i != 1 && i != num) {
+				arr.push(i);
+			}
+		}
+		// Reducir
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i] == 4 || arr[i] == 9 || arr[i] == 16 || arr[i] == 25 || arr[i] == 36) {
+				let valor1 = Math.sqrt(arr[i]);
+				let valor2 = num / arr[i];
+				return [valor1,valor2];
+				break;
+			}
+		}
+		num = Math.sqrt(num)
+		return num;
+	}
 	document.querySelector(".f2__submit-input").addEventListener("click",()=>{
 		let a = 1, b = 1, c = 0;
-		if (document.querySelector(".f2__firstValue-input").value !== '') a = document.querySelector(".f2__firstValue-input").value;
-		if (document.querySelector(".f2__secondValue-input").value !== '') b = document.querySelector(".f2__secondValue-input").value;
-		if (document.querySelector(".f2__thirdValue-input").value !== '') c = document.querySelector(".f2__thirdValue-input").value;
-		if (typeof c === "string") c = parseInt(c);
+		if (document.querySelector(".f2__firstValue-input").value !== '') a = parseInt(document.querySelector(".f2__firstValue-input").value);
+		if (document.querySelector(".f2__secondValue-input").value !== '') b = parseInt(document.querySelector(".f2__secondValue-input").value);
+		if (document.querySelector(".f2__thirdValue-input").value !== '') c = parseInt(document.querySelector(".f2__thirdValue-input").value);
 		if (document.querySelector(".f2__button-inactive")) {
-			let answerPositive, answerNegative;
-			let preAnswer = b * b - (4 * a * c)
-			preAnswer = Math.sqrt(preAnswer)
-			if (preAnswer == NaN) {
-				alert("Tu operación no es válida");
+			// ( -b +/- ^/(b * b - 4 * a * c) ) / 2 * a
+			let oneValue, twoValue, threeValue, preAnswer;
+			oneValue = b * b;
+			twoValue = 4 * a * c;
+			threeValue = oneValue - twoValue; 
+			threeValue = oneValue - twoValue;
+			preAnswer = Math.sqrt(threeValue)
+			if (isNaN(preAnswer)) {
+				if (Math.sign(threeValue) == -1) {
+					// Raiz de menos uno o i
+					threeValue = threeValue * -1;
+					let answer = calculated(threeValue);
+					if (typeof answer == "number") {
+						oneValue = (- b + answer) / (2 * a);
+						twoValue = (- b - answer) / (2 * a);
+						let content = document.createElement("p");
+						let i = document.querySelectorAll(".f2__history p").length;
+						content.textContent = `${i}: ${oneValue}.i, ${twoValue}.i`;
+						document.querySelector(".f2__history").appendChild(content);
+					} else {
+						threeValue = (- b) /(2 * a);
+						oneValue = (+ answer[0]) /(2 * a);
+						twoValue = (- answer[0]) /(2 * a);
+						let content = document.createElement("p");
+						let i = document.querySelectorAll(".f2__history p").length;
+						content.textContent = `${i}: ( ${-b} ± ${answer[0]} √${answer[1]}.i ) /${2 * a}`;
+						document.querySelector(".f2__history").appendChild(content);
+					}
+				} else {
+					let answer = calculated(threeValue);
+					threeValue = (- b) /(2 * a);
+					oneValue = (+ answer[0]) /(2 * a);
+					twoValue = (- answer[0]) /(2 * a);
+					let content = document.createElement("p");
+					let i = document.querySelectorAll(".f2__history p").length;
+					content.textContent = `${i}: ( ${-b} ± ${answer[0]} √${answer[1]} ) /${2 * a}`;
+					document.querySelector(".f2__history").appendChild(content);
+				}
 			}
 			else {
-				answerPositive = (- b + preAnswer) / (2 * a);
-				answerNegative = (- b - preAnswer) / (2 * a);
+				oneValue = (- b + preAnswer) / (2 * a);
+				twoValue = (- b - preAnswer) / (2 * a);
+				let content = document.createElement("p");
+				let i = document.querySelectorAll(".f2__history p").length;
+				content.textContent = `${i}: ${oneValue}, ${twoValue}`;
+				document.querySelector(".f2__history").appendChild(content);
 			}
-			alert("Respuesta positiva" + answerPositive);
-			alert("Respuesta negativa" + answerNegative);
 		} else {
 			let x = document.querySelector(".f2__unknownValue-input").value;
 			let answerOne = a * x * x;
 			let answerTwo = x * b;
 			let answerZero = answerOne + answerTwo + c;
-			alert("Respuesta" + answerZero);
+			alert("Respuesta: " + answerZero);
 		}
 	})
 }
@@ -358,7 +413,7 @@ clickboton4 = () => {
 	} else if (var1 == "malo" || var1 == "Malo" || var1 == "MALO") {
 		alert("¿Quién es el malo, el quién lo dice a otra persona o el quien hace un programa para ayudar a los demás?");
 	} else {
-		alert("La opción no es valida");
+		alert("La opción no es válida");
 	}
 }
 // Proyecto 5
@@ -367,6 +422,9 @@ clickboton5 = () => {
 	let alumnosTotales = [];
 	let fragment1 = document.createDocumentFragment();
 	let cantidad = prompt(`¿Cuántos alumnos son?`);
+	let total = 15;
+	let resta = total / 1.666;
+	resta = Math.round(resta);
 
 	const asistencia = (nombre,p,e) => {
 		let presencia = prompt(nombre + ", Presencia (P/p), Inasistencias (A/a). Día: " + e);
@@ -377,7 +435,7 @@ clickboton5 = () => {
 	for (let i = 0; i < cantidad; i++) {
 		alumnosTotales[i] = [prompt(`Nombre del alumno ${i + 1}`),0];
 	}
-	for (let i = 0; i < 30; i++) {
+	for (let i = 0; i < total; i++) {
 		for (alumno in alumnosTotales) {
 			asistencia(alumnosTotales[alumno][0],alumno,i);
 		}
@@ -386,8 +444,8 @@ clickboton5 = () => {
 		let div5 = document.createElement('DIV');
 		let resultado = `${alumnosTotales[alumno][0]}:<br>
 		Presencias:  <b>${alumnosTotales[alumno][1]}</b><br>
-		Inasistencias: <b>${30 - parseInt(alumnosTotales[alumno][1])}</b><br>`;
-		if (30 - alumnosTotales[alumno][1] > 18) {
+		Inasistencias: <b>${total - parseInt(alumnosTotales[alumno][1])}</b><br>`;
+		if (total - alumnosTotales[alumno][1] > resta) {
 			resultado+= "<b style='color:red'>REPROBADO POR INASISTENCIAS</b><br><br>";
 		} else {resultado+= "<br><br>"}
 		div5.innerHTML = resultado;
@@ -1765,12 +1823,12 @@ clickboton18 = () => {
 				if (document.querySelector(".desarrollo__div").clientWidth >= 886) {
 					document.querySelector(".f18__update__title").style.display = "grid";
 				}
-				document.querySelector(".f18__update__head-container").style.display = "grid";
+				document.querySelector(".f18__update__head-container").style.display = "flex";
 			} else {
 				if (document.querySelector(".desarrollo__div").clientWidth >= 886) {
 					document.querySelector(".f18__update__save__title").style.display = "grid";
 				}
-				document.querySelector(".f18__update__saved-content").style.display = "grid";
+				document.querySelector(".f18__update__saved-content").style.display = "flex";
 			}
 		}
 	}

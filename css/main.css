@@ -7,46 +7,88 @@ body {
 	min-height: 100vh;
 	padding: 12px;
 	min-width: 210px;
+	background: #555;
 }
 main {
-	background: #9f9;
+	background: #333;
+	padding: 5px;
 }
-h1 {
+h1, h2 {
 	text-align: center;
 }
-h2 {
-	text-align: center;
+h1, h2, h3, .input, div {
+	color: #ccc;
 }
 /*Desarrollo*/
-.container {
-	padding: 0 12px 8px 12px;
-}
 .form {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-around;
-	padding: 10px;
-}
-.input {
-	padding: 2px;
-	white-space: pre-wrap;
+	justify-content: center;
+	padding: 10px 0;
 }
 .form__div {
-	min-width: 160px;
+	min-width: 120px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 6px;
-	padding: 6px;
-	border: 1px solid #8be;
+	margin: 5px;
+	border: 1px solid #ccc;
+	border-radius: 50px;
+}
+.form__div:active {
+	background: #ccc3;
+}
+.input {
+	padding: 6px 8px;
+	border: none;
+	cursor: pointer;
+	white-space: pre-wrap;
+	background: none;
+	width: 100%;
 }
 .desarrollo__div {
 	border: 1px solid #000;
-	padding: 20px;
+	padding: 10px;
 }
 .button {
 	border-radius: 5px;
 	width: 30px;
 	height: 30px;
 	margin: auto;
+}
+::-webkit-inner-spin-button { 
+  display:none;
+}
+::-webkit-calendar-picker-indicator {
+	background-color:white
+}
+::-webkit-datetime-edit-text {
+}
+	color:#555555
+::-webkit-datetime-edit-month-field {
+	color:#555555 
+}
+::-webkit-datetime-edit-day-field {
+	color: #555555; 
+}
+::-webkit-datetime-edit-year-field {
+	color:#555555; 
+}
+::-webkit-calendar-picker-indicator {
+	background-image: url(../img/Calendar-icon.png);
+	background-position:center;
+	background-size:20px 20px;
+	background-repeat:no-repeat;
+	color:rgba(204,204,204,0);
+}
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #333;
+}
+/*Generalidades*/
+.flex {
+	display: flex;
 }

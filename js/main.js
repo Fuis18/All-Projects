@@ -6,18 +6,34 @@ let veces = 18;
 // Funciones
 // Contrucción de cada boton para los proyectos
 buildkey = (i) => {
-	let h3 = document.createElement("h3");
 	let input = document.createElement("input");
-	let textH3 = document.createTextNode(buildH3(i));
-	h3.appendChild(textH3);
 	input.classList.add("input");
 	input.classList.add("input-" + i);
 	input.setAttribute("type","button");
 	input.setAttribute("value",buildH3(i));
-	input.setAttribute("onclick",`javascript:
-		if (document.querySelector(".desarrollo__div").hasChildNodes() == false) clickboton${i}();
-		else remove();`)
-	return [h3, input];
+	input.addEventListener("click",() => {
+		if (document.querySelector(".desarrollo__div").hasChildNodes() == false) {
+			if (i == 1)  clickboton1();
+			if (i == 2)  clickboton2();
+			if (i == 3)  clickboton3();
+			if (i == 4)  clickboton4();
+			if (i == 5)  clickboton5();
+			if (i == 6)  clickboton6();
+			if (i == 7)  clickboton7();
+			if (i == 8)  clickboton8();
+			if (i == 9)  clickboton9();
+			if (i == 10) clickboton10();
+			if (i == 11) clickboton11();
+			if (i == 12) clickboton12();
+			if (i == 13) clickboton13();
+			if (i == 14) clickboton14();
+			if (i == 15) clickboton15();
+			if (i == 16) clickboton16();
+			if (i == 17) clickboton17();
+			if (i == 18) clickboton18();
+		} else remove();
+	}) // input.setAttribute("onclick",`javascript:if(document.querySelector(".desarrollo__div").hasChildNodes()==false)clickboton${i}();elseremove();`);
+	return input;
 }
 // Contrucción del titulo de cada boton
 buildH3 = (i) => {
@@ -25,7 +41,7 @@ buildH3 = (i) => {
 	if (i == 2) return "Función Cuadratica";
 	if (i == 3) return "Bucle";
 	if (i == 4) return "Calculadora";
-	if (i == 5) return "Asistencias por 30 días";
+	if (i == 5) return "Asistencias por 15 días";
 	if (i == 6) return "Intervalo de tiempo";
 	if (i == 7) return "Cursos";
 	if (i == 8) return "Temperatura y Comida";
@@ -56,8 +72,8 @@ for (let i = 1; i <= veces; i++) {
 	let div = document.createElement("DIV");
 	div.classList.add("form__div");
 	let key = buildkey(i);
-	div.appendChild(key[0]);
-	div.appendChild(key[1]);
+	div.appendChild(key);
 	fragment.appendChild(div);
 }
+// Compilación
 form.appendChild(fragment);

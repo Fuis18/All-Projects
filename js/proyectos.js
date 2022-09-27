@@ -1,9 +1,9 @@
-"strict mode";
+'use strict';
 // Proyecto 1
-clickboton1 = () => {
+const clickboton1 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	container.innerHTML = `
-	<div class="flex">
+	<div class="f1">
 		<div class="f1__container">
 			<input type="number" class="f1__input1-left" placeholder="1">
 			<input type="number" class="f1__input1-right" placeholder="1">
@@ -18,21 +18,21 @@ clickboton1 = () => {
 		if (document.querySelector(".f1__input1-right").value != '') num2 = document.querySelector(".f1__input1-right").value;
 		if (document.querySelector(".f1__input1-down").value != '') num3 = document.querySelector(".f1__input1-down").value;
 		let res = (num1 * num2) / num3;
-		document.querySelector(".result1").textContent = "Resultado:" + res;
+		document.querySelector(".result1").textContent = "Resultado: " + res;
 	})
 }
 // Proyecto 2
-clickboton2 = () => {
+const clickboton2 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	container.innerHTML = `
 	<div class="f2">
 		<div class="f2__operatetor">
 			<h4>Introduce tu operación</h4>
-			<div class="flex">
+			<div class="f2__content">
 				<div class="f2__firstValue">
 					<input type="number" class="f2__firstValue-input" placeholder="1">
 				</div>
-				<div class="f2__unknown">.X^2.</div>
+				<div class="f2__unknown">.X^2+</div>
 				<div class="f2__secondValue">
 					<input type="number" class="f2__secondValue-input" placeholder="1">
 				</div>
@@ -65,7 +65,7 @@ clickboton2 = () => {
 			document.querySelector(".f2__unknownValue").classList.replace("f2__block","f2__none");
 		}
 	})
-	calculated = num => {
+	const calculated = num => {'use strict';
 		let arr = [];
 		// Divisivilidad
 		for (let i = 1; i <= num; i++) {
@@ -74,8 +74,11 @@ clickboton2 = () => {
 			}
 		}
 		// Reducir
-		for (let i = 0; i < arr.length; i++) {
-			if (arr[i] == 4 || arr[i] == 9 || arr[i] == 16 || arr[i] == 25 || arr[i] == 36) {
+		for (let i = arr.length; i > 0; i--) {
+			if (arr[i] == 4 || arr[i] == 9 || arr[i] == 16 || arr[i] == 25 || arr[i] == 36 || arr[i] == 49 || arr[i] == 64 || arr[i] == 81 ||
+				arr[i] == 100 || arr[i] == 121 || arr[i] == 144 || arr[i] == 169 || arr[i] == 196 || arr[i] == 225 || arr[i] == 256 ||
+				arr[i] == 289 || arr[i] == 324 || arr[i] == 361 || arr[i] == 400 || arr[i] == 441 || arr[i] == 484 || arr[i] == 529 ||
+				arr[i] == 576 || arr[i] == 625 || arr[i] == 676 || arr[i] == 729 || arr[i] == 784 || arr[i] == 841 || arr[i] == 900) {
 				let valor1 = Math.sqrt(arr[i]);
 				let valor2 = num / arr[i];
 				return [valor1,valor2];
@@ -93,6 +96,7 @@ clickboton2 = () => {
 		if (document.querySelector(".f2__button-inactive")) {
 			// ( -b +/- ^/(b * b - 4 * a * c) ) / 2 * a
 			let oneValue, twoValue, threeValue, preAnswer;
+			let content = document.createElement("p");
 			oneValue = b * b;
 			twoValue = 4 * a * c;
 			threeValue = oneValue - twoValue; 
@@ -106,38 +110,31 @@ clickboton2 = () => {
 					if (typeof answer == "number") {
 						oneValue = (- b + answer) / (2 * a);
 						twoValue = (- b - answer) / (2 * a);
-						let content = document.createElement("p");
 						let i = document.querySelectorAll(".f2__history p").length;
 						content.textContent = `${i}: ${oneValue}.i, ${twoValue}.i`;
-						document.querySelector(".f2__history").appendChild(content);
 					} else {
 						threeValue = (- b) /(2 * a);
 						oneValue = (+ answer[0]) /(2 * a);
 						twoValue = (- answer[0]) /(2 * a);
-						let content = document.createElement("p");
 						let i = document.querySelectorAll(".f2__history p").length;
 						content.textContent = `${i}: ( ${-b} ± ${answer[0]} √${answer[1]}.i ) /${2 * a}`;
-						document.querySelector(".f2__history").appendChild(content);
 					}
 				} else {
 					let answer = calculated(threeValue);
 					threeValue = (- b) /(2 * a);
 					oneValue = (+ answer[0]) /(2 * a);
 					twoValue = (- answer[0]) /(2 * a);
-					let content = document.createElement("p");
 					let i = document.querySelectorAll(".f2__history p").length;
 					content.textContent = `${i}: ( ${-b} ± ${answer[0]} √${answer[1]} ) /${2 * a}`;
-					document.querySelector(".f2__history").appendChild(content);
 				}
 			}
 			else {
 				oneValue = (- b + preAnswer) / (2 * a);
 				twoValue = (- b - preAnswer) / (2 * a);
-				let content = document.createElement("p");
 				let i = document.querySelectorAll(".f2__history p").length;
 				content.textContent = `${i}: ${oneValue}, ${twoValue}`;
-				document.querySelector(".f2__history").appendChild(content);
 			}
+			document.querySelector(".f2__history").appendChild(content);
 		} else {
 			let x = document.querySelector(".f2__unknownValue-input").value;
 			let answerOne = a * x * x;
@@ -148,7 +145,7 @@ clickboton2 = () => {
 	})
 }
 // Proyecto 3
-clickboton3 = () => {
+const clickboton3 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	let fragment1 = document.createDocumentFragment();
 	container.innerHTML = `
@@ -174,7 +171,7 @@ clickboton3 = () => {
 		<input type="submit" class="f3__submit">
 	</div>`;
 	let numberActive = document.querySelector(".f3__numbers-input");
-	validarCantidad = () => {
+	const validarCantidad = () => {'use strict';
 		if (document.querySelector(".f3__amount-input").value > 50000) {
 			document.querySelector(".f3__bigAmount-error").classList.replace("f3__error-inactive","f3__error-active");
 		} else if (document.querySelector(".f3__amount-input").value < 0 || document.querySelector(".f3__amount-input").value == "") {
@@ -199,7 +196,7 @@ clickboton3 = () => {
 	})
 	document.querySelector(".f3__amount-input").addEventListener("keyup", validarCantidad);
 	document.querySelector(".f3__amount-input").addEventListener("blur", validarCantidad);
-	document.querySelector(".f3__submit").addEventListener("click",()=> {
+	document.querySelector(".f3__submit").addEventListener("click",()=> {'use strict';
 		if (document.querySelector(".f3__error-active") == null && document.querySelector(".f3__amount-input").value != 0) {
 			let cantidad = document.querySelector(".f3__amount-input").value;
 			let listado = document.querySelector(".f3__listado-input").checked;
@@ -269,155 +266,272 @@ clickboton3 = () => {
 	})
 }
 // Proyecto 4
-clickboton4 = () => {
-	class Calculator {
-		constructor() {}
-		plus(num1,num2,num3 = 0,num4 = 0,num5 = 0) {
-			return parseInt(num1) + parseInt(num2) + parseInt(num3) + parseInt(num4) + parseInt(num5);
-		}
-		subtract(num1,num2,num3 = 0,num4 = 0,num5 = 0) {
-			return parseInt(num1) - parseInt(num2) - parseInt(num3) - parseInt(num4) - parseInt(num5);
-		}
-		multiply(num1,num2,num3 = 1,num4 = 1,num5 = 1) {
-			return parseInt(num1) * parseInt(num2) * parseInt(num3) * parseInt(num4) * parseInt(num5);
-		}
-		divide(num1,num2,num3 = 1,num4 = 1,num5 = 1) {
-			return parseInt(num1) / parseInt(num2) / parseInt(num3) / parseInt(num4) / parseInt(num5);
-		}
-		potenciar(num1,num2) {
-			let num3 = parseInt(num1)
-			for (let i = 1; i < parseInt(num2); i++) {
-				num3 = num3 * num1;
+const clickboton4 = () => {'use strict';
+	console.log("2-(3-(3-(3-(3))))");
+	console.log("54−(6.5⋅2−(1−8)+(5x8)−3⋅6+5x4)+5");
+	let container = document.querySelector(".desarrollo__div");
+	const fragment4 = document.createDocumentFragment();
+	let quest = [];
+	container.appendChild(fragment4);
+	const separatOperators = array => {'use strict';
+		// Seprar en multiplicación y división, atraves de la suma y resta
+		let k = 0, temporal = [], retornar = [];
+		for (let i = 0; i <= array.length - 1; i++) {
+			if (!i == 0 && (array[i] == "+" || array[i] == "-")) {
+				// Signo en medio de números
+				k++;
+				temporal = [];
+				temporal.push(array[i]);
+				retornar[k] = temporal;
+			} else if (i == 0 && (array[i] == "+" || array[i] == "-")) {
+				// El signo denfinido primero
+				temporal = [];
+				temporal.push(array[i]);
+				retornar[k] = temporal;
+			} else if (array[i] == "") {
+				console.log("Error: " + temporal);
+				retornar[k] = temporal;
+			} else {
+				// Número
+				temporal.push(array[i]);
+				retornar[k] = temporal;
 			}
-			return num3;
-			// return num1**num2;
 		}
-		raizsquares(num1) {
-			return Math.sqrt(num1);
+		return retornar;
+	}
+	const operateArrays = array => {'use strict';
+		// Multiplicar y Divividir con signos Arrays
+		let multiples = false, divisors = false, retornar = [], var1 = 1;
+		for (let i = 0; i <= array.length - 1; i++) {
+			var1 = 1;
+			for (let a = 0; a <= array[i].length - 1; a++) {
+				if (array[i][a] == "x" && array[i].length != 1) {
+					multiples = true;
+				} else if (array[i][a] == "/" && array[i].length != 1) {
+					divisors = true;
+				} else if (!a == 0 && array[i][a] == "(") {
+					// Todo se invierte o mantiene
+					var1 = 0;
+				} else if (array[i][a] == ")" || array[i][a] == "(") {
+					// Error
+				} else if (array[i][a] == "-" && array[i].length != 1) {
+					var1 = var1 * -1;
+				} else if (array[i][a] == "+" && array[i].length != 1) {
+					var1 = var1 * 1;
+				} else if (multiples == true) {
+					var1 = var1 * parseFloat(array[i][a]);
+					multiples = false;
+				} else if (divisors == true) {
+					var1 = var1 / parseFloat(array[i][a]);
+					divisors = false;
+				} else if ((array[i][a] == "+" || array[i][a] == "-" || array[i][a] == "x" || array[i][a] == "/") &&
+					array[i].length == 1) {
+					var1 = array[i][a];
+				} else {
+					var1 = var1 * parseFloat(array[i][a]);
+				}
+			}
+			retornar.push(var1);
 		}
-		raizcubicates(num1,num2) {
-			return Math.cbrt(num1);
+		return retornar
+	}
+	const determine = array => {'use strict';
+		let var1 = 0, retornar = [];
+		for (let i = 0; i <= array.length - 1; i++) {
+			if (array.length == 1) {
+				var1 = array[i];
+			} else {
+				var1 += array[i];
+			}
+		}
+		return var1;
+	}
+	const options = btn => {'use strict';
+		if (btn == "AC") {
+			// Borrar Todo
+			quest = [];
+			document.querySelector(".f4__window-operation").textContent = "";
+			document.querySelector(".f4__window-answer").textContent = "0";
+		} else if (btn == "DEL") {
+			// Borrar
+			quest.pop();
+			let info = "", j = 0;
+			for (let i = quest.length; i > 0; i--) {
+				info += quest[j];
+				j++;
+			}
+			document.querySelector(".f4__window-operation").textContent = info;
+		} else if (btn == "=" && quest.length > 0) {
+			let arr = [], answer = [];
+			arr = quest;
+			// Juntar números
+			let operation = [], text = "", j = 0, temporal = [];
+			for (let i = 0; i < arr.length; i++) {
+				if (!isNaN(parseFloat(arr[i])) || arr[i] == ".") {
+					text += arr[i];
+				} else {
+					if (!text == "") {
+						operation.push(text);
+					}
+					operation.push(arr[i]);
+					text = "";
+				}
+				if (i == arr.length - 1) {
+					operation.push(text);
+				}
+			}
+			// Separar en parentesis
+			let parentesis = false, number = false, sign = false, postSign = "";
+			arr = [];
+			for (let i = 0; i < operation.length; i++) {
+				if ((operation[i] == "+" || operation[i] == "-" || operation[i] == "x" || operation[i] == "/") && parentesis == false) {
+					// Si es una operación
+					postSign = operation[i];
+					sign = true;
+				} else if ((operation[i] == "+" || operation[i] == "-" || operation[i] == "x" || operation[i] == "/") && parentesis == true) {
+					// Si es una operación luego de un parentesis
+					j++;
+					temporal = [];
+					postSign = operation[i];
+					temporal.push(postSign);
+					arr[j] = postSign;
+					j++;
+					sign = true;
+					temporal = [];
+				} else if (operation[i] == "(" && sign == true && parentesis == false && number == false) {
+					// Signo antes del parentesis. Principio
+					temporal = []
+					temporal.push(postSign);
+					arr[j] = temporal;
+					temporal = [];
+					sign = false;
+					j++;
+				} else if (operation[i] == "(" && sign == true && parentesis == false) {
+					// Signo antes del parentesis
+					j++;
+					temporal = []
+					temporal.push(postSign);
+					arr[j] = temporal;
+					temporal = [];
+					sign = false;
+					j++;
+				} else if (operation[i] == "(" && sign == true && parentesis == true) {
+					// Signo en medio de parentesis
+					parentesis = false;
+				} else if (operation[i] == "(" && sign == false && i != 0) {
+					// Multiplicación implicita
+					arr[j] = temporal;
+					j++;
+					temporal = [];
+					temporal.push("x");
+					arr[j] = temporal;
+					temporal = [];
+					j++;
+				} else if (operation[i] == ")") {
+					// Activar el cierre de parentesis
+					parentesis = true;
+				} else if (operation[i] == "" || (operation[i] == "(" && sign == false && i == 0)) {
+					// Ignorar. Manejo de errores.
+				} else if (sign == true && parentesis == true) {
+					// número despues de un signo y parentesis
+					temporal.push(operation[i]);
+					arr[j] = temporal;
+				} else if (sign == true) {
+					// número despues de un signo
+					temporal.push(postSign);
+					temporal.push(operation[i]);
+					arr[j] = temporal;
+					number = true;
+				} else {
+					// Si es un número
+					temporal.push(operation[i]);
+					arr[j] = temporal;
+					number = true;
+				}
+			}
+			// Operaciónes si hay parentesis
+			let var1 = 1, k = 0, arrEnding = [];
+			operation = [];
+			// console.log("Array:", arr);
+			for (let n = 0; n < arr.length; n++) {
+				// Separar en Multiplicación y División
+				operation = separatOperators(arr[n]);
+				// Multiplicar y Divividir con signos
+				temporal = operateArrays(operation);
+				operation = [];
+				// Sumar y Restar
+				var1 = determine(temporal);
+				arrEnding.push(var1);
+				// console.log("Temporal: ", temporal);
+			}
+			// console.log("Answer:", arrEnding);
+			// Separar en Multiplicación y División
+			answer = separatOperators(arrEnding);
+			// console.log("Answer:", answer);
+			// Multiplicar y Divividir con signos
+			answer = operateArrays(answer);
+			// console.log("Answer:", answer);
+			// Sumar y Restar
+			answer = determine(answer);
+			// console.log("Answer:", answer);
+			document.querySelector(".f4__window-answer").textContent = answer;
 		}
 	}
-	let arr = [];
-	const calculadora = new Calculator();
-	let var1, var2;
-	var1 = prompt("¿Qué quieres hacer? ¿Sumar, Multiplicar, Restar, Dividir, Potenciar, Raíz Cuadrada o Raíz Cúbica?");
-	all:if (var1 == "suma" || var1 == "sumar" || var1 == "Suma" || var1 == "Sumar") {
-		arr[0] = prompt("Dime tu primer número");
-		arr[1] = prompt("Dime tu siguiente número");
-		arr[2] = prompt("Dime tu siguiente número o Finalizar?");
-		if (arr[2] == "Finalizar" || arr[2] == "finalizar" || arr[2] == "Finaliza" || arr[2] == "finaliza") {
-			arr.pop();
-			var2 = calculadora.plus(...arr);
-			alert(var2);break all;
-		}
-		arr[3] = prompt("Dime tu siguiente número o Finalizar?");
-		if (arr[3] == "Finalizar" || arr[3] == "finalizar" || arr[3] == "Finaliza" || arr[3] == "finaliza") {
-			arr.pop();
-			var2 = calculadora.plus(...arr);
-			alert(var2);break all;
-		}
-		arr[4] = prompt("Dime tu siguiente número o Finalizar?")
-		if (arr[4] == "Finalizar" || arr[4] == "finalizar" || arr[4] == "Finaliza" || arr[4] == "finaliza") {
-			arr.pop();
-			var2 = calculadora.plus(...arr);
-			alert(var2);break all;
-		}
-		var2 = calculadora.plus(...arr);
-		alert(var2);break all;
-	} else if (var1 == "resta" || var1 == "restar" || var1 == "Resta" || var1 == "Restar") {
-		arr[0] = prompt("Dime tu primer número");
-		arr[1] = prompt("Dime tu siguiente número");
-		arr[2] = prompt("Dime tu siguiente número o Finalizar?");
-		if (arr[2] == "Finalizar" || arr[2] == "finalizar" || arr[2] == "Finaliza" || arr[2] == "finaliza") {
-			arr.pop();
-			var2 = calculadora.subtract(...arr);
-			alert(var2);break all;
-		}
-		arr[3] = prompt("Dime tu siguiente número o Finalizar?");
-		if (arr[3] == "Finalizar" || arr[3] == "finalizar" || arr[3] == "Finaliza" || arr[3] == "finaliza") {
-			arr.pop();
-			var2 = calculadora.subtract(...arr);
-			alert(var2);break all;
-		}
-		arr[4] = prompt("Dime tu siguiente número o Finalizar?")
-		if (arr[4] == "Finalizar" || arr[4] == "finalizar" || arr[4] == "Finaliza" || arr[4] == "finaliza") {
-			arr.pop();
-			var2 = calculadora.subtract(...arr);
-			alert(var2);break all;
-		}
-		var2 = calculadora.subtract(...arr);
-		alert(var2);break all;
-	} else if (var1 == "multiplica" || var1 == "multiplicar" || var1 == "Multiplica" || var1 == "Multiplicar") {
-		arr[0] = prompt("Dime tu primer número");
-		arr[1] = prompt("Dime tu siguiente número");
-		arr[2] = prompt("Dime tu siguiente número o Finalizar?");
-		if (arr[2] == "Finalizar" || arr[2] == "finalizar" || arr[2] == "Finaliza" || arr[2] == "finaliza") {
-			arr.pop();
-			var2 = calculadora.multiply(...arr);
-			alert(var2);break all;
-		}
-		arr[3] = prompt("Dime tu siguiente número o Finalizar?");
-		if (arr[3] == "Finalizar" || arr[3] == "finalizar" || arr[3] == "Finaliza" || arr[3] == "finaliza") {
-			arr.pop();
-			var2 = calculadora.multiply(...arr);
-			alert(var2);break all;
-		}
-		arr[4] = prompt("Dime tu siguiente número o Finalizar?")
-		if (arr[4] == "Finalizar" || arr[4] == "finalizar" || arr[4] == "Finaliza" || arr[4] == "finaliza") {
-			arr.pop();
-			var2 = calculadora.multiply(...arr);
-			alert(var2);break all;
-		}
-		var2 = calculadora.multiply(...arr);
-		alert(var2);break all;
-	} else if (var1 == "Dividir" || var1 == "dividir" || var1 == "divide" || var1 == "Divide") {
-		arr[0] = prompt("Dime tu primer número");
-		arr[1] = prompt("Dime tu siguiente número");
-		arr[2] = prompt("Dime tu siguiente número o Finalizar?");
-		if (arr[2] == "Finalizar" || arr[2] == "finalizar" || arr[2] == "Finaliza" || arr[2] == "finaliza") {
-			arr.pop();
-			var2 = calculadora.divide(...arr);
-			alert(var2);break all;
-		}
-		arr[3] = prompt("Dime tu siguiente número o Finalizar?");
-		if (arr[3] == "Finalizar" || arr[3] == "finalizar" || arr[3] == "Finaliza" || arr[3] == "finaliza") {
-			arr.pop();
-			var2 = calculadora.divide(...arr);
-			alert(var2);break all;
-		}
-		arr[4] = prompt("Dime tu siguiente número o Finalizar?")
-		if (arr[4] == "Finalizar" || arr[4] == "finalizar" || arr[4] == "Finaliza" || arr[4] == "finaliza") {
-			arr.pop();
-			var2 = calculadora.divide(...arr);
-			alert(var2);break all;
-		}
-		var2 = calculadora.divide(...arr);
-		alert(var2);break all;
-	} else if (var1 == "Potenciar" || var1 == "potenciar" || var1 == "potencia" || var1 == "Potencia") {
-		arr[0] = prompt("Dime el número a potenciar");
-		arr[1] = prompt("Dime tu exponente");
-		var2 = calculadora.potenciar(...arr);
-		alert(var2);break all;
-	} else if (var1 == "Raiz Cuadrada" || var1 == "raíz cuadrada" || var1 == "Raíz Cuadrada"
-		|| var1 == "raíz cuadrada" || var1 == "Raíz cuadrada" || var1 == "Raiz cuadrada" || var1 == "raiz cuadrada") {
-		arr[0] = prompt("Raíz cuadrada de");
-		var2 = calculadora.raizsquares(...arr);
-		alert(var2);break all;
-	} else if (var1 == "Raiz Cubica" || var1 == "raíz cubica" || var1 == "Raíz Cúbica" || var1 == "raíz cúbica"
-		|| var1 == "Raíz cúbica" || var1 == "Raiz cubica" || var1 == "raiz cubica") {
-		arr[0] = prompt("Raíz cúbica de");
-		var2 = calculadora.raizcubicates(...arr);
-		alert(var2);break all;
-	} else if (var1 == "malo" || var1 == "Malo" || var1 == "MALO") {
-		alert("¿Quién es el malo, el quién lo dice a otra persona o el quien hace un programa para ayudar a los demás?");
-	} else {
-		alert("La opción no es válida");
-	}
+	container.innerHTML = `
+	<div class="f4">
+		<div class="f4__window">
+			<div class="f4__window-quest">
+				<div class="f4__window-operation"></div>
+				<div class="f4__window-text">_</div>
+			</div>
+			<div class="f4__window-answer">0</div>
+		</div>
+		<div class="f4__history">
+			<h3 class="f4__history-h3">Historial</h3>
+			<div class="f4__history-div">00</div>
+		</div>
+		<div class="f4__buttons">
+			<button class="f4__button-n"   value="7"  >7</button>
+			<button class="f4__button-n"   value="8"  >8</button>
+			<button class="f4__button-n"   value="9"  >9</button>
+			<button class="f4__button-del" value="DEL">DEL</button>
+			<button class="f4__button-ac" value="AC"  >AC</button>
+			<button class="f4__button-n"   value="4"  >4</button>
+			<button class="f4__button-n"   value="5"  >5</button>
+			<button class="f4__button-n"   value="6"  >6</button>
+			<button class="f4__button-n"   value="x"  >x</button>
+			<button class="f4__button-n"   value="/"  >/</button>
+			<button class="f4__button-n"   value="1"  >1</button>
+			<button class="f4__button-n"   value="2"  >2</button>
+			<button class="f4__button-n"   value="3"  >3</button>
+			<button class="f4__button-n"   value="+"  >+</button>
+			<button class="f4__button-n"   value="-"  >-</button>
+			<button class="f4__button-n"   value="0"  >0</button>
+			<button class="f4__button-n"   value="."  >•</button>
+			<button class="f4__button-n"   value="("  >(</button>
+			<button class="f4__button-n"   value=")"  >)</button>
+			<button class="f4__button-n"   value="="  >=</button>
+		</div>
+	</div>`;
+	document.querySelectorAll(".f4__buttons button").forEach((button) => {
+		button.addEventListener("click",()=>{
+			if (button.value == "DEL" || button.value == "AC" || button.value == "=") {
+				options(button.value);
+			}
+			else {
+				let info = "", j = 0;
+				quest.push(button.value);
+				for (let i = quest.length; i > 0; i--) {
+					info += quest[j];
+					j++;
+				}
+				document.querySelector(".f4__window-operation").textContent = info;
+			}
+		})
+	})
 }
 // Proyecto 5
-clickboton5 = () => {
+const clickboton5 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	let alumnosTotales = [];
 	let fragment1 = document.createDocumentFragment();
@@ -426,7 +540,7 @@ clickboton5 = () => {
 	let resta = total / 1.666;
 	resta = Math.round(resta);
 
-	const asistencia = (nombre,p,e) => {
+	const asistencia = (nombre,p,e) => {'use strict';
 		let presencia = prompt(nombre + ", Presencia (P/p), Inasistencias (A/a). Día: " + e);
 		if (presencia == "p" || presencia == "P" || presencia == "pp") {
 			alumnosTotales[p][1]++
@@ -445,16 +559,16 @@ clickboton5 = () => {
 		let resultado = `${alumnosTotales[alumno][0]}:<br>
 		Presencias:  <b>${alumnosTotales[alumno][1]}</b><br>
 		Inasistencias: <b>${total - parseInt(alumnosTotales[alumno][1])}</b><br>`;
-		if (total - alumnosTotales[alumno][1] > resta) {
-			resultado+= "<b style='color:red'>REPROBADO POR INASISTENCIAS</b><br><br>";
-		} else {resultado+= "<br><br>"}
+		if (alumnosTotales[alumno][0] >= resta) {
+			resultado+= "<b style='color:red'>REPROBADO POR INASISTENCIAS</b><br>";
+		} else {resultado+= "<br>"}
 		div5.innerHTML = resultado;
 		fragment1.appendChild(div5);
 	}
 	container.appendChild(fragment1);
 }
 // Proyecto 6
-clickboton6 = () => {
+const clickboton6 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	let time = 0;
 	let p = document.createElement("P");
@@ -482,11 +596,11 @@ clickboton6 = () => {
 	},1000);
 }
 // Proyecto 7
-clickboton7 = () => {
+const clickboton7 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	let fragment1 = document.createDocumentFragment();
-	const getInfo = (materia) => {
-		materias = {
+	const getInfo = (materia) => {'use strict';
+		let materias = {
 			fisica: ["Perez","pedro","pepito","cofla","maria"],
 			programacion: ["Dalto","pedro","juan","pepito"],
 			logica: ["Hernandez","pedro","juan","cofla","maria"],
@@ -498,7 +612,7 @@ clickboton7 = () => {
 			return materias;
 		}
 	}
-	const showMateria = (materia)=> {
+	const showMateria = (materia)=> {'use strict';
 		let info = getInfo(materia);
 
 		if (info !== false) {
@@ -511,25 +625,25 @@ clickboton7 = () => {
 				Los alumnos son: <b style="color:blue">${alumnos.join(", ")}</b><br><br>`;
 		}
 	}
-	const buildDiv = (materia) => {
+	const buildDiv = (materia) => {'use strict';
 		let a = showMateria(materia);
 		let div = document.createElement('div');
 		div.innerHTML = a;
 		fragment1.appendChild(div);
 		container.appendChild(fragment1);
 	}
-	const buildClases = (alumno) => {
+	const buildClases = (alumno) => {'use strict';
 		let a = cantidadDeClases(alumno);
 		let div = document.createElement('div');
 		div.innerHTML = a;
 		fragment1.appendChild(div);
 		container.appendChild(fragment1);
 	}
-	const cantidadDeClases = (alumno) => {
+	const cantidadDeClases = (alumno) => {'use strict';
 		let info = getInfo();
 		let clasesPresentes = [];
 		let cantidadTotal = 0;
-		for (data in info) {
+		for (let data in info) {
 			if (info[data].includes(alumno)) {
 				cantidadTotal++;
 				clasesPresentes.push(" " + data);
@@ -550,10 +664,10 @@ clickboton7 = () => {
 	buildClases("pepito");
 }
 // Proyecto 8
-clickboton8 = () => {
+const clickboton8 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	// Funciones
-	const buildForm = () => {
+	const buildForm = () => {'use strict';
 		let f8 = document.createElement("FORM");
 		f8.classList.add("f8");
 		let a = `<label>Ingresar Datos</label>`;
@@ -577,7 +691,7 @@ clickboton8 = () => {
 			document.createElement("DIV")
 		]
 	}
-	const validarForm = () => {
+	const validarForm = () => {'use strict';
 		if (e[0].value == 1 && e[1].value == 1) e[3].innerHTML = "<p>Muerto por congelamiento e Intoxicado</p>";
 		if (e[0].value == 2 && e[1].value == 1) e[3].innerHTML = "<p>Muerto por gripe</p>";
 		if (e[0].value == 3 && e[1].value == 1) e[3].innerHTML = "<p>Muerto por Envenamiento</p>";
@@ -610,7 +724,7 @@ clickboton8 = () => {
 	e[2].addEventListener("click", validarForm);
 }
 // Proyecto 9
-clickboton9 = () => {
+const clickboton9 = () => {'use strict';
 	// let fragment1 = document.createDocumentFragment();
 	let container = document.querySelector(".desarrollo__div");
 	container.innerHTML = `
@@ -627,7 +741,7 @@ clickboton9 = () => {
 	});
 }
 // Proyecto 10
-clickboton10 = () => {
+const clickboton10 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	container.innerHTML = `<div class="f10__fast"></div>
 	<div class="f10__slow"></div>
@@ -656,7 +770,7 @@ clickboton10 = () => {
 	// 128 - 125
 }
 // Proyecto 11
-clickboton11 = () => {
+const clickboton11 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	container.innerHTML = `<div class="f11__reloj">
 		<div class="f11__hora">00</div>
@@ -669,11 +783,11 @@ clickboton11 = () => {
 		<div>|</div>
 		<button class="f11__button">Stop</button>
 	</div>`
-	const addZeros = n => {
+	const addZeros = n => {'use strict';
 		if (n.toString().length < 2) return "0".concat(n);
 		return n;
 	}
-	const actualizarHora = () => {
+	const actualizarHora = () => {'use strict';
 		if (document.querySelector(".f11__reloj")) {
 			const time = new Date();
 			document.querySelector(".f11__hora").textContent = addZeros(time.getHours());
@@ -689,7 +803,7 @@ clickboton11 = () => {
 	document.querySelector(".f11__button").addEventListener("click",()=>{clearInterval(a)})
 }
 // Proyecto 12
-clickboton12 = () => {
+const clickboton12 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	container.innerHTML = `
 	<div class="modal-overlay">
@@ -702,7 +816,7 @@ clickboton12 = () => {
 	<button class="remove">Eliminar</button>`
 	const modal = document.querySelector(".modal-overlay");
 	const remove = document.querySelector(".remove");
-	const definirIdioma = () => {
+	const definirIdioma = () => {'use strict';
 		document.querySelector(".en").addEventListener("click", ()=>{
 			localStorage.setItem("idioma","en");
 			cerrarModal();
@@ -716,20 +830,20 @@ clickboton12 = () => {
 		eliminar();
 		abrirModal();
 	})
-	const cerrarModal = () => {
+	const cerrarModal = () => {'use strict';
 		modal.style.animation = "desaparecer 1s forwards";
 		modal.style.display = "none";
 		remove.style.display = "initial";
 	}
-	const abrirModal = () => {
+	const abrirModal = () => {'use strict';
 		modal.style.animation = "aparecer 1s forwards";
 		modal.style.display = "initial"
 	}
-	const eliminar = () => {
+	const eliminar = () => {'use strict';
 		localStorage.removeItem("idioma");
 		remove.style.display = "none";
 	}
-	idioma = localStorage.getItem("idioma")
+	let idioma = localStorage.getItem("idioma")
 	if (idioma === null) {
 		abrirModal();
 		definirIdioma();
@@ -739,7 +853,7 @@ clickboton12 = () => {
 	}
 }
 // Proyecto 13
-clickboton13 = () => {
+const clickboton13 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	container.innerHTML = `
 	<div class="textures">
@@ -761,14 +875,14 @@ clickboton13 = () => {
 	for (let i = 0; i < textures.children.length; i++) {
 		document.querySelector(`.texture${i}`).addEventListener("dragstart",(e)=>transferirTextura(i,e));
 	}
-	const transferirTextura = (n,e) => {
+	const transferirTextura = (n,e) => {'use strict';
 		e.dataTransfer.setData("texture", n);
 	}
 }
 // Poryecto 14
-clickboton14 = () => {
+const clickboton14 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
-	const desarrollo = type => {
+	const desarrollo = type => {'use strict';
 		document.querySelector(".pregunta14").removeChild(document.querySelector(".select14"));
 		document.querySelector(".pregunta14").removeChild(document.querySelector(".button14"));
 		if (type == "text") {
@@ -790,37 +904,37 @@ clickboton14 = () => {
 		const zona = document.querySelector(".container14");
 		const resultado = document.querySelector(".result14");
 		const loadingBar = document.querySelector(".loading-bar14")
-		zona.addEventListener("dragover", e => {
+		zona.addEventListener("dragover", e => {'use strict';
 			e.preventDefault();
 			changeStyle(e.srcElement, "#444");
 		})
-		zona.addEventListener("dragleave", e => {
+		zona.addEventListener("dragleave", e => {'use strict';
 			e.preventDefault();
 			changeStyle(e.srcElement, "#888");
 		})
-		const changeStyle = (obj, color) => {
+		const changeStyle = (obj, color) => {'use strict';
 			obj.style.color = color;
 			obj.style.border = `4px dashed ${color}`
 		}
 		if (type == "text") {
-			zona.addEventListener("drop", e => {
+			zona.addEventListener("drop", e => {'use strict';
 				e.preventDefault();
 				changeStyle(e.srcElement, "#888");
 				zona.style.border = "4px solid #888";
 				const reader = new FileReader();
 				reader.readAsText(e.dataTransfer.files[0]);
-				reader.addEventListener("load", e => {
+				reader.addEventListener("load", e => {'use strict';
 					resultado.textContent = e.currentTarget.result;
 				})
 			})
 		} else if (type == "img") {
-			zona.addEventListener("drop", e => {
+			zona.addEventListener("drop", e => {'use strict';
 				let file = e.dataTransfer.files[0]
 				e.preventDefault();
 				changeStyle(e.srcElement, "#888");
 				const reader = new FileReader();
 				reader.readAsDataURL(file);
-				reader.addEventListener("load", () => {
+				reader.addEventListener("load", () => {'use strict';
 					let url = URL.createObjectURL(file)
 					let img = document.createElement("IMG");
 					img.setAttribute("src", url);
@@ -830,13 +944,13 @@ clickboton14 = () => {
 				zona.style.border = "4px solid #888";
 			})
 		} else if (type == "video") {
-			zona.addEventListener("drop", e => {
+			zona.addEventListener("drop", e => {'use strict';
 				let file = e.dataTransfer.files[0];
 				e.preventDefault();
 				changeStyle(e.srcElement, "#888");
 				const reader = new FileReader();
 				reader.readAsArrayBuffer(file);
-				reader.addEventListener("progress", e => {
+				reader.addEventListener("progress", e => {'use strict';
 					let carga = Math.round(e.loaded / file.size * 100);
 					zona.textContent = `${carga}%`;
 					loadingBar.style.padding = "75px 20px";
@@ -865,17 +979,17 @@ clickboton14 = () => {
 						loadingBar.style.width = `${carga/1.61}%`; //hasta el 62%;
 					}
 				})
-				reader.addEventListener("loadend", e => {
+				reader.addEventListener("loadend", e => {'use strict';
 					changeStyle(zona, "#2e7");
 					zona.style.borderStyle = "solid";
 					loadingBar.style.background = "#2e7";
-					setTimeout(() => {
+					setTimeout(() => {'use strict';
 						zona.style.color = "#222";
 						zona.style.animation = "aparecer 1s forwards";
 						zona.textContent = "!Carga Completa!"
 					},500)
 				})
-				reader.addEventListener("load", e => {
+				reader.addEventListener("load", e => {'use strict';
 					let video = new Blob([new Uint8Array(e.currentTarget.result)], {type: 'video/mp4'})
 					let url = URL.createObjectURL(video);
 					let img = document.createElement("VIDEO");
@@ -900,13 +1014,13 @@ clickboton14 = () => {
 	</div>
 	<div class="desarrollo14"></div>`;
 	let confirmar = document.querySelector(".button14")
-	confirmar.addEventListener("click", e => {
+	confirmar.addEventListener("click", e => {'use strict';
 		let type = document.querySelector(".select14").value;
 		desarrollo(type);
 	})
 }
 // Poryecto 15
-clickboton15 = () => {
+const clickboton15 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	container.innerHTML = `
 	<div class="add-names"><input type="text" id="name" placeholder="Introduce un nombre"><button id="add">Añadir</button></div>
@@ -915,7 +1029,7 @@ clickboton15 = () => {
 	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("name",{autoIncrement: true}))
 	IDBRequest.addEventListener("success",() => readObject())
 	IDBRequest.addEventListener("error",() => alert("ocurrio un error al abrir la base de datos"))
-	document.getElementById("add").addEventListener("click",()=> {
+	document.getElementById("add").addEventListener("click",()=> {'use strict';
 		let name = document.getElementById("name").value;
 		if (name.length > 0) {
 			if (document.querySelector(".possibly") != undefined) {
@@ -937,11 +1051,11 @@ clickboton15 = () => {
 			}
 		}
 	})
-	const addObject = object => {
+	const addObject = object => {'use strict';
 		const IDBData = transactionOperation("readwrite","Objeto agregado correctamente");
 		IDBData.add(object);
 	}
-	const readObject = () => {
+	const readObject = () => {'use strict';
 		const IDBData = transactionOperation("readonly");
 		const cursor = IDBData.openCursor();
 		const fragment = document.createDocumentFragment();
@@ -954,15 +1068,15 @@ clickboton15 = () => {
 			}
 		})
 	}
-	const modificarObject = (key, object) => {
+	const modificarObject = (key, object) => {'use strict';
 		const IDBData = transactionOperation("readwrite","Objeto modificado correctamente");
 		IDBData.put(object, key);
 	}
-	const eliminarObject = key => {
+	const eliminarObject = key => {'use strict';
 		const IDBData = transactionOperation("readwrite","Objeto eliminado correctamente");
 		IDBData.delete(key);
 	}
-	const transactionOperation = (mode,msg) => {
+	const transactionOperation = (mode,msg) => {'use strict';
 		const IDBTransaction = IDBRequest.result.transaction("name",mode);
 		const objectStore = IDBTransaction.objectStore("name");
 		// IDBTransaction.addEventListener("complete",()=>{
@@ -970,7 +1084,7 @@ clickboton15 = () => {
 		// })
 		return objectStore;
 	}
-	const nameHTML = (id, result) => {
+	const nameHTML = (id, result) => {'use strict';
 		const container = document.createElement("DIV");
 		const h2 = document.createElement("h2");
 		const options = document.createElement("DIV");
@@ -1006,7 +1120,7 @@ clickboton15 = () => {
 	}
 }
 // Poryecto 16
-clickboton16 = () => {
+const clickboton16 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	container.innerHTML = `<div class="publicaciones"></div>`;
 	const publicaciones = document.querySelector(".publicaciones");
@@ -1103,6 +1217,14 @@ clickboton16 = () => {
 				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
 				{"nombre": "Ramo",
 				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
+				{"nombre": "Valeria",
+				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
+				{"nombre": "El ser",
+				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
+				{"nombre": "Parmenides",
+				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
+				{"nombre": "Estoicismo",
+				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
 				{"nombre": "Shido y Bianca",
 				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
 				{"nombre": "Eres Tu Danilo Montero",
@@ -1112,7 +1234,7 @@ clickboton16 = () => {
 				}
 			]
 		}
-	const createPublicationCode = (name,content) => {
+	const createPublicationCode = (name,content) => {'use strict';
 		const container = document.createElement("DIV");
 		const comentarios = document.createElement("DIV");
 		const nombre = document.createElement("H3");
@@ -1136,11 +1258,11 @@ clickboton16 = () => {
 
 		return container;
 	}
-	const cargarMasPublicaciones = entry => {
+	const cargarMasPublicaciones = entry => {'use strict';
 		if (entry[0].isIntersecting) cargarPublicaciones(5)
 	}
 	const observer = new IntersectionObserver(cargarMasPublicaciones)
-	const cargarPublicaciones = /*async*/ num => {
+	const cargarPublicaciones = /*async*/ num => {'use strict';
 		// const request = await fetch(filetxt);
 		// const content = await request.json();
 		const content = filetxt; //archivo aparte de texto
@@ -1166,7 +1288,7 @@ clickboton16 = () => {
 	cargarPublicaciones(10);
 }
 // Poryecto 17
-clickboton17 = () => {
+const clickboton17 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	const fragment17 = document.createDocumentFragment();
 	container.innerHTML = `
@@ -1213,15 +1335,15 @@ clickboton17 = () => {
 	})
 }
 // Poryecto 18
-clickboton18 = () => {
+const clickboton18 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	const fragment18 = document.createDocumentFragment();
 	const IDBRequest = indexedDB.open("reader",2);
-	const addObject = object => {
+	const addObject = object => {'use strict';
 		const IDBData = transactionOperation("readwrite","Objeto agregado correctamente");
 		IDBData.add(object);
 	}
-	const readObject = () => {
+	const readObject = () => {'use strict';
 		const IDBData = transactionOperation("readonly");
 		const cursor = IDBData.openCursor();
 		const fragment = document.createDocumentFragment();
@@ -1238,15 +1360,15 @@ clickboton18 = () => {
 			}
 		})
 	}
-	const modificarObject = (key, object) => {
+	const modificarObject = (key, object) => {'use strict';
 		const IDBData = transactionOperation("readwrite","Objeto modificado correctamente");
 		IDBData.put(object, key);
 	}
-	const eliminarObject = key => {
+	const eliminarObject = key => {'use strict';
 		const IDBData = transactionOperation("readwrite","Objeto eliminado correctamente");
 		IDBData.delete(key);
 	}
-	const transactionOperation = (mode,msg) => {
+	const transactionOperation = (mode,msg) => {'use strict';
 		const IDBTransaction = IDBRequest.result.transaction("books",mode);
 		const objectStore = IDBTransaction.objectStore("books");
 		return objectStore;
@@ -1289,7 +1411,7 @@ clickboton18 = () => {
 	    }
 	}
 	// Porcentaje de avance entre lo leído y lo no leido
-	calculatePorcentaje = (amount,value) => {
+	const calculatePorcentaje = (amount,value) => {'use strict';
 		let progress, result;
 		if (value == undefined) {
 			progress = document.querySelector(".f18__update-percentageInput").value;
@@ -1297,7 +1419,7 @@ clickboton18 = () => {
 		} else result = (value * 100) / amount;
 		return result;
 	}
-	buildDiv = (name, calculate, timed, amount, tiempo, id, value, block) => {
+	const buildDiv = (name, calculate, timed, amount, tiempo, id, value, block) => {'use strict';
 		let nameClass = "f18__update";
 		let percentageNumber = calculatePorcentaje(amount, value);
 		let container = document.createElement('div');
@@ -1461,7 +1583,7 @@ clickboton18 = () => {
 				buttonToSave.classList.replace("f18__update-save","f18__update-saved");
 			}
 		})
-		buttonToUpdate.addEventListener("click",() => {
+		buttonToUpdate.addEventListener("click",() => {'use strict';
 			if (buttonToSave.className == "f18__update-saved") {
 				let percentageNumber = calculatePorcentaje(amount, percentageInput.value);
 				theProgress.style.width = `${percentageNumber}%`;
@@ -1539,17 +1661,17 @@ clickboton18 = () => {
 		})
 		return container;
 	}
-	checkMonth = (month, year) => {
+	const checkMonth = (month, year) => {'use strict';
 		if (month == 1 || month == 3 || month == 5 || month == 7  || month == 8  || month == 10  || month == 12) return 31;
 		else if (month == 4 || month == 6 || month == 9 || month == 11) return 30;
 		else if (month == 2 && year%4 == 0 && year%400 == 0 && !year%100 == 0) return 29;
 		else return 28;
 	}
-	checkYear = year => {
+	const checkYear = year => {'use strict';
 		if (year%4 == 0 && year%400 == 0 && !year%100 == 0) return 366;
 		else return 365;
 	}
-	calculateDate = (year, month, day) => {
+	const calculateDate = (year, month, day) => {'use strict';
 		let today = new Date();
 		let todayYear = today.getYear() + 1900;
 		let todayMonth = today.getMonth() + 1;
@@ -1589,7 +1711,7 @@ clickboton18 = () => {
 		let newDate = preNewDay + preNewMonth + preNewYear;
 		return newDate;
 	}
-	calculatePerformance = (amount, year, month, day) => {
+	const calculatePerformance = (amount, year, month, day) => {'use strict';
 		// Total de días
 		let temporalTime = year + month + day;
 
@@ -1633,13 +1755,13 @@ clickboton18 = () => {
 		}
 		return [temporalProNominator, temporalProDenominator]
 	}
-	calculateMath = (year, month, day, amount, amountProgress) => {
+	const calculateMath = (year, month, day, amount, amountProgress) => {'use strict';
 		amount = amount - amountProgress;
 		let today = new Date();
 		let todayYear = today.getYear() + 1900;
 		let todayMonth = today.getMonth() + 1;
 		let todayDay = today.getDate();
-		let yearToDay = 0, monthToDay = 0, newDay, newMonth;
+		let yearToDay = 0, monthToDay = 0, newDay, newMonth, newYear;
 
 		// Comparar Años
 		if (todayYear <= year) {
@@ -1687,7 +1809,7 @@ clickboton18 = () => {
 		let forEachPro = numerator + denominator;
 		return forEachPro;
 	}
-	calculatedCheck = (bollean, origin, space) => {
+	const calculatedCheck = (bollean, origin, space) => {'use strict';
 		let allDivs = document.querySelectorAll('.f18__update__head-container .f18__update-div');
 		if (space) allDivs = document.querySelectorAll('.f18__update__saved-content .f18__update-div');
 		if (origin.className.animVal == "f18__update-circleFront" || origin.className.animVal == "f18__update__save-circleFront") {
@@ -1725,7 +1847,7 @@ clickboton18 = () => {
 			}
 		}
 	}
-	selectCheck = (space,type) => {
+	const selectCheck = (space,type) => {'use strict';
 		let text;
 		if (type == 0) text = "¿Seguro que quieres proceder a Eliminar?";
 		else if (type == 1 && space == 0) text = "¿Seguro que quieres proceder a Archivar?";
@@ -1806,7 +1928,7 @@ clickboton18 = () => {
 			}
 		}
 	}
-	contractDiv = svg => {
+	const contractDiv = svg => {'use strict';
 		let css = svg.style;
 		if (css.transform == "rotateZ(0deg)") {
 			css.transform = "rotateZ(-90deg)";
@@ -1832,24 +1954,25 @@ clickboton18 = () => {
 			}
 		}
 	}
+	// Añadir
 	container.innerHTML = `
 		<div class="f18">
 			<div class="f18__add">
 				<div class="f18__add-Div">
 					<h3>Nombre de la lectura</h3>
 					<input type="text" class="f18__add-name" spellcheck="false">
-					<p class="f18__add__errorInactive">El nombre esta incompleto</p>
+					<p style="display: none">El nombre esta incompleto</p>
 				</div>
 				<div class="f18__add-Div">
 					<h3>Cantidad de páginas</h3>
 					<input type="number" class="f18__add-amount">
-					<p class="f18__add__errorInactive">La cantidad esta incompleta</p>
-					<p class="f18__add__errorInactive">La cantidad no es válida</p>
+					<p style="display: none">La cantidad esta incompleta</p>
+					<p style="display: none">La cantidad no es válida</p>
 				</div>
 				<div class="f18__add-Div">
 					<h3>Fecha de entrega</h3>
 					<input type="date" class="f18__add-date">
-					<p class="f18__add__errorInactive">La fecha esta incompleta</p>
+					<p style="display: none">La fecha esta incompleta</p>
 				</div>
 				<div class="f18__add-Div">
 					<h3>Páginas avanzadas</h3>
@@ -1912,7 +2035,7 @@ clickboton18 = () => {
 				</div>
 			</div>
 		</div>`;
-	// Añadir
+	// Ejecutar
 	document.querySelector(".f18__add-submit").addEventListener("click",()=>{
 		let name = document.querySelector(".f18__add-name").value;
 		let amount = parseInt(document.querySelector(".f18__add-amount").value);
@@ -1950,28 +2073,26 @@ clickboton18 = () => {
 			document.querySelector(".f18__update__head-container").appendChild(element);
 		} else {
 			// Manejo de errores en la validación
+			let div = document.querySelectorAll(".f18__add-Div");
+			document.querySelector(".f18__add").classList.add("f18__add__error-content");
 			if (name.length == '') {
-				let div = document.querySelectorAll(".f18__add-Div")[0];
-				let error = div.children[2]
-				div.classList.add("f18__add-error");
-				error.classList.replace("f18__add__errorInactive","f18__add__errorActive");
+				let error = div[0].children[2];
+				div[0].classList.add("f18__add-error");
+				error.style.display = "block";
 			}
 			if (isNaN(amount)) {
-				let div = document.querySelectorAll(".f18__add-Div")[1];
-				let error = div.children[2]
-				error.classList.replace("f18__add__errorInactive","f18__add__errorActive");
-				div.classList.add("f18__add-error");
+				let error = div[1].children[2];
+				div[1].classList.add("f18__add-error");
+				error.style.display = "block";
 			} else if (amount > 10000) {
-				let div = document.querySelectorAll(".f18__add-Div")[1];
-				let error = div.children[3]
-				error.classList.replace("f18__add__errorInactive","f18__add__errorActive");
-				div.classList.add("f18__add-error");
+				let error = div[1].children[3];
+				div[1].classList.add("f18__add-error");
+				error.style.display = "block";
 			}
 			if (date == "") {
-				let div = document.querySelectorAll(".f18__add-Div")[2];
-				let error = div.children[2]
-				error.classList.replace("f18__add__errorInactive","f18__add__errorActive");
-				div.classList.add("f18__add-error");
+				let error = div[2].children[2];
+				div[2].classList.add("f18__add-error");
+				error.style.display = "block";
 			}
 		}
 	})
@@ -2008,10 +2129,17 @@ clickboton18 = () => {
 	document.querySelector(".f18__update__save-delete").addEventListener("click",()=> selectCheck(1, 0));
 	document.querySelector(".f18__update__save-save").addEventListener("click",() => selectCheck(1, 1));
 
-	document.querySelector(".f18__update__header-svg").addEventListener("click",() => {
+	document.querySelector(".f18__update__header-svg").addEventListener("click",() => {'use strict';
 		contractDiv(document.querySelector(".f18__update__header-svg"));
 	});
-	document.querySelector(".f18__update__saved-svg").addEventListener("click",() => {
+	document.querySelector(".f18__update__saved-svg").addEventListener("click",() => {'use strict';
 		contractDiv(document.querySelector(".f18__update__saved-svg"));
 	});
+}
+// Proyecto 19
+const clickboton19 = () => {'use strict';
+	let container = document.querySelector(".desarrollo__div");
+	const fragment19 = document.createDocumentFragment();
+	container.appendChild(fragment19);
+	container.innerHTML = ``;
 }

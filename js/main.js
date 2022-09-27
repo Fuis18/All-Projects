@@ -32,7 +32,8 @@ buildkey = (i) => {
 			if (i == 17) clickboton17();
 			if (i == 18) clickboton18();
 		} else remove();
-	}) // input.setAttribute("onclick",`javascript:if(document.querySelector(".desarrollo__div").hasChildNodes()==false)clickboton${i}();elseremove();`);
+	})
+// input.setAttribute("onclick",`javascript:if(document.querySelector(".desarrollo__div").hasChildNodes()==false)clickboton${i}();elseremove();`);
 	return input;
 }
 // Contrucción del titulo de cada boton

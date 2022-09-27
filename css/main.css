@@ -87,8 +87,3 @@ h1, h2, h3, .input, div {
 ::-webkit-scrollbar-thumb {
     background-color: #333;
 }
-/*Tipografías*/
-@font-face {
-	font-family: DS-DIGI;
-	src:url(../fonts/DS-DIGI.TTF);
-}

@@ -75,10 +75,11 @@ const clickboton2 = () => {'use strict';
 		}
 		// Reducir
 		for (let i = arr.length; i > 0; i--) {
-			if (arr[i] == 4 || arr[i] == 9 || arr[i] == 16 || arr[i] == 25 || arr[i] == 36 || arr[i] == 49 || arr[i] == 64 || arr[i] == 81 ||
-				arr[i] == 100 || arr[i] == 121 || arr[i] == 144 || arr[i] == 169 || arr[i] == 196 || arr[i] == 225 || arr[i] == 256 ||
-				arr[i] == 289 || arr[i] == 324 || arr[i] == 361 || arr[i] == 400 || arr[i] == 441 || arr[i] == 484 || arr[i] == 529 ||
-				arr[i] == 576 || arr[i] == 625 || arr[i] == 676 || arr[i] == 729 || arr[i] == 784 || arr[i] == 841 || arr[i] == 900) {
+			if (arr[i] == 4 || arr[i] == 9 || arr[i] == 16 || arr[i] == 25 || arr[i] == 36 || arr[i] == 49 || arr[i] == 64 ||
+				arr[i] == 81 || arr[i] == 100 || arr[i] == 121 || arr[i] == 144 || arr[i] == 169 || arr[i] == 196 ||
+				arr[i] == 225 || arr[i] == 256 || arr[i] == 289 || arr[i] == 324 || arr[i] == 361 || arr[i] == 400 ||
+				arr[i] == 441 || arr[i] == 484 || arr[i] == 529 || arr[i] == 576 || arr[i] == 625 || arr[i] == 676 ||
+				arr[i] == 729 || arr[i] == 784 || arr[i] == 841 || arr[i] == 900) {
 				let valor1 = Math.sqrt(arr[i]);
 				let valor2 = num / arr[i];
 				return [valor1,valor2];
@@ -90,9 +91,15 @@ const clickboton2 = () => {'use strict';
 	}
 	document.querySelector(".f2__submit-input").addEventListener("click",()=>{
 		let a = 1, b = 1, c = 0;
-		if (document.querySelector(".f2__firstValue-input").value !== '') a = parseInt(document.querySelector(".f2__firstValue-input").value);
-		if (document.querySelector(".f2__secondValue-input").value !== '') b = parseInt(document.querySelector(".f2__secondValue-input").value);
-		if (document.querySelector(".f2__thirdValue-input").value !== '') c = parseInt(document.querySelector(".f2__thirdValue-input").value);
+		if (document.querySelector(".f2__firstValue-input").value !== '') {
+			a = parseInt(document.querySelector(".f2__firstValue-input").value);
+		}
+		if (document.querySelector(".f2__secondValue-input").value !== '') {
+			b = parseInt(document.querySelector(".f2__secondValue-input").value);
+		}
+		if (document.querySelector(".f2__thirdValue-input").value !== '') {
+			c = parseInt(document.querySelector(".f2__thirdValue-input").value);
+		}
 		if (document.querySelector(".f2__button-inactive")) {
 			// ( -b +/- ^/(b * b - 4 * a * c) ) / 2 * a
 			let oneValue, twoValue, threeValue, preAnswer;
@@ -388,7 +395,7 @@ const clickboton4 = () => {'use strict';
 					// Si es una operación
 					postSign = operation[i];
 					sign = true;
-				} else if ((operation[i] == "+" || operation[i] == "-" || operation[i] == "x" || operation[i] == "/") && parentesis == true) {
+				} else if ((operation[i] == "+"||operation[i] == "-"||operation[i] == "x" || operation[i] == "/")&&parentesis == true) {
 					// Si es una operación luego de un parentesis
 					j++;
 					temporal = [];
@@ -475,6 +482,9 @@ const clickboton4 = () => {'use strict';
 			answer = determine(answer);
 			// console.log("Answer:", answer);
 			document.querySelector(".f4__window-answer").textContent = answer;
+			let div = document.createElement("div");
+			div.textContent = answer;
+			document.querySelector(".f4__history-div").appendChild(div);
 		}
 	}
 	container.innerHTML = `
@@ -488,7 +498,7 @@ const clickboton4 = () => {'use strict';
 		</div>
 		<div class="f4__history">
 			<h3 class="f4__history-h3">Historial</h3>
-			<div class="f4__history-div">00</div>
+			<div class="f4__history-div"></div>
 		</div>
 		<div class="f4__buttons">
 			<button class="f4__button-n"   value="7"  >7</button>
@@ -946,6 +956,7 @@ const clickboton14 = () => {'use strict';
 		} else if (type == "video") {
 			zona.addEventListener("drop", e => {'use strict';
 				let file = e.dataTransfer.files[0];
+				let mainStyleWidth = document.querySelector("main").style.width;
 				e.preventDefault();
 				changeStyle(e.srcElement, "#888");
 				const reader = new FileReader();
@@ -954,25 +965,25 @@ const clickboton14 = () => {'use strict';
 					let carga = Math.round(e.loaded / file.size * 100);
 					zona.textContent = `${carga}%`;
 					loadingBar.style.padding = "75px 20px";
-					if (document.querySelector("main").style.width <= "810px" && document.querySelector("main").style.width >= "500px") {
+					if (mainStyleWidth <= "810px" && mainStyleWidth >= "500px") {
 						loadingBar.style.width = `${carga/1.20}%`; //hasta el 83.2%;
-					} else if (document.querySelector("main").style.width <= "500px" && document.querySelector("main").style.width >= "400px") {
+					} else if (mainStyleWidth <= "500px" && mainStyleWidth >= "400px") {
 						loadingBar.style.width = `${carga/1.0}%`; //hasta el 79.6%%;
 					} else if (
-						document.querySelector("main").style.width <= "400px"
-						&& document.querySelector("main").style.width >= "350px"
-						|| document.querySelector("main").style.width <= "400px"
-						&& document.querySelector("main").style.width >= "350px"
+						mainStyleWidth <= "400px"
+						&& mainStyleWidth >= "350px"
+						|| mainStyleWidth <= "400px"
+						&& mainStyleWidth >= "350px"
 						) {
 						loadingBar.style.width = `${carga/1.0}%`; //hasta el 74.2%;
 					} else if (
-						document.querySelector("main").style.width <= "350px" 
-						&& document.querySelector("main").style.width >= "300px" 
-						|| document.querySelector("main").style.width <= "809px" 
-						&& document.querySelector("main").style.width >= "755px"
+						mainStyleWidth <= "350px" 
+						&& mainStyleWidth >= "300px" 
+						|| mainStyleWidth <= "809px" 
+						&& mainStyleWidth >= "755px"
 						) {
 						loadingBar.style.width = `${carga/1.0}%`; //hasta el 70.3%;
-					} else if (document.querySelector("main").style.width >= "298px") {
+					} else if (mainStyleWidth >= "298px") {
 						loadingBar.style.width = `${carga/1.0}%`; //hasta el 64.8%;
 						loadingBar.style.height = `170px`;
 					} else {
@@ -1125,115 +1136,6 @@ const clickboton16 = () => {'use strict';
 	container.innerHTML = `<div class="publicaciones"></div>`;
 	const publicaciones = document.querySelector(".publicaciones");
 	let contador = 0;
-	const filetxt = {
-			"content": [
-				{"nombre": "Lucas Dalto",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Rancio Dalto",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Luis Román",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Cofla Cofla",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Fuis18 Larc",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Dalto Nico",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Ai Román",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Roberto Sanchez",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "José Carlos",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Alfonso Pedrosky",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Esto está de Rúcula",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Bruja Asquerosa",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Buenovich",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Hormigas Esteban",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Darin Coder",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Lupa Pincel",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Elver Gon",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Kariño",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "MaVeNi",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Juan Pijalvaso",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Absolutamente",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Tritocode",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "La Larcpedia de esto",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Tettatech",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Adiós Mundo",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "RanaulMasters",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "RubioProfe",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Rojo",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Deucht",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Masters",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Gamers",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Music",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Capi Sama",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "España Crew",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Delasama Gamer",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Lara Amely Violeta Perea",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Runier",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Chris",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Latinogato",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Jared Manuel",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Clave de Sol",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Miyu",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Diana",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Fan de Eric Wiserman",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Ramo",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Valeria",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "El ser",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Parmenides",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Estoicismo",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Shido y Bianca",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-				{"nombre": "Eres Tu Danilo Montero",
-				"contenido": "Declaralo esta noche así. Jesús tu eres el amigo que me ama, Jesús tu eres la esperanza de mi vida, Eer."},
-				{"nombre": "Te veo",
-				"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."
-				}
-			]
-		}
 	const createPublicationCode = (name,content) => {'use strict';
 		const container = document.createElement("DIV");
 		const comentarios = document.createElement("DIV");
@@ -1262,11 +1164,10 @@ const clickboton16 = () => {'use strict';
 		if (entry[0].isIntersecting) cargarPublicaciones(5)
 	}
 	const observer = new IntersectionObserver(cargarMasPublicaciones)
-	const cargarPublicaciones = /*async*/ num => {'use strict';
-		// const request = await fetch(filetxt);
-		// const content = await request.json();
-		const content = filetxt; //archivo aparte de texto
-		const arr = content.content;
+	const cargarPublicaciones = async num => {'use strict';
+		const request = await fetch("txt/f16.txt");
+		const container = await request.json();
+		const arr = container.content;
 		const documentFragment = document.createDocumentFragment();
 		for (let i = 0; i < num; i++) {
 			if (arr[contador] != undefined) {
@@ -1349,9 +1250,9 @@ const clickboton18 = () => {'use strict';
 		const fragment = document.createDocumentFragment();
 		cursor.addEventListener("success",()=>{
 			if (cursor.result) {
-				let curs = cursor.result.value;
-				let element = buildDiv(curs.nombre,curs.calculo,curs.total,curs.cantidad,curs.tiempo,cursor.result.key,curs.valor,curs.lock);
-				if (curs.lock[0] == true) {
+				let c = cursor.result.value;
+				let element = buildDiv(c.nombre, c.calculo, c.total, c.cantidad, c.tiempo, cursor.result.key, c.valor, c.lock);
+				if (c.lock[0] == true) {
 					document.querySelector(".f18__update__saved-content").appendChild(element);
 				} else {
 					document.querySelector(".f18__update__head-container").appendChild(element);
@@ -1811,10 +1712,11 @@ const clickboton18 = () => {'use strict';
 	}
 	const calculatedCheck = (bollean, origin, space) => {'use strict';
 		let allDivs = document.querySelectorAll('.f18__update__head-container .f18__update-div');
+		let nameClass = ".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront";
 		if (space) allDivs = document.querySelectorAll('.f18__update__saved-content .f18__update-div');
 		if (origin.className.animVal == "f18__update-circleFront" || origin.className.animVal == "f18__update__save-circleFront") {
 			for (let i = allDivs.length - 1; i >= 0; i--) {
-			let divCheck = allDivs[i].querySelector(".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront");
+			let divCheck = allDivs[i].querySelector(nameClass);
 				if (bollean) {
 					divCheck.style.fill = "#000";
 				} else {
@@ -1823,7 +1725,7 @@ const clickboton18 = () => {'use strict';
 			}
 		} else {
 			for (let i = allDivs.length - 1; i >= 0; i--) {
-			let divCheck = allDivs[i].querySelector(".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront");
+			let divCheck = allDivs[i].querySelector(nameClass);
 				if (divCheck.style.fill == "rgb(204, 204, 204)") {
 					bollean = false;
 				} else {
@@ -1848,7 +1750,7 @@ const clickboton18 = () => {'use strict';
 		}
 	}
 	const selectCheck = (space,type) => {'use strict';
-		let text;
+		let text, nameClass = ".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront";
 		if (type == 0) text = "¿Seguro que quieres proceder a Eliminar?";
 		else if (type == 1 && space == 0) text = "¿Seguro que quieres proceder a Archivar?";
 		else text = "¿Seguro que quieres proceder a Desarchivar?";
@@ -1858,7 +1760,7 @@ const clickboton18 = () => {'use strict';
 			else allDivs = document.querySelectorAll('.f18__update__saved-content .f18__update-div');
 			// Recoge todos los ids seleccionados
 			for (let i = allDivs.length - 1; i >= 0; i--) {
-				let divCheck = allDivs[i].querySelector(".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront");
+				let divCheck = allDivs[i].querySelector(nameClass);
 				if (divCheck.style.fill == "rgb(0, 0, 0)") {
 					let key = allDivs[i].getAttribute("id");
 					arr.push(key)
@@ -2141,5 +2043,12 @@ const clickboton19 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	const fragment19 = document.createDocumentFragment();
 	container.appendChild(fragment19);
+	container.innerHTML = ``;
+}
+// Proyecto 20
+const clickboton20 = () => {'use strict';
+	let container = document.querySelector(".desarrollo__div");
+	const fragment20 = document.createDocumentFragment();
+	container.appendChild(fragment20);
 	container.innerHTML = ``;
 }

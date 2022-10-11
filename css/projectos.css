@@ -143,7 +143,7 @@
 	font-family: DS-DIGI;
 	font-size: 20px;
 }
-.f4__history-h3 {
+.f4__history {
 	grid-area: history;
 }
 .f4__buttons {
@@ -272,7 +272,30 @@
 	height: 200px;
 }
 /*Proyecto 14*/
-.container14, .loading-bar14 {
+.f14__result {
+	display: grid;
+	grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+	grid-auto-rows: 100px;
+	grid-gap: 6px;
+}
+.f14__result img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.f14__result img:first-child {
+	grid-column: 1 / 3;
+	grid-row: 1 / 3;
+}
+.f14__result img:nth-child(6) {
+	grid-column: 2 / 4;
+	grid-row: 3 / 5;
+}
+.f14__result img:nth-child(10) {
+	grid-row: span 2;
+}
+/*Proyecto 15*/
+.container15, .loading-bar15 {
 	padding: 60px 20px;
 	border: 4px dashed #222;
 	max-width: 500px;
@@ -285,7 +308,7 @@
 	z-index: 10;
 	/*cursor: context-menu;*/
 }
-.loading-bar14 {
+.loading-bar15 {
 	position: absolute;
 	width: 0;
 	left: 0;
@@ -297,14 +320,14 @@
 	background: #9cf;
 	transition: width 0.2s, background 0.1s;
 }
-.result14 {
+.result15 {
 	text-align: center;
 	padding: 20px;
 }
-.img14 {
+.img15 {
 	margin: auto;
 }
-/*Proyecto 15*/
+/*Proyecto 16*/
 .names {
 	max-width: 800px;
 	margin: auto;
@@ -397,139 +420,139 @@
 	color: #bcf;
 	text-shadow: none;
 }
-/*Proyecto 17*/
-.button17 {
+/*Proyecto 18*/
+.button18 {
 	padding: 5px;
 }
-/*Proyecto 18*/
-.f18 {
+/*Proyecto 19*/
+.f19 {
 	display: flex;
 }
-.f18__add {
+.f19__add {
 	margin-right: 10px;
 	padding: 2px 6px;
 	border-radius: 5%;
 	height: min-content;
 	border: 1px solid #666;
 }
-.f18__add-Div {
+.f19__add-Div {
 	display: flex;
     flex-direction: column;
     align-items: center;
 }
-.f18__add-Div input {
+.f19__add-Div input {
     padding: 5px 8px;
     border-radius: 18px;
     border: 1px solid #333;
     width: 187px;
 }
-.f18__add-Div input:focus-visible {
+.f19__add-Div input:focus-visible {
     outline-style: none;
 }
-.f18__add-date {
+.f19__add-date {
 	text-align: center;
 }
-.f18__add-Div input[type="submit"] {
+.f19__add-Div input[type="submit"] {
 	margin: 4px 1px;
 	border: none;
 	width: 57.5px;
 }
-.f18__add-submit:hover {
+.f19__add-submit:hover {
 	background: #bbb;
 }
-.f18__add__error-content {
+.f19__add__error-content {
 	background: #300;
 	border: 1px solid #a00;
 }
-.f18__add-error, .f18__add-error h3 {
+.f19__add-error, .f19__add-error h3 {
 	color: #f77;
 }
-.f18__add-error input {
+.f19__add-error input {
 	border-color: #a00;
 /*	background: #300;
     color: #f77;*/
 }
-.f18__update {
+.f19__update {
 	width: 100%;
 }
-.f18__update__head-container, .f18__update__saved-content {
+.f19__update__head-container, .f19__update__saved-content {
 	display: flex;
 	flex-direction: column;
 	overflow-y: auto;
 	max-height: 225px;
 	/*75 * 3*/
 }
-.f18__update-div, .f18__update__header, .f18__update__title, .f18__update__save__title, .f18__update-optionsMaths, .f18__update-optionsButtons,
-.f18__update-percentage, .f18__update__saved {
+.f19__update-div, .f19__update__header, .f19__update__title, .f19__update__save__title, .f19__update-optionsMaths,
+.f19__update-optionsButtons, .f19__update-percentage, .f19__update__saved {
 	display: grid;
 	align-items: center;
 	justify-items: center;
 }
-.f18__update-div {
+.f19__update-div {
 	grid-template-columns: 10fr 1fr;
 	padding: 10px 0;
 	min-height: 75px;
 	border-top: 1px solid #333;
 }
-.f18__update__header {
+.f19__update__header {
 	grid-template-columns: repeat(3, 1fr);
 	margin: 5px 0;
 }
-.f18__update__title, .f18__update__save__title {
+.f19__update__title, .f19__update__save__title {
 	grid-template-columns: 28px 160px repeat(4, 1fr) 140px;
 }
-.f18__update__title, .f18__update__save__title, .f18__update__header-save, .f18__update__header-delete, .f18__update__save-save,
-.f18__update__save-delete {
+.f19__update__title, .f19__update__save__title, .f19__update__header-save, .f19__update__header-delete, .f19__update__save-save,
+.f19__update__save-delete {
 	font-weight: 600;
 }
-.f18__update-optionsMaths, .f18__update-optionsButtons {
+.f19__update-optionsMaths, .f19__update-optionsButtons {
 	grid-template-columns: repeat(5, 1fr);
 	text-align: center;
 }
-.f18__update__header h3 {
+.f19__update__header h3 {
 	text-align-last: center;
 }
-.f18__update__header-buttons {
+.f19__update__header-buttons {
 	display: flex;
 	justify-content: space-between;
 }
-.f18__update-main {
+.f19__update-main {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	height: 100%;
 }
-.f18__update__header-svg, .f18__update__saved-svg, .f18__update__title-svg, .f18__update-finish, .f18__update-check {
+.f19__update__header-svg, .f19__update__saved-svg, .f19__update__title-svg, .f19__update-finish, .f19__update-check {
 	cursor: pointer;
 	height: 22px;
 	width: 25px;
 }
-.f18__update__saved-svg {
+.f19__update__saved-svg {
 	transform: rotateZ(-90deg);
 }
-.f18__update__header-svg, .f18__update__saved-svg {
+.f19__update__header-svg, .f19__update__saved-svg {
 	justify-self: self-start;
 	transition: transform .5s;
 }
-.f18__update-unLock, .f18__update-lock {
+.f19__update-unLock, .f19__update-lock {
 	fill: #ccc;
 	transform: scale(2.2);
 	stroke-width: .3;
 	stroke: #222;
 }
-.f18__update-circleBack, .f18__update__save-circleBack, .f18__update-checkBack {
+.f19__update-circleBack, .f19__update__save-circleBack, .f19__update-checkBack {
 	fill: #ccc;
 	transform: scale(1.8);
 	stroke-width: .3;
 	stroke: #000;
 }
-.f18__update-circleFront, .f18__update__save-circleFront, .f18__update-checkFront {
+.f19__update-circleFront, .f19__update__save-circleFront, .f19__update-checkFront {
 	transform: scale(1.8);
 	stroke: none;
 }
-.f18__update-circleFront:active, .f18__update__save-circleFront:active, .f18__update-checkFront:active {
+.f19__update-circleFront:active, .f19__update__save-circleFront:active, .f19__update-checkFront:active {
 	fill: #aaa;
 }
-.f18__update-name {
+.f19__update-name {
 	margin: auto 0;
 	color: #49f;
 	outline-color: #48e;
@@ -538,16 +561,16 @@
 	grid-column: 2 / 3;
 	grid-row: 1 / 3;
 }
-.f18__update-percentage {
+.f19__update-percentage {
 	grid-template-columns: repeat(2, 1fr);
 }
-.f18__update-percentageEntire {
+.f19__update-percentageEntire {
 	white-space: nowrap;
 }
-.f18__update-time {
+.f19__update-time {
 	grid-column: 1 / 3;
 }
-.f18__update-percentageInput {
+.f19__update-percentageInput {
 	width: 45px;
 	border: none;
 	background: #aaa5;
@@ -555,17 +578,17 @@
 	border-radius: 50px;
     padding: 1px 5px;
 }
-.f18__update-percentageInput[disabled] {
+.f19__update-percentageInput[disabled] {
 	color: #999;
 }
-.f18__update-theProgressDiv {
+.f19__update-theProgressDiv {
 	width: 100%;
 	padding-right: 8px;
 }
-.f18__update-numberProgress {
+.f19__update-numberProgress {
 	text-align: right;
 }
-.f18__update-containerProgress {
+.f19__update-containerProgress {
 	display: flex;
 	background: #253;
 	border-radius: 15px;
@@ -574,14 +597,14 @@
 	padding: 0 3px;
 	align-items: center;
 }
-.f18__update-theProgress {
+.f19__update-theProgress {
 	height: 19px;
 	border-radius: 15px;
 	background: linear-gradient(90deg, #454, #1d1);
 	animation: upLoad 3s forwards;
     min-width: 16px;
 }
-.f18__update-theProgress::before {
+.f19__update-theProgress::before {
 	content: '';
 	display: block;
     width: 100%;
@@ -595,45 +618,69 @@
     mix-blend-mode: overlay;
     border-radius: 50px
 }
-.f18__update-containerProgress:hover {
+.f19__update-containerProgress:hover {
 	border: 1px solid #000;
 }
-.f18__update-optionsButtons {
+.f19__update-optionsButtons {
 	grid-template-columns: repeat(2, 70px);
 	grid-gap: 10px 0;
 }
-.f18__update__header-buttons button, .f18__update-toUpdate, .f18__update-toUpdated, .f18__update-save, .f18__update-saved, .f18__update-delete {
+.f19__update__header-buttons button, .f19__update-toUpdate, .f19__update-toUpdated, .f19__update-save, .f19__update-saved,
+.f19__update-delete {
 	background: transparent;
 	border: none;
 	margin: 0 6px;
 	cursor: pointer;
 	color: #ccc;
 }
-.f18__update-toUpdate, .f18__update-toUpdated {
+.f19__update-toUpdate, .f19__update-toUpdated {
 	grid-column: 1 / 3;
 }
-.f18__update__header-save:hover, .f18__update__save-save:hover .f18__update-save:hover {
+.f19__update__header-save:hover, .f19__update__save-save:hover .f19__update-save:hover {
 	color: #4c8;
 }
-.f18__update__header-delete:hover, .f18__update__save-delete:hover, .f18__update-delete:hover {
+.f19__update__header-delete:hover, .f19__update__save-delete:hover, .f19__update-delete:hover {
 	color: #c84;
 }
-.f18__update-toUpdate:hover {
+.f19__update-toUpdate:hover {
 	color: #48c;
 }
-.f18__update-saved, .f18__update-toUpdated {
+.f19__update-saved, .f19__update-toUpdated {
 	color: #999;
 	cursor: default;
 }
-.f18__update-save {
+.f19__update-save {
 	color: #4c8;
 }
-.f18__update__saved {
+.f19__update__saved {
 	grid-template-columns: repeat(3, 1fr);
 	margin: 5px 0;
 }
-.f18__update__saved h3 {
+.f19__update__saved h3 {
 	text-align-last: center;
+}
+/*Proyecto 20*/
+.f20__editor {
+	background: #fff;
+	width: fit-content;
+	margin: auto;
+	margin-top: 50px;
+}
+.f20__editor div {
+	background: #222;
+	padding: 5px;
+}
+.f20__canvas {
+	border: 1px solid #000;
+	cursor: crosshair;
+}
+#f20__lw {
+	width: 425px;
+	height: 20px;
+}
+#f20__color {
+	width: 60px;
+	height: 40px;
 }
 /*Responsive*/
 @media screen and (max-width: 600px) {
@@ -642,46 +689,46 @@
 	}
 }
 @media screen and (max-width: 942px) {
-	.flex, .f18 {
+	.flex, .f19 {
 		flex-direction: column;
 	}
-	.f18 {
+	.f19 {
 		align-items: center;
 	}
-	.f18__add {
+	.f19__add {
 		margin: initial;
 		text-align: center;
 	}
-	.f18__update-div {
+	.f19__update-div {
 		height: 238px;
 		grid-template-columns: none;
 		justify-items: center;
 		margin: 0 10px;
 		width: 200px;
 	}
-	.f18__update__title, .f18__update__save__title {
+	.f19__update__title, .f19__update__save__title {
 		display: none;
 	}
-	.f18__update__head-container, .f18__update__saved-content {
+	.f19__update__head-container, .f19__update__saved-content {
 		max-height: 476px;
 		/*238 * 2*/
 		flex-direction: row;
 		justify-content: space-around;
 		flex-wrap: wrap;
 	}
-	.f18__update-optionsMaths {
+	.f19__update-optionsMaths {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
 	}
-	.f18__update-main {
+	.f19__update-main {
 		grid-template-columns: repeat(3, 1fr);
 	}
-	.f18__update-name {
+	.f19__update-name {
 		grid-column: 2 / 3;
     	grid-row: 1 / 2;
 	}
-	.f18__update-optionsButtons {
+	.f19__update-optionsButtons {
 		grid-gap: initial;
 		height: 60px;
 	}

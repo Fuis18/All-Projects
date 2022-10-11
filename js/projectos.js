@@ -1227,18 +1227,11 @@ const clickboton17 = () => {'use strict';
 	}
 	const observer = new IntersectionObserver(cargarMasPublicaciones)
 	const cargarPublicaciones = async num => {'use strict';
-		try {
-			const request = await fetch("txt/f17.txt");
-			const contain = await request.json();
-			const arr = contain.content;
-			crearPublicacion(arr,num);
-		}
-		catch(e) {
-			console.error(e);
-			const contain = filetxt; // Archivo aparte de texto
-			const arr = contain.content;
-			crearPublicacion(arr,num);
-		}
+		const request = await fetch("txt/f17.txt");
+		const contain = await request.json();
+		// const contain = filetxt; // Archivo aparte de texto
+		const arr = contain.content;
+		crearPublicacion(arr,num);
 	}
 	cargarPublicaciones(10);
 }

@@ -1206,7 +1206,12 @@ const clickboton17 = () => {'use strict';
 	const cargarMasPublicaciones = entry => {'use strict';
 		if (entry[0].isIntersecting) cargarPublicaciones(5)
 	}
-	const crearPublicacion = (arr,num) => {
+	const observer = new IntersectionObserver(cargarMasPublicaciones)
+	const cargarPublicaciones = async num => {'use strict';
+		const request = await fetch("txt/f17.txt");
+		const contain = await request.json();
+		// const contain = filetxt; // Archivo aparte de texto
+		const arr = contain.content;
 		const documentFragment = document.createDocumentFragment();
 		for (let i = 0; i < num; i++) {
 			if (arr[contador] != undefined) {
@@ -1224,14 +1229,6 @@ const clickboton17 = () => {'use strict';
 			else break;
 		}
 		publicaciones.appendChild(documentFragment);
-	}
-	const observer = new IntersectionObserver(cargarMasPublicaciones)
-	const cargarPublicaciones = async num => {'use strict';
-		const request = await fetch("txt/f17.txt");
-		const contain = await request.json();
-		// const contain = filetxt; // Archivo aparte de texto
-		const arr = contain.content;
-		crearPublicacion(arr,num);
 	}
 	cargarPublicaciones(10);
 }

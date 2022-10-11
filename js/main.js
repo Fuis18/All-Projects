@@ -1,11 +1,11 @@
-"strict mode";
+'use strict';
 // Variables
 let form = document.querySelector(".form");
 let fragment = document.createDocumentFragment();
-let veces = 18;
+let veces = 21;
 // Funciones
 // Contrucción de cada boton para los proyectos
-buildkey = (i) => {
+const buildkey = (i) => {'use strict';
 	let input = document.createElement("input");
 	input.classList.add("input");
 	input.classList.add("input-" + i);
@@ -31,13 +31,17 @@ buildkey = (i) => {
 			if (i == 16) clickboton16();
 			if (i == 17) clickboton17();
 			if (i == 18) clickboton18();
+			if (i == 19) clickboton19();
+			if (i == 20) clickboton20();
+			if (i == 21) clickboton21();
 		} else remove();
 	})
-// input.setAttribute("onclick",`javascript:if(document.querySelector(".desarrollo__div").hasChildNodes()==false)clickboton${i}();elseremove();`);
+// input.setAttribute("onclick",`javascript:
+// if(document.querySelector(".desarrollo__div").hasChildNodes()==false)clickboton${i}();elseremove();`);
 	return input;
 }
 // Contrucción del titulo de cada boton
-buildH3 = (i) => {
+const buildH3 = (i) => {'use strict';
 	if (i == 1) return "Regla de 3 simple";
 	if (i == 2) return "Función Cuadratica";
 	if (i == 3) return "Bucle";
@@ -51,13 +55,16 @@ buildH3 = (i) => {
 	if (i == 11) return "Reloj";
 	if (i == 12) return "Idioma";
 	if (i == 13) return "Texturizador";
-	if (i == 14) return "FileRieder, Drag & Drop, Barra de progreso";
-	if (i == 15) return "IndexDB + Drag & Drop";
-	if (i == 16) return "Lazy Load";
-	if (i == 17) return "Bucle Host http";
-	if (i == 18) return "Eficiencia lectora";
+	if (i == 14) return "Galería dinámica";
+	if (i == 15) return "Lector de arhivos dinámico";
+	if (i == 16) return "IndexDB + Drag & Drop";
+	if (i == 17) return "Lazy Load";
+	if (i == 18) return "Bucle Host http";
+	if (i == 19) return "Eficiencia lectora";
+	if (i == 20) return "Web Paint";
+	if (i == 21) return "Calculadora de figuras";
 }
-remove = () => {
+const remove = () => {'use strict';
 	let a = document.createElement("H2");
 	let text = document.createTextNode("Desarrollo del proyecto");
 	a.appendChild(text);

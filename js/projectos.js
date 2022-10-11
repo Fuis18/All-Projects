@@ -1231,7 +1231,7 @@ const clickboton17 = () => {'use strict';
 			publicaciones.appendChild(documentFragment);
 		}
 		catch(e) {
-			console.error("Error: " + e);
+			console.error(e);
 			const contain = filetxt; //archivo aparte de texto
 			const arr = contain.content;
 			const documentFragment = document.createDocumentFragment();

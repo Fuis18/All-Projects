@@ -889,31 +889,55 @@ const clickboton13 = () => {'use strict';
 		e.dataTransfer.setData("texture", n);
 	}
 }
-// Poryecto 14
+// Proyecto 14
 const clickboton14 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
-	const desarrollo = type => {'use strict';
-		document.querySelector(".pregunta14").removeChild(document.querySelector(".select14"));
-		document.querySelector(".pregunta14").removeChild(document.querySelector(".button14"));
-		if (type == "text") {
-			document.querySelector(".desarrollo14").innerHTML = `
-			<div class="loading-bar14"></div>
-			<div class="container14">Arrastre y Suelte un Archivo de texto</div>
-			<div class="result14"></div>`
-		} else if (type == "img") {
-			document.querySelector(".desarrollo14").innerHTML = `
-			<div class="loading-bar14"></div>
-			<div class="container14">Arrastre y Suelte una imagen</div>
-			<div class="result14"></div>`
-		} else if (type == "video") {
-			document.querySelector(".desarrollo14").innerHTML = `
-			<div class="loading-bar14"></div>
-			<div class="container14">Arrastre y Suelte un video</div>
-			<div class="result14"></div>`
+	const fragment14 = document.createDocumentFragment();
+	container.appendChild(fragment14);
+	container.innerHTML = `<div class="f14">
+		<input type="file" class="f14__file" accept="image/png, .jpeg, .jpg, image/gif" multiple>
+		<div class="f14__result"></div>
+	</div>`;
+	const readFile = file => {
+		for (let i = 0; i < file.length; i++) {
+			const reader = new FileReader();
+			reader.readAsDataURL(file[i])
+			reader.addEventListener("load",(e)=>{
+				let newImg = document.createElement("img");
+				newImg.src = e.currentTarget.result;
+				document.querySelector(".f14__result").appendChild(newImg);
+			})
 		}
-		const zona = document.querySelector(".container14");
-		const resultado = document.querySelector(".result14");
-		const loadingBar = document.querySelector(".loading-bar14")
+	}
+	document.querySelector(".f14__file").addEventListener("change",() => {
+		readFile(document.querySelector(".f14__file").files);
+	});
+}
+// Poryecto 15
+const clickboton15 = () => {'use strict';
+	let container = document.querySelector(".desarrollo__div");
+	const desarrollo = type => {'use strict';
+		document.querySelector(".pregunta15").removeChild(document.querySelector(".select15"));
+		document.querySelector(".pregunta15").removeChild(document.querySelector(".button15"));
+		if (type == "text") {
+			document.querySelector(".desarrollo15").innerHTML = `
+			<div class="loading-bar15"></div>
+			<div class="container15">Arrastre y Suelte un Archivo de texto</div>
+			<div class="result15"></div>`;
+		} else if (type == "img") {
+			document.querySelector(".desarrollo15").innerHTML = `
+			<div class="loading-bar15"></div>
+			<div class="container15">Arrastre y Suelte una imagen</div>
+			<div class="result15"></div>`;
+		} else if (type == "video") {
+			document.querySelector(".desarrollo15").innerHTML = `
+			<div class="loading-bar15"></div>
+			<div class="container15">Arrastre y Suelte un video</div>
+			<div class="result15"></div>`;
+		}
+		const zona = document.querySelector(".container15");
+		const resultado = document.querySelector(".result15");
+		const loadingBar = document.querySelector(".loading-bar15")
 		zona.addEventListener("dragover", e => {'use strict';
 			e.preventDefault();
 			changeStyle(e.srcElement, "#444");
@@ -948,7 +972,7 @@ const clickboton14 = () => {'use strict';
 					let url = URL.createObjectURL(file)
 					let img = document.createElement("IMG");
 					img.setAttribute("src", url);
-					img.classList.add("img14");
+					img.classList.add("img15");
 					resultado.appendChild(img);
 				})
 				zona.style.border = "4px solid #888";
@@ -1006,7 +1030,7 @@ const clickboton14 = () => {'use strict';
 					let img = document.createElement("VIDEO");
 					img.setAttribute("src", url);
 					img.setAttribute("controls", true);
-					img.classList.add("img14")
+					img.classList.add("img15")
 					resultado.appendChild(img);
 					img.style.width = "calc(100vw - 145px)";
 				})
@@ -1015,23 +1039,23 @@ const clickboton14 = () => {'use strict';
 		}
 	}
 	container.innerHTML = `
-	<div class="pregunta14">
-		<select class="select14">
+	<div class="pregunta15">
+		<select class="select15">
 			<option value="text">Texto</option>
 			<option value="img">Imagenes</option>
 			<option value="video">Videos</option>
 		</select>
-		<button class="button14">Aceptar</button>
+		<button class="button15">Aceptar</button>
 	</div>
-	<div class="desarrollo14"></div>`;
-	let confirmar = document.querySelector(".button14")
+	<div class="desarrollo15"></div>`;
+	let confirmar = document.querySelector(".button15")
 	confirmar.addEventListener("click", e => {'use strict';
-		let type = document.querySelector(".select14").value;
+		let type = document.querySelector(".select15").value;
 		desarrollo(type);
 	})
 }
-// Poryecto 15
-const clickboton15 = () => {'use strict';
+// Poryecto 16
+const clickboton16 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	container.innerHTML = `
 	<div class="add-names"><input type="text" id="name" placeholder="Introduce un nombre"><button id="add">Añadir</button></div>
@@ -1130,12 +1154,31 @@ const clickboton15 = () => {'use strict';
 		return container;
 	}
 }
-// Poryecto 16
-const clickboton16 = () => {'use strict';
+// Poryecto 17
+const clickboton17 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	container.innerHTML = `<div class="publicaciones"></div>`;
 	const publicaciones = document.querySelector(".publicaciones");
 	let contador = 0;
+	const filetxt = {
+		"content": [
+			{"nombre": "Lucas Dalto",
+			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
+			{"nombre": "Rancio Dalto",
+			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
+			{"nombre": "Luis Román",
+			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
+			{"nombre": "Cofla Cofla",
+			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
+			{"nombre": "Fuis18 Larc",
+			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
+			{"nombre": "Eres Tu Danilo Montero",
+			"contenido": "Declaralo esta noche así. Jesús tu eres el amigo que me ama, Jesús tu eres la esperanza de mi vida, Eer."},
+			{"nombre": "Te veo",
+			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."
+			}
+		]
+	}
 	const createPublicationCode = (name,content) => {'use strict';
 		const container = document.createElement("DIV");
 		const comentarios = document.createElement("DIV");
@@ -1165,55 +1208,79 @@ const clickboton16 = () => {'use strict';
 	}
 	const observer = new IntersectionObserver(cargarMasPublicaciones)
 	const cargarPublicaciones = async num => {'use strict';
-		const request = await fetch("txt/f16.txt");
-		const container = await request.json();
-		const arr = container.content;
-		const documentFragment = document.createDocumentFragment();
-		for (let i = 0; i < num; i++) {
-			if (arr[contador] != undefined) {
-				const newPublicacion = createPublicationCode(arr[contador].nombre,arr[contador].contenido);
-				documentFragment.appendChild(newPublicacion);
-				contador++;
-				if (i == num-1) observer.observe(newPublicacion)
-			} else if (document.getElementById("noMore") == undefined) {
-				let noMore = document.createElement("H3");
-				noMore.id = "noMore";
-				noMore.textContent = "No hay más publicaciones";
-				documentFragment.appendChild(noMore);
-				publicaciones.appendChild(documentFragment);
+		try {
+			const request = await fetch("txt/f17.txt");
+			const contain = await request.json();
+			const arr = contain.content;
+			const documentFragment = document.createDocumentFragment();
+			for (let i = 0; i < num; i++) {
+				if (arr[contador] != undefined) {
+					const newPublicacion = createPublicationCode(arr[contador].nombre,arr[contador].contenido);
+					documentFragment.appendChild(newPublicacion);
+					contador++;
+					if (i == num-1) observer.observe(newPublicacion)
+				} else if (document.getElementById("noMore") == undefined) {
+					let noMore = document.createElement("H3");
+					noMore.id = "noMore";
+					noMore.textContent = "No hay más publicaciones";
+					documentFragment.appendChild(noMore);
+					publicaciones.appendChild(documentFragment);
+				}
+				else break;
 			}
-			else break;
+			publicaciones.appendChild(documentFragment);
 		}
-		publicaciones.appendChild(documentFragment);
+		catch(e) {
+			console.error("Error: " + e);
+			const contain = filetxt; //archivo aparte de texto
+			const arr = contain.content;
+			const documentFragment = document.createDocumentFragment();
+			for (let i = 0; i < num; i++) {
+				if (arr[contador] != undefined) {
+					const newPublicacion = createPublicationCode(arr[contador].nombre,arr[contador].contenido);
+					documentFragment.appendChild(newPublicacion);
+					contador++;
+					if (i == num-1) observer.observe(newPublicacion)
+				} else if (document.getElementById("noMore") == undefined) {
+					let noMore = document.createElement("H3");
+					noMore.id = "noMore";
+					noMore.textContent = "No hay más publicaciones";
+					documentFragment.appendChild(noMore);
+					publicaciones.appendChild(documentFragment);
+				}
+				else break;
+			}
+			publicaciones.appendChild(documentFragment);
+		}
 	}
 	cargarPublicaciones(10);
 }
-// Poryecto 17
-const clickboton17 = () => {'use strict';
+// Poryecto 18
+const clickboton18 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
-	const fragment17 = document.createDocumentFragment();
+	const fragment18 = document.createDocumentFragment();
 	container.innerHTML = `
-		<div class="div17">
+		<div class="div18">
 			<div>Número de IP:</div>
-			<input type="text" class="number17">
+			<input type="text" class="number18">
 			<div>Cantidad Deseada:</div>
-			<input type="number" class="amount17">
-			<div class="result17"></div>
+			<input type="number" class="amount18">
+			<div class="result18"></div>
 			<div>Rellenar con HTTPS:
-				<input type="checkbox" class="boolean17">
+				<input type="checkbox" class="boolean18">
 			</div>
-			<input type="submit" class="button17">
+			<input type="submit" class="button18">
 		</div>`;
-	document.querySelector(".button17").addEventListener("click",()=>{
-		let amount = document.querySelector(".amount17").value;
+	document.querySelector(".button18").addEventListener("click",()=>{
+		let amount = document.querySelector(".amount18").value;
 		const node = document.createElement("div");
 		for (let i = 0; i < amount; i++) {
-			let number = document.querySelector(".number17").value;
+			let number = document.querySelector(".number18").value;
 			let result = prompt("Dime tu URL:");
 			let space = String.fromCharCode(160) + '\xa0' + '\xa0' + '\xa0' + '\xa0' + '\xa0' + '\xa0';
 			let p0 = document.createElement("div");
 			let p1 = document.createElement("div");
-			if (document.querySelector(".boolean17").checked) {
+			if (document.querySelector(".boolean18").checked) {
 				p0.textContent = number + space + "https://www." + result;
 				p1.textContent = number + space + "https://" + result;
 			} else {
@@ -1229,16 +1296,16 @@ const clickboton17 = () => {'use strict';
 			node.appendChild(p1);
 			node.appendChild(p2);
 			node.appendChild(p3);
-			fragment17.appendChild(node);
+			fragment18.appendChild(node);
 		}
-		container.removeChild(document.querySelector(".div17"))
-		container.appendChild(fragment17);
+		container.removeChild(document.querySelector(".div18"))
+		container.appendChild(fragment18);
 	})
 }
-// Poryecto 18
-const clickboton18 = () => {'use strict';
+// Poryecto 19
+const clickboton19 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
-	const fragment18 = document.createDocumentFragment();
+	const fragment19 = document.createDocumentFragment();
 	const IDBRequest = indexedDB.open("reader",2);
 	const addObject = object => {'use strict';
 		const IDBData = transactionOperation("readwrite","Objeto agregado correctamente");
@@ -1253,9 +1320,9 @@ const clickboton18 = () => {'use strict';
 				let c = cursor.result.value;
 				let element = buildDiv(c.nombre, c.calculo, c.total, c.cantidad, c.tiempo, cursor.result.key, c.valor, c.lock);
 				if (c.lock[0] == true) {
-					document.querySelector(".f18__update__saved-content").appendChild(element);
+					document.querySelector(".f19__update__saved-content").appendChild(element);
 				} else {
-					document.querySelector(".f18__update__head-container").appendChild(element);
+					document.querySelector(".f19__update__head-container").appendChild(element);
 				}
 				cursor.result.continue();
 			}
@@ -1315,13 +1382,13 @@ const clickboton18 = () => {'use strict';
 	const calculatePorcentaje = (amount,value) => {'use strict';
 		let progress, result;
 		if (value == undefined) {
-			progress = document.querySelector(".f18__update-percentageInput").value;
+			progress = document.querySelector(".f19__update-percentageInput").value;
 			result = (progress * 100) / amount;
 		} else result = (value * 100) / amount;
 		return result;
 	}
 	const buildDiv = (name, calculate, timed, amount, tiempo, id, value, block) => {'use strict';
-		let nameClass = "f18__update";
+		let nameClass = "f19__update";
 		let percentageNumber = calculatePorcentaje(amount, value);
 		let container = document.createElement('div');
 		let divMain = document.createElement('div');
@@ -1432,45 +1499,45 @@ const clickboton18 = () => {'use strict';
 			pathLock.style.fill = "#a11";
 			pathUnlock.style.display = "none";
 			finish.style.cursor = "default";
-			buttonToUpdate.classList.replace("f18__update-toUpdate","f18__update-toUpdated");
+			buttonToUpdate.classList.replace("f19__update-toUpdate","f19__update-toUpdated");
 		}
 		checkFront.addEventListener("click",()=>{
 			if (checkFront.style.fill == "rgb(204, 204, 204)") {
 				checkFront.style.fill = "#000";
 				calculatedCheck(true, checkFront, block[0]);
 				if (!block[0]) {
-					document.querySelector(".f18__update__header-delete").style.display = "block";
-					document.querySelector(".f18__update__header-save").style.display = "block";
+					document.querySelector(".f19__update__header-delete").style.display = "block";
+					document.querySelector(".f19__update__header-save").style.display = "block";
 				} else {
-					document.querySelector(".f18__update__save-delete").style.display = "block";
-					document.querySelector(".f18__update__save-save").style.display = "block";
+					document.querySelector(".f19__update__save-delete").style.display = "block";
+					document.querySelector(".f19__update__save-save").style.display = "block";
 				}
 			} else {
 				checkFront.style.fill = "#ccc";
 				calculatedCheck(false, checkFront, block[0]);
-				if (document.querySelector(".f18__update-circleFront").style.fill == "rgb(204, 204, 204)" && !block[0]) {
-					document.querySelector(".f18__update__header-delete").style.display = "none";
-					document.querySelector(".f18__update__header-save").style.display = "none";
+				if (document.querySelector(".f19__update-circleFront").style.fill == "rgb(204, 204, 204)" && !block[0]) {
+					document.querySelector(".f19__update__header-delete").style.display = "none";
+					document.querySelector(".f19__update__header-save").style.display = "none";
 				} else {
-					document.querySelector(".f18__update__save-save").style.display = "none";
-					document.querySelector(".f18__update__save-delete").style.display = "none";
+					document.querySelector(".f19__update__save-save").style.display = "none";
+					document.querySelector(".f19__update__save-delete").style.display = "none";
 				}
 			}
 		})
 		h4.addEventListener("keyup",()=>{
 			if (!block[1]) {
-				buttonToSave.classList.replace("f18__update-saved","f18__update-save");
-				buttonToUpdate.classList.replace("f18__update-toUpdate","f18__update-toUpdated");
+				buttonToSave.classList.replace("f19__update-saved","f19__update-save");
+				buttonToUpdate.classList.replace("f19__update-toUpdate","f19__update-toUpdated");
 			}
 		})
 		percentageInput.addEventListener("keyup",()=>{
 			if (!block[1]) {
-				buttonToSave.classList.replace("f18__update-saved","f18__update-save");
-				buttonToUpdate.classList.replace("f18__update-toUpdate","f18__update-toUpdated");
+				buttonToSave.classList.replace("f19__update-saved","f19__update-save");
+				buttonToUpdate.classList.replace("f19__update-toUpdate","f19__update-toUpdated");
 			}
 		})
 		buttonToSave.addEventListener("click",()=>{
-			if (buttonToSave.className == "f18__update-save") {
+			if (buttonToSave.className == "f19__update-save") {
 				modificarObject(id,{
 					nombre: h4.textContent,
 					calculo: calculate,
@@ -1480,12 +1547,12 @@ const clickboton18 = () => {'use strict';
 					valor: percentageInput.value,
 					lock: block
 				})
-				buttonToUpdate.classList.replace("f18__update-toUpdated","f18__update-toUpdate");
-				buttonToSave.classList.replace("f18__update-save","f18__update-saved");
+				buttonToUpdate.classList.replace("f19__update-toUpdated","f19__update-toUpdate");
+				buttonToSave.classList.replace("f19__update-save","f19__update-saved");
 			}
 		})
 		buttonToUpdate.addEventListener("click",() => {'use strict';
-			if (buttonToSave.className == "f18__update-saved") {
+			if (buttonToSave.className == "f19__update-saved") {
 				let percentageNumber = calculatePorcentaje(amount, percentageInput.value);
 				theProgress.style.width = `${percentageNumber}%`;
 				numberProgress.textContent = `${Math.trunc(percentageNumber)}%`;
@@ -1515,7 +1582,7 @@ const clickboton18 = () => {'use strict';
 					pathLock.style.fill = "#a11";
 					pathUnlock.style.display = "none";
 					finish.style.cursor = "default";
-					buttonToUpdate.classList.replace("f18__update-toUpdate","f18__update-toUpdated");
+					buttonToUpdate.classList.replace("f19__update-toUpdate","f19__update-toUpdated");
 				}
 			}
 			modificarObject(id,{
@@ -1531,14 +1598,14 @@ const clickboton18 = () => {'use strict';
 		buttonDelete.addEventListener("click",()=>{
 			if (window.confirm("¿Seguro que quieres Eliminar una lectura?")) {
 				eliminarObject(id);
-				if (block[0] == false) document.querySelector(".f18__update__head-container").removeChild(container);
-				else document.querySelector(".f18__update__saved-content").removeChild(container);
+				if (block[0] == false) document.querySelector(".f19__update__head-container").removeChild(container);
+				else document.querySelector(".f19__update__saved-content").removeChild(container);
 			}
 		})
 		pathUnlock.addEventListener("click",()=>{
-			if (percentageNumber >= 100 && buttonToSave.className == "f18__update-saved") {
+			if (percentageNumber >= 100 && buttonToSave.className == "f19__update-saved") {
 				if (window.confirm("¿Quiéres Bloquear está lectura?")) {
-					buttonToUpdate.classList.replace("f18__update-toUpdate","f18__update-toUpdated");
+					buttonToUpdate.classList.replace("f19__update-toUpdate","f19__update-toUpdated");
 					h4.setAttribute("contenteditable","false");
 					percentageInput.setAttribute("disabled","");
 					pathLock.style.display = "block";
@@ -1556,7 +1623,7 @@ const clickboton18 = () => {'use strict';
 						lock: block
 					})
 				}
-			} else if (buttonToSave.className == "f18__update-save") {
+			} else if (buttonToSave.className == "f19__update-save") {
 				alert("Hay cambios sin guardar");
 			}
 		})
@@ -1711,10 +1778,10 @@ const clickboton18 = () => {'use strict';
 		return forEachPro;
 	}
 	const calculatedCheck = (bollean, origin, space) => {'use strict';
-		let allDivs = document.querySelectorAll('.f18__update__head-container .f18__update-div');
-		let nameClass = ".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront";
-		if (space) allDivs = document.querySelectorAll('.f18__update__saved-content .f18__update-div');
-		if (origin.className.animVal == "f18__update-circleFront" || origin.className.animVal == "f18__update__save-circleFront") {
+		let allDivs = document.querySelectorAll('.f19__update__head-container .f19__update-div');
+		let nameClass = ".f19__update-optionsMaths .f19__update-main .f19__update-check .f19__update-checkFront";
+		if (space) allDivs = document.querySelectorAll('.f19__update__saved-content .f19__update-div');
+		if (origin.className.animVal == "f19__update-circleFront" || origin.className.animVal == "f19__update__save-circleFront") {
 			for (let i = allDivs.length - 1; i >= 0; i--) {
 			let divCheck = allDivs[i].querySelector(nameClass);
 				if (bollean) {
@@ -1734,30 +1801,30 @@ const clickboton18 = () => {'use strict';
 				}
 			}
 			if (bollean) {
-				if (!space) document.querySelector(".f18__update-circleFront").style.fill = "#000";
-				else document.querySelector(".f18__update__save-circleFront").style.fill = "#000";
+				if (!space) document.querySelector(".f19__update-circleFront").style.fill = "#000";
+				else document.querySelector(".f19__update__save-circleFront").style.fill = "#000";
 			} else {
 				if (!space) {
-					document.querySelector(".f18__update-circleFront").style.fill = "#ccc";
-					document.querySelector(".f18__update__header-delete").style.display = "block";
-					document.querySelector(".f18__update__header-save").style.display = "block";
+					document.querySelector(".f19__update-circleFront").style.fill = "#ccc";
+					document.querySelector(".f19__update__header-delete").style.display = "block";
+					document.querySelector(".f19__update__header-save").style.display = "block";
 				} else {
-					document.querySelector(".f18__update__save-circleFront").style.fill = "#ccc";
-					document.querySelector(".f18__update__save-delete").style.display = "block";
-					document.querySelector(".f18__update__save-save").style.display = "block";
+					document.querySelector(".f19__update__save-circleFront").style.fill = "#ccc";
+					document.querySelector(".f19__update__save-delete").style.display = "block";
+					document.querySelector(".f19__update__save-save").style.display = "block";
 				}
 			}
 		}
 	}
 	const selectCheck = (space,type) => {'use strict';
-		let text, nameClass = ".f18__update-optionsMaths .f18__update-main .f18__update-check .f18__update-checkFront";
+		let text, nameClass = ".f19__update-optionsMaths .f19__update-main .f19__update-check .f19__update-checkFront";
 		if (type == 0) text = "¿Seguro que quieres proceder a Eliminar?";
 		else if (type == 1 && space == 0) text = "¿Seguro que quieres proceder a Archivar?";
 		else text = "¿Seguro que quieres proceder a Desarchivar?";
 		if (window.confirm(text)) {
 			let arr = [], divs = [], allDivs;
-			if (space == 0) allDivs = document.querySelectorAll('.f18__update__head-container .f18__update-div');
-			else allDivs = document.querySelectorAll('.f18__update__saved-content .f18__update-div');
+			if (space == 0) allDivs = document.querySelectorAll('.f19__update__head-container .f19__update-div');
+			else allDivs = document.querySelectorAll('.f19__update__saved-content .f19__update-div');
 			// Recoge todos los ids seleccionados
 			for (let i = allDivs.length - 1; i >= 0; i--) {
 				let divCheck = allDivs[i].querySelector(nameClass);
@@ -1776,30 +1843,30 @@ const clickboton18 = () => {'use strict';
 				if (type == 0) {
 					eliminarObject(arr[i]);
 					if (space == 0) {
-						document.querySelector(".f18__update__head-container").removeChild(divs[i]);
-						document.querySelector(".f18__update-circleFront").style.fill = "#ccc";
+						document.querySelector(".f19__update__head-container").removeChild(divs[i]);
+						document.querySelector(".f19__update-circleFront").style.fill = "#ccc";
 					}
 					else {
-						document.querySelector(".f18__update__saved-content").removeChild(divs[i]);
-						document.querySelector(".f18__update__save-circleFront").style.fill = "#ccc";
+						document.querySelector(".f19__update__saved-content").removeChild(divs[i]);
+						document.querySelector(".f19__update__save-circleFront").style.fill = "#ccc";
 					}
 				}
 				// Archiva
 				else if (type == 1) {
 					let obj = [];					
-					obj.push(divs[i].querySelector(".f18__update-name").textContent);
-					obj.push(divs[i].querySelector(".f18__update-recommendation").textContent);
-					let temporal = divs[i].querySelector(".f18__update-percentageEntire").textContent.split("/");
+					obj.push(divs[i].querySelector(".f19__update-name").textContent);
+					obj.push(divs[i].querySelector(".f19__update-recommendation").textContent);
+					let temporal = divs[i].querySelector(".f19__update-percentageEntire").textContent.split("/");
 					obj.push(parseInt(temporal[1]));
-					obj.push(divs[i].querySelector(".f18__update-calculateTime").textContent);
-					temporal = divs[i].querySelector(".f18__update-time").textContent.split("/");
+					obj.push(divs[i].querySelector(".f19__update-calculateTime").textContent);
+					temporal = divs[i].querySelector(".f19__update-time").textContent.split("/");
 					temporal = [parseInt(temporal[0]),parseInt(temporal[1]),parseInt(temporal[2])]
 					obj.push(temporal);
-					obj.push(divs[i].querySelector(".f18__update-percentageInput").value);
+					obj.push(divs[i].querySelector(".f19__update-percentageInput").value);
 					if (space == 0) temporal = true;
 					else temporal = false;
 					obj.push(temporal);
-					if (divs[i].querySelector(".f18__update-lock").style.display == "block") temporal = true;
+					if (divs[i].querySelector(".f19__update-lock").style.display == "block") temporal = true;
 					else temporal = false;
 					obj.push(temporal);
 					modificarObject(parseInt(arr[i]),{
@@ -1811,21 +1878,21 @@ const clickboton18 = () => {'use strict';
 						valor: obj[5],
 						lock: [obj[6], obj[7]]
 					})
-					divs[i].querySelector(".f18__update-checkFront").style.fill = "#ccc";
+					divs[i].querySelector(".f19__update-checkFront").style.fill = "#ccc";
 				}
 				if (space == 0 && type == 1) {
-					document.querySelector(".f18__update-circleFront").style.fill = "#ccc";
-					document.querySelector(".f18__update__head-container").removeChild(divs[i]);
-					document.querySelector(".f18__update__saved-content").appendChild(divs[i]);
-					document.querySelector(".f18__update__header-save").style.display = "none";
-					document.querySelector(".f18__update__header-delete").style.display = "none";
+					document.querySelector(".f19__update-circleFront").style.fill = "#ccc";
+					document.querySelector(".f19__update__head-container").removeChild(divs[i]);
+					document.querySelector(".f19__update__saved-content").appendChild(divs[i]);
+					document.querySelector(".f19__update__header-save").style.display = "none";
+					document.querySelector(".f19__update__header-delete").style.display = "none";
 				}
 				else if (space == 1 && type == 1) {
-					document.querySelector(".f18__update__save-circleFront").style.fill = "#ccc";
-					document.querySelector(".f18__update__saved-content").removeChild(divs[i]);
-					document.querySelector(".f18__update__head-container").appendChild(divs[i]);
-					document.querySelector(".f18__update__save-save").style.display = "none";
-					document.querySelector(".f18__update__save-delete").style.display = "none";
+					document.querySelector(".f19__update__save-circleFront").style.fill = "#ccc";
+					document.querySelector(".f19__update__saved-content").removeChild(divs[i]);
+					document.querySelector(".f19__update__head-container").appendChild(divs[i]);
+					document.querySelector(".f19__update__save-save").style.display = "none";
+					document.querySelector(".f19__update__save-delete").style.display = "none";
 				}
 			}
 		}
@@ -1834,118 +1901,118 @@ const clickboton18 = () => {'use strict';
 		let css = svg.style;
 		if (css.transform == "rotateZ(0deg)") {
 			css.transform = "rotateZ(-90deg)";
-			if (svg.className.animVal == "f18__update__header-svg") {
-				document.querySelector(".f18__update__title").style.display = "none";
-				document.querySelector(".f18__update__head-container").style.display = "none";
+			if (svg.className.animVal == "f19__update__header-svg") {
+				document.querySelector(".f19__update__title").style.display = "none";
+				document.querySelector(".f19__update__head-container").style.display = "none";
 			} else {
-				document.querySelector(".f18__update__save__title").style.display = "none";
-				document.querySelector(".f18__update__saved-content").style.display = "none";
+				document.querySelector(".f19__update__save__title").style.display = "none";
+				document.querySelector(".f19__update__saved-content").style.display = "none";
 			}
 		} else {
 			css.transform = "rotateZ(0deg)";
-			if (svg.className.animVal == "f18__update__header-svg") {
+			if (svg.className.animVal == "f19__update__header-svg") {
 				if (document.querySelector(".desarrollo__div").clientWidth >= 886) {
-					document.querySelector(".f18__update__title").style.display = "grid";
+					document.querySelector(".f19__update__title").style.display = "grid";
 				}
-				document.querySelector(".f18__update__head-container").style.display = "flex";
+				document.querySelector(".f19__update__head-container").style.display = "flex";
 			} else {
 				if (document.querySelector(".desarrollo__div").clientWidth >= 886) {
-					document.querySelector(".f18__update__save__title").style.display = "grid";
+					document.querySelector(".f19__update__save__title").style.display = "grid";
 				}
-				document.querySelector(".f18__update__saved-content").style.display = "flex";
+				document.querySelector(".f19__update__saved-content").style.display = "flex";
 			}
 		}
 	}
 	// Añadir
 	container.innerHTML = `
-		<div class="f18">
-			<div class="f18__add">
-				<div class="f18__add-Div">
+		<div class="f19">
+			<div class="f19__add">
+				<div class="f19__add-Div">
 					<h3>Nombre de la lectura</h3>
-					<input type="text" class="f18__add-name" spellcheck="false">
+					<input type="text" class="f19__add-name" spellcheck="false">
 					<p style="display: none">El nombre esta incompleto</p>
 				</div>
-				<div class="f18__add-Div">
+				<div class="f19__add-Div">
 					<h3>Cantidad de páginas</h3>
-					<input type="number" class="f18__add-amount">
+					<input type="number" class="f19__add-amount">
 					<p style="display: none">La cantidad esta incompleta</p>
 					<p style="display: none">La cantidad no es válida</p>
 				</div>
-				<div class="f18__add-Div">
+				<div class="f19__add-Div">
 					<h3>Fecha de entrega</h3>
-					<input type="date" class="f18__add-date">
+					<input type="date" class="f19__add-date">
 					<p style="display: none">La fecha esta incompleta</p>
 				</div>
-				<div class="f18__add-Div">
+				<div class="f19__add-Div">
 					<h3>Páginas avanzadas</h3>
-					<input type="number" class="f18__add-progress" placeholder="0">
+					<input type="number" class="f19__add-progress" placeholder="0">
 				</div>
-				<div class="f18__add-Div">
-					<input type="submit" class="f18__add-submit">
+				<div class="f19__add-Div">
+					<input type="submit" class="f19__add-submit">
 				</div>
 			</div>
-			<div class="f18__update">
-				<div class="f18__update__head">
-					<div class="f18__update__header">
-						<svg class="f18__update__header-svg" viewbox="0 0 10 10" class="svg">
+			<div class="f19__update">
+				<div class="f19__update__head">
+					<div class="f19__update__header">
+						<svg class="f19__update__header-svg" viewbox="0 0 10 10" class="svg">
 							<polygon points=".8,2.5 5,10 9.2,2.5"fill="black"/>
 						</sgv>
 						<h3>Lecturas</h3>
-						<div class="f18__update__header-buttons">
-							<button class="f18__update__header-save" style="display: none">Archivar</button>
-							<button class="f18__update__header-delete" style="display: none">Eliminar</button>
+						<div class="f19__update__header-buttons">
+							<button class="f19__update__header-save" style="display: none">Archivar</button>
+							<button class="f19__update__header-delete" style="display: none">Eliminar</button>
 						</div>
 					</div>
-					<div class="f18__update__title">
-						<svg class="f18__update__title-svg">
-							<circle class="f18__update-circleBack" cx="5" cy="5" r="4.8"></circle>
-							<circle class="f18__update-circleFront" cx="5" cy="5" r="3.5" style="fill:#ccc"></circle>
+					<div class="f19__update__title">
+						<svg class="f19__update__title-svg">
+							<circle class="f19__update-circleBack" cx="5" cy="5" r="4.8"></circle>
+							<circle class="f19__update-circleFront" cx="5" cy="5" r="3.5" style="fill:#ccc"></circle>
 						</svg>
-						<div class="f18__update__title-name">Nombre</div>
-						<div class="f18__update__title-calculateTime">Tiempo Restante</div>
-						<div class="f18__update__title-recommendation">Proporción</div>
-						<div class="f18__update__title-time">Restante</div>
-						<div class="f18__update__title-percentage">Porcentaje</div>
-						<div class="f18__update__title-options">Opciones</div>
+						<div class="f19__update__title-name">Nombre</div>
+						<div class="f19__update__title-calculateTime">Tiempo Restante</div>
+						<div class="f19__update__title-recommendation">Proporción</div>
+						<div class="f19__update__title-time">Restante</div>
+						<div class="f19__update__title-percentage">Porcentaje</div>
+						<div class="f19__update__title-options">Opciones</div>
 					</div>
-				<div class="f18__update__head-container"></div>
+				<div class="f19__update__head-container"></div>
 				</div>
-				<div class="f18__update__save">
-					<div class="f18__update__saved">
-						<svg class="f18__update__saved-svg" viewbox="0 0 10 10" class="svg">
+				<div class="f19__update__save">
+					<div class="f19__update__saved">
+						<svg class="f19__update__saved-svg" viewbox="0 0 10 10" class="svg">
 							<polygon points=".8,2.5 5,10 9.2,2.5"fill="black"/>
 						</sgv>
 						<h3>Archivados</h3>
-						<div class="f18__update__header-buttons">
-							<button class="f18__update__save-save" style="display: none">Desarchivar</button>
-							<button class="f18__update__save-delete" style="display: none">Eliminar</button>
+						<div class="f19__update__header-buttons">
+							<button class="f19__update__save-save" style="display: none">Desarchivar</button>
+							<button class="f19__update__save-delete" style="display: none">Eliminar</button>
 						</div>
 					</div>
-					<div class="f18__update__save__title" style="display: none">
-						<svg class="f18__update__title-svg">
-							<circle class="f18__update__save-circleBack" cx="5" cy="5" r="4.8"></circle>
-							<circle class="f18__update__save-circleFront" cx="5" cy="5" r="3.5" style="fill:#ccc"></circle>
+					<div class="f19__update__save__title" style="display: none">
+						<svg class="f19__update__title-svg">
+							<circle class="f19__update__save-circleBack" cx="5" cy="5" r="4.8"></circle>
+							<circle class="f19__update__save-circleFront" cx="5" cy="5" r="3.5" style="fill:#ccc"></circle>
 						</svg>
-						<div class="f18__update__save__title-name">Nombre</div>
-						<div class="f18__update__save__title-calculateTime">Tiempo Restante</div>
-						<div class="f18__update__save__title-recommendation">Proporción</div>
-						<div class="f18__update__save__title-time">Restante</div>
-						<div class="f18__update__save__title-percentage">Porcentaje</div>
-						<div class="f18__update__save__title-options">Opciones</div>
+						<div class="f19__update__save__title-name">Nombre</div>
+						<div class="f19__update__save__title-calculateTime">Tiempo Restante</div>
+						<div class="f19__update__save__title-recommendation">Proporción</div>
+						<div class="f19__update__save__title-time">Restante</div>
+						<div class="f19__update__save__title-percentage">Porcentaje</div>
+						<div class="f19__update__save__title-options">Opciones</div>
 					</div>
-					<div class="f18__update__saved-content" style="display: none"></div>
+					<div class="f19__update__saved-content" style="display: none"></div>
 				</div>
 			</div>
 		</div>`;
 	// Ejecutar
-	document.querySelector(".f18__add-submit").addEventListener("click",()=>{
-		let name = document.querySelector(".f18__add-name").value;
-		let amount = parseInt(document.querySelector(".f18__add-amount").value);
+	document.querySelector(".f19__add-submit").addEventListener("click",()=>{
+		let name = document.querySelector(".f19__add-name").value;
+		let amount = parseInt(document.querySelector(".f19__add-amount").value);
 		let amountProgress = 0;
-		if (document.querySelector(".f18__add-progress").value != '') {
-			amountProgress = parseInt(document.querySelector(".f18__add-progress").value);
+		if (document.querySelector(".f19__add-progress").value != '') {
+			amountProgress = parseInt(document.querySelector(".f19__add-progress").value);
 		}
-		let date = document.querySelector(".f18__add-date").value;
+		let date = document.querySelector(".f19__add-date").value;
 		let year = parseInt(date.substring(0,4));
 		let month = parseInt(date.substring(5,7));
 		let day = parseInt(date.substring(8,10));
@@ -1953,11 +2020,11 @@ const clickboton18 = () => {'use strict';
 		if (name.length > 0 && amount > 0 && amount < 10000 && !date == "") {
 			let calculated = calculateMath(year, month, day, amount, amountProgress);
 			let timed = calculateDate(year, month, day);
-			let key = document.querySelectorAll(".f18__update-div").length - 1;
+			let key = document.querySelectorAll(".f19__update-div").length - 1;
 			let idKey;
 			if (key == -1) {
 				idKey = 0;
-			} else idKey = parseInt(document.querySelectorAll(".f18__update-div")[key].id) + 1;
+			} else idKey = parseInt(document.querySelectorAll(".f19__update-div")[key].id) + 1;
 			addObject({
 				nombre: name,
 				calculo: calculated,
@@ -1967,88 +2034,175 @@ const clickboton18 = () => {'use strict';
 				valor: amountProgress,
 				lock: [false, false]
 			});
-			document.querySelector(".f18__add-name").value = "";
-			document.querySelector(".f18__add-amount").value = "";
-			document.querySelector(".f18__add-date").value = "";
-			document.querySelector(".f18__add-progress").value = "";
+			document.querySelector(".f19__add-name").value = "";
+			document.querySelector(".f19__add-amount").value = "";
+			document.querySelector(".f19__add-date").value = "";
+			document.querySelector(".f19__add-progress").value = "";
 			let element = buildDiv(name, calculated, timed, amount, [day, month, year], idKey, amountProgress, [false, false]);
-			document.querySelector(".f18__update__head-container").appendChild(element);
+			document.querySelector(".f19__update__head-container").appendChild(element);
 		} else {
 			// Manejo de errores en la validación
-			let div = document.querySelectorAll(".f18__add-Div");
-			document.querySelector(".f18__add").classList.add("f18__add__error-content");
+			let div = document.querySelectorAll(".f19__add-Div");
+			document.querySelector(".f19__add").classList.add("f19__add__error-content");
 			if (name.length == '') {
 				let error = div[0].children[2];
-				div[0].classList.add("f18__add-error");
+				div[0].classList.add("f19__add-error");
 				error.style.display = "block";
 			}
 			if (isNaN(amount)) {
 				let error = div[1].children[2];
-				div[1].classList.add("f18__add-error");
+				div[1].classList.add("f19__add-error");
 				error.style.display = "block";
 			} else if (amount > 10000) {
 				let error = div[1].children[3];
-				div[1].classList.add("f18__add-error");
+				div[1].classList.add("f19__add-error");
 				error.style.display = "block";
 			}
 			if (date == "") {
 				let error = div[2].children[2];
-				div[2].classList.add("f18__add-error");
+				div[2].classList.add("f19__add-error");
 				error.style.display = "block";
 			}
 		}
 	})
 	// Check list primero
-	document.querySelector(".f18__update-circleFront").addEventListener("click",()=>{
-		if (document.querySelector(".f18__update-circleFront").style.fill == "rgb(204, 204, 204)") {
-			document.querySelector(".f18__update-circleFront").style.fill = "#000";
-			document.querySelector(".f18__update__header-delete").style.display = "block";
-			document.querySelector(".f18__update__header-save").style.display = "block";
-			calculatedCheck(true, document.querySelector(".f18__update-circleFront"), false);
+	document.querySelector(".f19__update-circleFront").addEventListener("click",()=>{
+		if (document.querySelector(".f19__update-circleFront").style.fill == "rgb(204, 204, 204)") {
+			document.querySelector(".f19__update-circleFront").style.fill = "#000";
+			document.querySelector(".f19__update__header-delete").style.display = "block";
+			document.querySelector(".f19__update__header-save").style.display = "block";
+			calculatedCheck(true, document.querySelector(".f19__update-circleFront"), false);
 		} else {
-			document.querySelector(".f18__update-circleFront").style.fill = "#ccc";
-			document.querySelector(".f18__update__header-delete").style.display = "none";
-			document.querySelector(".f18__update__header-save").style.display = "none";
-			calculatedCheck(false, document.querySelector(".f18__update-circleFront"), false);
+			document.querySelector(".f19__update-circleFront").style.fill = "#ccc";
+			document.querySelector(".f19__update__header-delete").style.display = "none";
+			document.querySelector(".f19__update__header-save").style.display = "none";
+			calculatedCheck(false, document.querySelector(".f19__update-circleFront"), false);
 		}
 	})
 	// Check list segundo
-	document.querySelector(".f18__update__save-circleFront").addEventListener("click",()=>{
-		if (document.querySelector(".f18__update__save-circleFront").style.fill == "rgb(204, 204, 204)") {
-			document.querySelector(".f18__update__save-circleFront").style.fill = "#000";
-			document.querySelector(".f18__update__save-delete").style.display = "block";
-			document.querySelector(".f18__update__save-save").style.display = "block";
-			calculatedCheck(true, document.querySelector(".f18__update-circleFront"), true);
+	document.querySelector(".f19__update__save-circleFront").addEventListener("click",()=>{
+		if (document.querySelector(".f19__update__save-circleFront").style.fill == "rgb(204, 204, 204)") {
+			document.querySelector(".f19__update__save-circleFront").style.fill = "#000";
+			document.querySelector(".f19__update__save-delete").style.display = "block";
+			document.querySelector(".f19__update__save-save").style.display = "block";
+			calculatedCheck(true, document.querySelector(".f19__update-circleFront"), true);
 		} else {
-			document.querySelector(".f18__update__save-circleFront").style.fill = "#ccc";
-			document.querySelector(".f18__update__save-delete").style.display = "none";
-			document.querySelector(".f18__update__save-save").style.display = "none";
-			calculatedCheck(false, document.querySelector(".f18__update-circleFront"), true);
+			document.querySelector(".f19__update__save-circleFront").style.fill = "#ccc";
+			document.querySelector(".f19__update__save-delete").style.display = "none";
+			document.querySelector(".f19__update__save-save").style.display = "none";
+			calculatedCheck(false, document.querySelector(".f19__update-circleFront"), true);
 		}
 	})
-	document.querySelector(".f18__update__header-delete").addEventListener("click",()=> selectCheck(0, 0));
-	document.querySelector(".f18__update__header-save").addEventListener("click",() => selectCheck(0, 1));
-	document.querySelector(".f18__update__save-delete").addEventListener("click",()=> selectCheck(1, 0));
-	document.querySelector(".f18__update__save-save").addEventListener("click",() => selectCheck(1, 1));
+	document.querySelector(".f19__update__header-delete").addEventListener("click",()=> selectCheck(0, 0));
+	document.querySelector(".f19__update__header-save").addEventListener("click",() => selectCheck(0, 1));
+	document.querySelector(".f19__update__save-delete").addEventListener("click",()=> selectCheck(1, 0));
+	document.querySelector(".f19__update__save-save").addEventListener("click",() => selectCheck(1, 1));
 
-	document.querySelector(".f18__update__header-svg").addEventListener("click",() => {'use strict';
-		contractDiv(document.querySelector(".f18__update__header-svg"));
+	document.querySelector(".f19__update__header-svg").addEventListener("click",() => {'use strict';
+		contractDiv(document.querySelector(".f19__update__header-svg"));
 	});
-	document.querySelector(".f18__update__saved-svg").addEventListener("click",() => {'use strict';
-		contractDiv(document.querySelector(".f18__update__saved-svg"));
+	document.querySelector(".f19__update__saved-svg").addEventListener("click",() => {'use strict';
+		contractDiv(document.querySelector(".f19__update__saved-svg"));
 	});
-}
-// Proyecto 19
-const clickboton19 = () => {'use strict';
-	let container = document.querySelector(".desarrollo__div");
-	const fragment19 = document.createDocumentFragment();
-	container.appendChild(fragment19);
-	container.innerHTML = ``;
 }
 // Proyecto 20
 const clickboton20 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	const fragment20 = document.createDocumentFragment();
 	container.appendChild(fragment20);
-	container.innerHTML = ``;
+	container.innerHTML = `
+	<div class="f20__editor">
+		<canvas class="f20__canvas" width="500px" height="150px"></canvas>
+		<div>
+			<input type="color" id="f20__color">
+			<input type="range" id="f20__lw" min="1" max="8">
+		</div>
+	</div>`;
+	const canvas = document.querySelector('.f20__canvas');
+	const dif = canvas.getBoundingClientRect();
+	const ctx = canvas.getContext('2d');
+
+	let painting,color,linewidth,difX,difY;
+
+	canvas.addEventListener('mousedown',(e)=>{
+		difX = e.clientX - dif.left;
+		difY = e.clientY - dif.top;
+		painting = true;
+		color = document.getElementById('f20__color').value;
+		linewidth = document.getElementById('f20__lw').value;
+		ctx.beginPath();
+	});
+	canvas.addEventListener('mousemove',(e)=>{
+		if (painting) {
+			dibujar(difX,difY,e.clientX - dif.left,e.clientY - dif.top)
+			difX = e.clientX - difX.left;
+			difY = e.clientY - difY.top;
+		}
+	})
+	canvas.addEventListener('mouseup',(e)=>{
+		ctx.closePath();
+		painting = false;
+	});
+	const dibujar = (x1,y1,x2,y2) => {
+		ctx.strokeStyle = color;
+		ctx.lineWidth = linewidth;
+		ctx.moveTo(x1,y1);
+		ctx.lineTo(x2,y2);
+		ctx.stroke();
+	}
+
+}
+// Proyecto21
+const clickboton21 = () => {'use strict';
+	let container = document.querySelector(".desarrollo__div");
+	const fragment21 = document.createDocumentFragment();
+	container.appendChild(fragment21);
+	container.innerHTML = `<div class="f21">
+		<div class="f21__container">
+			<!-- <div class="f21__Segmentos-Content">
+				<h3>Segmentos</h3>
+			</div>-->
+			<div class="f21__Areas-Content">
+				<h3>Áreas</h3>
+				<div class="f21__Areas-buttons">
+					<button>Círculo</button>
+					<button>Sector Cirular</button>
+					<button>Segmento Cirular</button>
+					<button>Trapecio Cirular</button>
+					<button>Triángulo</button>
+					<button>Cuadrilatero</button>
+					<button>Integral</button>
+				</div>
+			</div>
+			<!-- <div class="f21__volumenes-Content">
+				<h3>Volúmenes</h3>
+				<div class="f21__volumenes-buttons">
+					<button>Esfera</button>
+					<button>Cilindro</button>
+					<button>Cono</button>
+					<button>Trapecio Cirular</button>
+					<button>Triángulo</button>
+					<button>Cuadrilatero</button>
+					<button>Integral</button>
+				</div>
+			</div>-->
+		</div>
+		<div class="f21__develop">
+			<h3>Desarrollo</h3>
+		</divs>
+	</div>`;
+}
+// Proyecto 22
+const clickboton22 = () => {'use strict';
+	let container = document.querySelector(".desarrollo__div");
+	const fragment22 = document.createDocumentFragment();
+	container.appendChild(fragment22);
+	container.innerHTML = `<div class="f23"></div>`;
+}
+// Proyecto 23
+const clickboton23 = () => {'use strict';
+	let container = document.querySelector(".desarrollo__div");
+	const fragment23 = document.createDocumentFragment();
+	container.appendChild(fragment23);
+	container.innerHTML = `<div class="f23"></div>`;
 }

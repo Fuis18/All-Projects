@@ -1206,51 +1206,38 @@ const clickboton17 = () => {'use strict';
 	const cargarMasPublicaciones = entry => {'use strict';
 		if (entry[0].isIntersecting) cargarPublicaciones(5)
 	}
+	const crearPublicacion = (arr,num) => {
+		const documentFragment = document.createDocumentFragment();
+		for (let i = 0; i < num; i++) {
+			if (arr[contador] != undefined) {
+				const newPublicacion = createPublicationCode(arr[contador].nombre,arr[contador].contenido);
+				documentFragment.appendChild(newPublicacion);
+				contador++;
+				if (i == num-1) observer.observe(newPublicacion)
+			} else if (document.getElementById("noMore") == undefined) {
+				let noMore = document.createElement("H3");
+				noMore.id = "noMore";
+				noMore.textContent = "No hay más publicaciones";
+				documentFragment.appendChild(noMore);
+				publicaciones.appendChild(documentFragment);
+			}
+			else break;
+		}
+		publicaciones.appendChild(documentFragment);
+	}
 	const observer = new IntersectionObserver(cargarMasPublicaciones)
 	const cargarPublicaciones = async num => {'use strict';
 		try {
 			const request = await fetch("txt/f17.txt");
 			const contain = await request.json();
 			const arr = contain.content;
-			const documentFragment = document.createDocumentFragment();
-			for (let i = 0; i < num; i++) {
-				if (arr[contador] != undefined) {
-					const newPublicacion = createPublicationCode(arr[contador].nombre,arr[contador].contenido);
-					documentFragment.appendChild(newPublicacion);
-					contador++;
-					if (i == num-1) observer.observe(newPublicacion)
-				} else if (document.getElementById("noMore") == undefined) {
-					let noMore = document.createElement("H3");
-					noMore.id = "noMore";
-					noMore.textContent = "No hay más publicaciones";
-					documentFragment.appendChild(noMore);
-					publicaciones.appendChild(documentFragment);
-				}
-				else break;
-			}
-			publicaciones.appendChild(documentFragment);
+			crearPublicacion(arr,num);
 		}
 		catch(e) {
 			console.error(e);
-			const contain = filetxt; //archivo aparte de texto
+			const contain = filetxt; // Archivo aparte de texto
 			const arr = contain.content;
-			const documentFragment = document.createDocumentFragment();
-			for (let i = 0; i < num; i++) {
-				if (arr[contador] != undefined) {
-					const newPublicacion = createPublicationCode(arr[contador].nombre,arr[contador].contenido);
-					documentFragment.appendChild(newPublicacion);
-					contador++;
-					if (i == num-1) observer.observe(newPublicacion)
-				} else if (document.getElementById("noMore") == undefined) {
-					let noMore = document.createElement("H3");
-					noMore.id = "noMore";
-					noMore.textContent = "No hay más publicaciones";
-					documentFragment.appendChild(noMore);
-					publicaciones.appendChild(documentFragment);
-				}
-				else break;
-			}
-			publicaciones.appendChild(documentFragment);
+			crearPublicacion(arr,num);
 		}
 	}
 	cargarPublicaciones(10);

@@ -536,6 +536,7 @@ const clickboton4 = () => {'use strict';
 		button.addEventListener("click",()=>{
 			if (button.value == "DEL" || button.value == "AC" || button.value == "=") {
 				options(button.value);
+				quest = [];
 			}
 			else {
 				let info = "", j = 0;
@@ -552,7 +553,10 @@ const clickboton4 = () => {'use strict';
 		if (e.key == "Backspace" || e.key == "Enter") {
 			if (e.key == "Backspace" && e.ctrlKey == true) {
 				options("AC")
-			} else options(e.key);
+			} else {
+				options(e.key);
+				quest = [];
+			};
 		} else if (e.key == "0" || e.key == "1" || e.key == "2" || e.key == "3" || e.key == "4" || e.key == "5" || e.key == "6" ||
 			e.key == "7" || e.key == "8" || e.key == "9" || e.key == "/" || e.key == "*" || e.key == "-" || e.key == "+" ||
 			e.key == "." || e.key == "(" || e.key == ")" || e.key == "x") {

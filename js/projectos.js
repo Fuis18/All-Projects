@@ -208,8 +208,8 @@ const clickboton3 = () => {'use strict';
 			let cantidad = document.querySelector(".f3__amount-input").value;
 			let listado = document.querySelector(".f3__listado-input").checked;
 			let antes = document.querySelector(".f3__before-input").value;
+			let answer;
 			if (numberActive.className == "f3__numbers-input f3__button-active") {
-				let answer;
 				let luego = document.querySelector(".f3__before-input").value;
 				let ceros = document.querySelector(".f3__zeros-input").checked;
 				if (ceros) {
@@ -279,6 +279,7 @@ const clickboton4 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	const fragment4 = document.createDocumentFragment();
 	let quest = [];
+	let ans = 0;
 	container.appendChild(fragment4);
 	const separatOperators = array => {'use strict';
 		// Seprar en multiplicación y división, atraves de la suma y resta
@@ -297,7 +298,7 @@ const clickboton4 = () => {'use strict';
 				retornar[k] = temporal;
 			} else if (array[i] == "") {
 				console.log("Error: " + temporal);
-				retornar[k] = temporal;
+				// retornar[k] = temporal;
 			} else {
 				// Número
 				temporal.push(array[i]);
@@ -334,6 +335,8 @@ const clickboton4 = () => {'use strict';
 				} else if ((array[i][a] == "+" || array[i][a] == "-" || array[i][a] == "x" || array[i][a] == "/") &&
 					array[i].length == 1) {
 					var1 = array[i][a];
+				} else if (array[i][a] == "ANS") {
+					var1 = ans;
 				} else {
 					var1 = var1 * parseFloat(array[i][a]);
 				}
@@ -359,7 +362,7 @@ const clickboton4 = () => {'use strict';
 			quest = [];
 			document.querySelector(".f4__window-operation").textContent = "";
 			document.querySelector(".f4__window-answer").textContent = "0";
-		} else if (btn == "DEL") {
+		} else if (btn == "DEL" || btn == "Backspace") {
 			// Borrar
 			quest.pop();
 			let info = "", j = 0;
@@ -368,7 +371,7 @@ const clickboton4 = () => {'use strict';
 				j++;
 			}
 			document.querySelector(".f4__window-operation").textContent = info;
-		} else if (btn == "=" && quest.length > 0) {
+		} else if ((btn == "Enter" || btn == "=") && quest.length > 0) {
 			let arr = [], answer = [];
 			arr = quest;
 			// Juntar números
@@ -482,6 +485,7 @@ const clickboton4 = () => {'use strict';
 			answer = determine(answer);
 			// console.log("Answer:", answer);
 			document.querySelector(".f4__window-answer").textContent = answer;
+			ans = answer;
 			let div = document.createElement("div");
 			div.textContent = answer;
 			document.querySelector(".f4__history-div").appendChild(div);
@@ -521,6 +525,11 @@ const clickboton4 = () => {'use strict';
 			<button class="f4__button-n"   value="("  >(</button>
 			<button class="f4__button-n"   value=")"  >)</button>
 			<button class="f4__button-n"   value="="  >=</button>
+			<button class="f4__button-n"   value=" "  >√</button>
+			<button class="f4__button-n"   value=" "  >x²</button>
+			<button class="f4__button-n"   value=" "  >^</button>
+			<button class="f4__button-n"   value=" "  >Exp</button>
+			<button class="f4__button-n"   value="ANS">ANS</button>
 		</div>
 	</div>`;
 	document.querySelectorAll(".f4__buttons button").forEach((button) => {
@@ -538,6 +547,25 @@ const clickboton4 = () => {'use strict';
 				document.querySelector(".f4__window-operation").textContent = info;
 			}
 		})
+	});
+	document.addEventListener("keyup",(e)=>{
+		if (e.key == "Backspace" || e.key == "Enter") {
+			if (e.key == "Backspace" && e.ctrlKey == true) {
+				options("AC")
+			} else options(e.key);
+		} else if (e.key == "0" || e.key == "1" || e.key == "2" || e.key == "3" || e.key == "4" || e.key == "5" || e.key == "6" ||
+			e.key == "7" || e.key == "8" || e.key == "9" || e.key == "/" || e.key == "*" || e.key == "-" || e.key == "+" ||
+			e.key == "." || e.key == "(" || e.key == ")" || e.key == "x") {
+			let info = "", j = 0;
+			if (e.key == "*") {
+				quest.push("x");
+			} else quest.push(e.key);
+			for (let i = quest.length; i > 0; i--) {
+				info += quest[j];
+				j++;
+			}
+			document.querySelector(".f4__window-operation").textContent = info;
+		}
 	})
 }
 // Proyecto 5
@@ -2108,9 +2136,15 @@ const clickboton20 = () => {'use strict';
 	const canvas = document.querySelector('.f20__canvas');
 	const dif = canvas.getBoundingClientRect();
 	const ctx = canvas.getContext('2d');
-
 	let painting,color,linewidth,difX,difY;
 
+	const dibujar = (x1,y1,x2,y2) => {
+		ctx.strokeStyle = color;
+		ctx.lineWidth = linewidth;
+		ctx.moveTo(x1,y1);
+		ctx.lineTo(x2,y2);
+		ctx.stroke();
+	}
 	canvas.addEventListener('mousedown',(e)=>{
 		difX = e.clientX - dif.left;
 		difY = e.clientY - dif.top;
@@ -2130,54 +2164,460 @@ const clickboton20 = () => {'use strict';
 		ctx.closePath();
 		painting = false;
 	});
-	const dibujar = (x1,y1,x2,y2) => {
-		ctx.strokeStyle = color;
-		ctx.lineWidth = linewidth;
-		ctx.moveTo(x1,y1);
-		ctx.lineTo(x2,y2);
-		ctx.stroke();
-	}
-
+	document.querySelector(".desarrollo__div").addEventListener("mouseup",(e)=>{if (painting) painting = false});
 }
 // Proyecto21
 const clickboton21 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	const fragment21 = document.createDocumentFragment();
+	const seno = num => {
+		if (num % 180 == 0) {
+			return 0
+		} else {
+			num *= Math.PI/180;
+			let y = Math.sin(num);
+			return y;
+		}
+	}
+	const tang = num => {
+		if (num % 180 == 0) {
+			return 0
+		} else {
+			num *= Math.PI/180;
+			let y = Math.tan(num);
+			return y;
+		}
+	}
+	const rectas = () => {
+		// document
+		let div = document.createElement('div');
+		let submit = document.createElement("INPUT");
+		submit.type = "submit";
+		submit.addEventListener("click",()=>{
+		})
+		div.appendChild(submit);
+		return div;
+	}
+	const circulo = () => {
+		let div = document.createElement('div');
+		let inputRadius = document.createElement("INPUT");
+		let submit = document.createElement("INPUT");
+		inputRadius.type = "number";
+		inputRadius.placeholder = "Radio";
+		submit.type = "submit";
+		submit.addEventListener("click",()=>{
+			// pi * radio^2
+			let radio = inputRadius.value
+			if (radio != "") {
+				let answer = radio * radio * Math.PI;
+				let answerDiv = document.createElement("div");
+				answerDiv.textContent = `Radio: ${radio}, Área: ${answer}`;
+				document.querySelector(".f21__develop div").appendChild(answerDiv);
+			}
+		})
+		div.appendChild(inputRadius);
+		div.appendChild(submit);
+		return div;
+	}
+	const ovalo = () => {
+		let div = document.createElement('div');
+		let inputMinorRadius = document.createElement("INPUT");
+		let inputManjorRadius = document.createElement("INPUT");
+		let submit = document.createElement("INPUT");
+		inputMinorRadius.type = "number";
+		inputMinorRadius.placeholder = "Radio menor";
+		inputManjorRadius.type = "number";
+		inputManjorRadius.placeholder = "Radio mayor";
+		submit.type = "submit";
+		submit.addEventListener("click",()=>{
+			// pi * radio^2
+			let radioMenor = inputMinorRadius.value;
+			let radioMayor = inputManjorRadius.value;
+			if (radioMenor != "" && radioMayor != "") {
+				let answer = Math.PI * radioMenor * radioMayor;
+				let answerDiv = document.createElement("div");
+				answerDiv.textContent = `Radio menor: ${radioMenor} Radio mayor: ${radioMayor}, Área: ${answer}`;
+				document.querySelector(".f21__develop div").appendChild(answerDiv);
+			}
+		})
+		div.appendChild(inputMinorRadius);
+		div.appendChild(inputManjorRadius);
+		div.appendChild(submit);
+		return div;
+	}
+	const sectorCircular = () => {
+		let div = document.createElement('div');
+		let inputAngle = document.createElement("INPUT");
+		let inputRadius = document.createElement("INPUT");
+		let inputLength = document.createElement("INPUT");
+		let submit = document.createElement("INPUT");
+		inputAngle.type = "number";
+		inputAngle.placeholder = "Ángulo Sexagesimal";
+		inputRadius.type = "number";
+		inputRadius.placeholder = "Radio";
+		inputLength.type = "number";
+		inputLength.placeholder = "Longitud de arco";
+		submit.type = "submit";
+		submit.addEventListener("click",()=>{
+			// (pi*angle*r^2)/360 || (l*r)/2 || l^2/2*angle
+			// pi * radio^2 * a/360
+			let angulo = inputAngle.value;
+			let radio = inputRadius.value;
+			let longitudArco = inputLength.value;
+			if (!(angulo != "" && radio != "" && longitudArco != "") && 
+				((angulo != "" && radio != "") || (radio != "" && longitudArco != "") || (longitudArco != "" && angulo != ""))) {
+				angulo = parseFloat(angulo);
+				if (angulo >= 360) {
+					let multipo = parseInt(angulo / 360);
+					angulo = angulo - (multipo * 360);
+				}
+				let answerDiv = document.createElement("div");
+				if ((!isNaN(angulo) || angulo == 0) && radio != "") {
+					let answer = (angulo * radio * radio * Math.PI) / 360;
+					answerDiv.textContent = `Ángulo: ${angulo}, Radio: ${radio}, Área: ${answer}`;
+				} else if (radio != "" && longitudArco != "") {
+					let answer = (radio * longitudArco) / 2;
+					answerDiv.textContent = `Longitud de Árco: ${longitudArco}, Radio: ${radio}, Área: ${answer}`;
+				} else if (longitudArco != "" && (angulo != "" || angulo == 0)) {
+					let answer = (longitudArco * longitudArco) / (2 * angulo);
+					answerDiv.textContent = `Longitud de Árco: ${longitudArco}, Ángulo: ${angulo}, Área: ${answer}`;
+				}
+				document.querySelector(".f21__develop div").appendChild(answerDiv);
+			}
+		})
+		div.appendChild(inputAngle);
+		div.appendChild(inputRadius);
+		div.appendChild(inputLength);
+		div.appendChild(submit);
+		return div;
+	}
+	const triangulo = () => {
+		let div = document.createElement('div');
+		let inputBase = document.createElement("INPUT");
+		let inputHeight = document.createElement("INPUT");
+		let inputAngle = document.createElement("INPUT");
+		let submit = document.createElement("INPUT");
+		inputBase.setAttribute("type","number");
+		inputBase.setAttribute("placeholder","Primer lado");
+		inputHeight.setAttribute("type","number");
+		inputHeight.setAttribute("placeholder","Segundo lado");
+		inputAngle.setAttribute("type","number");
+		inputAngle.setAttribute("placeholder","Ángulo del tercer lado (90°)");
+		submit.setAttribute("type","submit");
+		submit.addEventListener("click",()=>{
+			// Base * height / 2 if angle is 90
+			//1/2 * Base * height * sen(angle)
+			let answerDiv = document.createElement("div");
+			let base = inputBase.value;
+			let height = inputHeight.value;
+			let angulo = inputAngle.value;
+			if (base != "" && height != "" && angulo == "") {
+				let answer = base * height * seno(90) / 2;
+				answerDiv.textContent = `Primer lado: ${base}, Segundo lado: ${height}, Ángulo: ${90}, Área: ${answer}`;
+			} else if (base != "" && height != "" && angulo != "") {
+				let answer = base * height * seno(angulo) / 2;
+				answerDiv.textContent = `Primer lado: ${base}, Segundo lado: ${height}, Ángulo: ${angulo}, Área: ${answer}`;
+			}
+			document.querySelector(".f21__develop div").appendChild(answerDiv);
+		})
+		div.appendChild(inputBase);
+		div.appendChild(inputHeight);
+		div.appendChild(inputAngle);
+		div.appendChild(submit);
+		return div;
+	}
+	const segmentoCircular = () => {
+		let div = document.createElement('div');
+		let inputRadius = document.createElement("INPUT");
+		let inputAngle = document.createElement("INPUT");
+		let submit = document.createElement("INPUT");
+		inputAngle.setAttribute("type","number");
+		inputRadius.setAttribute("type","number");
+		inputRadius.setAttribute("placeholder","Radio");
+		inputAngle.setAttribute("placeholder","Angulo Sexagesimal");
+		submit.setAttribute("type","submit");
+		submit.addEventListener("click",()=>{
+			// A = AreaSectorCircular - ATriangulo
+			// pi * radio^2 * a/360 - lenght * height / 2
+			let answerDiv = document.createElement("div");
+			let radio = inputRadius.value;
+			let angulo = inputAngle.value;
+			if (radio != "" && angulo != "") {
+				angulo = parseFloat(angulo);
+				if (angulo >= 360) {
+					let multipo = parseInt(angulo / 360);
+					angulo = angulo - (multipo * 360);
+				}
+				let answer = ((Math.PI * radio * radio * angulo) / 360) - (radio * radio * seno(angulo) / 2);
+				answerDiv.textContent = `Ángulo: ${angulo}, Radio: ${radio}, Área: ${answer}`;
+			}
+			document.querySelector(".f21__develop div").appendChild(answerDiv);
+		})
+		div.appendChild(inputRadius);
+		div.appendChild(inputAngle);
+		div.appendChild(submit);
+		return div;
+	}
+	const trapecioCircular = () => {
+		let div = document.createElement('div');
+		let inputAngle = document.createElement("INPUT");
+		let inputMinorRadius = document.createElement("INPUT");
+		let inputManjorRadius = document.createElement("INPUT");
+		let submit = document.createElement("INPUT");
+		inputAngle.setAttribute("type","number");
+		inputAngle.setAttribute("placeholder","Ángulo");
+		inputMinorRadius.setAttribute("type","number");
+		inputMinorRadius.setAttribute("placeholder","Radio menor");
+		inputManjorRadius.setAttribute("type","number");
+		inputManjorRadius.setAttribute("placeholder","Radio mayor");
+		submit.setAttribute("type","submit");
+		submit.addEventListener("click",()=>{
+			// (pi*(R^2-r^2)*a)/360
+			let answerDiv = document.createElement("div");
+			let angulo = inputAngle.value;
+			let radioMenor = inputMinorRadius.value;
+			let radioMayor = inputManjorRadius.value;
+			if (angulo != "" && radioMenor != "" && radioMayor != "" && radioMenor < radioMayor) {
+				angulo = parseFloat(angulo);
+				if (angulo >= 360) {
+					let multipo = parseInt(angulo / 360);
+					angulo = angulo - (multipo * 360);
+				}
+				let answer = Math.PI * ((radioMayor ** 2) - (radioMenor ** 2)) * angulo / 360;
+				answerDiv.textContent = `Ángulo: ${angulo}, Radio Mayor: ${radioMayor}, Radio Menor: ${radioMenor}, Área: ${answer}`;
+			}
+			document.querySelector(".f21__develop div").appendChild(answerDiv);
+		})
+		div.appendChild(inputAngle);
+		div.appendChild(inputMinorRadius);
+		div.appendChild(inputManjorRadius);
+		div.appendChild(submit);
+		return div;
+	}
+	const cuadrilatero = () => {
+		// document
+		let div = document.createElement('div');
+		// let canvas = document.createElement('canvas');
+		let inputAngleOne = document.createElement("INPUT");
+		let inputAngleTwo = document.createElement("INPUT");
+		// let inputLengthOne = document.createElement("INPUT");
+		let inputLengthTwo = document.createElement("INPUT");
+		let inputLengthThree = document.createElement("INPUT");
+		let submit = document.createElement("INPUT");
+		// canvas.id = "f21__canvas";
+		inputAngleOne.type = "number";
+		inputAngleOne.placeholder = "Angulo inferior izquierdo (90°)";
+		inputAngleTwo.type = "number";
+		inputAngleTwo.placeholder = "Angulo superior derecho (90°)";
+		// inputLengthOne.type = "number";
+		// inputLengthOne.placeholder = "Base superior";
+		inputLengthTwo.type = "number";
+		inputLengthTwo.placeholder = "Base";
+		inputLengthThree.type = "number";
+		inputLengthThree.placeholder = "Altura";
+		submit.type = "submit";
+		submit.addEventListener("click",()=>{
+			let answerDiv = document.createElement("div");
+			if (true) {
+				let answer = (inputLengthOne + inputLengthTwo) / 2;
+				answerDiv.textContent = ` ${answer}, : ${answer}, Área: ${answer}`;
+			}
+			document.querySelector(".f21__develop div").appendChild(answerDiv);
+		})
+		// div.appendChild(canvas);
+		div.appendChild(inputAngleOne);
+		div.appendChild(inputAngleTwo);
+		// div.appendChild(inputLengthOne);
+		div.appendChild(inputLengthTwo);
+		div.appendChild(inputLengthThree);
+		div.appendChild(submit);
+		return div;
+	}
+	const poligonoRegular = () => {
+		// numero de lados * longitud de lado * apotema
+		let div = document.createElement('div');
+		let inputLength = document.createElement('input');
+		let inputTimes = document.createElement('input');
+		let submit = document.createElement("INPUT");
+		inputLength.setAttribute("type","number");
+		inputLength.setAttribute("placeholder","Longitud de lado");
+		inputTimes.setAttribute("type","number");
+		inputTimes.setAttribute("placeholder","Número de lados");
+		submit.setAttribute("type","submit");
+		submit.addEventListener("click",()=>{
+			let answerDiv = document.createElement("div");
+			let longitudLado = inputLength.value;
+			let numeroLados = inputTimes.value;
+			if (longitudLado != "" && numeroLados != "") {
+				let angulo = 360 / (2 * numeroLados);
+				let apotema = longitudLado / (2 * tang(angulo));
+				let answer = longitudLado * numeroLados * apotema / 2;
+				answerDiv.textContent = `Longitud de lado: ${longitudLado}, Número de lados: ${numeroLados}, Área: ${answer}`;
+			}
+			document.querySelector(".f21__develop div").appendChild(answerDiv);
+		})
+		div.appendChild(inputLength)
+		div.appendChild(inputTimes)
+		div.appendChild(submit);
+		return div;
+	}
+	const integral = () => {
+		// document
+		let div = document.createElement('div');
+		let submit = document.createElement("INPUT");
+		submit.setAttribute("type","submit");
+		submit.addEventListener("click",()=>{
+			let answerDiv = document.createElement("div");
+			if (true) {
+				let answer = (1);
+				answerDiv.textContent = `: ${answer}, : ${answer}, Área: ${answer}`;
+			}
+			document.querySelector(".f21__develop div").appendChild(answerDiv);
+		})
+		div.appendChild(submit);
+		return div;
+	}
+	const esfera = () => {
+		// document
+		let div = document.createElement('div');
+		let submit = document.createElement("INPUT");
+		submit.setAttribute("type","submit");
+		submit.addEventListener("click",()=>{
+			let answerDiv = document.createElement("div");
+			if (true) {}
+			document.querySelector(".f21__develop div").appendChild(answerDiv);
+		})
+		div.appendChild(submit);
+		return div;
+	}
+	const cilindro = () => {
+		// document
+		let div = document.createElement('div');
+		let submit = document.createElement("INPUT");
+		submit.setAttribute("type","submit");
+		submit.addEventListener("click",()=>{})
+		div.appendChild(submit);
+		return div;
+	}
+	const cono = () => {
+		// document
+		let div = document.createElement('div');
+		let submit = document.createElement("INPUT");
+		submit.setAttribute("type","submit");
+		submit.addEventListener("click",()=>{})
+		div.appendChild(submit);
+		return div;
+	}
+	const integralTriple = () => {
+		// document
+		let div = document.createElement('div');
+		let submit = document.createElement("INPUT");
+		submit.setAttribute("type","submit");
+		submit.addEventListener("click",()=>{})
+		div.appendChild(submit);
+		return div;
+	}
 	container.appendChild(fragment21);
 	container.innerHTML = `<div class="f21">
 		<div class="f21__container">
-			<!-- <div class="f21__Segmentos-Content">
+			<div class="f21__Segmentos-Content">
 				<h3>Segmentos</h3>
-			</div>-->
+				<div class="f21__Segmentos-buttons">
+					<input type="button" value="Rectas">
+				</div>
+			</div>
 			<div class="f21__Areas-Content">
 				<h3>Áreas</h3>
 				<div class="f21__Areas-buttons">
-					<button>Círculo</button>
-					<button>Sector Cirular</button>
-					<button>Segmento Cirular</button>
-					<button>Trapecio Cirular</button>
-					<button>Triángulo</button>
-					<button>Cuadrilatero</button>
-					<button>Integral</button>
+					<input type="button" value="Circulo">
+					<input type="button" value="Ovalo">
+					<input type="button" value="Sector Circular">
+					<input type="button" value="Triangulo">
+					<input type="button" value="Segmento Circular">
+					<input type="button" value="Trapecio Circular">
+					<input type="button" value="Cuadrilatero">
+					<input type="button" value="Poligono Regular">
+					<input type="button" value="Integral">
 				</div>
 			</div>
-			<!-- <div class="f21__volumenes-Content">
+			<div class="f21__volumenes-Content">
 				<h3>Volúmenes</h3>
 				<div class="f21__volumenes-buttons">
-					<button>Esfera</button>
-					<button>Cilindro</button>
-					<button>Cono</button>
-					<button>Trapecio Cirular</button>
-					<button>Triángulo</button>
-					<button>Cuadrilatero</button>
-					<button>Integral</button>
+					<input type="button" value="Esfera">
+					<input type="button" value="Cilindro">
+					<input type="button" value="Cono">
+					<input type="button" value="Cubo">
+					<input type="button" value="Tubo">
+					<input type="button" value="Piramides">
+					<input type="button" value="Tronco de piramide">
+					<input type="button" value="Dona">
+					<input type="button" value="Prisma regular">
+					<input type="button" value="Integral Triple">
 				</div>
-			</div>-->
+			</div>
 		</div>
 		<div class="f21__develop">
 			<h3>Desarrollo</h3>
 		</divs>
 	</div>`;
+	let inputs = document.querySelectorAll(".f21__container input");
+	inputs.forEach((input)=>{
+		input.addEventListener("click",(e)=>{
+			let add;
+			if (document.querySelector(".f21__develop").childElementCount == 1) {
+				switch (e.target.value) {
+					case "Rectas":
+						add = rectas();
+						break;
+					case "Circulo":
+						add = circulo();
+						break;
+					case "Ovalo":
+						add = ovalo();
+						break;
+					case "Sector Circular":
+						add = sectorCircular();
+						break;
+					case "Triangulo":
+						add = triangulo();
+						break;
+					case "Segmento Circular":
+						add = segmentoCircular();
+						break;
+					case "Trapecio Circular":
+						add = trapecioCircular();
+						break;
+					case "Cuadrilatero":
+						add = cuadrilatero();
+						break;
+					case "Poligono Regular":
+						add = poligonoRegular();
+						break;
+					case "Integral":
+						add = integral();
+						break;
+					case "Esfera":
+						add = esfera();
+						break;
+					case "Cilindro":
+						add = cilindro();
+						break;
+					case "Cono":
+						add = cono();
+						break;
+					case "Integral Triple":
+						add = integralTriple();
+						break;
+					default:
+						alert("No es ninguna de las anteriores");
+						console.log(e.target.value);
+				}
+				document.querySelector(".f21__develop").appendChild(add);
+			} else {
+				document.querySelector(".f21__develop").removeChild(document.querySelector(".f21__develop div"));
+			}
+		})
+	})
 }
 // Proyecto 22
 const clickboton22 = () => {'use strict';

@@ -280,6 +280,7 @@ const clickboton4 = () => {'use strict';
 	const fragment4 = document.createDocumentFragment();
 	let quest = [];
 	let ans = 0;
+	let history = 0;
 	container.appendChild(fragment4);
 	const separatOperators = array => {'use strict';
 		// Seprar en multiplicación y división, atraves de la suma y resta
@@ -371,9 +372,15 @@ const clickboton4 = () => {'use strict';
 				j++;
 			}
 			document.querySelector(".f4__window-operation").textContent = info;
-		} else if ((btn == "Enter" || btn == "=") && quest.length > 0) {
+		} else if (btn == "Enter" || btn == "=") {
 			let arr = [], answer = [];
+			if (quest.length == 0) {
+				arr = history;
+			} else if (quest.length > 0) {
+			history = quest;
 			arr = quest;
+			quest = [];
+			}
 			// Juntar números
 			let operation = [], text = "", j = 0, temporal = [];
 			for (let i = 0; i < arr.length; i++) {
@@ -466,11 +473,14 @@ const clickboton4 = () => {'use strict';
 			for (let n = 0; n < arr.length; n++) {
 				// Separar en Multiplicación y División
 				operation = separatOperators(arr[n]);
+				// console.log("Answer:", operation);
 				// Multiplicar y Divividir con signos
 				temporal = operateArrays(operation);
+				// console.log("Answer:", temporal);
 				operation = [];
 				// Sumar y Restar
 				var1 = determine(temporal);
+				// console.log("Answer:", var1);
 				arrEnding.push(var1);
 				// console.log("Temporal: ", temporal);
 			}
@@ -484,11 +494,15 @@ const clickboton4 = () => {'use strict';
 			// Sumar y Restar
 			answer = determine(answer);
 			// console.log("Answer:", answer);
+			if (answer == 0 && history == 0) {
+				// Error
+			} else {
 			document.querySelector(".f4__window-answer").textContent = answer;
 			ans = answer;
 			let div = document.createElement("div");
 			div.textContent = answer;
 			document.querySelector(".f4__history-div").appendChild(div);
+			}
 		}
 	}
 	container.innerHTML = `
@@ -536,14 +550,22 @@ const clickboton4 = () => {'use strict';
 		button.addEventListener("click",()=>{
 			if (button.value == "DEL" || button.value == "AC" || button.value == "=") {
 				options(button.value);
-				quest = [];
 			}
 			else {
 				let info = "", j = 0;
-				quest.push(button.value);
-				for (let i = quest.length; i > 0; i--) {
-					info += quest[j];
-					j++;
+				if (ans && !quest.length && (button.value == "+" || button.value == "-" || button.value == "x" || button.value == "/")) {
+					quest.push("ANS");
+					quest.push(button.value);
+					for (let i = quest.length; i > 0; i--) {
+						info += quest[j];
+						j++;
+					}
+				} else {
+					quest.push(button.value);
+					for (let i = quest.length; i > 0; i--) {
+						info += quest[j];
+						j++;
+					}
 				}
 				document.querySelector(".f4__window-operation").textContent = info;
 			}
@@ -552,21 +574,31 @@ const clickboton4 = () => {'use strict';
 	document.addEventListener("keyup",(e)=>{
 		if (e.key == "Backspace" || e.key == "Enter") {
 			if (e.key == "Backspace" && e.ctrlKey == true) {
-				options("AC")
+				options("AC");
 			} else {
 				options(e.key);
-				quest = [];
 			};
 		} else if (e.key == "0" || e.key == "1" || e.key == "2" || e.key == "3" || e.key == "4" || e.key == "5" || e.key == "6" ||
 			e.key == "7" || e.key == "8" || e.key == "9" || e.key == "/" || e.key == "*" || e.key == "-" || e.key == "+" ||
 			e.key == "." || e.key == "(" || e.key == ")" || e.key == "x") {
 			let info = "", j = 0;
-			if (e.key == "*") {
-				quest.push("x");
-			} else quest.push(e.key);
-			for (let i = quest.length; i > 0; i--) {
-				info += quest[j];
-				j++;
+			if (ans && !quest.length && (e.key == "/" || e.key == "*" || e.key == "-" || e.key == "+")) {
+				quest.push("ANS");
+				if (e.key == "*") {
+					quest.push("x");
+				} else quest.push(e.key);
+				for (let i = quest.length; i > 0; i--) {
+					info += quest[j];
+					j++;
+				}
+			} else {
+				if (e.key == "*") {
+					quest.push("x");
+				} else quest.push(e.key);
+				for (let i = quest.length; i > 0; i--) {
+					info += quest[j];
+					j++;
+				}
 			}
 			document.querySelector(".f4__window-operation").textContent = info;
 		}

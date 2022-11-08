@@ -274,11 +274,11 @@ const clickboton3 = () => {'use strict';
 }
 // Proyecto 4
 const clickboton4 = () => {'use strict';
-	console.log("2-(3-(3-(3-(3))))");
-	console.log("54−(6.5⋅2−(1−8)+(5x8)−3⋅6+5x4)+5");
+	console.log("2-(3-(3-(3-(3)))) "," 54−(6.5⋅2−(1−8)+(5x8)−3⋅6+5x4)+5");
 	let container = document.querySelector(".desarrollo__div");
 	const fragment4 = document.createDocumentFragment();
 	let quest = [];
+	let ac = false;
 	let ans = 0;
 	let history = 0;
 	container.appendChild(fragment4);
@@ -347,6 +347,7 @@ const clickboton4 = () => {'use strict';
 		return retornar
 	}
 	const determine = array => {'use strict';
+		// Sumar y Restar
 		let var1 = 0, retornar = [];
 		for (let i = 0; i <= array.length - 1; i++) {
 			if (array.length == 1) {
@@ -357,10 +358,45 @@ const clickboton4 = () => {'use strict';
 		}
 		return var1;
 	}
+	const buttonValue = (btn,ctrl) => {'use strict';
+		// detectar el valor del boton o key
+		if (btn == "Backspace" || btn == "Enter" || btn == "DEL" || btn == "AC" || btn == "=") {
+			if (btn == "Backspace" && ctrl == true) {
+				options("AC");
+			} else {
+				options(btn);
+			}
+		} else if (btn == "0" || btn == "1" || btn == "2" || btn == "3" || btn == "4" || btn == "5" || btn == "6" || btn == "7" ||
+			btn == "8" || btn == "9" || btn == "/" || btn == "*" || btn == "-" || btn == "+" || btn == "." || btn == "(" ||
+			btn == ")" || btn == "x" || btn == "ANS") {
+			let info = "", j = 0;
+			if (ans && !quest.length && !ac && (btn == "/" || btn == "*" || btn == "-" || btn == "+")) {
+				quest.push("ANS");
+				if (btn == "*") {
+					quest.push("x");
+				} else quest.push(btn);
+				for (let i = quest.length; i > 0; i--) {
+					info += quest[j];
+					j++;
+				}
+			} else {
+				ac = false;
+				if (btn == "*") {
+					quest.push("x");
+				} else quest.push(btn);
+				for (let i = quest.length; i > 0; i--) {
+					info += quest[j];
+					j++;
+				}
+			}
+			document.querySelector(".f4__window-operation").textContent = info;
+		}
+	}
 	const options = btn => {'use strict';
 		if (btn == "AC") {
 			// Borrar Todo
 			quest = [];
+			ac = true;
 			document.querySelector(".f4__window-operation").textContent = "";
 			document.querySelector(".f4__window-answer").textContent = "0";
 		} else if (btn == "DEL" || btn == "Backspace") {
@@ -373,7 +409,9 @@ const clickboton4 = () => {'use strict';
 			}
 			document.querySelector(".f4__window-operation").textContent = info;
 		} else if (btn == "Enter" || btn == "=") {
+			// Operar
 			let arr = [], answer = [];
+			ac = false;
 			if (quest.length == 0) {
 				arr = history;
 			} else if (quest.length > 0) {
@@ -548,60 +586,11 @@ const clickboton4 = () => {'use strict';
 	</div>`;
 	document.querySelectorAll(".f4__buttons button").forEach((button) => {
 		button.addEventListener("click",()=>{
-			if (button.value == "DEL" || button.value == "AC" || button.value == "=") {
-				options(button.value);
-			}
-			else {
-				let info = "", j = 0;
-				if (ans && !quest.length && (button.value == "+" || button.value == "-" || button.value == "x" || button.value == "/")) {
-					quest.push("ANS");
-					quest.push(button.value);
-					for (let i = quest.length; i > 0; i--) {
-						info += quest[j];
-						j++;
-					}
-				} else {
-					quest.push(button.value);
-					for (let i = quest.length; i > 0; i--) {
-						info += quest[j];
-						j++;
-					}
-				}
-				document.querySelector(".f4__window-operation").textContent = info;
-			}
+			buttonValue(button.value);
 		})
 	});
 	document.addEventListener("keyup",(e)=>{
-		if (e.key == "Backspace" || e.key == "Enter") {
-			if (e.key == "Backspace" && e.ctrlKey == true) {
-				options("AC");
-			} else {
-				options(e.key);
-			};
-		} else if (e.key == "0" || e.key == "1" || e.key == "2" || e.key == "3" || e.key == "4" || e.key == "5" || e.key == "6" ||
-			e.key == "7" || e.key == "8" || e.key == "9" || e.key == "/" || e.key == "*" || e.key == "-" || e.key == "+" ||
-			e.key == "." || e.key == "(" || e.key == ")" || e.key == "x") {
-			let info = "", j = 0;
-			if (ans && !quest.length && (e.key == "/" || e.key == "*" || e.key == "-" || e.key == "+")) {
-				quest.push("ANS");
-				if (e.key == "*") {
-					quest.push("x");
-				} else quest.push(e.key);
-				for (let i = quest.length; i > 0; i--) {
-					info += quest[j];
-					j++;
-				}
-			} else {
-				if (e.key == "*") {
-					quest.push("x");
-				} else quest.push(e.key);
-				for (let i = quest.length; i > 0; i--) {
-					info += quest[j];
-					j++;
-				}
-			}
-			document.querySelector(".f4__window-operation").textContent = info;
-		}
+		buttonValue(e.key,e.ctrlKey);
 	})
 }
 // Proyecto 5
@@ -855,7 +844,7 @@ const clickboton11 = () => {'use strict';
 		<div class="f11__mes">00</div>
 		<div class="f11__year">00</div>
 		<div>|</div>
-		<button class="f11__button">Stop</button>
+		<input type="button" class="f11__button" value="Stop">
 	</div>`
 	const addZeros = n => {'use strict';
 		if (n.toString().length < 2) return "0".concat(n);
@@ -977,7 +966,7 @@ const clickboton14 = () => {'use strict';
 		readFile(document.querySelector(".f14__file").files);
 	});
 }
-// Poryecto 15
+// Proyecto 15
 const clickboton15 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	const desarrollo = type => {'use strict';
@@ -1118,7 +1107,7 @@ const clickboton15 = () => {'use strict';
 		desarrollo(type);
 	})
 }
-// Poryecto 16
+// Proyecto 16
 const clickboton16 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	container.innerHTML = `
@@ -1218,7 +1207,7 @@ const clickboton16 = () => {'use strict';
 		return container;
 	}
 }
-// Poryecto 17
+// Proyecto 17
 const clickboton17 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	container.innerHTML = `<div class="publicaciones"></div>`;
@@ -1298,7 +1287,7 @@ const clickboton17 = () => {'use strict';
 			crearPublicacion(arr,num);
 		}
 		catch(e) {
-			console.error(e);
+			console.log(e);
 			const contain = filetxt; // Archivo aparte de texto
 			const arr = contain.content;
 			crearPublicacion(arr,num);
@@ -1306,14 +1295,14 @@ const clickboton17 = () => {'use strict';
 	}
 	cargarPublicaciones(10);
 }
-// Poryecto 18
+// Proyecto 18
 const clickboton18 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	const fragment18 = document.createDocumentFragment();
 	container.innerHTML = `
 		<div class="div18">
 			<div>Número de IP:</div>
-			<input type="text" class="number18">
+			<input type="text" class="number18" placeholder="127.0.0.1">
 			<div>Cantidad Deseada:</div>
 			<input type="number" class="amount18">
 			<div class="result18"></div>
@@ -1327,6 +1316,7 @@ const clickboton18 = () => {'use strict';
 		const node = document.createElement("div");
 		for (let i = 0; i < amount; i++) {
 			let number = document.querySelector(".number18").value;
+			if (number == "") number = "127.0.0.1";
 			let result = prompt("Dime tu URL:");
 			let space = String.fromCharCode(160) + '\xa0' + '\xa0' + '\xa0' + '\xa0' + '\xa0' + '\xa0';
 			let p0 = document.createElement("div");
@@ -1353,7 +1343,7 @@ const clickboton18 = () => {'use strict';
 		container.appendChild(fragment18);
 	})
 }
-// Poryecto 19
+// Proyecto 19
 const clickboton19 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	const fragment19 = document.createDocumentFragment();
@@ -2202,7 +2192,7 @@ const clickboton20 = () => {'use strict';
 	});
 	document.querySelector(".desarrollo__div").addEventListener("mouseup",(e)=>{if (painting) painting = false});
 }
-// Proyecto21
+// Proyecto 21
 const clickboton21 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	const fragment21 = document.createDocumentFragment();
@@ -2594,7 +2584,10 @@ const clickboton21 = () => {'use strict';
 		</div>
 		<div class="f21__develop">
 			<h3>Desarrollo</h3>
-		</divs>
+		</div>
+		<div class="f21__history">
+			<h3>History</h3>
+		</div>
 	</div>`;
 	let inputs = document.querySelectorAll(".f21__container input");
 	inputs.forEach((input)=>{

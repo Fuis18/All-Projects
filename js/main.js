@@ -2,7 +2,7 @@
 // Variables
 let form = document.querySelector(".form");
 let fragment = document.createDocumentFragment();
-let veces = 21;
+let veces = 22;
 // Funciones
 // Contrucción de cada boton para los proyectos
 const buildkey = (i) => {'use strict';
@@ -11,7 +11,7 @@ const buildkey = (i) => {'use strict';
 	input.classList.add("input-" + i);
 	input.setAttribute("type","button");
 	input.setAttribute("value",buildH3(i));
-	input.addEventListener("click",() => {
+	input.addEventListener("mousedown",(e) => {
 		if (document.querySelector(".desarrollo__div").hasChildNodes() == false) {
 			if (i == 1)  clickboton1();
 			if (i == 2)  clickboton2();
@@ -34,6 +34,7 @@ const buildkey = (i) => {'use strict';
 			if (i == 19) clickboton19();
 			if (i == 20) clickboton20();
 			if (i == 21) clickboton21();
+			if (i == 22) clickboton22();
 		} else remove();
 	})
 // input.setAttribute("onclick",`javascript:
@@ -63,6 +64,7 @@ const buildH3 = (i) => {'use strict';
 	if (i == 19) return "Eficiencia lectora";
 	if (i == 20) return "Web Paint";
 	if (i == 21) return "Calculadora de figuras";
+	if (i == 22) return "Horario";
 }
 const remove = () => {'use strict';
 	let a = document.createElement("H2");

@@ -19,7 +19,7 @@ const clickboton1 = () => {'use strict';
 		if (document.querySelector(".f1__input1-down").value != '') num3 = document.querySelector(".f1__input1-down").value;
 		let res = (num1 * num2) / num3;
 		document.querySelector(".result1").textContent = "Resultado: " + res;
-	})
+	});
 }
 // Proyecto 2
 const clickboton2 = () => {'use strict';
@@ -64,7 +64,7 @@ const clickboton2 = () => {'use strict';
 			document.querySelector(".f2__zeroValue-input").classList.replace("f2__button-active","f2__button-inactive");
 			document.querySelector(".f2__unknownValue").classList.replace("f2__block","f2__none");
 		}
-	})
+	});
 	const calculated = num => {'use strict';
 		let arr = [];
 		// Divisivilidad
@@ -75,40 +75,30 @@ const clickboton2 = () => {'use strict';
 		}
 		// Reducir
 		for (let i = arr.length; i > 0; i--) {
-			if (arr[i] == 4 || arr[i] == 9 || arr[i] == 16 || arr[i] == 25 || arr[i] == 36 || arr[i] == 49 || arr[i] == 64 ||
-				arr[i] == 81 || arr[i] == 100 || arr[i] == 121 || arr[i] == 144 || arr[i] == 169 || arr[i] == 196 ||
-				arr[i] == 225 || arr[i] == 256 || arr[i] == 289 || arr[i] == 324 || arr[i] == 361 || arr[i] == 400 ||
-				arr[i] == 441 || arr[i] == 484 || arr[i] == 529 || arr[i] == 576 || arr[i] == 625 || arr[i] == 676 ||
-				arr[i] == 729 || arr[i] == 784 || arr[i] == 841 || arr[i] == 900) {
+			if (arr[i] == 4   || arr[i] == 9   || arr[i] == 16  || arr[i] == 25  || arr[i] == 36  || arr[i] == 49  || arr[i] == 64  || arr[i] == 81  || arr[i] == 100 || arr[i] == 121 ||
+				arr[i] == 144 || arr[i] == 169 || arr[i] == 196 || arr[i] == 225 || arr[i] == 256 || arr[i] == 289 || arr[i] == 324 || arr[i] == 361 || arr[i] == 400 || arr[i] == 441 ||
+				arr[i] == 484 || arr[i] == 529 || arr[i] == 576 || arr[i] == 625 || arr[i] == 676 || arr[i] == 729 || arr[i] == 784 || arr[i] == 841 || arr[i] == 900 || arr[i] == 961) {
 				let valor1 = Math.sqrt(arr[i]);
 				let valor2 = num / arr[i];
 				return [valor1,valor2];
 				break;
 			}
 		}
-		num = Math.sqrt(num)
-		return num;
+		return Math.sqrt(num);
 	}
 	document.querySelector(".f2__submit-input").addEventListener("click",()=>{
 		let a = 1, b = 1, c = 0;
-		if (document.querySelector(".f2__firstValue-input").value !== '') {
-			a = parseInt(document.querySelector(".f2__firstValue-input").value);
-		}
-		if (document.querySelector(".f2__secondValue-input").value !== '') {
-			b = parseInt(document.querySelector(".f2__secondValue-input").value);
-		}
-		if (document.querySelector(".f2__thirdValue-input").value !== '') {
-			c = parseInt(document.querySelector(".f2__thirdValue-input").value);
-		}
+		if (document.querySelector(".f2__firstValue-input").value !== '') a = parseInt(document.querySelector(".f2__firstValue-input").value);
+		if (document.querySelector(".f2__secondValue-input").value !== '') b = parseInt(document.querySelector(".f2__secondValue-input").value);
+		if (document.querySelector(".f2__thirdValue-input").value !== '') c = parseInt(document.querySelector(".f2__thirdValue-input").value);
 		if (document.querySelector(".f2__button-inactive")) {
 			// ( -b +/- ^/(b * b - 4 * a * c) ) / 2 * a
 			let oneValue, twoValue, threeValue, preAnswer;
 			let content = document.createElement("p");
 			oneValue = b * b;
-			twoValue = 4 * a * c;
-			threeValue = oneValue - twoValue; 
+			twoValue = 4 * a * c; 
 			threeValue = oneValue - twoValue;
-			preAnswer = Math.sqrt(threeValue)
+			preAnswer = Math.sqrt(threeValue);
 			if (isNaN(preAnswer)) {
 				if (Math.sign(threeValue) == -1) {
 					// Raiz de menos uno o i
@@ -149,7 +139,7 @@ const clickboton2 = () => {'use strict';
 			let answerZero = answerOne + answerTwo + c;
 			alert("Respuesta: " + answerZero);
 		}
-	})
+	});
 }
 // Proyecto 3
 const clickboton3 = () => {'use strict';
@@ -200,7 +190,7 @@ const clickboton3 = () => {'use strict';
 			document.querySelector(".f3__zeros").classList.replace("f3__block","f3__none");
 			numberActive.classList.replace("f3__button-active","f3__button-inactive");
 		}
-	})
+	});
 	document.querySelector(".f3__amount-input").addEventListener("keyup", validarCantidad);
 	document.querySelector(".f3__amount-input").addEventListener("blur", validarCantidad);
 	document.querySelector(".f3__submit").addEventListener("click",()=> {'use strict';
@@ -216,7 +206,7 @@ const clickboton3 = () => {'use strict';
 					for (let i = 0; i <= cantidad; i++) {
 						let div = document.createElement("DIV");
 						if (listado) div.classList.add("f3__div-block");
-						else div.classList.add("f3__div-inline")
+						else div.classList.add("f3__div-inline");
 						let i9_i100 = i > 9 && i < 100;
 						let i99_i1000 = i > 99 && i < 1000;
 						let a99_a1000 = cantidad > 99 && cantidad < 1000;
@@ -249,8 +239,31 @@ const clickboton3 = () => {'use strict';
 					for (let i = 0; i <= cantidad; i++) {
 						let div = document.createElement("DIV");
 						if (listado) div.classList.add("f3__div-block");
-						else div.classList.add("f3__div-inline")
-						answer = antes + i + luego;
+						else div.classList.add("f3__div-inline");
+						let i9_i100 = i > 9 && i < 100;
+						let i99_i1000 = i > 99 && i < 1000;
+						let a99_a1000 = cantidad > 99 && cantidad < 1000;
+						let l999_l10000 = cantidad > 999 && cantidad < 10000;
+						let a9999_a100000 = cantidad > 9999 && cantidad < 100000;
+						let d0 = `${antes}&nbsp;${i}${luego}`;
+						let d00 = `${antes}&nbsp;&nbsp;${i}${luego}`;
+						let d000 = `${antes}&nbsp;&nbsp;&nbsp;${i}${luego}`;
+						// 00 - 99
+						if (i < 10 && cantidad < 100) answer = d0;
+						// 000 - 999
+						else if (i < 10 && a99_a1000) answer = d00;
+						else if (i9_i100 && a99_a1000) answer = d0;
+						// 0000 - 9999
+						else if (i < 10 && l999_l10000) answer = d000;
+						else if (i9_i100 && l999_l10000) answer = d00;
+						else if (i99_i1000 && l999_l10000) answer = d0;
+						// 00000 - 99999
+						else if (i < 10 && a9999_a100000) answer = `${antes}0000${i}${luego}`;
+						else if (i9_i100 && a9999_a100000) answer = d000;
+						else if (i99_i1000 && a9999_a100000) answer = d00;
+						else if (i > 999 && i < 10000 && a9999_a100000) answer = d0;
+						// last
+						else answer = antes + i + luego;
 						if (!listado) answer = answer + "&nbsp;";
 						div.innerHTML = answer;
 						fragment1.appendChild(div);
@@ -267,10 +280,10 @@ const clickboton3 = () => {'use strict';
 					fragment1.appendChild(div);
 				}
 			}
-			container.appendChild(fragment1)
+			container.appendChild(fragment1);
 			container.removeChild(document.querySelector(".f3"));
 		}
-	})
+	});
 }
 // Proyecto 4
 const clickboton4 = () => {'use strict';
@@ -333,8 +346,7 @@ const clickboton4 = () => {'use strict';
 				} else if (divisors == true) {
 					var1 = var1 / parseFloat(array[i][a]);
 					divisors = false;
-				} else if ((array[i][a] == "+" || array[i][a] == "-" || array[i][a] == "x" || array[i][a] == "/") &&
-					array[i].length == 1) {
+				} else if ((array[i][a] == "+" || array[i][a] == "-" || array[i][a] == "x" || array[i][a] == "/") && array[i].length == 1) {
 					var1 = array[i][a];
 				} else if (array[i][a] == "ANS") {
 					var1 = ans;
@@ -344,7 +356,7 @@ const clickboton4 = () => {'use strict';
 			}
 			retornar.push(var1);
 		}
-		return retornar
+		return retornar;
 	}
 	const determine = array => {'use strict';
 		// Sumar y Restar
@@ -366,9 +378,8 @@ const clickboton4 = () => {'use strict';
 			} else {
 				options(btn);
 			}
-		} else if (btn == "0" || btn == "1" || btn == "2" || btn == "3" || btn == "4" || btn == "5" || btn == "6" || btn == "7" ||
-			btn == "8" || btn == "9" || btn == "/" || btn == "*" || btn == "-" || btn == "+" || btn == "." || btn == "(" ||
-			btn == ")" || btn == "x" || btn == "ANS") {
+		} else if (btn == "0" || btn == "1" || btn == "2" || btn == "3" || btn == "4" || btn == "5" || btn == "6" || btn == "7" || btn == "8" || btn == "9" || btn == "/" ||
+			btn == "*"|| btn == "-" || btn == "+" || btn == "." || btn == "(" || btn == ")" || btn == "x" || btn == "ANS") {
 			let info = "", j = 0;
 			if (ans && !quest.length && !ac && (btn == "/" || btn == "*" || btn == "-" || btn == "+")) {
 				quest.push("ANS");
@@ -455,7 +466,7 @@ const clickboton4 = () => {'use strict';
 					temporal = [];
 				} else if (operation[i] == "(" && sign == true && parentesis == false && number == false) {
 					// Signo antes del parentesis. Principio
-					temporal = []
+					temporal = [];
 					temporal.push(postSign);
 					arr[j] = temporal;
 					temporal = [];
@@ -464,7 +475,7 @@ const clickboton4 = () => {'use strict';
 				} else if (operation[i] == "(" && sign == true && parentesis == false) {
 					// Signo antes del parentesis
 					j++;
-					temporal = []
+					temporal = [];
 					temporal.push(postSign);
 					arr[j] = temporal;
 					temporal = [];
@@ -486,7 +497,7 @@ const clickboton4 = () => {'use strict';
 					// Activar el cierre de parentesis
 					parentesis = true;
 				} else if (operation[i] == "" || (operation[i] == "(" && sign == false && i == 0)) {
-					// Ignorar. Manejo de errores.
+					// Ignorar. Manejo de errores
 				} else if (sign == true && parentesis == true) {
 					// número despues de un signo y parentesis
 					temporal.push(operation[i]);
@@ -587,11 +598,11 @@ const clickboton4 = () => {'use strict';
 	document.querySelectorAll(".f4__buttons button").forEach((button) => {
 		button.addEventListener("click",()=>{
 			buttonValue(button.value);
-		})
+		});
 	});
 	document.addEventListener("keyup",(e)=>{
 		buttonValue(e.key,e.ctrlKey);
-	})
+	});
 }
 // Proyecto 5
 const clickboton5 = () => {'use strict';
@@ -605,9 +616,7 @@ const clickboton5 = () => {'use strict';
 
 	const asistencia = (nombre,p,e) => {'use strict';
 		let presencia = prompt(nombre + ", Presencia (P/p), Inasistencias (A/a). Día: " + e);
-		if (presencia == "p" || presencia == "P" || presencia == "pp") {
-			alumnosTotales[p][1]++
-		}
+		if (presencia == "p" || presencia == "P" || presencia == "pp") alumnosTotales[p][1]++;
 	}
 	for (let i = 0; i < cantidad; i++) {
 		alumnosTotales[i] = [prompt(`Nombre del alumno ${i + 1}`),0];
@@ -654,7 +663,7 @@ const clickboton6 = () => {'use strict';
 			}
 		}
 		catch (e) {
-			clearInterval(myInterval)
+			clearInterval(myInterval);
 		}
 	},1000);
 }
@@ -733,58 +742,52 @@ const clickboton8 = () => {'use strict';
 	const buildForm = () => {'use strict';
 		let f8 = document.createElement("FORM");
 		f8.classList.add("f8");
-		let a = `<label>Ingresar Datos</label>`;
 		let b = `<div class="f8__display">
 			<label>Ingresar Temperatura</label>
 			<input type="range" min="1" max="5" id="inTemperatur">
-			<div class="f8__div"><p>Congelamiento</p><p>Frio</p><p>Tropical</p><p>calor</p><p>hipertermia</p></div>
+			<div class="f8__div"><p>Congelamiento</p><p>Frio</p><p>Tropical</p><p>Calor</p><p>Calentamiento</p></div>
 		</div>`;
 		let c = `<div class="f8__display">
 			<label>Ingresar Comida</label>
 			<input type="range" min="1" max="5" id="inFood">
-			<div class="f8__div"><p>Envenenado</p><p>Crudo</p><p>Optima</p><p>Fita</p><p>Saturada</p></div>
+			<div class="f8__div"><p>Envenenado</p><p>Crudo</p><p>Optima</p><p>Frita</p><p>Saturada</p></div>
 		</div>`;
-		let d = `<div class="from8_display"><input type="button" name="detector" class="f8__button"></div>`;
-		f8.innerHTML = a + b + c + d;
+		f8.innerHTML = b + c;
 		container.appendChild(f8);
-		return [
-			document.getElementById("inTemperatur"),
-			document.getElementById("inFood"),
-			document.querySelector(".f8__button"),
-			document.createElement("DIV")
-		]
+		return [document.getElementById("inTemperatur"),document.getElementById("inFood"),document.createElement("DIV")];
 	}
 	const validarForm = () => {'use strict';
-		if (e[0].value == 1 && e[1].value == 1) e[3].innerHTML = "<p>Muerto por congelamiento e Intoxicado</p>";
-		if (e[0].value == 2 && e[1].value == 1) e[3].innerHTML = "<p>Muerto por gripe</p>";
-		if (e[0].value == 3 && e[1].value == 1) e[3].innerHTML = "<p>Muerto por Envenamiento</p>";
-		if (e[0].value == 4 && e[1].value == 1) e[3].innerHTML = "<p>Muerto por Fiebre</p>";
-		if (e[0].value == 5 && e[1].value == 1) e[3].innerHTML = "<p>Muerto por calentamiento y Envenenamiento</p>";
-		if (e[0].value == 1 && e[1].value == 2) e[3].innerHTML = "<p>Muerto por congelamiento</p>";
-		if (e[0].value == 2 && e[1].value == 2) e[3].innerHTML = "<p>Adaptación al frio con fátiga</p>";
-		if (e[0].value == 3 && e[1].value == 2) e[3].innerHTML = "<p>Vómitos, diarrea, nauseas</p>";
-		if (e[0].value == 4 && e[1].value == 2) e[3].innerHTML = "<p>Adaptación al calor con cansancio</p>";
-		if (e[0].value == 5 && e[1].value == 2) e[3].innerHTML = "<p>Muerto por calentamiento</p>";
-		if (e[0].value == 1 && e[1].value == 3) e[3].innerHTML = "<p>Muerto por congelamiento</p>";
-		if (e[0].value == 2 && e[1].value == 3) e[3].innerHTML = "<p>Adaptación al frio</p>";
-		if (e[0].value == 3 && e[1].value == 3) e[3].innerHTML = "<p>Estado optimo</p>";
-		if (e[0].value == 4 && e[1].value == 3) e[3].innerHTML = "<p>Adaptación al calor</p>";
-		if (e[0].value == 5 && e[1].value == 3) e[3].innerHTML = "<p>Muerto por calentamiento</p>";
-		if (e[0].value == 1 && e[1].value == 4) e[3].innerHTML = "<p>Muerto por congelamiento</p>";
-		if (e[0].value == 2 && e[1].value == 4) e[3].innerHTML = "<p>Adaptación al frio</p>";
-		if (e[0].value == 3 && e[1].value == 4) e[3].innerHTML = "<p>Sedentarismo</p>";
-		if (e[0].value == 4 && e[1].value == 4) e[3].innerHTML = "<p>Sedentario</p>";
-		if (e[0].value == 5 && e[1].value == 4) e[3].innerHTML = "<p>Muerto por calentamiento</p>";
-		if (e[0].value == 1 && e[1].value == 5) e[3].innerHTML = "<p>Muerto por congelamiento</p>";
-		if (e[0].value == 2 && e[1].value == 5) e[3].innerHTML = "<p>Adaptación al frio</p>";
-		if (e[0].value == 3 && e[1].value == 5) e[3].innerHTML = "<p>Obesidad</p>";
-		if (e[0].value == 4 && e[1].value == 5) e[3].innerHTML = "<p>Desidratación</p>";
-		if (e[0].value == 5 && e[1].value == 5) e[3].innerHTML = "<p>Muerto por calentamiento</p>";
-		container.appendChild(e[3]);
+		if (e[0].value == 1 && e[1].value == 1) e[2].innerHTML = "<p>Muerto por Congelamiento e Intoxicado</p>";
+		if (e[0].value == 2 && e[1].value == 1) e[2].innerHTML = "<p>Muerto por Gripe</p>";
+		if (e[0].value == 3 && e[1].value == 1) e[2].innerHTML = "<p>Muerto por Envenamiento</p>";
+		if (e[0].value == 4 && e[1].value == 1) e[2].innerHTML = "<p>Muerto por Fiebre</p>";
+		if (e[0].value == 5 && e[1].value == 1) e[2].innerHTML = "<p>Muerto por Calentamiento y Envenenamiento</p>";
+		if (e[0].value == 1 && e[1].value == 2) e[2].innerHTML = "<p>Muerto por Congelamiento</p>";
+		if (e[0].value == 2 && e[1].value == 2) e[2].innerHTML = "<p>Adaptación al frio con fátiga</p>";
+		if (e[0].value == 3 && e[1].value == 2) e[2].innerHTML = "<p>Vómitos, diarrea, nauseas</p>";
+		if (e[0].value == 4 && e[1].value == 2) e[2].innerHTML = "<p>Adaptación al calor con cansancio</p>";
+		if (e[0].value == 5 && e[1].value == 2) e[2].innerHTML = "<p>Muerto por Calentamiento</p>";
+		if (e[0].value == 1 && e[1].value == 3) e[2].innerHTML = "<p>Muerto por Congelamiento</p>";
+		if (e[0].value == 2 && e[1].value == 3) e[2].innerHTML = "<p>Adaptación al frio</p>";
+		if (e[0].value == 3 && e[1].value == 3) e[2].innerHTML = "<p>Estado optimo</p>";
+		if (e[0].value == 4 && e[1].value == 3) e[2].innerHTML = "<p>Adaptación al calor</p>";
+		if (e[0].value == 5 && e[1].value == 3) e[2].innerHTML = "<p>Muerto por Calentamiento</p>";
+		if (e[0].value == 1 && e[1].value == 4) e[2].innerHTML = "<p>Muerto por Congelamiento</p>";
+		if (e[0].value == 2 && e[1].value == 4) e[2].innerHTML = "<p>Adaptación al frio</p>";
+		if (e[0].value == 3 && e[1].value == 4) e[2].innerHTML = "<p>Sedentarismo</p>";
+		if (e[0].value == 4 && e[1].value == 4) e[2].innerHTML = "<p>Sedentario</p>";
+		if (e[0].value == 5 && e[1].value == 4) e[2].innerHTML = "<p>Muerto por Calentamiento</p>";
+		if (e[0].value == 1 && e[1].value == 5) e[2].innerHTML = "<p>Muerto por Congelamiento</p>";
+		if (e[0].value == 2 && e[1].value == 5) e[2].innerHTML = "<p>Adaptación al frio</p>";
+		if (e[0].value == 3 && e[1].value == 5) e[2].innerHTML = "<p>Obesidad</p>";
+		if (e[0].value == 4 && e[1].value == 5) e[2].innerHTML = "<p>Desidratación</p>";
+		if (e[0].value == 5 && e[1].value == 5) e[2].innerHTML = "<p>Muerto por Calentamiento</p>";
+		container.appendChild(e[2]);
 	}
 	// Ejecución
 	let e = buildForm();
-	e[2].addEventListener("click", validarForm);
+	e[0].addEventListener("change", validarForm);
+	e[1].addEventListener("change", validarForm);
 }
 // Proyecto 9
 const clickboton9 = () => {'use strict';
@@ -794,13 +797,13 @@ const clickboton9 = () => {'use strict';
 	<h2>Dime lo que selecioné</h2>
 	<input class="f9__input" type="text"></input>
 	<div class="f9__div"></div>`
-	let input = document.querySelector(".f9__input")
-	let div1 = document.querySelector(".f9__div")
+	let input = document.querySelector(".f9__input");
+	let div1 = document.querySelector(".f9__div");
 	input.addEventListener("select",(e)=>{
 		let start = e.target.selectionStart;
 		let end = e.target.selectionEnd;
 		let text = input.value;
-		div1.innerHTML = text.substring(start,end)
+		div1.innerHTML = text.substring(start,end);
 	});
 }
 // Proyecto 10
@@ -820,16 +823,16 @@ const clickboton10 = () => {'use strict';
 	const a = setInterval(() => {
 		i++;
 		fast.innerHTML = ("Con lectura rápida en: " + i + ".");
-	},tf)
+	},tf);
 	const b = setInterval(() => {
 		e++;
 		slow.innerHTML = ("Con lectura normal en: " + e + ".");
-	},ts)
+	},ts);
 	setTimeout(()=>{
 		clearInterval(a);
 		clearInterval(b);
-		answer.innerHTML = ("<p>Se excede en: " + (i - min) + "</p>")
-	},(min * ts))
+		answer.innerHTML = ("<p>Se excede en: " + (i - min) + "</p>");
+	},(min * ts));
 	// 128 - 125
 }
 // Proyecto 11
@@ -863,7 +866,7 @@ const clickboton11 = () => {'use strict';
 	}
 	const a = setInterval(actualizarHora,1000);
 	actualizarHora();
-	document.querySelector(".f11__button").addEventListener("click",()=>{clearInterval(a)})
+	document.querySelector(".f11__button").addEventListener("click",()=>{clearInterval(a)});
 }
 // Proyecto 12
 const clickboton12 = () => {'use strict';
@@ -883,16 +886,16 @@ const clickboton12 = () => {'use strict';
 		document.querySelector(".en").addEventListener("click", ()=>{
 			localStorage.setItem("idioma","en");
 			cerrarModal();
-		})
+		});
 		document.querySelector(".es").addEventListener("click", ()=>{
 			localStorage.setItem("idioma","es");
 			cerrarModal();
-		})
+		});
 	}
 	remove.addEventListener("click", ()=>{
 		eliminar();
 		abrirModal();
-	})
+	});
 	const cerrarModal = () => {'use strict';
 		modal.style.animation = "desaparecer 1s forwards";
 		modal.style.display = "none";
@@ -900,19 +903,19 @@ const clickboton12 = () => {'use strict';
 	}
 	const abrirModal = () => {'use strict';
 		modal.style.animation = "aparecer 1s forwards";
-		modal.style.display = "initial"
+		modal.style.display = "initial";
 	}
 	const eliminar = () => {'use strict';
 		localStorage.removeItem("idioma");
 		remove.style.display = "none";
 	}
-	let idioma = localStorage.getItem("idioma")
+	let idioma = localStorage.getItem("idioma");
 	if (idioma === null) {
 		abrirModal();
 		definirIdioma();
 	}
 	else {
-		cerrarModal()
+		cerrarModal();
 	}
 }
 // Proyecto 13
@@ -929,11 +932,11 @@ const clickboton13 = () => {'use strict';
 	const zone = document.querySelector(".zone");
 	zone.addEventListener("dragover", (e)=>{
 		e.preventDefault();
-	})
+	});
 	zone.addEventListener("drop", (e)=>{
-		let n = e.dataTransfer.getData("texture")
+		let n = e.dataTransfer.getData("texture");
 		zone.style.background = `url("img/textura${n}.png")`;
-	})
+	});
 	const textures = document.querySelector(".textures");
 	for (let i = 0; i < textures.children.length; i++) {
 		document.querySelector(`.texture${i}`).addEventListener("dragstart",(e)=>transferirTextura(i,e));
@@ -954,12 +957,12 @@ const clickboton14 = () => {'use strict';
 	const readFile = file => {
 		for (let i = 0; i < file.length; i++) {
 			const reader = new FileReader();
-			reader.readAsDataURL(file[i])
+			reader.readAsDataURL(file[i]);
 			reader.addEventListener("load",(e)=>{
 				let newImg = document.createElement("img");
 				newImg.src = e.currentTarget.result;
 				document.querySelector(".f14__result").appendChild(newImg);
-			})
+			});
 		}
 	}
 	document.querySelector(".f14__file").addEventListener("change",() => {
@@ -990,15 +993,15 @@ const clickboton15 = () => {'use strict';
 		}
 		const zona = document.querySelector(".container15");
 		const resultado = document.querySelector(".result15");
-		const loadingBar = document.querySelector(".loading-bar15")
+		const loadingBar = document.querySelector(".loading-bar15");
 		zona.addEventListener("dragover", e => {'use strict';
 			e.preventDefault();
 			changeStyle(e.srcElement, "#444");
-		})
+		});
 		zona.addEventListener("dragleave", e => {'use strict';
 			e.preventDefault();
 			changeStyle(e.srcElement, "#888");
-		})
+		});
 		const changeStyle = (obj, color) => {'use strict';
 			obj.style.color = color;
 			obj.style.border = `4px dashed ${color}`
@@ -1012,24 +1015,24 @@ const clickboton15 = () => {'use strict';
 				reader.readAsText(e.dataTransfer.files[0]);
 				reader.addEventListener("load", e => {'use strict';
 					resultado.textContent = e.currentTarget.result;
-				})
-			})
+				});
+			});
 		} else if (type == "img") {
 			zona.addEventListener("drop", e => {'use strict';
-				let file = e.dataTransfer.files[0]
+				let file = e.dataTransfer.files[0];
 				e.preventDefault();
 				changeStyle(e.srcElement, "#888");
 				const reader = new FileReader();
 				reader.readAsDataURL(file);
 				reader.addEventListener("load", () => {'use strict';
-					let url = URL.createObjectURL(file)
+					let url = URL.createObjectURL(file);
 					let img = document.createElement("IMG");
 					img.setAttribute("src", url);
 					img.classList.add("img15");
 					resultado.appendChild(img);
-				})
+				});
 				zona.style.border = "4px solid #888";
-			})
+			});
 		} else if (type == "video") {
 			zona.addEventListener("drop", e => {'use strict';
 				let file = e.dataTransfer.files[0];
@@ -1046,19 +1049,9 @@ const clickboton15 = () => {'use strict';
 						loadingBar.style.width = `${carga/1.20}%`; //hasta el 83.2%;
 					} else if (mainStyleWidth <= "500px" && mainStyleWidth >= "400px") {
 						loadingBar.style.width = `${carga/1.0}%`; //hasta el 79.6%%;
-					} else if (
-						mainStyleWidth <= "400px"
-						&& mainStyleWidth >= "350px"
-						|| mainStyleWidth <= "400px"
-						&& mainStyleWidth >= "350px"
-						) {
+					} else if (mainStyleWidth <= "400px" && mainStyleWidth >= "350px" || mainStyleWidth <= "400px" && mainStyleWidth >= "350px") {
 						loadingBar.style.width = `${carga/1.0}%`; //hasta el 74.2%;
-					} else if (
-						mainStyleWidth <= "350px" 
-						&& mainStyleWidth >= "300px" 
-						|| mainStyleWidth <= "809px" 
-						&& mainStyleWidth >= "755px"
-						) {
+					} else if (mainStyleWidth <= "350px" && mainStyleWidth >= "300px" || mainStyleWidth <= "809px" && mainStyleWidth >= "755px") {
 						loadingBar.style.width = `${carga/1.0}%`; //hasta el 70.3%;
 					} else if (mainStyleWidth >= "298px") {
 						loadingBar.style.width = `${carga/1.0}%`; //hasta el 64.8%;
@@ -1066,7 +1059,7 @@ const clickboton15 = () => {'use strict';
 					} else {
 						loadingBar.style.width = `${carga/1.61}%`; //hasta el 62%;
 					}
-				})
+				});
 				reader.addEventListener("loadend", e => {'use strict';
 					changeStyle(zona, "#2e7");
 					zona.style.borderStyle = "solid";
@@ -1074,21 +1067,21 @@ const clickboton15 = () => {'use strict';
 					setTimeout(() => {'use strict';
 						zona.style.color = "#222";
 						zona.style.animation = "aparecer 1s forwards";
-						zona.textContent = "!Carga Completa!"
-					},500)
-				})
+						zona.textContent = "!Carga Completa!";
+					},500);
+				});
 				reader.addEventListener("load", e => {'use strict';
-					let video = new Blob([new Uint8Array(e.currentTarget.result)], {type: 'video/mp4'})
+					let video = new Blob([new Uint8Array(e.currentTarget.result)], {type: 'video/mp4'});
 					let url = URL.createObjectURL(video);
 					let img = document.createElement("VIDEO");
 					img.setAttribute("src", url);
 					img.setAttribute("controls", true);
-					img.classList.add("img15")
+					img.classList.add("img15");
 					resultado.appendChild(img);
 					img.style.width = "calc(100vw - 145px)";
-				})
+				});
 				zona.style.border = "4px solid #888";
-			})
+			});
 		}
 	}
 	container.innerHTML = `
@@ -1101,11 +1094,11 @@ const clickboton15 = () => {'use strict';
 		<button class="button15">Aceptar</button>
 	</div>
 	<div class="desarrollo15"></div>`;
-	let confirmar = document.querySelector(".button15")
+	let confirmar = document.querySelector(".button15");
 	confirmar.addEventListener("click", e => {'use strict';
 		let type = document.querySelector(".select15").value;
 		desarrollo(type);
-	})
+	});
 }
 // Proyecto 16
 const clickboton16 = () => {'use strict';
@@ -1114,9 +1107,9 @@ const clickboton16 = () => {'use strict';
 	<div class="add-names"><input type="text" id="name" placeholder="Introduce un nombre"><button id="add">Añadir</button></div>
 	<div class="names"></div>`;
 	const IDBRequest = indexedDB.open("daltobase",1);
-	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("name",{autoIncrement: true}))
-	IDBRequest.addEventListener("success",() => readObject())
-	IDBRequest.addEventListener("error",() => alert("ocurrio un error al abrir la base de datos"))
+	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("name",{autoIncrement: true}));
+	IDBRequest.addEventListener("success",() => readObject());
+	IDBRequest.addEventListener("error",() => alert("ocurrio un error al abrir la base de datos"));
 	document.getElementById("add").addEventListener("click",()=> {'use strict';
 		let name = document.getElementById("name").value;
 		if (name.length > 0) {
@@ -1137,8 +1130,8 @@ const clickboton16 = () => {'use strict';
 				document.getElementById("name").value = "";
 				readObject();
 			}
-		}
-	})
+		}		
+	});
 	const addObject = object => {'use strict';
 		const IDBData = transactionOperation("readwrite","Objeto agregado correctamente");
 		IDBData.add(object);
@@ -1154,7 +1147,7 @@ const clickboton16 = () => {'use strict';
 				cursor.result.continue();
 				document.querySelector(".names").appendChild(element);
 			}
-		})
+		});
 	}
 	const modificarObject = (key, object) => {'use strict';
 		const IDBData = transactionOperation("readwrite","Objeto modificado correctamente");
@@ -1168,8 +1161,8 @@ const clickboton16 = () => {'use strict';
 		const IDBTransaction = IDBRequest.result.transaction("name",mode);
 		const objectStore = IDBTransaction.objectStore("name");
 		// IDBTransaction.addEventListener("complete",()=>{
-		// 	if (msg) alert.log(msg)
-		// })
+		// 	if (msg) alert.log(msg);
+		// });
 		return objectStore;
 	}
 	const nameHTML = (id, result) => {'use strict';
@@ -1193,17 +1186,17 @@ const clickboton16 = () => {'use strict';
 		container.appendChild(options);
 		h2.addEventListener("keyup",()=>{
 			saveButton.classList.replace("impossible","possibly");
-		})
+		});
 		saveButton.addEventListener("click",()=>{
 			if (saveButton.className == "possibly") {
-				modificarObject(id,{name: h2.textContent})
-				saveButton.classList.replace("possibly","impossible")
+				modificarObject(id,{name: h2.textContent});
+				saveButton.classList.replace("possibly","impossible");
 			}
-		})
+		});
 		deleteButton.addEventListener("click",()=>{
 			eliminarObject(id);
 			document.querySelector(".names").removeChild(container);
-		})
+		});
 		return container;
 	}
 }
@@ -1257,7 +1250,7 @@ const clickboton17 = () => {'use strict';
 		return container;
 	}
 	const cargarMasPublicaciones = entry => {'use strict';
-		if (entry[0].isIntersecting) cargarPublicaciones(5)
+		if (entry[0].isIntersecting) cargarPublicaciones(5);
 	}
 	const crearPublicacion = (arr,num) => {
 		const documentFragment = document.createDocumentFragment();
@@ -1266,7 +1259,7 @@ const clickboton17 = () => {'use strict';
 				const newPublicacion = createPublicationCode(arr[contador].nombre,arr[contador].contenido);
 				documentFragment.appendChild(newPublicacion);
 				contador++;
-				if (i == num-1) observer.observe(newPublicacion)
+				if (i == num-1) observer.observe(newPublicacion);
 			} else if (document.getElementById("noMore") == undefined) {
 				let noMore = document.createElement("H3");
 				noMore.id = "noMore";
@@ -1278,7 +1271,7 @@ const clickboton17 = () => {'use strict';
 		}
 		publicaciones.appendChild(documentFragment);
 	}
-	const observer = new IntersectionObserver(cargarMasPublicaciones)
+	const observer = new IntersectionObserver(cargarMasPublicaciones);
 	const cargarPublicaciones = async num => {'use strict';
 		try {
 			const request = await fetch("txt/f17.txt");
@@ -1339,9 +1332,9 @@ const clickboton18 = () => {'use strict';
 			node.appendChild(p3);
 			fragment18.appendChild(node);
 		}
-		container.removeChild(document.querySelector(".div18"))
+		container.removeChild(document.querySelector(".div18"));
 		container.appendChild(fragment18);
-	})
+	});
 }
 // Proyecto 19
 const clickboton19 = () => {'use strict';
@@ -1367,7 +1360,7 @@ const clickboton19 = () => {'use strict';
 				}
 				cursor.result.continue();
 			}
-		})
+		});
 	}
 	const modificarObject = (key, object) => {'use strict';
 		const IDBData = transactionOperation("readwrite","Objeto modificado correctamente");
@@ -1382,8 +1375,8 @@ const clickboton19 = () => {'use strict';
 		const objectStore = IDBTransaction.objectStore("books");
 		return objectStore;
 	}
-	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("books",{autoIncrement: true}))
-	IDBRequest.addEventListener("success",() => readObject())
+	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("books",{autoIncrement: true}));
+	IDBRequest.addEventListener("success",() => readObject());
 	class Fraccion {
 		constructor(numerador, denominador) {
 	        this.setNumerador(numerador);
@@ -1527,7 +1520,7 @@ const clickboton19 = () => {'use strict';
 		theProgressDiv.appendChild(numberProgress);
 		optionsMaths.appendChild(theProgressDiv);
 		optionsButtons.appendChild(buttonToUpdate);
-		optionsButtons.appendChild(buttonToSave)
+		optionsButtons.appendChild(buttonToSave);
 		optionsButtons.appendChild(buttonDelete);
 		container.appendChild(optionsMaths);
 		container.appendChild(optionsButtons);
@@ -1564,19 +1557,19 @@ const clickboton19 = () => {'use strict';
 					document.querySelector(".f19__update__save-delete").style.display = "none";
 				}
 			}
-		})
+		});
 		h4.addEventListener("keyup",()=>{
 			if (!block[1]) {
 				buttonToSave.classList.replace("f19__update-saved","f19__update-save");
 				buttonToUpdate.classList.replace("f19__update-toUpdate","f19__update-toUpdated");
 			}
-		})
+		});
 		percentageInput.addEventListener("keyup",()=>{
 			if (!block[1]) {
 				buttonToSave.classList.replace("f19__update-saved","f19__update-save");
 				buttonToUpdate.classList.replace("f19__update-toUpdate","f19__update-toUpdated");
 			}
-		})
+		});
 		buttonToSave.addEventListener("click",()=>{
 			if (buttonToSave.className == "f19__update-save") {
 				modificarObject(id,{
@@ -1587,11 +1580,11 @@ const clickboton19 = () => {'use strict';
 					tiempo: tiempo,
 					valor: percentageInput.value,
 					lock: block
-				})
+				});
 				buttonToUpdate.classList.replace("f19__update-toUpdated","f19__update-toUpdate");
 				buttonToSave.classList.replace("f19__update-save","f19__update-saved");
 			}
-		})
+		});
 		buttonToUpdate.addEventListener("click",() => {'use strict';
 			if (buttonToSave.className == "f19__update-saved") {
 				let percentageNumber = calculatePorcentaje(amount, percentageInput.value);
@@ -1615,7 +1608,7 @@ const clickboton19 = () => {'use strict';
 			let timed = calculateDate(a,b,c);
 			calculateTime.textContent = timed;
 			if (block[0] == undefined) {
-				block = [false, block]
+				block = [false, block];
 				if (block[1]) {
 					h4.setAttribute("contenteditable","false");
 					percentageInput.setAttribute("disabled","");
@@ -1634,15 +1627,15 @@ const clickboton19 = () => {'use strict';
 					tiempo: tiempo,
 					valor: percentageInput.value,
 					lock: block
-				})
-		})
+				});
+		});
 		buttonDelete.addEventListener("click",()=>{
 			if (window.confirm("¿Seguro que quieres Eliminar una lectura?")) {
 				eliminarObject(id);
 				if (block[0] == false) document.querySelector(".f19__update__head-container").removeChild(container);
 				else document.querySelector(".f19__update__saved-content").removeChild(container);
 			}
-		})
+		});
 		pathUnlock.addEventListener("click",()=>{
 			if (percentageNumber >= 100 && buttonToSave.className == "f19__update-saved") {
 				if (window.confirm("¿Quiéres Bloquear está lectura?")) {
@@ -1662,12 +1655,12 @@ const clickboton19 = () => {'use strict';
 						tiempo: tiempo,
 						valor: percentageInput.value,
 						lock: block
-					})
+					});
 				}
 			} else if (buttonToSave.className == "f19__update-save") {
 				alert("Hay cambios sin guardar");
 			}
-		})
+		});
 		return container;
 	}
 	const checkMonth = (month, year) => {'use strict';
@@ -1762,7 +1755,7 @@ const clickboton19 = () => {'use strict';
 				numeratorPro++;
 			}
 		}
-		return [temporalProNominator, temporalProDenominator]
+		return [temporalProNominator, temporalProDenominator];
 	}
 	const calculateMath = (year, month, day, amount, amountProgress) => {'use strict';
 		amount = amount - amountProgress;
@@ -1814,7 +1807,7 @@ const clickboton19 = () => {'use strict';
 		if (arrayFraccionEficiency.denominador == 1) denominator = `cada día`;
 		else denominator = `cada ${arrayFraccionEficiency.denominador} días`;
 
-		//Retorno
+		// Retorno
 		let forEachPro = numerator + denominator;
 		return forEachPro;
 	}
@@ -1871,7 +1864,7 @@ const clickboton19 = () => {'use strict';
 				let divCheck = allDivs[i].querySelector(nameClass);
 				if (divCheck.style.fill == "rgb(0, 0, 0)") {
 					let key = allDivs[i].getAttribute("id");
-					arr.push(key)
+					arr.push(key);
 				}
 			}
 			// Recoge los los divs seleccionados
@@ -1901,7 +1894,7 @@ const clickboton19 = () => {'use strict';
 					obj.push(parseInt(temporal[1]));
 					obj.push(divs[i].querySelector(".f19__update-calculateTime").textContent);
 					temporal = divs[i].querySelector(".f19__update-time").textContent.split("/");
-					temporal = [parseInt(temporal[0]),parseInt(temporal[1]),parseInt(temporal[2])]
+					temporal = [parseInt(temporal[0]),parseInt(temporal[1]),parseInt(temporal[2])];
 					obj.push(temporal);
 					obj.push(divs[i].querySelector(".f19__update-percentageInput").value);
 					if (space == 0) temporal = true;
@@ -1918,7 +1911,7 @@ const clickboton19 = () => {'use strict';
 						tiempo: obj[4],
 						valor: obj[5],
 						lock: [obj[6], obj[7]]
-					})
+					});
 					divs[i].querySelector(".f19__update-checkFront").style.fill = "#ccc";
 				}
 				if (space == 0 && type == 1) {
@@ -2105,7 +2098,7 @@ const clickboton19 = () => {'use strict';
 				error.style.display = "block";
 			}
 		}
-	})
+	});
 	// Check list primero
 	document.querySelector(".f19__update-circleFront").addEventListener("click",()=>{
 		if (document.querySelector(".f19__update-circleFront").style.fill == "rgb(204, 204, 204)") {
@@ -2119,7 +2112,7 @@ const clickboton19 = () => {'use strict';
 			document.querySelector(".f19__update__header-save").style.display = "none";
 			calculatedCheck(false, document.querySelector(".f19__update-circleFront"), false);
 		}
-	})
+	});
 	// Check list segundo
 	document.querySelector(".f19__update__save-circleFront").addEventListener("click",()=>{
 		if (document.querySelector(".f19__update__save-circleFront").style.fill == "rgb(204, 204, 204)") {
@@ -2133,7 +2126,7 @@ const clickboton19 = () => {'use strict';
 			document.querySelector(".f19__update__save-save").style.display = "none";
 			calculatedCheck(false, document.querySelector(".f19__update-circleFront"), true);
 		}
-	})
+	});
 	document.querySelector(".f19__update__header-delete").addEventListener("click",()=> selectCheck(0, 0));
 	document.querySelector(".f19__update__header-save").addEventListener("click",() => selectCheck(0, 1));
 	document.querySelector(".f19__update__save-delete").addEventListener("click",()=> selectCheck(1, 0));
@@ -2149,8 +2142,6 @@ const clickboton19 = () => {'use strict';
 // Proyecto 20
 const clickboton20 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
-	const fragment20 = document.createDocumentFragment();
-	container.appendChild(fragment20);
 	container.innerHTML = `
 	<div class="f20__editor">
 		<canvas class="f20__canvas" width="500px" height="150px"></canvas>
@@ -2181,11 +2172,11 @@ const clickboton20 = () => {'use strict';
 	});
 	canvas.addEventListener('mousemove',(e)=>{
 		if (painting) {
-			dibujar(difX,difY,e.clientX - dif.left,e.clientY - dif.top)
+			dibujar(difX,difY,e.clientX - dif.left,e.clientY - dif.top);
 			difX = e.clientX - difX.left;
 			difY = e.clientY - difY.top;
 		}
-	})
+	});
 	canvas.addEventListener('mouseup',(e)=>{
 		ctx.closePath();
 		painting = false;
@@ -2195,10 +2186,10 @@ const clickboton20 = () => {'use strict';
 // Proyecto 21
 const clickboton21 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
-	const fragment21 = document.createDocumentFragment();
+	let fragment21 = document.createDocumentFragment();
 	const seno = num => {
 		if (num % 180 == 0) {
-			return 0
+			return 0;
 		} else {
 			num *= Math.PI/180;
 			let y = Math.sin(num);
@@ -2207,7 +2198,7 @@ const clickboton21 = () => {'use strict';
 	}
 	const tang = num => {
 		if (num % 180 == 0) {
-			return 0
+			return 0;
 		} else {
 			num *= Math.PI/180;
 			let y = Math.tan(num);
@@ -2215,12 +2206,11 @@ const clickboton21 = () => {'use strict';
 		}
 	}
 	const rectas = () => {
-		// document
 		let div = document.createElement('div');
 		let submit = document.createElement("INPUT");
 		submit.type = "submit";
 		submit.addEventListener("click",()=>{
-		})
+		});
 		div.appendChild(submit);
 		return div;
 	}
@@ -2233,14 +2223,14 @@ const clickboton21 = () => {'use strict';
 		submit.type = "submit";
 		submit.addEventListener("click",()=>{
 			// pi * radio^2
-			let radio = inputRadius.value
+			let radio = inputRadius.value;
 			if (radio != "") {
 				let answer = radio * radio * Math.PI;
 				let answerDiv = document.createElement("div");
 				answerDiv.textContent = `Radio: ${radio}, Área: ${answer}`;
 				document.querySelector(".f21__develop div").appendChild(answerDiv);
 			}
-		})
+		});
 		div.appendChild(inputRadius);
 		div.appendChild(submit);
 		return div;
@@ -2265,7 +2255,7 @@ const clickboton21 = () => {'use strict';
 				answerDiv.textContent = `Radio menor: ${radioMenor} Radio mayor: ${radioMayor}, Área: ${answer}`;
 				document.querySelector(".f21__develop div").appendChild(answerDiv);
 			}
-		})
+		});
 		div.appendChild(inputMinorRadius);
 		div.appendChild(inputManjorRadius);
 		div.appendChild(submit);
@@ -2310,7 +2300,7 @@ const clickboton21 = () => {'use strict';
 				}
 				document.querySelector(".f21__develop div").appendChild(answerDiv);
 			}
-		})
+		});
 		div.appendChild(inputAngle);
 		div.appendChild(inputRadius);
 		div.appendChild(inputLength);
@@ -2332,7 +2322,7 @@ const clickboton21 = () => {'use strict';
 		submit.setAttribute("type","submit");
 		submit.addEventListener("click",()=>{
 			// Base * height / 2 if angle is 90
-			//1/2 * Base * height * sen(angle)
+			//1/2 * Base * height * sen(angle);
 			let answerDiv = document.createElement("div");
 			let base = inputBase.value;
 			let height = inputHeight.value;
@@ -2345,7 +2335,7 @@ const clickboton21 = () => {'use strict';
 				answerDiv.textContent = `Primer lado: ${base}, Segundo lado: ${height}, Ángulo: ${angulo}, Área: ${answer}`;
 			}
 			document.querySelector(".f21__develop div").appendChild(answerDiv);
-		})
+		});
 		div.appendChild(inputBase);
 		div.appendChild(inputHeight);
 		div.appendChild(inputAngle);
@@ -2378,7 +2368,7 @@ const clickboton21 = () => {'use strict';
 				answerDiv.textContent = `Ángulo: ${angulo}, Radio: ${radio}, Área: ${answer}`;
 			}
 			document.querySelector(".f21__develop div").appendChild(answerDiv);
-		})
+		});
 		div.appendChild(inputRadius);
 		div.appendChild(inputAngle);
 		div.appendChild(submit);
@@ -2413,7 +2403,7 @@ const clickboton21 = () => {'use strict';
 				answerDiv.textContent = `Ángulo: ${angulo}, Radio Mayor: ${radioMayor}, Radio Menor: ${radioMenor}, Área: ${answer}`;
 			}
 			document.querySelector(".f21__develop div").appendChild(answerDiv);
-		})
+		});
 		div.appendChild(inputAngle);
 		div.appendChild(inputMinorRadius);
 		div.appendChild(inputManjorRadius);
@@ -2421,7 +2411,6 @@ const clickboton21 = () => {'use strict';
 		return div;
 	}
 	const cuadrilatero = () => {
-		// document
 		let div = document.createElement('div');
 		// let canvas = document.createElement('canvas');
 		let inputAngleOne = document.createElement("INPUT");
@@ -2449,7 +2438,7 @@ const clickboton21 = () => {'use strict';
 				answerDiv.textContent = ` ${answer}, : ${answer}, Área: ${answer}`;
 			}
 			document.querySelector(".f21__develop div").appendChild(answerDiv);
-		})
+		});
 		// div.appendChild(canvas);
 		div.appendChild(inputAngleOne);
 		div.appendChild(inputAngleTwo);
@@ -2481,14 +2470,13 @@ const clickboton21 = () => {'use strict';
 				answerDiv.textContent = `Longitud de lado: ${longitudLado}, Número de lados: ${numeroLados}, Área: ${answer}`;
 			}
 			document.querySelector(".f21__develop div").appendChild(answerDiv);
-		})
-		div.appendChild(inputLength)
-		div.appendChild(inputTimes)
+		});
+		div.appendChild(inputLength);
+		div.appendChild(inputTimes);
 		div.appendChild(submit);
 		return div;
 	}
 	const integral = () => {
-		// document
 		let div = document.createElement('div');
 		let submit = document.createElement("INPUT");
 		submit.setAttribute("type","submit");
@@ -2499,12 +2487,11 @@ const clickboton21 = () => {'use strict';
 				answerDiv.textContent = `: ${answer}, : ${answer}, Área: ${answer}`;
 			}
 			document.querySelector(".f21__develop div").appendChild(answerDiv);
-		})
+		});
 		div.appendChild(submit);
 		return div;
 	}
 	const esfera = () => {
-		// document
 		let div = document.createElement('div');
 		let submit = document.createElement("INPUT");
 		submit.setAttribute("type","submit");
@@ -2512,34 +2499,31 @@ const clickboton21 = () => {'use strict';
 			let answerDiv = document.createElement("div");
 			if (true) {}
 			document.querySelector(".f21__develop div").appendChild(answerDiv);
-		})
+		});
 		div.appendChild(submit);
 		return div;
 	}
 	const cilindro = () => {
-		// document
 		let div = document.createElement('div');
 		let submit = document.createElement("INPUT");
 		submit.setAttribute("type","submit");
-		submit.addEventListener("click",()=>{})
+		submit.addEventListener("click",()=>{});
 		div.appendChild(submit);
 		return div;
 	}
 	const cono = () => {
-		// document
 		let div = document.createElement('div');
 		let submit = document.createElement("INPUT");
 		submit.setAttribute("type","submit");
-		submit.addEventListener("click",()=>{})
+		submit.addEventListener("click",()=>{});
 		div.appendChild(submit);
 		return div;
 	}
 	const integralTriple = () => {
-		// document
 		let div = document.createElement('div');
 		let submit = document.createElement("INPUT");
 		submit.setAttribute("type","submit");
-		submit.addEventListener("click",()=>{})
+		submit.addEventListener("click",()=>{});
 		div.appendChild(submit);
 		return div;
 	}
@@ -2596,47 +2580,33 @@ const clickboton21 = () => {'use strict';
 			if (document.querySelector(".f21__develop").childElementCount == 1) {
 				switch (e.target.value) {
 					case "Rectas":
-						add = rectas();
-						break;
+						add = rectas();				break;
 					case "Circulo":
-						add = circulo();
-						break;
+						add = circulo();			break;
 					case "Ovalo":
-						add = ovalo();
-						break;
+						add = ovalo();				break;
 					case "Sector Circular":
-						add = sectorCircular();
-						break;
+						add = sectorCircular();		break;
 					case "Triangulo":
-						add = triangulo();
-						break;
+						add = triangulo();			break;
 					case "Segmento Circular":
-						add = segmentoCircular();
-						break;
+						add = segmentoCircular();	break;
 					case "Trapecio Circular":
-						add = trapecioCircular();
-						break;
+						add = trapecioCircular();	break;
 					case "Cuadrilatero":
-						add = cuadrilatero();
-						break;
+						add = cuadrilatero();		break;
 					case "Poligono Regular":
-						add = poligonoRegular();
-						break;
+						add = poligonoRegular();	break;
 					case "Integral":
-						add = integral();
-						break;
+						add = integral();			break;
 					case "Esfera":
-						add = esfera();
-						break;
+						add = esfera();				break;
 					case "Cilindro":
-						add = cilindro();
-						break;
+						add = cilindro();			break;
 					case "Cono":
-						add = cono();
-						break;
+						add = cono();				break;
 					case "Integral Triple":
-						add = integralTriple();
-						break;
+						add = integralTriple();		break;
 					default:
 						alert("No es ninguna de las anteriores");
 						console.log(e.target.value);
@@ -2645,20 +2615,779 @@ const clickboton21 = () => {'use strict';
 			} else {
 				document.querySelector(".f21__develop").removeChild(document.querySelector(".f21__develop div"));
 			}
-		})
-	})
+		});
+	});
 }
 // Proyecto 22
 const clickboton22 = () => {'use strict';
+	// Variables
 	let container = document.querySelector(".desarrollo__div");
-	const fragment22 = document.createDocumentFragment();
-	container.appendChild(fragment22);
-	container.innerHTML = `<div class="f23"></div>`;
+	let data = [];
+	// Funciones
+	const rangeTime = (input,modo) => {
+		if (modo == 0) {
+			if (input == 24) input = 0;
+			else if (input == -1) input = 23;
+			else if (input > 24 || input.length > 2) input = "";
+			return input;
+		} else if (modo == 1) {
+			if (input == data[0][1] + 2) input = data[0][0];
+			else if (input == data[0][0] - 1) input = data[0][1];
+			else if (input > data[0][1] + 1 || input.length > 2) input = "";
+			return input;
+		} else if (modo == 2) {
+			if (input == data[0][2] + 2) input = 0;
+			else if (input == -1) input = data[0][2];
+			else if (input > data[0][2] + 1 || input.length > 2) input = "";
+			return input;
+		}
+	}
+	const countTime = (start,end) => {
+		let count = 0;
+		if (parseInt(start.value) > parseInt(end.value)) {
+			count = parseInt(end.value) + 24 - parseInt(start.value);
+		} else if (parseInt(start.value) <= parseInt(end.value)) {
+			count = parseInt(end.value) - parseInt(start.value);
+		}
+		if (count == 0) return [count,"block","err","Error"]; // Configuración de Error
+		if (count < 10) return [count,"block","err","Exceso de tiempo durmiendo"]; // Configuración de Exceso
+		if (count > 18) return [count,"block","err","Carencia de tiempo durmiendo"]; // Configuración de Carencia
+		return [count,"none","",""]; // Configuración de Desactivación
+	}
+	const countCommit = (start,end) => {
+		let count = 0;
+		if (parseInt(start.value) > parseInt(end.value)) {
+			count = parseInt(end.value) + 24 - parseInt(start.value);
+		} else if (parseInt(start.value) < parseInt(end.value)) {
+			count = parseInt(end.value) - parseInt(start.value);
+		} else if (parseInt(start.value) == parseInt(end.value)) {
+			count = 23;
+		}
+		if (count > 12) return [count,"block","err","Tiempo Excesivo"]; // Configuración de Error
+		return [count,"none","",""]; // Configuración de Desactivación
+	}
+	const createQuestTime = () => {'use strict';
+		let time = document.createElement("div");
+		time.classList.add("f22__time");
+		let startHour = document.createElement("input");
+		startHour.type = "number";
+		startHour.setAttribute("min","-1");
+		startHour.setAttribute("max","24");
+		let endHour = document.createElement("input");
+		endHour.type = "number";
+		endHour.setAttribute("min","-1");
+		endHour.setAttribute("max","24");
+		let getTime = document.createElement("p");
+		getTime.classList.add("f22__time-get");
+		let errTime = document.createElement("p");
+		errTime.classList.add("f22__ERR");
+		errTime.style.display = "none";
+		if (data[0]) {
+			startHour.value = data[0][0];
+			endHour.value = data[0][1] + 1;
+		}
+		startHour.addEventListener("keyup", () => {
+			startHour.value = rangeTime(startHour.value,0);
+			let count = countTime(startHour,endHour);
+			getTime.textContent = `Tiempo despierto: ${count[0]}`;
+			errTime.style.display = count[1];
+			errTime.id = count[2];
+			errTime.textContent = count[3];
+		});
+		endHour.addEventListener("keyup", () => {
+			endHour.value = rangeTime(endHour.value,0);
+			let count = countTime(startHour,endHour);
+			getTime.textContent = `Tiempo despierto: ${count[0]}`;
+			errTime.style.display = count[1];
+			errTime.id = count[2];
+			errTime.textContent = count[3];
+		});
+		time.appendChild(document.createTextNode("Desde: "));
+		time.appendChild(startHour);
+		time.appendChild(document.createTextNode(":00h  Hasta: "));
+		time.appendChild(endHour);
+		time.appendChild(document.createTextNode(":00h"));
+		time.appendChild(getTime);
+		time.appendChild(errTime);
+		return time;
+	}
+	const createAdds = (modo,n) => {'use strict';
+		let div = document.createElement("div");
+		div.classList.add("f22__right-div");
+		let name = document.createElement("div");
+		name.textContent = "Nombre:";
+		let nameInput = document.createElement("div");
+		nameInput.classList.add("f22__right-input");
+		nameInput.setAttribute("contenteditable","true");
+		let when = document.createElement("div");
+		let whenInput = document.createElement("div");
+		whenInput.classList.add("f22__right-input");
+		if (modo == 1) {
+			when.textContent = "Hora:";
+			let startHour = document.createElement("input");
+			startHour.type = "number";
+			startHour.setAttribute("min","-1");
+			startHour.setAttribute("max","24");
+			let endHour = document.createElement("input");
+			endHour.type = "number";
+			endHour.setAttribute("min","-1");
+			endHour.setAttribute("max","24");
+			let getTime = document.createElement("p");
+			getTime.classList.add("f22__commit-get");
+			let errTime = document.createElement("p");
+			errTime.classList.add("f22__ERR");
+			errTime.style.display = "none";
+			startHour.addEventListener("keyup", () => {
+				startHour.value = rangeTime(startHour.value,1);
+				let count = countCommit(startHour,endHour);
+				if (count[0] == 1) getTime.textContent = `Tiempo Invertido: ${count[0]} hora`;
+				else getTime.textContent = `Tiempo Invertido: ${count[0]} horas`;
+				errTime.style.display = count[1];
+				errTime.id = count[2];
+				errTime.textContent = count[3];
+			});
+			endHour.addEventListener("keyup", () => {
+				endHour.value = rangeTime(endHour.value,1);
+				let count = countCommit(startHour,endHour);
+				if (count[0] == 1) getTime.textContent = `Tiempo Invertido: ${count[0]} hora`;
+				else getTime.textContent = `Tiempo Invertido: ${count[0]} horas`;
+				errTime.style.display = count[1];
+				errTime.id = count[2];
+				errTime.textContent = count[3];
+			});
+			if (data[modo] && n != -1) {
+				startHour.value = data[modo][n][1][0];
+				endHour.value = data[modo][n][1][1] + 1;
+			}
+			whenInput.appendChild(document.createTextNode("Desde: "));
+			whenInput.appendChild(startHour);
+			whenInput.appendChild(document.createTextNode(":00h  Hasta: "));
+			whenInput.appendChild(endHour);
+			whenInput.appendChild(document.createTextNode(":00h"));
+			whenInput.appendChild(getTime);
+			whenInput.appendChild(errTime);
+		} else {
+			when.textContent = "Duración:";
+			let hour = document.createElement("input");
+			hour.type = "number";
+			hour.setAttribute("min","-1");
+			hour.setAttribute("max","24");
+			let getTime = document.createElement("p");
+			getTime.classList.add("f22__commit-get");
+			let errTime = document.createElement("p");
+			errTime.classList.add("f22__ERR");
+			errTime.style.display = "none";
+			if (data[2]) {
+				hour.value = data[2][0];
+			}
+			hour.addEventListener("keyup", () => {
+				hour.value = rangeTime(hour.value,2);
+				if (hour.value == 0) {
+					errTime.style.display = "block";
+					errTime.id = "err";
+					errTime.textContent = "Error";
+				} else if (hour.value > 4) {
+					errTime.style.display = "block";
+					errTime.id = "err";
+					errTime.textContent = "Exceso de Tiempo invertido";
+				} else {
+					errTime.style.display = "none";
+					errTime.id = "";
+					errTime.textContent = "";
+				}
+			});
+			if (data[modo] && n != -1) {
+				hour.value = data[modo][n][1][0];
+			}
+			whenInput.appendChild(hour);
+			whenInput.appendChild(document.createTextNode(" horas"));
+			whenInput.appendChild(getTime);
+			whenInput.appendChild(errTime);
+		}
+		let description = document.createElement("div");
+		description.textContent = "Propósito:";
+		let descriptionInput = document.createElement("div");
+		descriptionInput.classList.add("f22__right-input");
+		descriptionInput.setAttribute("contenteditable","true");
+		let type = document.createElement("div");
+		type.textContent = "Tipo:";
+		let typeInput = document.createElement("select");
+		typeInput.classList.add("f22__right-input");
+		let zeroOption = document.createElement("option");
+		zeroOption.value = 2;
+		zeroOption.textContent = "Ejercicitar";
+		let oneOption = document.createElement("option");
+		oneOption.value = 1;
+		oneOption.textContent = "Estudiar";
+		let twoOption = document.createElement("option");
+		twoOption.value = 0;
+		twoOption.textContent = "Limpiar";
+		let threeOption = document.createElement("option");
+		threeOption.value = 4;
+		threeOption.textContent = "Procrastinar";
+		let fourOption = document.createElement("option");
+		fourOption.value = 3;
+		fourOption.textContent = "Trabajar";
+		typeInput.appendChild(zeroOption);
+		typeInput.appendChild(oneOption);
+		typeInput.appendChild(twoOption);
+		typeInput.appendChild(threeOption);
+		typeInput.appendChild(fourOption);
+		let weekName = document.createElement("div");
+		weekName.textContent = "Días:";
+		let weekInputs = document.createElement("div");
+		weekInputs.classList.add("f22__right-input");
+		for (let i = 0; i < 7; i++) {
+			let week = document.createElement("input");
+			week.classList.add("f22__right-inactive");
+			week.setAttribute("id",i);
+			week.type = "button";
+			switch (i) {
+				case 0: week.value = "Domingo";		break;
+				case 1: week.value = "Lunes";		break;
+				case 2: week.value = "Martes";		break;
+				case 3: week.value = "Miércoles";	break;
+				case 4: week.value = "Jueves";		break;
+				case 5: week.value = "Viernes";		break;
+				case 6: week.value = "Sábado";		break;
+			}
+			if (data[modo] && n != -1) {
+				if (data[modo][n][4].includes(`${i}`)) week.classList.replace("f22__right-inactive","f22__right-active");
+			}
+			week.addEventListener("click",() => {
+				if (week.className == "f22__right-inactive") {
+					week.classList.replace("f22__right-inactive","f22__right-active");
+				} else {
+					week.classList.replace("f22__right-active","f22__right-inactive");
+				}
+			});
+			weekInputs.appendChild(week);
+		}
+		if (data[modo] && n != -1) {
+			let info = data[modo][n]
+			nameInput.textContent = info[0]
+			descriptionInput.value = info[2];
+			typeInput.value = info[3];
+		}
+		div.appendChild(name);
+		div.appendChild(nameInput);
+		div.appendChild(when);
+		div.appendChild(whenInput);
+		div.appendChild(description);
+		div.appendChild(descriptionInput);
+		div.appendChild(type);
+		div.appendChild(typeInput);
+		div.appendChild(weekName);
+		div.appendChild(weekInputs);
+		return div;
+	}
+	const createQuestCommitments = () => {'use strict';
+		let commitments = document.createElement("div");
+		commitments.classList.add("f22__commit");
+		let commitleft = document.createElement("div");
+		commitleft.classList.add("f22__commit__left");
+		let addCommitments = document.createElement("input");
+		addCommitments.classList.add(`f22__commit__left-button`);
+		addCommitments.type = "button";
+		addCommitments.value = "+";
+		let right = document.createElement("div");
+		right.classList.add("f22__right");
+		commitleft.appendChild(addCommitments);
+		if (data[1]) {
+			for (let i = 0; i < data[1].length; i++) {
+				let div = createAdds(1,i);
+				right.appendChild(div);
+			}
+		}
+		addCommitments.addEventListener("click", () => {
+			let div = createAdds(1,-1);
+			right.appendChild(div);
+		});
+		commitments.appendChild(commitleft);
+		commitments.appendChild(right);
+		return commitments;
+	}
+	const createQuestObjectives = () => {'use strict';
+		let objectives = document.createElement("div");
+		objectives.classList.add("f22__object");
+		let objectleft = document.createElement("div");
+		objectleft.classList.add("f22__object__left");
+		let addObjectives = document.createElement("input");
+		addObjectives.classList.add(`f22__object__left-button`);
+		addObjectives.type = "button";
+		addObjectives.value = "+";
+		let right = document.createElement("div");
+		right.classList.add("f22__right");
+		objectleft.appendChild(addObjectives);
+		if (data[2]) {
+			for (let i = 0; i < data[2].length; i++) {
+				let div = createAdds(2,i);
+				right.appendChild(div);
+			}
+		}
+		addObjectives.addEventListener("click", () => {
+			let div = createAdds(2,-1);
+			right.appendChild(div);
+		});
+		objectives.appendChild(objectleft);
+		objectives.appendChild(right);
+		return objectives;
+	}
+	const activeERR = () => {
+		let err = document.createElement("div");
+		err.classList.add("f22__ERR");
+		err.textContent = "Completa el campo";
+		document.querySelector(".f22__quest").appendChild(err);
+		setTimeout(() => {
+			document.querySelector(".f22__quest").removeChild(err);
+		},700);
+	}
+	const validarExistencia = e => {
+		let develop = document.querySelector(".f22__develop");
+		if (develop.hasChildNodes() == false) {
+			if (document.querySelector(".f22__time-content").children.length == 1 && e.className != "f22__time") {
+				if (document.querySelector(".f22__quest").children.length == 5) {
+					activeERR();
+					document.querySelector(".f22__time-content input").classList.remove("f22__time-Button");
+					document.querySelector(".f22__time-content input").classList.add("f22__ERR");
+					setTimeout(() => {
+						document.querySelector(".f22__time-content input").classList.remove("f22__ERR");
+						document.querySelector(".f22__time-content input").classList.add("f22__time-Button");
+					},700);
+				}
+			} else {
+				let options = document.createElement("div");
+				options.classList.add("f22__options");
+				let saveButton = document.createElement("input");
+				saveButton.classList.add("f22__options-button");
+				saveButton.type = "submit";
+				saveButton.value = "Guardar";
+				let deleteButton = document.createElement("input");
+				deleteButton.classList.add("f22__options-button");
+				deleteButton.type = "submit";
+				deleteButton.value = "Eliminar";
+				saveButton.addEventListener("click", () => {
+					let divContent = document.querySelector(`.${e.className}`);
+					if (e.className == "f22__time" && !document.getElementById("err")) {
+						let info = [];
+						divContent.querySelectorAll("input").forEach((input) => info.push(input.value));
+						if (!info.includes("")) {
+							info.push(divContent.querySelector(".f22__time-get").textContent.split(" ")[2]);
+							let divInfo = document.createElement("div");
+							divInfo.classList.add("f22__time-data");
+							divInfo.textContent = `${info[0]}:00h - ${info[1]}:00h, ${info[2]} horas`;
+							if (document.querySelector(".f22__time-content").children.length == 1) {
+								document.querySelector(".f22__time-content").appendChild(divInfo);
+							} else {
+								document.querySelector(".f22__time-content").removeChild(document.querySelector(".f22__time-data"));
+								document.querySelector(".f22__time-content").appendChild(divInfo);
+							}
+						} else {
+							document.querySelector(".f22__ERR").style.display = "block";
+							document.querySelector(".f22__ERR").textContent = "Completa los campos";
+						}
+						data[0] = [info[0],parseInt(info[1]) - 1,parseInt(info[2])];
+					} else if (e.className == "f22__commit") {
+						let info = [];
+						divContent.querySelectorAll(".f22__right .f22__right-div").forEach((content)=>{
+							let subinfo = [];
+							for (let i = 1; i < 10; i+=2) {
+								if (i == 1 || i == 5) {
+									subinfo.push(content.children[i].textContent);
+								} else if (i == 3) {
+									let temporal = [];
+									content.children[i].querySelectorAll("input").forEach((input)=>temporal.push(input.value));
+									temporal[1] = parseInt(temporal[1]) - 1;
+									subinfo.push(temporal);
+								} else if (i == 7) {
+									subinfo.push(content.children[i].value);
+								} else if (i == 9) {
+									let temporal = [];
+									content.children[i].querySelectorAll(".f22__right-active").forEach((input)=>{
+										temporal.push(input.id);
+									});
+									subinfo.push(temporal);
+								}
+							}
+							info.push(subinfo);
+						});
+						data[1] = info;
+						let divInfo = document.createElement("div");
+						divInfo.classList.add("f22__commit-data");
+						divInfo.textContent = `Compromisos: ${info.length}`;
+						if (document.querySelector(".f22__commit-content").children.length == 1) {
+							document.querySelector(".f22__commit-content").appendChild(divInfo);
+						} else {
+							document.querySelector(".f22__commit-content").removeChild(document.querySelector(".f22__commit-data"));
+							document.querySelector(".f22__commit-content").appendChild(divInfo);
+						}
+					} else if (e.className == "f22__object") {
+						let info = [];
+						divContent.querySelectorAll(".f22__right .f22__right-div").forEach((content)=>{
+							let subinfo = [];
+							for (let i = 1; i < 12; i+=2) {
+								if (i == 1 || i == 5) {
+									subinfo.push(content.children[i].textContent);
+								} else if (i == 3) {
+									let temporal = [];
+									content.children[i].querySelectorAll("input").forEach((input)=>temporal = input.value);
+									subinfo.push(temporal);
+								} else if (i == 7) {
+									subinfo.push(content.children[i].value);
+								} else if (i == 9) {
+									let temporal = [];
+									content.children[i].querySelectorAll(".f22__right-active").forEach((input)=>{
+										temporal.push(input.id);
+									});
+									subinfo.push(temporal);
+								}
+							}
+							info.push(subinfo);
+						});
+						data[2] = info;
+						let divInfo = document.createElement("div");
+						divInfo.classList.add("f22__object-data");
+						divInfo.textContent = `Objetivos: ${info.length}`;
+						if (document.querySelector(".f22__object-content").children.length == 1) {
+							document.querySelector(".f22__object-content").appendChild(divInfo);
+						} else {
+							document.querySelector(".f22__object-content").removeChild(document.querySelector(".f22__object-data"));
+							document.querySelector(".f22__object-content").appendChild(divInfo);
+						}
+					}
+				});
+				deleteButton.addEventListener("click", () => {});
+				options.appendChild(saveButton);
+				options.appendChild(deleteButton);
+				develop.appendChild(e);
+				develop.appendChild(options);
+			}
+		} else {
+			develop.removeChild(document.querySelector(`.${develop.children[1].className}`));
+			develop.removeChild(document.querySelector(`.${develop.children[0].className}`));
+		}
+	}
+	const createElementDiv = (content,clase,grid_area) => {'use strict';
+		let day = document.createElement("div");
+		day.classList.add(clase);
+		day.textContent = content;
+		day.style.gridArea = `${grid_area}`;
+		return day;
+	}
+	const crearSchedule = () => {'use strict';
+		let content = document.querySelector(".f22");
+		content.removeChild(document.querySelector(`.f22__develop`));
+		content.removeChild(document.querySelector(`.f22__quest`));
+		let dayContent = document.createElement("div");
+		dayContent.classList.add("f22__days-content");
+		let options = document.createElement("div");
+		options.textContent = "Horas";
+		options.classList.add("f22__days-day");
+		let sunday = document.createElement("div");
+		sunday.classList.add("f22__days-day");
+		sunday.textContent = "Domingo";
+		let monday = document.createElement("div");
+		monday.classList.add("f22__days-day");
+		monday.textContent = "Lunes";
+		let tuesday = document.createElement("div");
+		tuesday.classList.add("f22__days-day");
+		tuesday.textContent = "Martes";
+		let wednesday = document.createElement("div");
+		wednesday.classList.add("f22__days-day");
+		wednesday.textContent = "Miércoles";
+		let thursday = document.createElement("div");
+		thursday.classList.add("f22__days-day");
+		thursday.textContent = "Jueves";
+		let friday = document.createElement("div");
+		friday.classList.add("f22__days-day");
+		friday.textContent = "Viernes";
+		let saturday = document.createElement("div");
+		saturday.classList.add("f22__days-day");
+		saturday.textContent = "Sábado";
+		dayContent.appendChild(options);
+		dayContent.appendChild(sunday);
+		dayContent.appendChild(monday);
+		dayContent.appendChild(tuesday);
+		dayContent.appendChild(wednesday);
+		dayContent.appendChild(thursday);
+		dayContent.appendChild(friday);
+		dayContent.appendChild(saturday);
+		let divDay = document.createElement("div");
+		// console.log(data[0]); // Complete
+		// console.log(data[1]); // Complete
+		// console.log(data[2]); // Complete
+		// Crear Filas configuradas
+		for (let k = data[0][0]; k <= parseInt(data[0][1]); k++) {
+			for (let j = 0; j <= 7; j++) {
+				// Crear Columnas configuradas
+				if (j == 0) {
+					let day = createElementDiv(`${k}:00 h`,`f22__days-day-${j}`,`${k-data[0][0]+2} / 1 / ${k-data[0][0]+3} / 2`);
+					divDay.appendChild(day);
+				} else {
+					// Configurando Compromisos
+					if (data[1].length != 0) {
+						all:for (let l = 0; l < data[1].length; l++) {
+							let comit = data[1][l];
+							if (comit[4].includes(`${j - 1}`) && parseInt(comit[1][0]) <= k && k <= parseInt(comit[1][1])) {
+								if (parseInt(comit[1][0]) == k) {
+									let day = createElementDiv(comit[0],`f22__days-day-${j}`,
+										`${parseInt(comit[1][0]) - data[0][0] + 2} / ${j + 1} / ${parseInt(comit[1][1]) - data[0][0] + 3} / ${j + 2}`);
+									divDay.appendChild(day);
+								}
+								break all;
+							} else if (l == data[1].length - 1) {
+								let day = createElementDiv("Libre",`f22__days-day-${j}`,`${k - data[0][0] + 2} / ${j + 1} / ${k - data[0][0] + 3} / ${j + 2}`);
+								divDay.appendChild(day);
+							}
+						}
+					} else {
+						let day = createElementDiv("Libre",`f22__days-day-${j}`,`${k - data[0][0] + 2} / ${j + 1} / ${k - data[0][0] + 3} / ${j + 2}`);
+						divDay.appendChild(day);
+					}
+				}
+			}
+		}
+		// Ordenar la información
+		let info = [];
+		let temporalUno = 0;
+		let temporalDos = 0;
+		for (let j = 0; j <= 7; j++) {
+			let subinfo = [];
+			let first = false;
+			let divDays = divDay.querySelectorAll(`.f22__days-day-${j}`);
+			// Reduciendo información (Libres);
+			for (let k = 0; k < divDays.length; k++) {
+				if (divDays[k].textContent == "Libre" && first == false && k + 1 != divDays.length) {
+					temporalUno = divDays[k].style.gridArea.split(" / ")[0];
+					temporalDos = divDays[k].style.gridArea.split(" / ")[2];
+					first = true;
+				} else if (divDays[k].textContent == "Libre" && first == true && k + 1 != divDays.length) {
+					temporalDos = divDays[k].style.gridArea.split(" / ")[2];
+				} else if (divDays[k].textContent != "Libre" && first == true) {
+					subinfo.push(["Libre",`${temporalUno} / ${j + 1} / ${temporalDos} / ${j + 2}`]);
+					subinfo.push([divDays[k].textContent,divDays[k].style.gridArea]);
+					first = false;
+				} else if (divDays[k].textContent == "Libre" && first == true) {
+					subinfo.push(["Libre",`${temporalUno} / ${j + 1} / ${parseInt(temporalDos) + 1} / ${j + 2}`]);
+				} else {
+					subinfo.push([divDays[k].textContent,divDays[k].style.gridArea]);
+				}
+			}
+			info.push(subinfo);
+		}
+		if (data[2].length != 0) {
+			// Configurando Objetivos
+			// console.log(info);
+			for (let j = 0; j <= 7; j++) {
+				if (info[j].length != 0) {
+					let last_priority = [0,0,0,0];
+					let memory = [];
+					let lastMemory = 1;
+					for (let k = 0; k < info[j].length; k++) {
+						let free = info[j][k];
+						let allPriritys = [0,0,0,0];
+						// Suma total del maximo de objetivos en un día
+						let stop = 0;
+						for (let l = 0; l < data[2].length; l++) {
+							if (data[2][l][4].includes(`${j - 1}`)) {
+								let num = parseInt(data[2][l][3]);
+								allPriritys[num] += 1;
+								stop++;
+							}
+						}
+						let objetivos_por_dia = allPriritys[0] + allPriritys[1] + allPriritys[2] + allPriritys[3];
+						if (j == 0) {
+							let day = createElementDiv(free[0],"f22__days-day",free[1]);
+							dayContent.appendChild(day);
+						}
+						// Definiendo objetivos
+						if (free[0] == "Libre") {
+							// parseInt(object[1]) <= duration,memoryFree + parseInt(object[1]) <= time[2]
+							// Objetivo efimero: object[0] object[1] object[2] object[3] object[4]
+							// Duración del tiempo libre: duration
+							// día: j - 1
+							// Nombres ya puestos: memory
+							// tamaño: memory.length
+							// Última fila: memoryFree
+							// Fila máxima: time[2]
+							// allPriritys last_priority
+							// ajuste perfecto: ajuste_perfecto
+							// Se intentaron todos: objectives objetivos_por_dia
+							let time = free[1].split(" / ");
+							let memoryFree = parseInt(time[0]);
+							let duration = parseInt(time[2]) - parseInt(time[0]);
+							let ajuste_perfecto = true;
+							let objectives = 0;
+							while (memory.length < stop) {
+								for (let l = 0; l < data[2].length; l++) {
+									let object = data[2][l];
+									// Si el compromiso se debe agregar
+									if (object[4].includes(`${j - 1}`)) {
+										if (parseInt(object[1]) <= duration && memoryFree + parseInt(object[1]) <= time[2]) {
+											// Ajuste Perfecto
+											if (ajuste_perfecto) {
+												objectives++;
+												if (parseInt(object[1]) == duration && !memory.includes(object[0])) {
+													// Prioridades
+													let all_priorities_perfects = [0,0,0,0]
+													for (let m = 0; m < data[2].length; m++) {
+														if (data[2][m][4].includes(`${j - 1}`) && parseInt(data[2][m][1]) == duration) {
+															let numP = parseInt(data[2][m][3]);
+															all_priorities_perfects[numP] += 1;
+														}
+													}
+													let n_priority = 0;
+													for (let m = 0; m < object[3]; m++) n_priority += all_priorities_perfects[m] - last_priority[m];
+													if (n_priority == 0) {
+														let day = createElementDiv(object[0],
+															"f22__days-day",`${memoryFree} / ${time[1]} / ${memoryFree + parseInt(object[1])} / ${time[3]}`);
+														dayContent.appendChild(day);
+														memory.push(object[0]);
+														lastMemory = object[3];
+														memoryFree += parseInt(object[1]);
+														last_priority[object[3]]++;
+														l = 0;
+													}
+												} else if (objectives == objetivos_por_dia) {
+													ajuste_perfecto = false;
+												}
+											// Prioridades
+											} else if (!ajuste_perfecto && !memory.includes(object[0])) {
+												let n_priority = 0;
+												for (let m = 0; m < object[3]; m++) {
+													n_priority += allPriritys[m] - last_priority[m];
+												}
+												if (n_priority == 0) {
+													let day = createElementDiv(object[0],
+														"f22__days-day",`${memoryFree} / ${time[1]} / ${memoryFree + parseInt(object[1])} / ${time[3]}`);
+													dayContent.appendChild(day);
+													memory.push(object[0]);
+													lastMemory = object[3];
+													memoryFree += parseInt(object[1]);
+													last_priority[object[3]]++;
+													l = 0;
+												}
+											}
+										} else if (memoryFree + parseInt(object[1]) >= time[2]) stop--;
+									}
+								}
+							}
+							if (memoryFree < time[2]) {
+								let day = createElementDiv(free[0],"f22__days-day",`${memoryFree} / ${time[1]} / ${time[2]} / ${time[3]}`);
+								dayContent.appendChild(day);
+							}
+						} else {
+							let day = createElementDiv(free[0],"f22__days-day",free[1]);
+							dayContent.appendChild(day);
+						}
+					}
+				}
+			}
+		} else {
+			// Filtar sin modificar
+			for (let j = 0; j <= 7; j++) {
+				if (info[j].length != 0) {
+					for (let k = 0; k < info[j].length; k++) {
+						let day = document.createElement("div");
+						day.classList.add("f22__days-day");
+						day.textContent = info[j][k][0];
+						day.style.gridArea = `${info[j][k][1]}`;
+						dayContent.appendChild(day);
+					}
+				}
+			}
+		}
+		content.appendChild(dayContent);
+	}
+	const validarCampo = () => {'use strict';
+		if (document.querySelector(".f22__quest").children.length == 4) {
+			if (data[0] == undefined) {
+				activeERR();
+				document.querySelector(".f22__time-content input").classList.remove("f22__time-Button");
+				document.querySelector(".f22__time-content input").classList.add("f22__ERR");
+				setTimeout(() => {
+					document.querySelector(".f22__time-content input").classList.remove("f22__ERR");
+					document.querySelector(".f22__time-content input").classList.add("f22__time-Button");
+				},700);
+			} else if (data[1] == undefined) {
+				activeERR();
+				document.querySelector(".f22__commit-content input").classList.remove("f22__commit-Button");
+				document.querySelector(".f22__commit-content input").classList.add("f22__ERR");
+				setTimeout(() => {
+					document.querySelector(".f22__commit-content input").classList.remove("f22__ERR");
+					document.querySelector(".f22__commit-content input").classList.add("f22__commit-Button");
+				},700);
+			} else if (data[2] == undefined) {
+				activeERR();
+				document.querySelector(".f22__object-content input").classList.remove("f22__object-Button");
+				document.querySelector(".f22__object-content input").classList.add("f22__ERR");
+				setTimeout(() => {
+					document.querySelector(".f22__object-content input").classList.remove("f22__ERR");
+					document.querySelector(".f22__object-content input").classList.add("f22__object-Button");
+				},700);
+			} else {
+				crearSchedule();
+			}
+		}
+	}
+	const createQuest = () => {'use strict';
+		let quest = document.createElement("div");
+		quest.classList.add("f22__quest");
+		let divTime = document.createElement("div");
+		divTime.classList.add("f22__time-content");
+		let time = document.createElement("input");
+		time.classList.add("f22__time-Button");
+		time.type = "button";
+		time.value = "Tiempo de Inicio y Final";
+		let divCommitments = document.createElement("div");
+		divCommitments.classList.add("f22__commit-content");
+		let commitments = document.createElement("input");
+		commitments.classList.add("f22__commit-Button");
+		commitments.type = "button";
+		commitments.value = "Compromisos";
+		let divObjectives = document.createElement("div");
+		divObjectives.classList.add("f22__object-content");
+		let objectives = document.createElement("input");
+		objectives.classList.add("f22__object-Button");
+		objectives.type = "button";
+		objectives.value = "Objetivos";
+		let submit = document.createElement("input");
+		submit.type = "button";
+		submit.value = "Enviar";
+		divTime.appendChild(time);
+		divCommitments.appendChild(commitments);
+		divObjectives.appendChild(objectives);
+		quest.appendChild(divTime);
+		quest.appendChild(divCommitments);
+		quest.appendChild(divObjectives);
+		quest.appendChild(submit);
+		let develop = document.createElement("div");
+		develop.classList.add("f22__develop");
+		time.addEventListener("click",()=>validarExistencia(createQuestTime()));
+		commitments.addEventListener("click",()=>validarExistencia(createQuestCommitments()));
+		objectives.addEventListener("click",()=>validarExistencia(createQuestObjectives()));
+		submit.addEventListener("click",()=>validarCampo());
+		document.querySelector(".f22").appendChild(quest);
+		document.querySelector(".f22").appendChild(develop);
+	}
+ 	// Ejecución
+	container.innerHTML = `<div class="f22">
+	</div>`;
+	createQuest();
 }
 // Proyecto 23
 const clickboton23 = () => {'use strict';
+	// Variables
 	let container = document.querySelector(".desarrollo__div");
-	const fragment23 = document.createDocumentFragment();
-	container.appendChild(fragment23);
+	// Funciones
+	// Ejecución
 	container.innerHTML = `<div class="f23"></div>`;
+}
+// Proyecto 24
+const clickboton24 = () => {'use strict';
+	// Variables
+	let container = document.querySelector(".desarrollo__div");
+	// Funciones
+	// Ejecución
+	container.innerHTML = `<div class="f24"></div>`;
 }

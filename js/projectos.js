@@ -1110,28 +1110,6 @@ const clickboton16 = () => {'use strict';
 	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("name",{autoIncrement: true}));
 	IDBRequest.addEventListener("success",() => readObject());
 	IDBRequest.addEventListener("error",() => alert("ocurrio un error al abrir la base de datos"));
-	document.getElementById("add").addEventListener("click",()=> {'use strict';
-		let name = document.getElementById("name").value;
-		if (name.length > 0) {
-			if (document.querySelector(".possibly") != undefined) {
-				if (confirm("Hay Elementos sin guardar: ¿Quiéres continuar?")) {
-					addObject({name});
-					document.getElementById("name").value = "";
-					readObject();
-				}
-				else {
-					addObject({name});
-					document.getElementById("name").value = "";
-					readObject();
-				}
-			}
-			else {
-				addObject({name});
-				document.getElementById("name").value = "";
-				readObject();
-			}
-		}		
-	});
 	const addObject = object => {'use strict';
 		const IDBData = transactionOperation("readwrite","Objeto agregado correctamente");
 		IDBData.add(object);
@@ -1158,7 +1136,7 @@ const clickboton16 = () => {'use strict';
 		IDBData.delete(key);
 	}
 	const transactionOperation = (mode,msg) => {'use strict';
-		const IDBTransaction = IDBRequest.result.transaction("name",mode);
+	const IDBTransaction = IDBRequest.result.transaction("name",mode);
 		const objectStore = IDBTransaction.objectStore("name");
 		// IDBTransaction.addEventListener("complete",()=>{
 		// 	if (msg) alert.log(msg);
@@ -1199,6 +1177,28 @@ const clickboton16 = () => {'use strict';
 		});
 		return container;
 	}
+	document.getElementById("add").addEventListener("click",()=> {'use strict';
+		let name = document.getElementById("name").value;
+		if (name.length > 0) {
+			if (document.querySelector(".possibly") != undefined) {
+				if (confirm("Hay Elementos sin guardar: ¿Quiéres continuar?")) {
+					addObject({name});
+					document.getElementById("name").value = "";
+					readObject();
+				}
+				else {
+					addObject({name});
+					document.getElementById("name").value = "";
+					readObject();
+				}
+			}
+			else {
+				addObject({name});
+				document.getElementById("name").value = "";
+				readObject();
+			}
+		}		
+	});
 }
 // Proyecto 17
 const clickboton17 = () => {'use strict';
@@ -2624,6 +2624,37 @@ const clickboton22 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	let data = [];
 	// Funciones
+	const IDBRequest = indexedDB.open("horario",1);
+	IDBRequest.addEventListener("upgradeneeded",()=> IDBRequest.result.createObjectStore("week",{autoIncrement: true}));
+	IDBRequest.addEventListener("success",() => readObject());
+	IDBRequest.addEventListener("error",() => alert("ocurrio un error al abrir la base de datos"));
+	const addObject = object => {'use strict';
+		const IDBData = transactionOperation("readwrite","Objeto agregado correctamente");
+		IDBData.add(object);
+	}
+	const eliminarObject = key => {'use strict';
+		const IDBData = transactionOperation("readwrite","Objeto eliminado correctamente");
+		IDBData.delete(key);
+	}
+	const readObject = () => {'use strict';
+		const IDBData = transactionOperation("readonly");
+		const cursor = IDBData.openCursor();
+		const fragment = document.createDocumentFragment();
+		cursor.addEventListener("success",()=>{
+			if (cursor.result) {
+				crearSchedule(cursor.result.key,cursor.result.value);
+				// cursor.result.continue();
+			}
+		});
+	}
+	const transactionOperation = (mode,msg) => {'use strict';
+		const IDBTransaction = IDBRequest.result.transaction("week",mode);
+		const objectStore = IDBTransaction.objectStore("week");
+		// IDBTransaction.addEventListener("complete",()=>{
+		// 	if (msg) alert.log(msg);
+		// });
+		return objectStore;
+	}
 	const rangeTime = (input,modo) => {
 		if (modo == 0) {
 			if (input == 24) input = 0;
@@ -2704,7 +2735,7 @@ const clickboton22 = () => {'use strict';
 		});
 		time.appendChild(document.createTextNode("Desde: "));
 		time.appendChild(startHour);
-		time.appendChild(document.createTextNode(":00h  Hasta: "));
+		time.appendChild(document.createTextNode(":00h Hasta: "));
 		time.appendChild(endHour);
 		time.appendChild(document.createTextNode(":00h"));
 		time.appendChild(getTime);
@@ -2712,6 +2743,8 @@ const clickboton22 = () => {'use strict';
 		return time;
 	}
 	const createAdds = (modo,n) => {'use strict';
+		let container_right = document.createElement("div");
+		container_right.classList.add("f22__right-content");
 		let div = document.createElement("div");
 		div.classList.add("f22__right-div");
 		let name = document.createElement("div");
@@ -2761,7 +2794,8 @@ const clickboton22 = () => {'use strict';
 			}
 			whenInput.appendChild(document.createTextNode("Desde: "));
 			whenInput.appendChild(startHour);
-			whenInput.appendChild(document.createTextNode(":00h  Hasta: "));
+			whenInput.appendChild(document.createTextNode(":00h "));
+			whenInput.appendChild(document.createTextNode(" Hasta:"));
 			whenInput.appendChild(endHour);
 			whenInput.appendChild(document.createTextNode(":00h"));
 			whenInput.appendChild(getTime);
@@ -2879,7 +2913,25 @@ const clickboton22 = () => {'use strict';
 		div.appendChild(typeInput);
 		div.appendChild(weekName);
 		div.appendChild(weekInputs);
-		return div;
+		container_right.appendChild(div);
+		let delete_div = document.createElement('div');
+		let delete_svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+		delete_svg.classList.add("f22__right__delete");
+		delete_svg.setAttribute("viewbox","0 0 15 15");
+		let delete_head = document.createElementNS("http://www.w3.org/2000/svg", "path");
+		delete_head.setAttribute("d",`M2 3 H8 Q9 3 9 2 T8 1 L7 1 Q6.7 .15 6 .15 L4 .15 Q3.3 .15 3 1 L2 1 Q1 1 1 2 T2 3z
+		M2 2.5 H8 Q8.5 2.5 8.5 2 T8 1.5 L2 1.5 Q1.5 1.5 1.5 2 T2 2.5z
+		M3.75 1  H6.25 Q6.5 1 6.5 .75 T6.25 .5 L3.75 .5 Q3.5 .5 3.5 .75 T3.75 1z`);
+		let delete_body = document.createElementNS("http://www.w3.org/2000/svg", "path");
+		delete_body.setAttribute("d",`M2 2.5 V9 Q2 10 3 10 L7 10 Q8 10 8 9 L8 2.5z
+		M2.5 3 V9 Q2.5 9.5 3 9.5 L7 9.5 Q7.5 9.5 7.5 9 L7.5 3z
+		M3 4.5 V8 Q3 8.5 3.3 8.5 T3.6 8 L3.6 4.5 Q3.6 4 3.3 4 T3 4.5z
+		M4.7 4.5 V8 Q4.7 8.5 5 8.5 T5.3 8 L5.3 4.5 Q5.3 4 5 4 T4.7 4.5z
+		M6.4 4.5 V8 Q6.4 8.5 6.7 8.5 T7 8 L7 4.5 Q7 4 6.7 4 T6.4 4.5z`);
+		delete_svg.appendChild(delete_head);
+		delete_svg.appendChild(delete_body);
+		container_right.appendChild(delete_svg);
+		return container_right;
 	}
 	const createQuestCommitments = () => {'use strict';
 		let commitments = document.createElement("div");
@@ -2897,11 +2949,13 @@ const clickboton22 = () => {'use strict';
 			for (let i = 0; i < data[1].length; i++) {
 				let div = createAdds(1,i);
 				right.appendChild(div);
+				div.querySelector(".f22__right__delete").addEventListener("click", () => right.removeChild(div));
 			}
 		}
 		addCommitments.addEventListener("click", () => {
 			let div = createAdds(1,-1);
 			right.appendChild(div);
+			div.querySelector(".f22__right__delete").addEventListener("click", () => right.removeChild(div));
 		});
 		commitments.appendChild(commitleft);
 		commitments.appendChild(right);
@@ -2923,11 +2977,13 @@ const clickboton22 = () => {'use strict';
 			for (let i = 0; i < data[2].length; i++) {
 				let div = createAdds(2,i);
 				right.appendChild(div);
+				div.querySelector(".f22__right__delete").addEventListener("click", () => right.removeChild(div));
 			}
 		}
 		addObjectives.addEventListener("click", () => {
 			let div = createAdds(2,-1);
 			right.appendChild(div);
+			div.querySelector(".f22__right__delete").addEventListener("click", () => right.removeChild(div));
 		});
 		objectives.appendChild(objectleft);
 		objectives.appendChild(right);
@@ -2940,21 +2996,19 @@ const clickboton22 = () => {'use strict';
 		document.querySelector(".f22__quest").appendChild(err);
 		setTimeout(() => {
 			document.querySelector(".f22__quest").removeChild(err);
-		},700);
+		},1000);
 	}
 	const validarExistencia = e => {
 		let develop = document.querySelector(".f22__develop");
 		if (develop.hasChildNodes() == false) {
 			if (document.querySelector(".f22__time-content").children.length == 1 && e.className != "f22__time") {
-				if (document.querySelector(".f22__quest").children.length == 5) {
-					activeERR();
-					document.querySelector(".f22__time-content input").classList.remove("f22__time-Button");
-					document.querySelector(".f22__time-content input").classList.add("f22__ERR");
-					setTimeout(() => {
-						document.querySelector(".f22__time-content input").classList.remove("f22__ERR");
-						document.querySelector(".f22__time-content input").classList.add("f22__time-Button");
-					},700);
-				}
+				activeERR();
+				document.querySelector(".f22__time-content input").classList.remove("f22__time-Button");
+				document.querySelector(".f22__time-content input").classList.add("f22__ERR");
+				setTimeout(() => {
+					document.querySelector(".f22__time-content input").classList.remove("f22__ERR");
+					document.querySelector(".f22__time-content input").classList.add("f22__time-Button");
+				},1000);
 			} else {
 				let options = document.createElement("div");
 				options.classList.add("f22__options");
@@ -2975,7 +3029,9 @@ const clickboton22 = () => {'use strict';
 							info.push(divContent.querySelector(".f22__time-get").textContent.split(" ")[2]);
 							let divInfo = document.createElement("div");
 							divInfo.classList.add("f22__time-data");
-							divInfo.textContent = `${info[0]}:00h - ${info[1]}:00h, ${info[2]} horas`;
+							divInfo.textContent = `${info[0]}:00h - ${info[1]}:00h`;
+							document.querySelector(".f22__admin_time").textContent = info[2] + " :00 horas";
+							document.querySelector(".f22__admin_time").style.borderBottom = "1px solid #ccc";
 							if (document.querySelector(".f22__time-content").children.length == 1) {
 								document.querySelector(".f22__time-content").appendChild(divInfo);
 							} else {
@@ -2987,7 +3043,7 @@ const clickboton22 = () => {'use strict';
 							document.querySelector(".f22__ERR").textContent = "Completa los campos";
 						}
 						data[0] = [info[0],parseInt(info[1]) - 1,parseInt(info[2])];
-					} else if (e.className == "f22__commit") {
+					} else if (e.className == "f22__commit" || e.className == "f22__object") {
 						let info = [];
 						divContent.querySelectorAll(".f22__right .f22__right-div").forEach((content)=>{
 							let subinfo = [];
@@ -3011,52 +3067,46 @@ const clickboton22 = () => {'use strict';
 							}
 							info.push(subinfo);
 						});
-						data[1] = info;
-						let divInfo = document.createElement("div");
-						divInfo.classList.add("f22__commit-data");
-						divInfo.textContent = `Compromisos: ${info.length}`;
-						if (document.querySelector(".f22__commit-content").children.length == 1) {
-							document.querySelector(".f22__commit-content").appendChild(divInfo);
-						} else {
-							document.querySelector(".f22__commit-content").removeChild(document.querySelector(".f22__commit-data"));
-							document.querySelector(".f22__commit-content").appendChild(divInfo);
-						}
-					} else if (e.className == "f22__object") {
-						let info = [];
-						divContent.querySelectorAll(".f22__right .f22__right-div").forEach((content)=>{
-							let subinfo = [];
-							for (let i = 1; i < 12; i+=2) {
-								if (i == 1 || i == 5) {
-									subinfo.push(content.children[i].textContent);
-								} else if (i == 3) {
-									let temporal = [];
-									content.children[i].querySelectorAll("input").forEach((input)=>temporal = input.value);
-									subinfo.push(temporal);
-								} else if (i == 7) {
-									subinfo.push(content.children[i].value);
-								} else if (i == 9) {
-									let temporal = [];
-									content.children[i].querySelectorAll(".f22__right-active").forEach((input)=>{
-										temporal.push(input.id);
-									});
-									subinfo.push(temporal);
-								}
+						if (e.className == "f22__commit") {
+							data[1] = info;
+							let divInfo = document.createElement("div");
+							divInfo.classList.add("f22__commit-data");
+							divInfo.textContent = `Compromisos: ${info.length}`;
+							if (document.querySelector(".f22__commit-content").children.length == 1) {
+								document.querySelector(".f22__commit-content").appendChild(divInfo);
+							} else {
+								document.querySelector(".f22__commit-content").removeChild(document.querySelector(".f22__commit-data"));
+								document.querySelector(".f22__commit-content").appendChild(divInfo);
 							}
-							info.push(subinfo);
-						});
-						data[2] = info;
-						let divInfo = document.createElement("div");
-						divInfo.classList.add("f22__object-data");
-						divInfo.textContent = `Objetivos: ${info.length}`;
-						if (document.querySelector(".f22__object-content").children.length == 1) {
-							document.querySelector(".f22__object-content").appendChild(divInfo);
 						} else {
-							document.querySelector(".f22__object-content").removeChild(document.querySelector(".f22__object-data"));
-							document.querySelector(".f22__object-content").appendChild(divInfo);
+							data[2] = info;
+							let divInfo = document.createElement("div");
+							divInfo.classList.add("f22__object-data");
+							divInfo.textContent = `Objetivos: ${info.length}`;
+							if (document.querySelector(".f22__object-content").children.length == 1) {
+								document.querySelector(".f22__object-content").appendChild(divInfo);
+							} else {
+								document.querySelector(".f22__object-content").removeChild(document.querySelector(".f22__object-data"));
+								document.querySelector(".f22__object-content").appendChild(divInfo);
+							}
 						}
 					}
 				});
-				deleteButton.addEventListener("click", () => {});
+				deleteButton.addEventListener("click", () => {
+					let divContent = document.querySelector(`.${e.className}`);
+					if (e.className == "f22__time") {
+						data[0] = undefined;
+						divContent.querySelectorAll("input").forEach((input) => input.value = "");
+						if (document.querySelector(".f22__time-data")) document.querySelector(".f22__time-content").removeChild(document.querySelector(".f22__time-data"));
+					} else if (e.className == "f22__commit" || e.className == "f22__object") {
+						let index = divContent.querySelectorAll(".f22__right-content").length;
+						let name = e.className;
+						for (let i = 0; i < index; i++) document.querySelector(".f22__right").removeChild(document.querySelector(".f22__right-content"));
+						if (document.querySelector(`.${name}-data`)) document.querySelector(`.${name}-content`).removeChild(document.querySelector(`.${name}-data`));
+						if (e.className == "f22__commit") data[1] = undefined;
+						else data[2] = undefined;
+					}
+				});
 				options.appendChild(saveButton);
 				options.appendChild(deleteButton);
 				develop.appendChild(e);
@@ -3074,7 +3124,13 @@ const clickboton22 = () => {'use strict';
 		day.style.gridArea = `${grid_area}`;
 		return day;
 	}
-	const crearSchedule = () => {'use strict';
+	const crearSchedule = (key,information) => {'use strict';
+		let inf
+		if (key != 0) {
+			inf = information;
+		} else {
+			inf = data;
+		}
 		let content = document.querySelector(".f22");
 		content.removeChild(document.querySelector(`.f22__develop`));
 		content.removeChild(document.querySelector(`.f22__quest`));
@@ -3113,35 +3169,35 @@ const clickboton22 = () => {'use strict';
 		dayContent.appendChild(friday);
 		dayContent.appendChild(saturday);
 		let divDay = document.createElement("div");
-		// console.log(data[0]); // Complete
-		// console.log(data[1]); // Complete
-		// console.log(data[2]); // Complete
+		// console.log(inf[0]); // Complete
+		// console.log(inf[1]); // Complete
+		// console.log(inf[2]); // Complete
 		// Crear Filas configuradas
-		for (let k = data[0][0]; k <= parseInt(data[0][1]); k++) {
+		for (let k = inf[0][0]; k <= parseInt(inf[0][1]); k++) {
 			for (let j = 0; j <= 7; j++) {
 				// Crear Columnas configuradas
 				if (j == 0) {
-					let day = createElementDiv(`${k}:00 h`,`f22__days-day-${j}`,`${k-data[0][0]+2} / 1 / ${k-data[0][0]+3} / 2`);
+					let day = createElementDiv(`${k}:00 h`,`f22__days-day-${j}`,`${k-inf[0][0]+2} / 1 / ${k-inf[0][0]+3} / 2`);
 					divDay.appendChild(day);
 				} else {
 					// Configurando Compromisos
-					if (data[1].length != 0) {
-						all:for (let l = 0; l < data[1].length; l++) {
-							let comit = data[1][l];
+					if (inf[1].length != 0) {
+						all:for (let l = 0; l < inf[1].length; l++) {
+							let comit = inf[1][l];
 							if (comit[4].includes(`${j - 1}`) && parseInt(comit[1][0]) <= k && k <= parseInt(comit[1][1])) {
 								if (parseInt(comit[1][0]) == k) {
 									let day = createElementDiv(comit[0],`f22__days-day-${j}`,
-										`${parseInt(comit[1][0]) - data[0][0] + 2} / ${j + 1} / ${parseInt(comit[1][1]) - data[0][0] + 3} / ${j + 2}`);
+										`${parseInt(comit[1][0]) - inf[0][0] + 2} / ${j + 1} / ${parseInt(comit[1][1]) - inf[0][0] + 3} / ${j + 2}`);
 									divDay.appendChild(day);
 								}
 								break all;
-							} else if (l == data[1].length - 1) {
-								let day = createElementDiv("Libre",`f22__days-day-${j}`,`${k - data[0][0] + 2} / ${j + 1} / ${k - data[0][0] + 3} / ${j + 2}`);
+							} else if (l == inf[1].length - 1) {
+								let day = createElementDiv("Libre",`f22__days-day-${j}`,`${k - inf[0][0] + 2} / ${j + 1} / ${k - inf[0][0] + 3} / ${j + 2}`);
 								divDay.appendChild(day);
 							}
 						}
 					} else {
-						let day = createElementDiv("Libre",`f22__days-day-${j}`,`${k - data[0][0] + 2} / ${j + 1} / ${k - data[0][0] + 3} / ${j + 2}`);
+						let day = createElementDiv("Libre",`f22__days-day-${j}`,`${k - inf[0][0] + 2} / ${j + 1} / ${k - inf[0][0] + 3} / ${j + 2}`);
 						divDay.appendChild(day);
 					}
 				}
@@ -3175,7 +3231,7 @@ const clickboton22 = () => {'use strict';
 			}
 			info.push(subinfo);
 		}
-		if (data[2].length != 0) {
+		if (inf[2].length != 0) {
 			// Configurando Objetivos
 			// console.log(info);
 			for (let j = 0; j <= 7; j++) {
@@ -3188,9 +3244,9 @@ const clickboton22 = () => {'use strict';
 						let allPriritys = [0,0,0,0];
 						// Suma total del maximo de objetivos en un día
 						let stop = 0;
-						for (let l = 0; l < data[2].length; l++) {
-							if (data[2][l][4].includes(`${j - 1}`)) {
-								let num = parseInt(data[2][l][3]);
+						for (let l = 0; l < inf[2].length; l++) {
+							if (inf[2][l][4].includes(`${j - 1}`)) {
+								let num = parseInt(inf[2][l][3]);
 								allPriritys[num] += 1;
 								stop++;
 							}
@@ -3219,8 +3275,8 @@ const clickboton22 = () => {'use strict';
 							let ajuste_perfecto = true;
 							let objectives = 0;
 							while (memory.length < stop) {
-								for (let l = 0; l < data[2].length; l++) {
-									let object = data[2][l];
+								for (let l = 0; l < inf[2].length; l++) {
+									let object = inf[2][l];
 									// Si el compromiso se debe agregar
 									if (object[4].includes(`${j - 1}`)) {
 										if (parseInt(object[1]) <= duration && memoryFree + parseInt(object[1]) <= time[2]) {
@@ -3230,9 +3286,9 @@ const clickboton22 = () => {'use strict';
 												if (parseInt(object[1]) == duration && !memory.includes(object[0])) {
 													// Prioridades
 													let all_priorities_perfects = [0,0,0,0]
-													for (let m = 0; m < data[2].length; m++) {
-														if (data[2][m][4].includes(`${j - 1}`) && parseInt(data[2][m][1]) == duration) {
-															let numP = parseInt(data[2][m][3]);
+													for (let m = 0; m < inf[2].length; m++) {
+														if (inf[2][m][4].includes(`${j - 1}`) && parseInt(inf[2][m][1]) == duration) {
+															let numP = parseInt(inf[2][m][3]);
 															all_priorities_perfects[numP] += 1;
 														}
 													}
@@ -3308,7 +3364,7 @@ const clickboton22 = () => {'use strict';
 				setTimeout(() => {
 					document.querySelector(".f22__time-content input").classList.remove("f22__ERR");
 					document.querySelector(".f22__time-content input").classList.add("f22__time-Button");
-				},700);
+				},1000);
 			} else if (data[1] == undefined) {
 				activeERR();
 				document.querySelector(".f22__commit-content input").classList.remove("f22__commit-Button");
@@ -3316,7 +3372,7 @@ const clickboton22 = () => {'use strict';
 				setTimeout(() => {
 					document.querySelector(".f22__commit-content input").classList.remove("f22__ERR");
 					document.querySelector(".f22__commit-content input").classList.add("f22__commit-Button");
-				},700);
+				},1000);
 			} else if (data[2] == undefined) {
 				activeERR();
 				document.querySelector(".f22__object-content input").classList.remove("f22__object-Button");
@@ -3324,9 +3380,10 @@ const clickboton22 = () => {'use strict';
 				setTimeout(() => {
 					document.querySelector(".f22__object-content input").classList.remove("f22__ERR");
 					document.querySelector(".f22__object-content input").classList.add("f22__object-Button");
-				},700);
+				},1000);
 			} else {
-				crearSchedule();
+				addObject(data);
+				crearSchedule(0);
 			}
 		}
 	}
@@ -3361,14 +3418,24 @@ const clickboton22 = () => {'use strict';
 		quest.appendChild(divCommitments);
 		quest.appendChild(divObjectives);
 		quest.appendChild(submit);
-		let develop = document.createElement("div");
-		develop.classList.add("f22__develop");
 		time.addEventListener("click",()=>validarExistencia(createQuestTime()));
 		commitments.addEventListener("click",()=>validarExistencia(createQuestCommitments()));
 		objectives.addEventListener("click",()=>validarExistencia(createQuestObjectives()));
 		submit.addEventListener("click",()=>validarCampo());
+		let develop = document.createElement("div");
+		develop.classList.add("f22__develop");
+		let admin = document.createElement("div");
+		admin.classList.add("f22__admin");
+		let admin_time = document.createElement("div");
+		admin_time.classList.add("f22__admin_time");
+		let admin_date = document.createElement("div");
+		admin_date.classList.add("f22__admin_date");
+		admin.appendChild(admin_time);
+		admin.appendChild(admin_date);
 		document.querySelector(".f22").appendChild(quest);
 		document.querySelector(".f22").appendChild(develop);
+		document.querySelector(".f22").appendChild(admin);
+		// Interfaz
 	}
  	// Ejecución
 	container.innerHTML = `<div class="f22">

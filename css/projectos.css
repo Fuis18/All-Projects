@@ -709,7 +709,7 @@
 /*Proyecto 22*/
 .f22 {
 	display: grid;
-	grid-template-columns: min-content 1fr;
+	grid-template-columns: min-content 1fr min-content;
 	grid-gap: 5px;
 }
 .f22__quest {
@@ -762,14 +762,19 @@
     width: 30px;
     text-align: center;
 }
+.f22__quest .f22__ERR {
+	width: 170px;
+}
 .f22__ERR {
-/*	display: none;*/
     background: #300;
     border: 1px solid #a00;
     border-radius: 50px;
 	color: #f77;
 	text-align: center;
 	margin: 5px 0;
+}
+.f22__ERR[type="button"] {
+	cursor: pointer;
 }
 .f22__commit, .f22__object {
 	display: grid;
@@ -788,8 +793,9 @@
     position: sticky;
     top: 10px;
 }
-.f22__right {
-	width: 85%;
+.f22__right-content {
+	display: grid;
+	grid-template-columns: 1fr 40px;
 }
 .f22__right-div {
 	display: grid;
@@ -808,10 +814,6 @@
 	padding: 3px 8px;
 	overflow-wrap: anywhere;
 }
-/* .f22__right-input {
-    border: 1px solid #ccc;
-    border-radius: 20px;
-} */
 .f22__right-div div:nth-child(4) {
 	text-align: center;
 	border: none;
@@ -836,6 +838,30 @@
     cursor: pointer;
 	background: #ccc;
 	color: #000;
+}
+.f22__right__delete {
+	cursor: pointer;
+	translate: 0 15px;
+	transform: scale(3.4);
+    height: 15px;
+    width: 15px;
+}
+.f22__right__delete:hover > path:nth-child(1) {
+	rotate: 30deg;
+	translate: 5px -1px;
+}
+.f22__right__delete:hover > path:nth-child(2) {
+	rotate: -5deg;
+	translate: 2px 4px;
+}
+.f22__right__delete path {
+	fill-rule: evenodd;
+	fill: #ccc;
+	translate: 1px 4px;
+	transition: all .4s;
+}
+.f22__admin_time {
+	min-width: 80px;
 }
 .f22__days-content {
 	grid-column: 1 / 3;
@@ -903,6 +929,11 @@
 	.f19__update-optionsButtons {
 		grid-gap: initial;
 		height: 60px;
+	}
+}
+@media screen and (max-width: 750px) {
+	.f22 {
+		grid-template-columns: initial;
 	}
 }
 /*Animaciones*/

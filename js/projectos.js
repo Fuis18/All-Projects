@@ -2990,13 +2990,43 @@ const clickboton22 = () => {'use strict';
 		return objectives;
 	}
 	const activeERR = () => {
-		let err = document.createElement("div");
-		err.classList.add("f22__ERR");
-		err.textContent = "Completa el campo";
-		document.querySelector(".f22__quest").appendChild(err);
-		setTimeout(() => {
-			document.querySelector(".f22__quest").removeChild(err);
-		},1000);
+		let content = document.querySelector(".f22__quest");
+		if (!content.querySelector(".f22__ERR")) {
+			let err = document.createElement("div");
+			err.classList.add("f22__ERR");
+			err.textContent = "Completa el campo";
+			content.appendChild(err);
+			setTimeout(() => {
+				content.removeChild(err);
+			},1000);
+		}
+	}
+	const validarTiempos = mode => {
+		if (mode == 0) {
+			let row = [1,2];
+			for (let i = 0; i < 7; i++) {
+				let div = document.createElement("div");
+				div.style.gridRow = `${row[0]} / ${row[1]}`;
+				switch (row[0]) {
+					case 1:	div.textContent = "D";	break;
+					case 2:	div.textContent = "L";	break;
+					case 3:	div.textContent = "M";	break;
+					case 4:	div.textContent = "X";	break;
+					case 5:	div.textContent = "J";	break;
+					case 6:	div.textContent = "V";	break;
+					default:div.textContent = "S";	break;
+				}
+				document.querySelector(".f22__admin__date").appendChild(div);
+				let day = document.createElement("div");
+				day.classList.add("f22__admin__date-t");
+				day.style.gridArea = `${row[0]} / 2 / ${row[1]} / ${data[0][2]}`;
+				document.querySelector(".f22__admin__date").appendChild(day);
+				row[0]++;
+				row[1]++;
+			}
+		} else {
+			console.log(data[1])
+		}
 	}
 	const validarExistencia = e => {
 		let develop = document.querySelector(".f22__develop");
@@ -3030,19 +3060,24 @@ const clickboton22 = () => {'use strict';
 							let divInfo = document.createElement("div");
 							divInfo.classList.add("f22__time-data");
 							divInfo.textContent = `${info[0]}:00h - ${info[1]}:00h`;
-							document.querySelector(".f22__admin_time").textContent = info[2] + " :00 horas";
-							document.querySelector(".f22__admin_time").style.borderBottom = "1px solid #ccc";
+							document.querySelector(".f22__admin__time").textContent = info[2] + " :00 horas";
+							document.querySelector(".f22__admin__time").style.borderBottom = "1px solid #ccc";
+							document.querySelector(".f22__admin__date").style.gridTemplateColumns = `repeat(${info[2]},1fr)`;
 							if (document.querySelector(".f22__time-content").children.length == 1) {
 								document.querySelector(".f22__time-content").appendChild(divInfo);
 							} else {
 								document.querySelector(".f22__time-content").removeChild(document.querySelector(".f22__time-data"));
 								document.querySelector(".f22__time-content").appendChild(divInfo);
 							}
+							data[0] = [info[0],parseInt(info[1]) - 1,parseInt(info[2])];
+							validarTiempos(0);
 						} else {
-							document.querySelector(".f22__ERR").style.display = "block";
-							document.querySelector(".f22__ERR").textContent = "Completa los campos";
+							document.querySelector(".f22__time .f22__ERR").style.display = "block";
+							document.querySelector(".f22__time .f22__ERR").textContent = "Completa los campos";
+							setTimeout(() => {
+								document.querySelector(".f22__time .f22__ERR").style.display = "none";
+							},1000);
 						}
-						data[0] = [info[0],parseInt(info[1]) - 1,parseInt(info[2])];
 					} else if (e.className == "f22__commit" || e.className == "f22__object") {
 						let info = [];
 						divContent.querySelectorAll(".f22__right .f22__right-div").forEach((content)=>{
@@ -3089,6 +3124,7 @@ const clickboton22 = () => {'use strict';
 								document.querySelector(".f22__object-content").removeChild(document.querySelector(".f22__object-data"));
 								document.querySelector(".f22__object-content").appendChild(divInfo);
 							}
+							validarTiempos(1);
 						}
 					}
 				});
@@ -3125,15 +3161,12 @@ const clickboton22 = () => {'use strict';
 		return day;
 	}
 	const crearSchedule = (key,information) => {'use strict';
-		let inf
-		if (key != 0) {
-			inf = information;
-		} else {
-			inf = data;
-		}
+		let inf;
+		key != 0 ? inf = information : inf = data;
 		let content = document.querySelector(".f22");
 		content.removeChild(document.querySelector(`.f22__develop`));
 		content.removeChild(document.querySelector(`.f22__quest`));
+		content.removeChild(document.querySelector(`.f22__admin`));
 		let dayContent = document.createElement("div");
 		dayContent.classList.add("f22__days-content");
 		let options = document.createElement("div");
@@ -3353,10 +3386,13 @@ const clickboton22 = () => {'use strict';
 				}
 			}
 		}
-		content.appendChild(dayContent);
+		let schedule = document.createElement("div");
+		schedule.classList.add("f22__schedule");
+		schedule.appendChild(dayContent);
+		content.appendChild(schedule);
 	}
 	const validarCampo = () => {'use strict';
-		if (document.querySelector(".f22__quest").children.length == 4) {
+	if (document.querySelector(".f22__quest").children.length == 4) {
 			if (data[0] == undefined) {
 				activeERR();
 				document.querySelector(".f22__time-content input").classList.remove("f22__time-Button");
@@ -3427,9 +3463,9 @@ const clickboton22 = () => {'use strict';
 		let admin = document.createElement("div");
 		admin.classList.add("f22__admin");
 		let admin_time = document.createElement("div");
-		admin_time.classList.add("f22__admin_time");
+		admin_time.classList.add("f22__admin__time");
 		let admin_date = document.createElement("div");
-		admin_date.classList.add("f22__admin_date");
+		admin_date.classList.add("f22__admin__date");
 		admin.appendChild(admin_time);
 		admin.appendChild(admin_date);
 		document.querySelector(".f22").appendChild(quest);

@@ -101,11 +101,20 @@
 }
 .f3__error-active {
 	display: block;
-	font-size: 12px;
-	color: #a11;
+	background: #300;
+    border: 1px solid #a00;
+    border-radius: 50px;
+    color: #f77;
+	padding: 5px 10px;
+	width: 225px;
 }
 .f3__error-inactive {
 	display: none;
+}
+.f3__submit {
+	border: 2px inset;
+	border-color: #777 #888;
+	cursor: pointer;
 }
 /*Proyecto 4*/
 .f4, .f4__buttons {

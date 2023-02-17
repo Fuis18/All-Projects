@@ -451,7 +451,7 @@
 .f19__add-Div input {
     padding: 5px 8px;
     border-radius: 18px;
-    border: 1px solid #333;
+    border: 1px solid #ccc;
     width: 187px;
 }
 .f19__add-Div input:focus-visible {
@@ -462,11 +462,12 @@
 }
 .f19__add-Div input[type="submit"] {
 	margin: 4px 1px;
-	border: none;
 	width: 57.5px;
 }
 .f19__add-submit:hover {
-	background: #bbb;
+	background: #ccc;
+	color: #333;
+	cursor: pointer;
 }
 .f19__add__error-content {
 	background: #300;

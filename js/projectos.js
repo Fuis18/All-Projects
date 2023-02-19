@@ -281,7 +281,7 @@ const clickboton3 = () => {'use strict';
 				}
 			}
 			container.appendChild(fragment1);
-			container.removeChild(document.querySelector(".f3"));
+			document.querySelector(".f3").remove();
 		}
 	});
 }
@@ -973,8 +973,8 @@ const clickboton14 = () => {'use strict';
 const clickboton15 = () => {'use strict';
 	let container = document.querySelector(".desarrollo__div");
 	const desarrollo = type => {'use strict';
-		document.querySelector(".pregunta15").removeChild(document.querySelector(".select15"));
-		document.querySelector(".pregunta15").removeChild(document.querySelector(".button15"));
+		document.querySelector(".select15").remove();
+		document.querySelector(".button15").remove();
 		if (type == "text") {
 			document.querySelector(".desarrollo15").innerHTML = `
 			<div class="loading-bar15"></div>
@@ -1173,7 +1173,7 @@ const clickboton16 = () => {'use strict';
 		});
 		deleteButton.addEventListener("click",()=>{
 			eliminarObject(id);
-			document.querySelector(".names").removeChild(container);
+			container.remove();
 		});
 		return container;
 	}
@@ -1332,7 +1332,7 @@ const clickboton18 = () => {'use strict';
 			node.appendChild(p3);
 			fragment18.appendChild(node);
 		}
-		container.removeChild(document.querySelector(".div18"));
+		document.querySelector(".div18").remove();
 		container.appendChild(fragment18);
 	});
 }
@@ -2612,9 +2612,7 @@ const clickboton21 = () => {'use strict';
 						console.log(e.target.value);
 				}
 				document.querySelector(".f21__develop").appendChild(add);
-			} else {
-				document.querySelector(".f21__develop").removeChild(document.querySelector(".f21__develop div"));
-			}
+			} else document.querySelector(".f21__develop div").remove();
 		});
 	});
 }
@@ -2629,30 +2627,28 @@ const clickboton22 = () => {'use strict';
 	IDBRequest.addEventListener("success",() => readObject());
 	IDBRequest.addEventListener("error",() => alert("ocurrio un error al abrir la base de datos"));
 	const addObject = object => {'use strict';
-		const IDBData = transactionOperation("readwrite","Objeto agregado correctamente");
+		const IDBData = transactionOperation("readwrite");
 		IDBData.add(object);
+		const key = IDBData.getAllKeys();
+		key.addEventListener("success",()=>{
+			if (key.result) crearSchedule(key.result,object);
+		});
 	}
 	const eliminarObject = key => {'use strict';
-		const IDBData = transactionOperation("readwrite","Objeto eliminado correctamente");
+		const IDBData = transactionOperation("readwrite");
 		IDBData.delete(key);
 	}
 	const readObject = () => {'use strict';
+		createQuest();
 		const IDBData = transactionOperation("readonly");
 		const cursor = IDBData.openCursor();
-		const fragment = document.createDocumentFragment();
 		cursor.addEventListener("success",()=>{
-			if (cursor.result) {
-				crearSchedule(cursor.result.key,cursor.result.value);
-				// cursor.result.continue();
-			}
+			if (cursor.result) crearSchedule(cursor.result.key,cursor.result.value);
 		});
 	}
-	const transactionOperation = (mode,msg) => {'use strict';
+	const transactionOperation = (mode) => {'use strict';
 		const IDBTransaction = IDBRequest.result.transaction("week",mode);
 		const objectStore = IDBTransaction.objectStore("week");
-		// IDBTransaction.addEventListener("complete",()=>{
-		// 	if (msg) alert.log(msg);
-		// });
 		return objectStore;
 	}
 	const rangeTime = (input,modo) => {
@@ -2758,10 +2754,12 @@ const clickboton22 = () => {'use strict';
 		if (modo == 1) {
 			when.textContent = "Hora:";
 			let startHour = document.createElement("input");
+			startHour.classList.add("f22__right-input-number");
 			startHour.type = "number";
 			startHour.setAttribute("min","-1");
 			startHour.setAttribute("max","24");
 			let endHour = document.createElement("input");
+			endHour.classList.add("f22__right-input-number");
 			endHour.type = "number";
 			endHour.setAttribute("min","-1");
 			endHour.setAttribute("max","24");
@@ -2803,6 +2801,7 @@ const clickboton22 = () => {'use strict';
 		} else {
 			when.textContent = "Duración:";
 			let hour = document.createElement("input");
+			hour.classList.add("f22__right-input-number");
 			hour.type = "number";
 			hour.setAttribute("min","-1");
 			hour.setAttribute("max","24");
@@ -2891,8 +2890,13 @@ const clickboton22 = () => {'use strict';
 			week.addEventListener("click",() => {
 				if (week.className == "f22__right-inactive") {
 					week.classList.replace("f22__right-inactive","f22__right-active");
-				} else {
+				} else if (week.className == "f22__right-active") {
 					week.classList.replace("f22__right-active","f22__right-inactive");
+				} else {
+					week.classList.replace("f22__ERR","f22__right-active");
+					document.querySelectorAll(".f22__right-div .f22__right-input:nth-child(10) .f22__ERR").forEach((e)=>{
+						e.classList.replace("f22__ERR","f22__right-inactive");
+					})
 				}
 			});
 			weekInputs.appendChild(week);
@@ -2949,13 +2953,13 @@ const clickboton22 = () => {'use strict';
 			for (let i = 0; i < data[1].length; i++) {
 				let div = createAdds(1,i);
 				right.appendChild(div);
-				div.querySelector(".f22__right__delete").addEventListener("click", () => right.removeChild(div));
+				div.querySelector(".f22__right__delete").addEventListener("click", () => div.remove());
 			}
 		}
 		addCommitments.addEventListener("click", () => {
 			let div = createAdds(1,-1);
 			right.appendChild(div);
-			div.querySelector(".f22__right__delete").addEventListener("click", () => right.removeChild(div));
+			div.querySelector(".f22__right__delete").addEventListener("click", () => div.remove());
 		});
 		commitments.appendChild(commitleft);
 		commitments.appendChild(right);
@@ -2977,13 +2981,13 @@ const clickboton22 = () => {'use strict';
 			for (let i = 0; i < data[2].length; i++) {
 				let div = createAdds(2,i);
 				right.appendChild(div);
-				div.querySelector(".f22__right__delete").addEventListener("click", () => right.removeChild(div));
+				div.querySelector(".f22__right__delete").addEventListener("click", () => div.remove());
 			}
 		}
 		addObjectives.addEventListener("click", () => {
 			let div = createAdds(2,-1);
 			right.appendChild(div);
-			div.querySelector(".f22__right__delete").addEventListener("click", () => right.removeChild(div));
+			div.querySelector(".f22__right__delete").addEventListener("click", () => div.remove());
 		});
 		objectives.appendChild(objectleft);
 		objectives.appendChild(right);
@@ -2996,9 +3000,7 @@ const clickboton22 = () => {'use strict';
 			err.classList.add("f22__ERR");
 			err.textContent = "Completa el campo";
 			content.appendChild(err);
-			setTimeout(() => {
-				content.removeChild(err);
-			},1000);
+			setTimeout(() => err.remove(),1000);
 		}
 	}
 	const validarTiempos = mode => {
@@ -3027,6 +3029,14 @@ const clickboton22 = () => {'use strict';
 		} else {
 			console.log(data[1])
 		}
+	}
+	const obeserver = (name) => {
+		console.log(name);
+		// let input = document.createElement("input");
+		// input.classList.add(`${e.className}__left-button`);
+		// input.type = "button"
+		// input.value = ">"
+		// document.querySelector(`.${e.className}__left`).appendChild(input);
 	}
 	const validarExistencia = e => {
 		let develop = document.querySelector(".f22__develop");
@@ -3066,7 +3076,7 @@ const clickboton22 = () => {'use strict';
 							if (document.querySelector(".f22__time-content").children.length == 1) {
 								document.querySelector(".f22__time-content").appendChild(divInfo);
 							} else {
-								document.querySelector(".f22__time-content").removeChild(document.querySelector(".f22__time-data"));
+								document.querySelector(".f22__time-data").remove()
 								document.querySelector(".f22__time-content").appendChild(divInfo);
 							}
 							data[0] = [info[0],parseInt(info[1]) - 1,parseInt(info[2])];
@@ -3080,14 +3090,29 @@ const clickboton22 = () => {'use strict';
 						}
 					} else if (e.className == "f22__commit" || e.className == "f22__object") {
 						let info = [];
+						let err = false;
 						divContent.querySelectorAll(".f22__right .f22__right-div").forEach((content)=>{
 							let subinfo = [];
 							for (let i = 1; i < 10; i+=2) {
 								if (i == 1 || i == 5) {
+									if (content.children[i].textContent == "") {
+										content.children[i].classList.remove("f22__right-input");
+										content.children[i].classList.add("f22__ERR");
+										content.children[i].addEventListener("keyup",() => {
+											content.children[i].classList.remove("f22__ERR");
+											content.children[i].classList.add("f22__right-input");
+										})
+										err = true;
+									}
 									subinfo.push(content.children[i].textContent);
 								} else if (i == 3) {
 									let temporal = [];
-									content.children[i].querySelectorAll("input").forEach((input)=>temporal.push(input.value));
+									content.children[i].querySelectorAll("input").forEach((input)=>{
+										if (input.value == "") input.classList.add("f22__ERR");
+										input.addEventListener("keyup",() => input.classList.remove("f22__ERR"))
+										err = true;
+										temporal.push(input.value)
+									});
 									temporal[1] = parseInt(temporal[1]) - 1;
 									subinfo.push(temporal);
 								} else if (i == 7) {
@@ -3097,34 +3122,58 @@ const clickboton22 = () => {'use strict';
 									content.children[i].querySelectorAll(".f22__right-active").forEach((input)=>{
 										temporal.push(input.id);
 									});
+									if (temporal.length == 0) {
+										content.children[i].querySelectorAll(".f22__right-input input[type='button']").forEach((input)=>{
+											input.classList.replace("f22__right-inactive","f22__ERR");
+											err = true;
+										})
+									}
 									subinfo.push(temporal);
 								}
 							}
-							info.push(subinfo);
-						});
-						if (e.className == "f22__commit") {
-							data[1] = info;
-							let divInfo = document.createElement("div");
-							divInfo.classList.add("f22__commit-data");
-							divInfo.textContent = `Compromisos: ${info.length}`;
-							if (document.querySelector(".f22__commit-content").children.length == 1) {
-								document.querySelector(".f22__commit-content").appendChild(divInfo);
-							} else {
-								document.querySelector(".f22__commit-content").removeChild(document.querySelector(".f22__commit-data"));
-								document.querySelector(".f22__commit-content").appendChild(divInfo);
+							if (!err) {
+								info.push(subinfo);
+								let divInfo = document.createElement("div");
+								if (e.className == "f22__commit") {
+									data[1] = info;
+									divInfo.textContent = `Compromisos: ${info.length}`;
+								} else {
+									data[2] = info;
+									divInfo.textContent = `Objetivos: ${info.length}`;
+								}
+								divInfo.classList.add(`${e.className}-data`);
+								if (document.querySelector(`.${e.className}-content`).children.length == 1) {
+									document.querySelector(`.${e.className}-content`).appendChild(divInfo);
+								} else {
+									document.querySelector(`.${e.className}-data`).remove();
+									document.querySelector(`.${e.className}-content`).appendChild(divInfo);
+								}
+								validarTiempos(1);
 							}
-						} else {
-							data[2] = info;
+						});
+						if (info == "" && !err) {
 							let divInfo = document.createElement("div");
-							divInfo.classList.add("f22__object-data");
-							divInfo.textContent = `Objetivos: ${info.length}`;
-							if (document.querySelector(".f22__object-content").children.length == 1) {
-								document.querySelector(".f22__object-content").appendChild(divInfo);
+							if (e.className == "f22__commit") {
+								data[1] = info;
+								divInfo.textContent = `Compromisos: ${info.length}`;
 							} else {
-								document.querySelector(".f22__object-content").removeChild(document.querySelector(".f22__object-data"));
-								document.querySelector(".f22__object-content").appendChild(divInfo);
+								data[2] = info;
+								divInfo.textContent = `Objetivos: ${info.length}`;
+							}
+							divInfo.classList.add(`${e.className}-data`);
+							if (document.querySelector(`.${e.className}-content`).children.length == 1) {
+								document.querySelector(`.${e.className}-content`).appendChild(divInfo);
+							} else {
+								document.querySelector(`.${e.className}-data`).remove();
+								document.querySelector(`.${e.className}-content`).appendChild(divInfo);
 							}
 							validarTiempos(1);
+						} else if (err) {
+							if (document.querySelector(`.${e.className}-data`)) {
+								document.querySelector(`.${e.className}-data`).remove();
+							}
+							console.log(data)
+							obeserver(e.className);
 						}
 					}
 				});
@@ -3133,12 +3182,12 @@ const clickboton22 = () => {'use strict';
 					if (e.className == "f22__time") {
 						data[0] = undefined;
 						divContent.querySelectorAll("input").forEach((input) => input.value = "");
-						if (document.querySelector(".f22__time-data")) document.querySelector(".f22__time-content").removeChild(document.querySelector(".f22__time-data"));
+						if (document.querySelector(".f22__time-data")) document.querySelector(".f22__time-data").remove();
 					} else if (e.className == "f22__commit" || e.className == "f22__object") {
 						let index = divContent.querySelectorAll(".f22__right-content").length;
 						let name = e.className;
 						for (let i = 0; i < index; i++) document.querySelector(".f22__right").removeChild(document.querySelector(".f22__right-content"));
-						if (document.querySelector(`.${name}-data`)) document.querySelector(`.${name}-content`).removeChild(document.querySelector(`.${name}-data`));
+						if (document.querySelector(`.${name}-data`)) document.querySelector(`.${name}-data`).remove();
 						if (e.className == "f22__commit") data[1] = undefined;
 						else data[2] = undefined;
 					}
@@ -3149,8 +3198,8 @@ const clickboton22 = () => {'use strict';
 				develop.appendChild(options);
 			}
 		} else {
-			develop.removeChild(document.querySelector(`.${develop.children[1].className}`));
-			develop.removeChild(document.querySelector(`.${develop.children[0].className}`));
+			develop.children[1].remove();
+			develop.children[0].remove();
 		}
 	}
 	const createElementDiv = (content,clase,grid_area) => {'use strict';
@@ -3161,12 +3210,10 @@ const clickboton22 = () => {'use strict';
 		return day;
 	}
 	const crearSchedule = (key,information) => {'use strict';
-		let inf;
-		key != 0 ? inf = information : inf = data;
-		let content = document.querySelector(".f22");
-		content.removeChild(document.querySelector(`.f22__develop`));
-		content.removeChild(document.querySelector(`.f22__quest`));
-		content.removeChild(document.querySelector(`.f22__admin`));
+		let inf = information
+		document.querySelector(`.f22__develop`).remove();
+		document.querySelector(`.f22__quest`).remove();
+		document.querySelector(`.f22__admin`).remove();
 		let dayContent = document.createElement("div");
 		dayContent.classList.add("f22__days-content");
 		let options = document.createElement("div");
@@ -3388,8 +3435,21 @@ const clickboton22 = () => {'use strict';
 		}
 		let schedule = document.createElement("div");
 		schedule.classList.add("f22__schedule");
+		schedule.id = key[0];
 		schedule.appendChild(dayContent);
-		content.appendChild(schedule);
+		let delete_schedule = document.createElement("input");
+		delete_schedule.classList.add("f22__schedule-input")
+		delete_schedule.type = "button";
+		delete_schedule.value = "Eliminar";
+		delete_schedule.addEventListener("click",() => {
+			document.querySelector(".f22__schedule").remove();
+			if (window.confirm("¿Estás seguro de elminar tu horario?")) {
+				createQuest();
+				eliminarObject(key[0]);
+			}
+		})
+		schedule.appendChild(delete_schedule);
+		document.querySelector(".f22").appendChild(schedule);
 	}
 	const validarCampo = () => {'use strict';
 	if (document.querySelector(".f22__quest").children.length == 4) {
@@ -3419,7 +3479,6 @@ const clickboton22 = () => {'use strict';
 				},1000);
 			} else {
 				addObject(data);
-				crearSchedule(0);
 			}
 		}
 	}
@@ -3476,7 +3535,6 @@ const clickboton22 = () => {'use strict';
  	// Ejecución
 	container.innerHTML = `<div class="f22">
 	</div>`;
-	createQuest();
 }
 // Proyecto 23
 const clickboton23 = () => {'use strict';

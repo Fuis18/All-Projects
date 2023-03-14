@@ -3111,7 +3111,6 @@ const clickboton22 = () => {'use strict';
 						}
 					}
 				}
-				console.log(active, min, max)
 				if (active || (min != 2 && min < max)) {
 					let free = createElementDiv("","f22__admin__date-t",`${row[0]} / ${min} / ${row[1]} / ${max}`);
 					date.appendChild(free);
@@ -3185,7 +3184,7 @@ const clickboton22 = () => {'use strict';
 						divContent.querySelectorAll(".f22__right .f22__right-div").forEach(content => {
 							let subinfo = [];
 							for (let i = 1; i < 10; i+=2) {
-								if (i == 1 || i == 5) {
+								if (i == 1) {
 									if (content.children[i].textContent == "") {
 										content.children[i].classList.remove("f22__right-input");
 										content.children[i].classList.add("f22__ERR");
@@ -3210,6 +3209,8 @@ const clickboton22 = () => {'use strict';
 									temporal[1] = parseInt(temporal[1]) - 1;
 									if (e.className == "f22__commit") temporal[2] = parseInt(content.children[i].querySelector(`.${e.className}-get`).textContent.split(" ")[2]);
 									subinfo.push(temporal);
+								} else if (i == 5) {
+									subinfo.push(content.children[i].textContent);
 								} else if (i == 7) {
 									subinfo.push(content.children[i].value);
 								} else if (i == 9) {
@@ -3266,7 +3267,6 @@ const clickboton22 = () => {'use strict';
 							if (document.querySelector(`.${e.className}-data`)) {
 								document.querySelector(`.${e.className}-data`).remove();
 							}
-							console.log(data)
 							obeserver(e.className);
 						} else if (info != "") {
 							validarTiempos(1);
@@ -3579,6 +3579,7 @@ const clickboton22 = () => {'use strict';
 					document.querySelector(".f22__object-content input").classList.remove("f22__ERR");
 					document.querySelector(".f22__object-content input").classList.add("f22__object-Button");
 				},1000);
+			} else if (document.querySelectorAll(".f22__admin__date .f22__admin__date-r").length > 0) {
 			} else {
 				addObject(data);
 				data = [];

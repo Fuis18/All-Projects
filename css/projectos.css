@@ -376,11 +376,14 @@
 #add, .delete {
 	cursor: pointer;
 }
+#add {
+	color: #333;
+}
 .delete:hover {
-	color: #999;
+	color: #fff;
 }
 .impossible {
-	color: #ccc;
+	color: #777;
 }
 .possibly {
 	color: #37d;
@@ -432,7 +435,7 @@
 	font-weight: 700;
 	font-family: monospace;
 	cursor: pointer;
-}
+}mentDiv
 .comentarios input[type="text"]::placeholder {
 	color: #bcf;
 	text-shadow: none;
@@ -649,7 +652,6 @@
 	border: none;
 	margin: 0 6px;
 	cursor: pointer;
-	color: #ccc;
 }
 .f19__update-toUpdate, .f19__update-toUpdated {
 	grid-column: 1 / 3;
@@ -711,7 +713,6 @@
 	border: 1px solid #ccc;
     border-radius: 20px;
     background: none;
-    color: #ccc;
     margin: 4px 1px;
 }
 .f21__develop h3, .f21__history h3 {
@@ -755,7 +756,6 @@
 	padding: 6px 8px;
 }
 .f22__quest div:nth-child(6), .f22__right-input, .f22__right-active, .f22__right-input, .f22__right-inactive {
-	padding: 3px 8px;
 	border: 1px solid #ccc;
 }
 .f22__time {
@@ -766,9 +766,7 @@
     border-radius: 50px;
     cursor: pointer;
     background: none;
-    color: #ccc;
     margin: 5px 0;
-    width: 170px;
 }
 .f22__time-Button:active, .f22__commit-Button:active, .f22__object-Button:active {
 	background: #ccc3;
@@ -778,7 +776,6 @@
     border: 1px solid #ccc;
     border-radius: 50px;
     background: none;
-    color: #ccc;
     width: 30px;
     text-align: center;
 }
@@ -808,7 +805,6 @@
     border-radius: 50px;
     cursor: pointer;
     background: none;
-    color: #ccc;
     font-size: 20px;
 	position: sticky;
 }
@@ -861,15 +857,9 @@
     justify-content: center;
     border: none;
 }
-.f22__right-div input[type="text"] {
-    cursor: text;
-    background: none;
-    color: #ccc;
-}
 .f22__right-inactive {
     cursor: pointer;
     background: none;
-    color: #ccc;
 }
 .f22__right-active {
     cursor: pointer;
@@ -903,7 +893,7 @@
 }
 .f22__admin__date {
 	display: grid;
-	grid-gap: 10px;
+	grid-gap: 10px 5px;
 	align-items: center;
     justify-items: center;
 	width: 230px;
@@ -912,10 +902,20 @@
 }
 .f22__admin__date div {
 	width: 100%;
+	min-width: 10px;
 	height: 10px;
 }
 .f22__admin__date-t {
 	border: 1px solid #ccc;
+}
+.f22__admin__date-g {
+	background: #0f0;
+}
+.f22__admin__date-b {
+	background: #00f;
+}
+.f22__admin__date-r {
+	background: #f00;
 }
 .f22__schedule {
 	grid-column: 1 / 3;

@@ -595,7 +595,7 @@ const clickboton4 = () => {'use strict';
 			<button class="f4__button-n"   value="ANS">ANS</button>
 		</div>
 	</div>`;
-	document.querySelectorAll(".f4__buttons button").forEach((button) => {
+	document.querySelectorAll(".f4__buttons button").forEach(button => {
 		button.addEventListener("click",()=>{
 			buttonValue(button.value);
 		});
@@ -1958,6 +1958,11 @@ const clickboton19 = () => {'use strict';
 		}
 	}
 	// Añadir
+	let date_now = new Date();
+	let day = date_now.getDate();
+	let month = date_now.getMonth() + 1;
+	if (month < 10) month = `0${month}`;
+	if (day < 10) day = `0${day}`;
 	container.innerHTML = `
 		<div class="f19">
 			<div class="f19__add">
@@ -1974,7 +1979,10 @@ const clickboton19 = () => {'use strict';
 				</div>
 				<div class="f19__add-Div">
 					<h3>Fecha de entrega</h3>
-					<input type="date" class="f19__add-date">
+					<input type="date" class="f19__add-date"
+						value="${date_now.getFullYear()}-${month}-${day}"
+						min="${date_now.getFullYear()}-${month}-${day}"
+						max="${date_now.getFullYear() + 1}-${month}-${day}">
 					<p style="display: none">La fecha esta incompleta</p>
 				</div>
 				<div class="f19__add-Div">
@@ -2574,7 +2582,7 @@ const clickboton21 = () => {'use strict';
 		</div>
 	</div>`;
 	let inputs = document.querySelectorAll(".f21__container input");
-	inputs.forEach((input)=>{
+	inputs.forEach(input=>{
 		input.addEventListener("click",(e)=>{
 			let add;
 			if (document.querySelector(".f21__develop").childElementCount == 1) {
@@ -2631,7 +2639,7 @@ const clickboton22 = () => {'use strict';
 		IDBData.add(object);
 		const key = IDBData.getAllKeys();
 		key.addEventListener("success",()=>{
-			if (key.result) crearSchedule(key.result,object);
+			if (key.result) crearSchedule(key.result[0],object);
 		});
 	}
 	const eliminarObject = key => {'use strict';
@@ -2652,22 +2660,22 @@ const clickboton22 = () => {'use strict';
 		return objectStore;
 	}
 	const rangeTime = (input,modo) => {
-		if (modo == 0) {
-			if (input == 24) input = 0;
-			else if (input == -1) input = 23;
-			else if (input > 24 || input.length > 2) input = "";
-			return input;
-		} else if (modo == 1) {
-			if (input == data[0][1] + 2) input = data[0][0];
+		if (input == 25) input = 1;
+		else if (input == -1) input = 23;
+		else if (input > 25 || input.length > 2) input = "";
+		else if (modo == 1) {
+			// Si se sale del limite máximo, vuelve al inicio
+			if (input == data[0][1] + 1) input = data[0][0];
+			// Si se sale del limite minimo, vuelve al maximo
 			else if (input == data[0][0] - 1) input = data[0][1];
-			else if (input > data[0][1] + 1 || input.length > 2) input = "";
-			return input;
+			// Si sale del rango abrutamente
+			else if (data[0][0] < data[0][1] && input > data[0][1] + 1) input = "";
 		} else if (modo == 2) {
 			if (input == data[0][2] + 2) input = 0;
 			else if (input == -1) input = data[0][2];
 			else if (input > data[0][2] + 1 || input.length > 2) input = "";
-			return input;
 		}
+		return input;
 	}
 	const countTime = (start,end) => {
 		let count = 0;
@@ -2699,11 +2707,11 @@ const clickboton22 = () => {'use strict';
 		let startHour = document.createElement("input");
 		startHour.type = "number";
 		startHour.setAttribute("min","-1");
-		startHour.setAttribute("max","24");
+		startHour.setAttribute("max","25");
 		let endHour = document.createElement("input");
 		endHour.type = "number";
 		endHour.setAttribute("min","-1");
-		endHour.setAttribute("max","24");
+		endHour.setAttribute("max","25");
 		let getTime = document.createElement("p");
 		getTime.classList.add("f22__time-get");
 		let errTime = document.createElement("p");
@@ -2731,9 +2739,9 @@ const clickboton22 = () => {'use strict';
 		});
 		time.appendChild(document.createTextNode("Desde: "));
 		time.appendChild(startHour);
-		time.appendChild(document.createTextNode(":00h Hasta: "));
+		time.appendChild(document.createTextNode(" h Hasta: "));
 		time.appendChild(endHour);
-		time.appendChild(document.createTextNode(":00h"));
+		time.appendChild(document.createTextNode(" h"));
 		time.appendChild(getTime);
 		time.appendChild(errTime);
 		return time;
@@ -2757,12 +2765,12 @@ const clickboton22 = () => {'use strict';
 			startHour.classList.add("f22__right-input-number");
 			startHour.type = "number";
 			startHour.setAttribute("min","-1");
-			startHour.setAttribute("max","24");
+			startHour.setAttribute("max","25");
 			let endHour = document.createElement("input");
 			endHour.classList.add("f22__right-input-number");
 			endHour.type = "number";
 			endHour.setAttribute("min","-1");
-			endHour.setAttribute("max","24");
+			endHour.setAttribute("max","25");
 			let getTime = document.createElement("p");
 			getTime.classList.add("f22__commit-get");
 			let errTime = document.createElement("p");
@@ -2789,13 +2797,15 @@ const clickboton22 = () => {'use strict';
 			if (data[modo] && n != -1) {
 				startHour.value = data[modo][n][1][0];
 				endHour.value = data[modo][n][1][1] + 1;
+				if (data[modo][n][1][2] == 1) getTime.textContent = `Tiempo Invertido: ${data[modo][n][1][2]} hora`;
+				else getTime.textContent = `Tiempo Invertido: ${data[modo][n][1][2]} horas`;
 			}
 			whenInput.appendChild(document.createTextNode("Desde: "));
 			whenInput.appendChild(startHour);
-			whenInput.appendChild(document.createTextNode(":00h "));
+			whenInput.appendChild(document.createTextNode(" h "));
 			whenInput.appendChild(document.createTextNode(" Hasta:"));
 			whenInput.appendChild(endHour);
-			whenInput.appendChild(document.createTextNode(":00h"));
+			whenInput.appendChild(document.createTextNode(" h"));
 			whenInput.appendChild(getTime);
 			whenInput.appendChild(errTime);
 		} else {
@@ -2894,7 +2904,7 @@ const clickboton22 = () => {'use strict';
 					week.classList.replace("f22__right-active","f22__right-inactive");
 				} else {
 					week.classList.replace("f22__ERR","f22__right-active");
-					document.querySelectorAll(".f22__right-div .f22__right-input:nth-child(10) .f22__ERR").forEach((e)=>{
+					document.querySelectorAll(".f22__right-div .f22__right-input:nth-child(10) .f22__ERR").forEach(e => {
 						e.classList.replace("f22__ERR","f22__right-inactive");
 					})
 				}
@@ -2953,6 +2963,7 @@ const clickboton22 = () => {'use strict';
 			for (let i = 0; i < data[1].length; i++) {
 				let div = createAdds(1,i);
 				right.appendChild(div);
+				validarTiempos(1);
 				div.querySelector(".f22__right__delete").addEventListener("click", () => div.remove());
 			}
 		}
@@ -2981,6 +2992,7 @@ const clickboton22 = () => {'use strict';
 			for (let i = 0; i < data[2].length; i++) {
 				let div = createAdds(2,i);
 				right.appendChild(div);
+				validarTiempos(1);
 				div.querySelector(".f22__right__delete").addEventListener("click", () => div.remove());
 			}
 		}
@@ -3004,7 +3016,10 @@ const clickboton22 = () => {'use strict';
 		}
 	}
 	const validarTiempos = mode => {
+		let date = document.querySelector(".f22__admin__date");
+		let max = data[0][2] + 2;
 		if (mode == 0) {
+			if (date.children.length != 0) date.querySelectorAll("div").forEach(event => event.remove())
 			let row = [1,2];
 			for (let i = 0; i < 7; i++) {
 				let div = document.createElement("div");
@@ -3018,16 +3033,92 @@ const clickboton22 = () => {'use strict';
 					case 6:	div.textContent = "V";	break;
 					default:div.textContent = "S";	break;
 				}
-				document.querySelector(".f22__admin__date").appendChild(div);
-				let day = document.createElement("div");
-				day.classList.add("f22__admin__date-t");
-				day.style.gridArea = `${row[0]} / 2 / ${row[1]} / ${data[0][2]}`;
-				document.querySelector(".f22__admin__date").appendChild(day);
+				date.appendChild(div);
+				let day = createElementDiv("","f22__admin__date-t",`${row[0]} / 2 / ${row[1]} / ${max}`);
+				date.appendChild(day);
 				row[0]++;
 				row[1]++;
 			}
-		} else {
-			console.log(data[1])
+		} else if (mode == 1) {
+			if (date.children.length != 0) date.querySelectorAll("div").forEach(event => event.remove())
+			let row = [1,2];
+			for (let i = 0; i < 7; i++) {
+				let active = true
+				let min = 2;
+				let div = document.createElement("div");
+				div.style.gridRow = `${row[0]} / ${row[1]}`;
+				switch (row[0]) {
+					case 1:	div.textContent = "D";	break;
+					case 2:	div.textContent = "L";	break;
+					case 3:	div.textContent = "M";	break;
+					case 4:	div.textContent = "X";	break;
+					case 5:	div.textContent = "J";	break;
+					case 6:	div.textContent = "V";	break;
+					default:div.textContent = "S";	break;
+				}
+				date.appendChild(div);
+				if (data[1] && data[1] != "") {
+					let arr = data[1];
+					let days = [0,0,0,0,0,0,0];
+					let memory = [0,0,0,0,0,0,0];
+					for (let i = 0; i < arr.length; i++) {
+						for (let j = 0; j < 7; j++) {
+							if (arr[i][4].includes(`${j}`)) days[j]++;
+						}
+					}
+					let duration = 0;
+					for (let j = 0; j < arr.length; j++) {
+						if (arr[j][4].includes(`${i}`)) {
+							let day;
+							if (arr[j][1][2] + min + duration > max) {
+								day = createElementDiv("","f22__admin__date-r",`${row[0]} / ${duration + min} / ${row[1]} / ${arr[j][1][2] + min + duration}`);
+							}
+							else day = createElementDiv("","f22__admin__date-g",`${row[0]} / ${duration + min} / ${row[1]} / ${arr[j][1][2] + min + duration}`);
+							date.appendChild(day);
+							memory[i]++;
+							if (memory[i] == days[i]) {
+								min += arr[j][1][2] + duration;
+							}
+							duration += arr[j][1][2];
+							active = false;
+						}
+					}
+				}
+				if (data[2] && data[2] != "") {
+					let arr = data[2];
+					let days = [0,0,0,0,0,0,0];
+					let memory = [0,0,0,0,0,0,0];
+					for (let i = 0; i < arr.length; i++) {
+						for (let j = 0; j < 7; j++) {
+							if (arr[i][4].includes(`${j}`)) days[j]++;
+						}
+					}
+					let duration = 0;
+					for (let j = 0; j < arr.length; j++) {
+						if (arr[j][4].includes(`${i}`)) {
+							let day;
+							if (arr[j][1][0] + min + duration > max) {
+								day = createElementDiv("","f22__admin__date-r",`${row[0]} / ${duration + min} / ${row[1]} / ${arr[j][1][0] + min + duration}`);
+							}
+							else day = createElementDiv("","f22__admin__date-b",`${row[0]} / ${duration + min} / ${row[1]} / ${arr[j][1][0] + min + duration}`);
+							date.appendChild(day);
+							memory[i]++;
+							if (memory[i] == days[i]) {
+								min += arr[j][1][0] + duration;
+							}
+							duration += arr[j][1][0];
+							active = false;
+						}
+					}
+				}
+				console.log(active, min, max)
+				if (active || (min != 2 && min < max)) {
+					let free = createElementDiv("","f22__admin__date-t",`${row[0]} / ${min} / ${row[1]} / ${max}`);
+					date.appendChild(free);
+				}
+				row[0]++;
+				row[1]++;
+			}
 		}
 	}
 	const obeserver = (name) => {
@@ -3064,12 +3155,12 @@ const clickboton22 = () => {'use strict';
 					let divContent = document.querySelector(`.${e.className}`);
 					if (e.className == "f22__time" && !document.getElementById("err")) {
 						let info = [];
-						divContent.querySelectorAll("input").forEach((input) => info.push(input.value));
+						divContent.querySelectorAll("input").forEach(input => info.push(input.value));
 						if (!info.includes("")) {
 							info.push(divContent.querySelector(".f22__time-get").textContent.split(" ")[2]);
 							let divInfo = document.createElement("div");
 							divInfo.classList.add("f22__time-data");
-							divInfo.textContent = `${info[0]}:00h - ${info[1]}:00h`;
+							divInfo.textContent = `${info[0]} h - ${info[1]} h`;
 							document.querySelector(".f22__admin__time").textContent = info[2] + " :00 horas";
 							document.querySelector(".f22__admin__time").style.borderBottom = "1px solid #ccc";
 							document.querySelector(".f22__admin__date").style.gridTemplateColumns = `repeat(${info[2]},1fr)`;
@@ -3079,7 +3170,7 @@ const clickboton22 = () => {'use strict';
 								document.querySelector(".f22__time-data").remove()
 								document.querySelector(".f22__time-content").appendChild(divInfo);
 							}
-							data[0] = [info[0],parseInt(info[1]) - 1,parseInt(info[2])];
+							data[0] = [parseInt(info[0]),parseInt(info[1]) - 1,parseInt(info[2])];
 							validarTiempos(0);
 						} else {
 							document.querySelector(".f22__time .f22__ERR").style.display = "block";
@@ -3091,7 +3182,7 @@ const clickboton22 = () => {'use strict';
 					} else if (e.className == "f22__commit" || e.className == "f22__object") {
 						let info = [];
 						let err = false;
-						divContent.querySelectorAll(".f22__right .f22__right-div").forEach((content)=>{
+						divContent.querySelectorAll(".f22__right .f22__right-div").forEach(content => {
 							let subinfo = [];
 							for (let i = 1; i < 10; i+=2) {
 								if (i == 1 || i == 5) {
@@ -3107,23 +3198,27 @@ const clickboton22 = () => {'use strict';
 									subinfo.push(content.children[i].textContent);
 								} else if (i == 3) {
 									let temporal = [];
-									content.children[i].querySelectorAll("input").forEach((input)=>{
-										if (input.value == "") input.classList.add("f22__ERR");
-										input.addEventListener("keyup",() => input.classList.remove("f22__ERR"))
-										err = true;
-										temporal.push(input.value)
+									content.children[i].querySelectorAll("input").forEach(input => {
+										if (input.value == "") {
+											input.classList.add("f22__ERR");
+											input.addEventListener("keyup",() => input.classList.remove("f22__ERR"))
+											err = true;
+										}
+										temporal.push(input.value);
 									});
+									temporal[0] = parseInt(temporal[0]);
 									temporal[1] = parseInt(temporal[1]) - 1;
+									if (e.className == "f22__commit") temporal[2] = parseInt(content.children[i].querySelector(`.${e.className}-get`).textContent.split(" ")[2]);
 									subinfo.push(temporal);
 								} else if (i == 7) {
 									subinfo.push(content.children[i].value);
 								} else if (i == 9) {
 									let temporal = [];
-									content.children[i].querySelectorAll(".f22__right-active").forEach((input)=>{
+									content.children[i].querySelectorAll(".f22__right-active").forEach(input => {
 										temporal.push(input.id);
 									});
 									if (temporal.length == 0) {
-										content.children[i].querySelectorAll(".f22__right-input input[type='button']").forEach((input)=>{
+										content.children[i].querySelectorAll(".f22__right-input input[type='button']").forEach(input => {
 											input.classList.replace("f22__right-inactive","f22__ERR");
 											err = true;
 										})
@@ -3148,7 +3243,6 @@ const clickboton22 = () => {'use strict';
 									document.querySelector(`.${e.className}-data`).remove();
 									document.querySelector(`.${e.className}-content`).appendChild(divInfo);
 								}
-								validarTiempos(1);
 							}
 						});
 						if (info == "" && !err) {
@@ -3174,6 +3268,8 @@ const clickboton22 = () => {'use strict';
 							}
 							console.log(data)
 							obeserver(e.className);
+						} else if (info != "") {
+							validarTiempos(1);
 						}
 					}
 				});
@@ -3181,7 +3277,7 @@ const clickboton22 = () => {'use strict';
 					let divContent = document.querySelector(`.${e.className}`);
 					if (e.className == "f22__time") {
 						data[0] = undefined;
-						divContent.querySelectorAll("input").forEach((input) => input.value = "");
+						divContent.querySelectorAll("input").forEach(input => input.value = "");
 						if (document.querySelector(".f22__time-data")) document.querySelector(".f22__time-data").remove();
 					} else if (e.className == "f22__commit" || e.className == "f22__object") {
 						let index = divContent.querySelectorAll(".f22__right-content").length;
@@ -3252,32 +3348,41 @@ const clickboton22 = () => {'use strict';
 		// console.log(inf[0]); // Complete
 		// console.log(inf[1]); // Complete
 		// console.log(inf[2]); // Complete
+		let hour = inf[0][0];
 		// Crear Filas configuradas
-		for (let k = inf[0][0]; k <= parseInt(inf[0][1]); k++) {
+		for (let k = 0; k < inf[0][2]; k++) {
 			for (let j = 0; j <= 7; j++) {
 				// Crear Columnas configuradas
+				if (hour == 24) {
+					hour = 0;
+				}
 				if (j == 0) {
-					let day = createElementDiv(`${k}:00 h`,`f22__days-day-${j}`,`${k-inf[0][0]+2} / 1 / ${k-inf[0][0]+3} / 2`);
+					let day = createElementDiv(`${hour++}:00 h`,`f22__days-day-${j}`,`${k + 2} / 1 / ${k + 3} / 2`);
 					divDay.appendChild(day);
 				} else {
 					// Configurando Compromisos
 					if (inf[1].length != 0) {
 						all:for (let l = 0; l < inf[1].length; l++) {
 							let comit = inf[1][l];
-							if (comit[4].includes(`${j - 1}`) && parseInt(comit[1][0]) <= k && k <= parseInt(comit[1][1])) {
-								if (parseInt(comit[1][0]) == k) {
-									let day = createElementDiv(comit[0],`f22__days-day-${j}`,
-										`${parseInt(comit[1][0]) - inf[0][0] + 2} / ${j + 1} / ${parseInt(comit[1][1]) - inf[0][0] + 3} / ${j + 2}`);
+							if (comit[4].includes(`${j - 1}`) && comit[1][0] <= comit[1][1] && comit[1][0] <= hour - 1 && hour - 1 <= comit[1][1]) {
+								if (comit[1][0] == hour - 1) {
+									let day = createElementDiv(comit[0],`f22__days-day-${j}`,`${k + 2} / ${j + 1} / ${comit[1][2] - 1 + k + 3} / ${j + 2}`);
 									divDay.appendChild(day);
+									break all;
 								}
-								break all;
+							} else if (comit[4].includes(`${j - 1}`) && comit[1][0] > comit[1][1] && (comit[1][0] <= hour - 1 || hour - 1 <= comit[1][1])) {
+								if (comit[1][0] == hour - 1) {
+									let day = createElementDiv(comit[0],`f22__days-day-${j}`,`${k + 2} / ${j + 1} / ${comit[1][2] - 1 + k + 3} / ${j + 2}`);
+									divDay.appendChild(day);
+									break all;
+								}
 							} else if (l == inf[1].length - 1) {
-								let day = createElementDiv("Libre",`f22__days-day-${j}`,`${k - inf[0][0] + 2} / ${j + 1} / ${k - inf[0][0] + 3} / ${j + 2}`);
+								let day = createElementDiv("Libre",`f22__days-day-${j}`,`${k + 2} / ${j + 1} / ${k + 3} / ${j + 2}`);
 								divDay.appendChild(day);
 							}
 						}
 					} else {
-						let day = createElementDiv("Libre",`f22__days-day-${j}`,`${k - inf[0][0] + 2} / ${j + 1} / ${k - inf[0][0] + 3} / ${j + 2}`);
+						let day = createElementDiv("Libre",`f22__days-day-${j}`,`${k + 2} / ${j + 1} / ${k + 3} / ${j + 2}`);
 						divDay.appendChild(day);
 					}
 				}
@@ -3424,10 +3529,7 @@ const clickboton22 = () => {'use strict';
 			for (let j = 0; j <= 7; j++) {
 				if (info[j].length != 0) {
 					for (let k = 0; k < info[j].length; k++) {
-						let day = document.createElement("div");
-						day.classList.add("f22__days-day");
-						day.textContent = info[j][k][0];
-						day.style.gridArea = `${info[j][k][1]}`;
+						let day = createElementDiv(info[j][k][0],"f22__days-day",info[j][k][1]);
 						dayContent.appendChild(day);
 					}
 				}
@@ -3435,7 +3537,7 @@ const clickboton22 = () => {'use strict';
 		}
 		let schedule = document.createElement("div");
 		schedule.classList.add("f22__schedule");
-		schedule.id = key[0];
+		schedule.id = key;
 		schedule.appendChild(dayContent);
 		let delete_schedule = document.createElement("input");
 		delete_schedule.classList.add("f22__schedule-input")
@@ -3445,7 +3547,7 @@ const clickboton22 = () => {'use strict';
 			document.querySelector(".f22__schedule").remove();
 			if (window.confirm("¿Estás seguro de elminar tu horario?")) {
 				createQuest();
-				eliminarObject(key[0]);
+				eliminarObject(key);
 			}
 		})
 		schedule.appendChild(delete_schedule);
@@ -3479,6 +3581,7 @@ const clickboton22 = () => {'use strict';
 				},1000);
 			} else {
 				addObject(data);
+				data = [];
 			}
 		}
 	}

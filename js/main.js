@@ -33,7 +33,7 @@ const buildkey = (i) => {'use strict';
 			if (i == 18) clickboton18();
 			if (i == 19) clickboton19();
 			if (i == 20) clickboton20();
-			if (i == 21) clickboton21();
+			if (i == 21) console.log("clickboton21()");
 			if (i == 22) clickboton22();
 		} else remove();
 	})
@@ -63,7 +63,7 @@ const buildH3 = (i) => {'use strict';
 	if (i == 18) return "Bucle Host http";
 	if (i == 19) return "Eficiencia lectora";
 	if (i == 20) return "Web Paint";
-	if (i == 21) return "Calculadora de figuras";
+	if (i == 21) return "Construcción";
 	if (i == 22) return "Horario";
 }
 const remove = () => {'use strict';

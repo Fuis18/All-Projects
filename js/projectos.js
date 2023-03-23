@@ -693,8 +693,8 @@ const clickboton7 = () => {'use strict';
 			alumnos.shift();
 			let a = alumnos.pop();
 			alumnos.push(a + ".");
-			return `El profesor de <b>${info[1]}</b> es: <b style="color:red">${teacher}</b><br>
-				Los alumnos son: <b style="color:blue">${alumnos.join(", ")}</b><br><br>`;
+			return `El profesor de <b>${info[1]}</b> es: <b style="color:#faa">${teacher}</b><br>
+				Los alumnos son: <b style="color:#bbf">${alumnos.join(", ")}</b><br><br>`;
 		}
 	}
 	const buildDiv = (materia) => {'use strict';
@@ -723,8 +723,8 @@ const clickboton7 = () => {'use strict';
 		}
 		let a = clasesPresentes.pop();
 		clasesPresentes.push(a + ".");
-		return `Cantidad de materias de <b style="color:blue">${alumno}</b>: <b>${cantidadTotal}</b><br>
-		Materias: <b style="color:green">${clasesPresentes}</b><br/><br/>`;
+		return `Cantidad de materias de <b style="color:#bbf">${alumno}</b>: <b>${cantidadTotal}</b><br>
+		Materias: <b style="color:#0e0">${clasesPresentes}</b><br/><br/>`;
 	}
 	buildDiv("fisica");
 	buildDiv("programacion");
@@ -846,7 +846,6 @@ const clickboton11 = () => {'use strict';
 		<div class="f11__dia">00</div>
 		<div class="f11__mes">00</div>
 		<div class="f11__year">00</div>
-		<div>|</div>
 		<input type="button" class="f11__button" value="Stop">
 	</div>`
 	const addZeros = n => {'use strict';
@@ -2665,7 +2664,7 @@ const clickboton22 = () => {'use strict';
 		else if (input > 25 || input.length > 2) input = "";
 		else if (modo == 1) {
 			// Si se sale del limite máximo, vuelve al inicio
-			if (input == data[0][1] + 1) input = data[0][0];
+			if (input > data[0][1] + 1) input = data[0][0];
 			// Si se sale del limite minimo, vuelve al maximo
 			else if (input == data[0][0] - 1) input = data[0][1];
 			// Si sale del rango abrutamente
@@ -2912,9 +2911,9 @@ const clickboton22 = () => {'use strict';
 			weekInputs.appendChild(week);
 		}
 		if (data[modo] && n != -1) {
-			let info = data[modo][n]
-			nameInput.textContent = info[0]
-			descriptionInput.value = info[2];
+			let info = data[modo][n];
+			nameInput.textContent = info[0];
+			descriptionInput.textContent = info[2];
 			typeInput.value = info[3];
 		}
 		div.appendChild(name);
@@ -3121,7 +3120,7 @@ const clickboton22 = () => {'use strict';
 		}
 	}
 	const obeserver = (name) => {
-		console.log(name);
+		// console.log(name);
 		// let input = document.createElement("input");
 		// input.classList.add(`${e.className}__left-button`);
 		// input.type = "button"
@@ -3305,6 +3304,8 @@ const clickboton22 = () => {'use strict';
 		day.style.gridArea = `${grid_area}`;
 		return day;
 	}
+	const model = (modo, name) => {'use strict';
+	}
 	const crearSchedule = (key,information) => {'use strict';
 		let inf = information
 		document.querySelector(`.f22__develop`).remove();
@@ -3346,8 +3347,8 @@ const clickboton22 = () => {'use strict';
 		dayContent.appendChild(saturday);
 		let divDay = document.createElement("div");
 		// console.log(inf[0]); // Complete
-		// console.log(inf[1]); // Complete
-		// console.log(inf[2]); // Complete
+		console.log(inf[1]); // Complete
+		console.log(inf[2]); // Complete
 		let hour = inf[0][0];
 		// Crear Filas configuradas
 		for (let k = 0; k < inf[0][2]; k++) {
@@ -3364,18 +3365,18 @@ const clickboton22 = () => {'use strict';
 					if (inf[1].length != 0) {
 						all:for (let l = 0; l < inf[1].length; l++) {
 							let comit = inf[1][l];
-							if (comit[4].includes(`${j - 1}`) && comit[1][0] <= comit[1][1] && comit[1][0] <= hour - 1 && hour - 1 <= comit[1][1]) {
+							if (comit[4].includes(`${j - 1}`) && comit[1][0] <= comit[1][1] && (comit[1][0] <= hour - 1 && hour - 1 <= comit[1][1])) {
 								if (comit[1][0] == hour - 1) {
 									let day = createElementDiv(comit[0],`f22__days-day-${j}`,`${k + 2} / ${j + 1} / ${comit[1][2] - 1 + k + 3} / ${j + 2}`);
 									divDay.appendChild(day);
-									break all;
 								}
+								break all;
 							} else if (comit[4].includes(`${j - 1}`) && comit[1][0] > comit[1][1] && (comit[1][0] <= hour - 1 || hour - 1 <= comit[1][1])) {
 								if (comit[1][0] == hour - 1) {
 									let day = createElementDiv(comit[0],`f22__days-day-${j}`,`${k + 2} / ${j + 1} / ${comit[1][2] - 1 + k + 3} / ${j + 2}`);
 									divDay.appendChild(day);
-									break all;
 								}
+								break all;
 							} else if (l == inf[1].length - 1) {
 								let day = createElementDiv("Libre",`f22__days-day-${j}`,`${k + 2} / ${j + 1} / ${k + 3} / ${j + 2}`);
 								divDay.appendChild(day);
@@ -3418,7 +3419,7 @@ const clickboton22 = () => {'use strict';
 		}
 		if (inf[2].length != 0) {
 			// Configurando Objetivos
-			// console.log(info);
+			console.log(info);
 			for (let j = 0; j <= 7; j++) {
 				if (info[j].length != 0) {
 					let last_priority = [0,0,0,0];
@@ -3437,10 +3438,6 @@ const clickboton22 = () => {'use strict';
 							}
 						}
 						let objetivos_por_dia = allPriritys[0] + allPriritys[1] + allPriritys[2] + allPriritys[3];
-						if (j == 0) {
-							let day = createElementDiv(free[0],"f22__days-day",free[1]);
-							dayContent.appendChild(day);
-						}
 						// Definiendo objetivos
 						if (free[0] == "Libre") {
 							// parseInt(object[1]) <= duration,memoryFree + parseInt(object[1]) <= time[2]

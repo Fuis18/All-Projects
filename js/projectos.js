@@ -200,7 +200,7 @@ const clickboton3 = () => {'use strict';
 			let antes = document.querySelector(".f3__before-input").value;
 			let answer;
 			if (numberActive.className == "f3__numbers-input f3__button-active") {
-				let luego = document.querySelector(".f3__before-input").value;
+				let luego = document.querySelector(".f3__after-input").value;
 				let ceros = document.querySelector(".f3__zeros-input").checked;
 				if (ceros) {
 					for (let i = 0; i <= cantidad; i++) {
@@ -245,9 +245,10 @@ const clickboton3 = () => {'use strict';
 						let a99_a1000 = cantidad > 99 && cantidad < 1000;
 						let l999_l10000 = cantidad > 999 && cantidad < 10000;
 						let a9999_a100000 = cantidad > 9999 && cantidad < 100000;
-						let d0 = `${antes}&nbsp;${i}${luego}`;
-						let d00 = `${antes}&nbsp;&nbsp;${i}${luego}`;
-						let d000 = `${antes}&nbsp;&nbsp;&nbsp;${i}${luego}`;
+						console.log(antes,luego)
+						let d0 = `&nbsp;${antes}${i}${luego}`;
+						let d00 = `&nbsp;&nbsp;${antes}${i}${luego}`;
+						let d000 = `&nbsp;&nbsp;&nbsp;${antes}${i}${luego}`;
 						// 00 - 99
 						if (i < 10 && cantidad < 100) answer = d0;
 						// 000 - 999
@@ -2658,6 +2659,12 @@ const clickboton22 = () => {'use strict';
 		const objectStore = IDBTransaction.objectStore("week");
 		return objectStore;
 	}
+	const renameObject = (info,modo,key,space,id,rename) => {'use strict';
+		const IDBData = transactionOperation("readwrite");
+		let object = info;
+		object[modo][key][space] = rename;
+		IDBData.put(object, id);
+	}
 	const rangeTime = (input,modo) => {
 		if (input == 25) input = 1;
 		else if (input == -1) input = 23;
@@ -3304,7 +3311,109 @@ const clickboton22 = () => {'use strict';
 		day.style.gridArea = `${grid_area}`;
 		return day;
 	}
-	const model = (modo, name) => {'use strict';
+	const create__modal = (info,modo,key,day,id) => {'use strict';
+		let element = info[modo][key];
+		let background = document.createElement("div");
+		background.classList.add("f22__modal-background");
+		let content = document.createElement("div");
+		content.classList.add("f22__modal");
+		let button_delete = document.createElement("input");
+		button_delete.type = "button";
+		button_delete.value = "X";
+		button_delete.addEventListener("click", () => background.remove());
+		let title = document.createElement("h2");
+		switch (day) {
+			case 0: title.textContent = "Domingo";		break;
+			case 1: title.textContent = "Lunes";		break;
+			case 2: title.textContent = "Martes";		break;
+			case 3: title.textContent = "Miércoles";	break;
+			case 4: title.textContent = "Jueves";		break;
+			case 5: title.textContent = "Viernes";		break;
+			case 6: title.textContent = "Sábado";		break;
+		}
+		let div_content = document.createElement("div");
+		div_content.classList.add("f22__modal-content");
+		// Nombre
+		let div_name = document.createElement("div");
+		div_name.classList.add("f22__modal__name");
+		let div_name_container = document.createElement("div");
+		div_name_container.classList.add("f22__modal__name-container");
+		let div_name_content = document.createElement("input");
+		div_name_content.classList.add("f22__modal__name-content");
+		div_name_content.value = element[0];
+		div_name_content.setAttribute("type","text");
+		let div_name_icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+		div_name_icon.setAttribute("viewbox","0 0 25 25");
+		div_name_icon.style.fill = "#222";
+		let div_name_icon_body = document.createElementNS("http://www.w3.org/2000/svg", "path");
+		div_name_icon_body.setAttribute("d",`M0 25 H3.5 L18.75 10 L15 6.25 L0 21.25z M20 8.75 L22.5 6.25 Q23 5.625 22.5 5 L20 2.5 Q19.375 1.875 18.75 2.5 L16.25 5z`);
+		let div_name_icon_footer = document.createElementNS("http://www.w3.org/2000/svg", "path");
+		div_name_icon_footer.setAttribute("d",`M7.5 25 H25 L25 20 L12.5 20z`);
+		div_name_content.addEventListener("keyup", () => {
+			if (div_name_icon.style.fill == "rgb(34, 34, 34)") div_name_icon.style.fill = "#000";
+		})
+		div_name_icon.addEventListener("click", () => {
+			renameObject(info,modo,key,0,id,div_name_content.value);
+			location.reload();
+		})
+		div_name_container.appendChild(div_name_content);
+		div_name.appendChild(div_name_container);
+		div_name_icon.appendChild(div_name_icon_body);
+		div_name_icon.appendChild(div_name_icon_footer);
+		div_name.appendChild(div_name_icon);
+		// Duración y Tipo
+		let div_technical = document.createElement("div");
+		div_technical.classList.add("f22__modal-technical");
+		let div_technical_hour = document.createElement("div");
+		div_technical_hour.textContent = "Hora: 0-0"
+		let div_technical_description = document.createElement("div");
+		if (modo == 1 && element[1][2] > 1) div_technical_description.textContent = `Duración: ${element[1][2]} horas`;
+		else if (modo == 1 && element[1][2] == 1) div_technical_description.textContent = `Duración: ${element[1][2]} hora`;
+		else if (modo == 2 && element[1][0] > 1) div_technical_description.textContent = `Duración: ${element[1][0]} horas`;
+		else div_technical_description.textContent = `Duración: ${element[1][0]} hora`;
+		let div_technical_type = document.createElement("div");
+		switch (parseInt(element[3])) {
+			case 1:	div_technical_type.textContent = "Tipo: Limpiar";		break;
+			case 2:	div_technical_type.textContent = "Tipo: Estudiar";		break;
+			case 3:	div_technical_type.textContent = "Tipo: Ejercitar";		break;
+			case 4:	div_technical_type.textContent = "Tipo: Trabajar";		break;
+			case 5:	div_technical_type.textContent = "Tipo: Procrastinar";	break;
+			default:div_technical_type.textContent = "Tipo: None";			break;
+		}
+		div_technical.appendChild(div_technical_hour);
+		div_technical.appendChild(div_technical_description);
+		div_technical.appendChild(div_technical_type);
+		// Descripciones
+		let div_description = document.createElement("div");
+		div_description.classList.add("f22__modal-description")
+		div_description.textContent = "Descripción: " + element[2];
+		// Recomendación
+		let div_recomendation = document.createElement("div");
+		div_recomendation.classList.add("f22__modal-recomendation");
+		div_recomendation.textContent = "Consejo"
+		let div_recomendation_content = document.createElement("div");
+		div_recomendation_content.classList.add("f22__modal-recomendation-content");
+		div_recomendation_content.textContent = "NULL";
+		div_recomendation.appendChild(div_recomendation_content);
+		// Botton de completo
+		let div_complete = document.createElement("div");
+		div_complete.classList.add("f22__modal-complete");
+		let div_complete_input = document.createElement("input");
+		div_complete_input.type = "button";
+		div_complete_input.value = "OK";
+		div_complete_input.addEventListener("click",() => background.remove())
+		div_complete.appendChild(div_complete_input);
+		content.appendChild(button_delete);
+		content.appendChild(title);
+		div_content.appendChild(div_name);
+		div_content.appendChild(div_technical);
+		div_content.appendChild(div_description);
+		div_content.appendChild(div_recomendation);
+		div_content.appendChild(div_complete);
+		content.appendChild(div_content);
+		background.appendChild(content);
+		container.appendChild(background);
+		console.log(element);
 	}
 	const crearSchedule = (key,information) => {'use strict';
 		let inf = information
@@ -3347,8 +3456,8 @@ const clickboton22 = () => {'use strict';
 		dayContent.appendChild(saturday);
 		let divDay = document.createElement("div");
 		// console.log(inf[0]); // Complete
-		console.log(inf[1]); // Complete
-		console.log(inf[2]); // Complete
+		// console.log(inf[1]); // Complete
+		// console.log(inf[2]); // Complete
 		let hour = inf[0][0];
 		// Crear Filas configuradas
 		for (let k = 0; k < inf[0][2]; k++) {
@@ -3368,12 +3477,14 @@ const clickboton22 = () => {'use strict';
 							if (comit[4].includes(`${j - 1}`) && comit[1][0] <= comit[1][1] && (comit[1][0] <= hour - 1 && hour - 1 <= comit[1][1])) {
 								if (comit[1][0] == hour - 1) {
 									let day = createElementDiv(comit[0],`f22__days-day-${j}`,`${k + 2} / ${j + 1} / ${comit[1][2] - 1 + k + 3} / ${j + 2}`);
+									day.id = l;
 									divDay.appendChild(day);
 								}
 								break all;
 							} else if (comit[4].includes(`${j - 1}`) && comit[1][0] > comit[1][1] && (comit[1][0] <= hour - 1 || hour - 1 <= comit[1][1])) {
 								if (comit[1][0] == hour - 1) {
 									let day = createElementDiv(comit[0],`f22__days-day-${j}`,`${k + 2} / ${j + 1} / ${comit[1][2] - 1 + k + 3} / ${j + 2}`);
+									day.id = l;
 									divDay.appendChild(day);
 								}
 								break all;
@@ -3407,19 +3518,19 @@ const clickboton22 = () => {'use strict';
 					temporalDos = divDays[k].style.gridArea.split(" / ")[2];
 				} else if (divDays[k].textContent != "Libre" && first == true) {
 					subinfo.push(["Libre",`${temporalUno} / ${j + 1} / ${temporalDos} / ${j + 2}`]);
-					subinfo.push([divDays[k].textContent,divDays[k].style.gridArea]);
+					subinfo.push([divDays[k].textContent,divDays[k].style.gridArea,divDays[k].id]);
 					first = false;
 				} else if (divDays[k].textContent == "Libre" && first == true) {
 					subinfo.push(["Libre",`${temporalUno} / ${j + 1} / ${parseInt(temporalDos) + 1} / ${j + 2}`]);
 				} else {
-					subinfo.push([divDays[k].textContent,divDays[k].style.gridArea]);
+					subinfo.push([divDays[k].textContent,divDays[k].style.gridArea,divDays[k].id]);
 				}
 			}
 			info.push(subinfo);
 		}
 		if (inf[2].length != 0) {
 			// Configurando Objetivos
-			console.log(info);
+			let max = parseInt(inf[0][2]);
 			for (let j = 0; j <= 7; j++) {
 				if (info[j].length != 0) {
 					let last_priority = [0,0,0,0];
@@ -3479,6 +3590,12 @@ const clickboton22 = () => {'use strict';
 													if (n_priority == 0) {
 														let day = createElementDiv(object[0],
 															"f22__days-day",`${memoryFree} / ${time[1]} / ${memoryFree + parseInt(object[1])} / ${time[3]}`);
+														day.style.cursor = "pointer";
+														day.style.transition = "background .5s";
+														day.id = l
+														day.addEventListener("mouseover", () => day.style.background = "#444");
+														day.addEventListener("mouseout", () => day.style.background = "#333");
+														day.addEventListener("click", () => create__modal(inf,2,day.id,j-1,key));
 														dayContent.appendChild(day);
 														memory.push(object[0]);
 														lastMemory = object[3];
@@ -3498,6 +3615,12 @@ const clickboton22 = () => {'use strict';
 												if (n_priority == 0) {
 													let day = createElementDiv(object[0],
 														"f22__days-day",`${memoryFree} / ${time[1]} / ${memoryFree + parseInt(object[1])} / ${time[3]}`);
+													day.style.cursor = "pointer";
+													day.style.transition = "background .5s";
+													day.id = l
+													day.addEventListener("mouseover", () => day.style.background = "#444");
+													day.addEventListener("mouseout", () => day.style.background = "#333");
+													day.addEventListener("click", () => create__modal(inf,2,day.id,j-1,key));
 													dayContent.appendChild(day);
 													memory.push(object[0]);
 													lastMemory = object[3];
@@ -3516,6 +3639,14 @@ const clickboton22 = () => {'use strict';
 							}
 						} else {
 							let day = createElementDiv(free[0],"f22__days-day",free[1]);
+							if (max < 1) {
+								day.style.cursor = "pointer";
+								day.style.transition = "background .5s";
+								day.addEventListener("mouseover", () => day.style.background = "#444");
+								day.addEventListener("mouseout", () => day.style.background = "#333");
+								day.addEventListener("click", () => create__modal(inf,1,free[2],j-1,key));
+							}
+							max--;
 							dayContent.appendChild(day);
 						}
 					}

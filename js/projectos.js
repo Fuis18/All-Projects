@@ -996,11 +996,11 @@ const clickboton15 = () => {'use strict';
 		const loadingBar = document.querySelector(".loading-bar15");
 		zona.addEventListener("dragover", e => {'use strict';
 			e.preventDefault();
-			changeStyle(e.srcElement, "#444");
+			changeStyle(e.target, "#444");
 		});
 		zona.addEventListener("dragleave", e => {'use strict';
 			e.preventDefault();
-			changeStyle(e.srcElement, "#888");
+			changeStyle(e.target, "#888");
 		});
 		const changeStyle = (obj, color) => {'use strict';
 			obj.style.color = color;
@@ -1009,7 +1009,7 @@ const clickboton15 = () => {'use strict';
 		if (type == "text") {
 			zona.addEventListener("drop", e => {'use strict';
 				e.preventDefault();
-				changeStyle(e.srcElement, "#888");
+				changeStyle(e.target, "#888");
 				zona.style.border = "4px solid #888";
 				const reader = new FileReader();
 				reader.readAsText(e.dataTransfer.files[0]);
@@ -1021,7 +1021,7 @@ const clickboton15 = () => {'use strict';
 			zona.addEventListener("drop", e => {'use strict';
 				let file = e.dataTransfer.files[0];
 				e.preventDefault();
-				changeStyle(e.srcElement, "#888");
+				changeStyle(e.target, "#888");
 				const reader = new FileReader();
 				reader.readAsDataURL(file);
 				reader.addEventListener("load", () => {'use strict';
@@ -1038,7 +1038,7 @@ const clickboton15 = () => {'use strict';
 				let file = e.dataTransfer.files[0];
 				let mainStyleWidth = document.querySelector("main").style.width;
 				e.preventDefault();
-				changeStyle(e.srcElement, "#888");
+				changeStyle(e.target, "#888");
 				const reader = new FileReader();
 				reader.readAsArrayBuffer(file);
 				reader.addEventListener("progress", e => {'use strict';
@@ -3311,7 +3311,7 @@ const clickboton22 = () => {'use strict';
 		day.style.gridArea = `${grid_area}`;
 		return day;
 	}
-	const create__modal = (info,modo,key,day,id) => {'use strict';
+	const create__modal = (info,modo,key,day,id,start,end) => {'use strict';
 		let element = info[modo][key];
 		let background = document.createElement("div");
 		background.classList.add("f22__modal-background");
@@ -3354,7 +3354,7 @@ const clickboton22 = () => {'use strict';
 		})
 		div_name_icon.addEventListener("click", () => {
 			renameObject(info,modo,key,0,id,div_name_content.value);
-			location.reload();
+			if (window.confirm("Estás seguro de cambiarle el nombre a " + element[0])) location.reload(true)
 		})
 		div_name_container.appendChild(div_name_content);
 		div_name.appendChild(div_name_container);
@@ -3365,7 +3365,7 @@ const clickboton22 = () => {'use strict';
 		let div_technical = document.createElement("div");
 		div_technical.classList.add("f22__modal-technical");
 		let div_technical_hour = document.createElement("div");
-		div_technical_hour.textContent = "Hora: 0-0"
+		div_technical_hour.textContent = `Hora: ${start}h - ${end}h`;
 		let div_technical_description = document.createElement("div");
 		if (modo == 1 && element[1][2] > 1) div_technical_description.textContent = `Duración: ${element[1][2]} horas`;
 		else if (modo == 1 && element[1][2] == 1) div_technical_description.textContent = `Duración: ${element[1][2]} hora`;
@@ -3373,11 +3373,11 @@ const clickboton22 = () => {'use strict';
 		else div_technical_description.textContent = `Duración: ${element[1][0]} hora`;
 		let div_technical_type = document.createElement("div");
 		switch (parseInt(element[3])) {
-			case 1:	div_technical_type.textContent = "Tipo: Limpiar";		break;
-			case 2:	div_technical_type.textContent = "Tipo: Estudiar";		break;
-			case 3:	div_technical_type.textContent = "Tipo: Ejercitar";		break;
-			case 4:	div_technical_type.textContent = "Tipo: Trabajar";		break;
-			case 5:	div_technical_type.textContent = "Tipo: Procrastinar";	break;
+			case 0:	div_technical_type.textContent = "Tipo: Limpiar";		break;
+			case 1:	div_technical_type.textContent = "Tipo: Estudiar";		break;
+			case 2:	div_technical_type.textContent = "Tipo: Ejercitar";		break;
+			case 3:	div_technical_type.textContent = "Tipo: Trabajar";		break;
+			case 4:	div_technical_type.textContent = "Tipo: Procrastinar";	break;
 			default:div_technical_type.textContent = "Tipo: None";			break;
 		}
 		div_technical.appendChild(div_technical_hour);
@@ -3413,7 +3413,6 @@ const clickboton22 = () => {'use strict';
 		content.appendChild(div_content);
 		background.appendChild(content);
 		container.appendChild(background);
-		console.log(element);
 	}
 	const crearSchedule = (key,information) => {'use strict';
 		let inf = information
@@ -3477,24 +3476,26 @@ const clickboton22 = () => {'use strict';
 							if (comit[4].includes(`${j - 1}`) && comit[1][0] <= comit[1][1] && (comit[1][0] <= hour - 1 && hour - 1 <= comit[1][1])) {
 								if (comit[1][0] == hour - 1) {
 									let day = createElementDiv(comit[0],`f22__days-day-${j}`,`${k + 2} / ${j + 1} / ${comit[1][2] - 1 + k + 3} / ${j + 2}`);
-									day.id = l;
+									day.id = `${comit[1][0]}/${comit[1][1]}/${l}`;
 									divDay.appendChild(day);
 								}
 								break all;
 							} else if (comit[4].includes(`${j - 1}`) && comit[1][0] > comit[1][1] && (comit[1][0] <= hour - 1 || hour - 1 <= comit[1][1])) {
 								if (comit[1][0] == hour - 1) {
 									let day = createElementDiv(comit[0],`f22__days-day-${j}`,`${k + 2} / ${j + 1} / ${comit[1][2] - 1 + k + 3} / ${j + 2}`);
-									day.id = l;
+									day.id = `${comit[1][0]}/${comit[1][1]}/${l}`;
 									divDay.appendChild(day);
 								}
 								break all;
 							} else if (l == inf[1].length - 1) {
 								let day = createElementDiv("Libre",`f22__days-day-${j}`,`${k + 2} / ${j + 1} / ${k + 3} / ${j + 2}`);
+								day.id = `${k + 2}/${k + 3}`;
 								divDay.appendChild(day);
 							}
 						}
 					} else {
 						let day = createElementDiv("Libre",`f22__days-day-${j}`,`${k + 2} / ${j + 1} / ${k + 3} / ${j + 2}`);
+						day.id = `${k + 2}/${k + 3}`;
 						divDay.appendChild(day);
 					}
 				}
@@ -3517,12 +3518,19 @@ const clickboton22 = () => {'use strict';
 				} else if (divDays[k].textContent == "Libre" && first == true && k + 1 != divDays.length) {
 					temporalDos = divDays[k].style.gridArea.split(" / ")[2];
 				} else if (divDays[k].textContent != "Libre" && first == true) {
-					subinfo.push(["Libre",`${temporalUno} / ${j + 1} / ${temporalDos} / ${j + 2}`]);
+					// Envía los libres entre medio de compromisos
+					let startHour = inf[0][0] + parseInt(temporalUno) - 2;
+					let endHour = inf[0][0] + parseInt(temporalDos) - 3;
+					subinfo.push(["Libre",`${temporalUno} / ${j + 1} / ${temporalDos} / ${j + 2}`,`${startHour}/${endHour}`]);
 					subinfo.push([divDays[k].textContent,divDays[k].style.gridArea,divDays[k].id]);
 					first = false;
 				} else if (divDays[k].textContent == "Libre" && first == true) {
-					subinfo.push(["Libre",`${temporalUno} / ${j + 1} / ${parseInt(temporalDos) + 1} / ${j + 2}`]);
+					// Enía los libres sobrantes o completos
+					let startHour = inf[0][0] + parseInt(temporalUno) - 2;
+					let endHour = inf[0][0] + parseInt(temporalDos) - 3;
+					subinfo.push(["Libre",`${temporalUno} / ${j + 1} / ${parseInt(temporalDos) + 1} / ${j + 2}`,`${startHour}/${endHour}`]);
 				} else {
+					// Envía Horas y los primeros compromisos
 					subinfo.push([divDays[k].textContent,divDays[k].style.gridArea,divDays[k].id]);
 				}
 			}
@@ -3581,8 +3589,8 @@ const clickboton22 = () => {'use strict';
 													let all_priorities_perfects = [0,0,0,0]
 													for (let m = 0; m < inf[2].length; m++) {
 														if (inf[2][m][4].includes(`${j - 1}`) && parseInt(inf[2][m][1]) == duration) {
-															let numP = parseInt(inf[2][m][3]);
-															all_priorities_perfects[numP] += 1;
+															let num = parseInt(inf[2][m][3]);
+															all_priorities_perfects[num] += 1;
 														}
 													}
 													let n_priority = 0;
@@ -3595,7 +3603,8 @@ const clickboton22 = () => {'use strict';
 														day.id = l
 														day.addEventListener("mouseover", () => day.style.background = "#444");
 														day.addEventListener("mouseout", () => day.style.background = "#333");
-														day.addEventListener("click", () => create__modal(inf,2,day.id,j-1,key));
+														let hour = free[2].split("/");
+														day.addEventListener("click", () => create__modal(inf,2,day.id,j-1,key,hour[0],hour[1]));
 														dayContent.appendChild(day);
 														memory.push(object[0]);
 														lastMemory = object[3];
@@ -3620,7 +3629,8 @@ const clickboton22 = () => {'use strict';
 													day.id = l
 													day.addEventListener("mouseover", () => day.style.background = "#444");
 													day.addEventListener("mouseout", () => day.style.background = "#333");
-													day.addEventListener("click", () => create__modal(inf,2,day.id,j-1,key));
+													let hour = free[2].split("/");
+													day.addEventListener("click", () => create__modal(inf,2,day.id,j-1,key,hour[0],hour[1]));
 													dayContent.appendChild(day);
 													memory.push(object[0]);
 													lastMemory = object[3];
@@ -3644,7 +3654,8 @@ const clickboton22 = () => {'use strict';
 								day.style.transition = "background .5s";
 								day.addEventListener("mouseover", () => day.style.background = "#444");
 								day.addEventListener("mouseout", () => day.style.background = "#333");
-								day.addEventListener("click", () => create__modal(inf,1,free[2],j-1,key));
+								let hour = free[2].split("/");
+								day.addEventListener("click", () => create__modal(inf,1,hour[2],j-1,key,hour[0],hour[1]));
 							}
 							max--;
 							dayContent.appendChild(day);
@@ -3667,17 +3678,47 @@ const clickboton22 = () => {'use strict';
 		schedule.classList.add("f22__schedule");
 		schedule.id = key;
 		schedule.appendChild(dayContent);
+		let edit_schedule = document.createElement("input");
+		edit_schedule.classList.add("f22__schedule-input");
+		edit_schedule.type = "button";
+		edit_schedule.value = "Editar";
+		edit_schedule.addEventListener("click",() => {
+			if (window.confirm("¿Estás seguro de editar tu horario?")) {
+				data = inf;
+				document.querySelector(".f22__schedule").remove();
+				eliminarObject(key);
+				createQuest();
+			}
+		})
 		let delete_schedule = document.createElement("input");
-		delete_schedule.classList.add("f22__schedule-input")
+		delete_schedule.classList.add("f22__schedule-input");
 		delete_schedule.type = "button";
 		delete_schedule.value = "Eliminar";
 		delete_schedule.addEventListener("click",() => {
-			document.querySelector(".f22__schedule").remove();
 			if (window.confirm("¿Estás seguro de elminar tu horario?")) {
-				createQuest();
+				document.querySelector(".f22__schedule").remove();
 				eliminarObject(key);
+				createQuest();
 			}
 		})
+		let export_schedule = document.createElement("input");
+		export_schedule.classList.add("f22__schedule-input");
+		export_schedule.type = "button";
+		export_schedule.value = "Exportar"
+		export_schedule.addEventListener("click",() => {
+			if (window.confirm("¿Estás seguro de exportar tu horario?")) {
+				let content = JSON.stringify(inf)
+				const a = document.createElement("a");
+				const file = new Blob([content],{type: "text/plain"});
+				const url = URL.createObjectURL(file);
+				a.href = url;
+				a.download = "Horario.txt";
+				a.click();
+				URL.revokeObjectURL(url);
+			}
+		})
+		schedule.appendChild(export_schedule);
+		schedule.appendChild(edit_schedule);
 		schedule.appendChild(delete_schedule);
 		document.querySelector(".f22").appendChild(schedule);
 	}
@@ -3762,7 +3803,6 @@ const clickboton22 = () => {'use strict';
 		document.querySelector(".f22").appendChild(quest);
 		document.querySelector(".f22").appendChild(develop);
 		document.querySelector(".f22").appendChild(admin);
-		// Interfaz
 	}
  	// Ejecución
 	container.innerHTML = `<div class="f22">

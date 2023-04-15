@@ -2726,6 +2726,8 @@ const clickboton22 = () => {'use strict';
 		if (data[0]) {
 			startHour.value = data[0][0];
 			endHour.value = data[0][1] + 1;
+			let count = countTime(startHour,endHour);
+			getTime.textContent = `Tiempo despierto: ${count[0]}`;
 		}
 		startHour.addEventListener("keyup", () => {
 			startHour.value = rangeTime(startHour.value,0);
@@ -3338,23 +3340,28 @@ const clickboton22 = () => {'use strict';
 		div_name.classList.add("f22__modal__name");
 		let div_name_container = document.createElement("div");
 		div_name_container.classList.add("f22__modal__name-container");
-		let div_name_content = document.createElement("input");
+		let div_name_content = document.createElement("div");
 		div_name_content.classList.add("f22__modal__name-content");
-		div_name_content.value = element[0];
-		div_name_content.setAttribute("type","text");
+		div_name_content.textContent = element[0];
+		div_name_content.setAttribute("contenteditable","true");
 		let div_name_icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 		div_name_icon.setAttribute("viewbox","0 0 25 25");
 		div_name_icon.style.fill = "#222";
 		let div_name_icon_body = document.createElementNS("http://www.w3.org/2000/svg", "path");
 		div_name_icon_body.setAttribute("d",`M0 25 H3.5 L18.75 10 L15 6.25 L0 21.25z M20 8.75 L22.5 6.25 Q23 5.625 22.5 5 L20 2.5 Q19.375 1.875 18.75 2.5 L16.25 5z`);
 		let div_name_icon_footer = document.createElementNS("http://www.w3.org/2000/svg", "path");
+		let available = false;
 		div_name_icon_footer.setAttribute("d",`M7.5 25 H25 L25 20 L12.5 20z`);
 		div_name_content.addEventListener("keyup", () => {
 			if (div_name_icon.style.fill == "rgb(34, 34, 34)") div_name_icon.style.fill = "#000";
 		})
 		div_name_icon.addEventListener("click", () => {
-			renameObject(info,modo,key,0,id,div_name_content.value);
-			if (window.confirm("Estás seguro de cambiarle el nombre a " + element[0])) location.reload(true)
+			if (available) {
+				if (window.confirm("Estás seguro de cambiarle el nombre a " + element[0])) {
+					renameObject(info,modo,key,0,id,div_name_content.textContent);
+					location.reload(true);
+				}
+			}
 		})
 		div_name_container.appendChild(div_name_content);
 		div_name.appendChild(div_name_container);

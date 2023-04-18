@@ -809,7 +809,7 @@
 .f22__commit, .f22__object {
 	display: grid;
 	grid-template-columns: 1fr 7fr;
-	justify-items: start;
+	justify-items: center;
 	width: 100%;
 }
 .f22__commit__left-button, .f22__object__left-button {
@@ -911,10 +911,20 @@
 }
 .f22__import-box {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
    justify-content: center;
-	border: 4px dashed #222;
+	border: 4px dashed #111;
 	font-size: 1.2em;
+	background: #222;
+	min-height: 100px;
+}
+.f22__import-box span {
+	color: #8bf;
+	cursor: pointer;
+}
+.f22__import-box span:active, .f22__import-box span:hover {
+	text-decoration: underline;
 }
 .f22__admin {
 	width: 100%;
@@ -930,7 +940,6 @@
 	grid-gap: 10px 5px;
 	align-items: center;
 	justify-items: center;
-	width: 100%;
 	padding-top: 10px;
 	font-size: 13px;
 	position: sticky;
@@ -1117,35 +1126,15 @@
 		height: 60px;
 	}
 }
-/* @media screen and (max-width: 800px) {
+@media screen and (max-width: 850px) {
 	.f22 {
 		grid-template-columns: initial;
 		Justify-content: center;
 	}
-	.f22__schedule {
-		display: grid;
-		height: 740px;
-		justify-content: center;
-		justify-items: center;
+	.f22__import-box {
+		width: calc(100vw - 51px)
 	}
-	.f22__days-content {
-		transform: rotate(90deg);
-		width: 700px;
-		margin-top: 125px;
-	}
-	.f22__schedule-buttons {
-		margin-top: 130px;
-		align-self: center;
-	}
-	.f22__modal-background {
-		display: flex;
-		padding: 0;
-	}
-	.f22__modal {
-		rotate: 90deg;
-		width: calc(100vh - 90px);
-	}
-} */
+}
 @media screen and (max-width: 650px) {
 	.f4 {
 		grid-template: 

@@ -1026,8 +1026,13 @@
 }
 .f22__modal-content {
 	grid-area: content;
-	grid-template-columns: min-content 1fr;
-	grid-gap: 10px;
+	grid-template: 
+	"name 		descript"	1fr
+	"technical 	descript"	1fr
+	"recomend	recomend"	1fr
+	"complete 	complete"	1fr
+	/min-content 1fr;
+	column-gap: 10px;
 	padding: 10px;
 	width: 100%;
 	height: 100%;
@@ -1035,6 +1040,7 @@
 	display: grid;
 }
 .f22__modal__name {
+	grid-area: name;
 	display: inline-flex;
 	height: min-content;
 }
@@ -1057,13 +1063,13 @@
 	cursor: pointer;
 }
 .f22__modal-technical {
-	grid-row: 2 / 3;
+	grid-area: technical;
 }
 .f22__modal-description {
-	grid-row: 1 / 3;
+	grid-area: descript;
 }
 .f22__modal-recomendation {
-	grid-column: 1 / 3;
+	grid-area: recomend;
 }
 .f22__modal-recomendation-content {
 	margin: 10px;
@@ -1072,7 +1078,7 @@
 	padding: 10px;
 }
 .f22__modal-complete {
-	grid-column: 1 / 3;
+	grid-area: complete;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -1133,6 +1139,15 @@
 	}
 	.f22__import-box {
 		width: calc(100vw - 51px)
+	}
+	.f22__modal-content {
+		grid-template: 
+		"name "		1fr
+		"descript"	1fr
+		"technical"	1fr
+		"recomend"	1fr
+		"complete"	1fr
+		/100%;
 	}
 }
 @media screen and (max-width: 650px) {

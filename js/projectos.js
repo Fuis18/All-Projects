@@ -3140,19 +3140,28 @@ const clickboton22 = () => {'use strict';
 			develop.children[1].remove();
 			develop.children[0].remove();
 		} else {
-			let divImport = document.createElement("div");
-			divImport.classList.add("f22__import")
 			let title = document.createElement("h3");
 			title.classList.add("f22__import-title");
 			title.textContent = "Suba su horario";
 			let box = document.createElement("div");
 			box.classList.add("f22__import-box");
-			box.textContent = "Arrastre o suba un archivo";
-			let resultado = document.createElement("div");
-			divImport.appendChild(title);
-			divImport.appendChild(box);
-			develop.appendChild(divImport);
-			develop.appendChild(resultado);
+			box.textContent = "Arrastre o";
+			let entrada = document.createElement("span");
+			entrada.textContent = "suba un archivo";
+			let input = document.createElement("input");
+			input.type = "file";
+			input.accept = "application/json";
+			box.appendChild(entrada);
+			develop.appendChild(title);
+			develop.appendChild(box);
+			input.addEventListener("change", (e) => {'use strict';
+				const reader = new FileReader();
+				reader.readAsText(e.target.files[0]);
+				reader.addEventListener("load", e => {'use strict';
+					addObject(JSON.parse(e.currentTarget.result));
+				});
+			});
+			entrada.addEventListener("click", () => {input.click()});
 			box.addEventListener("dragover", e => {'use strict';
 				e.preventDefault();
 				changeStyle(e.target, "#444");
@@ -3206,6 +3215,7 @@ const clickboton22 = () => {'use strict';
 							divInfo.classList.add("f22__time-data");
 							divInfo.textContent = `${info[0]} h - ${info[1]} h`;
 							document.querySelector(".f22__admin__time").textContent = info[2] + " :00 horas";
+							document.querySelector(".f22__admin__time").style.minWidth = "160px";
 							document.querySelector(".f22__admin__time").style.borderBottom = "1px solid #ccc";
 							document.querySelector(".f22__admin__date").style.gridTemplateColumns = `repeat(${info[2]},1fr)`;
 							if (document.querySelector(".f22__time-content").children.length == 1) {
@@ -3741,10 +3751,10 @@ const clickboton22 = () => {'use strict';
 			if (window.confirm("¿Estás seguro de exportar tu horario?")) {
 				let content = JSON.stringify(inf)
 				const a = document.createElement("a");
-				const file = new Blob([content],{type: "text/plain"});
+				const file = new Blob([content],{type: "application/json"});
 				const url = URL.createObjectURL(file);
 				a.href = url;
-				a.download = "Horario.txt";
+				a.download = "Horario.json";
 				a.click();
 				URL.revokeObjectURL(url);
 			}

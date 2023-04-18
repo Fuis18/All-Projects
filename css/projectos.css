@@ -65,7 +65,7 @@
 }
 .f2__history {
 	max-width: min-content;
-    margin: auto;
+	margin: auto;
 }
 .f2__history p {
 	white-space: nowrap;
@@ -105,9 +105,9 @@
 .f3__error-active {
 	display: block;
 	background: #300;
-    border: 1px solid #a00;
-    border-radius: 50px;
-    color: #f77;
+	border: 1px solid #a00;
+	border-radius: 50px;
+	color: #f77;
 	padding: 5px 10px;
 	width: 225px;
 }
@@ -128,7 +128,7 @@
 	grid-template: 
 	"window history" 53px
 	"button history" auto
-	/7fr    4fr;
+	/7fr	4fr;
 }
 .f4__window {
 	grid-area: window;
@@ -169,8 +169,8 @@
 	border-radius: 3px;
 	height: 30px;
 	font-size: 15px;
-    font-weight: 700;
-    color: #fff;
+	font-weight: 700;
+	color: #fff;
 	box-shadow: 1px 1px 5px 0 #000;
 }
 .f4__buttons button:nth-child(4), .f4__buttons button:nth-child(5) {
@@ -456,17 +456,17 @@
 }
 .f19__add-Div {
 	display: flex;
-    flex-direction: column;
-    align-items: center;
+	flex-direction: column;
+	align-items: center;
 }
 .f19__add-Div input {
-    padding: 5px 8px;
-    border-radius: 18px;
-    border: 1px solid #ccc;
-    width: 170px;
+	padding: 5px 8px;
+	border-radius: 18px;
+	border: 1px solid #ccc;
+	width: 170px;
 }
 .f19__add-Div input:focus-visible {
-    outline-style: none;
+	outline-style: none;
 }
 .f19__add-date {
 	text-align: center;
@@ -490,7 +490,7 @@
 .f19__add-error input {
 	border-color: #a00;
 /*	background: #300;
-    color: #f77;*/
+	color: #f77;*/
 }
 .f19__update {
 	width: 100%;
@@ -596,7 +596,7 @@
 	background: #aaa5;
 	text-align: end;
 	border-radius: 50px;
-    padding: 1px 5px;
+	padding: 1px 5px;
 }
 .f19__update-percentageInput[disabled] {
 	color: #999;
@@ -622,21 +622,21 @@
 	border-radius: 15px;
 	background: linear-gradient(90deg, #454, #1d1);
 	animation: upLoad 3s forwards;
-    min-width: 16px;
+	min-width: 16px;
 }
 .f19__update-theProgress::before {
 	content: '';
 	display: block;
-    width: 100%;
-    height: 100%;
-    background-size: 30px 30px;
-    background-image: linear-gradient(135deg, #fff2 25%, transparent 25%,
-    	transparent 50%, #fff2 50%, #fff2 75%, transparent 75%, transparent);
-    animation: animate-stripes 0.6s linear infinite;
-    background-color: #000;
-    opacity: 0.75;
-    mix-blend-mode: overlay;
-    border-radius: 50px
+	width: 100%;
+	height: 100%;
+	background-size: 30px 30px;
+	background-image: linear-gradient(135deg, #fff2 25%, transparent 25%,
+		transparent 50%, #fff2 50%, #fff2 75%, transparent 75%, transparent);
+	animation: animate-stripes 0.6s linear infinite;
+	background-color: #000;
+	opacity: 0.75;
+	mix-blend-mode: overlay;
+	border-radius: 50px
 }
 .f19__update-containerProgress:hover {
 	border: 1px solid #000;
@@ -708,11 +708,11 @@
 }
 .f21__container input {
 	padding: 6px 8px;
-    cursor: pointer;
+	cursor: pointer;
 	border: 1px solid #ccc;
-    border-radius: 20px;
-    background: none;
-    margin: 4px 1px;
+	border-radius: 20px;
+	background: none;
+	margin: 4px 1px;
 }
 .f21__develop h3, .f21__history h3 {
 	text-align: center;
@@ -727,67 +727,81 @@
 .f22__quest {
 	display: flex;
 	flex-direction: column;
-    align-items: center;
-    text-align: center;
-    min-width: 220px;
+	align-items: center;
+	text-align: center;
+	min-width: 200px;
 }
-.f22__quest input[value="Enviar"], .f22__options-button, .f22__schedule-input {
+.f22__quest input[value="button"], .f22__options-button, .f22__schedule-input {
 	padding: 6px 8px;
-    border: 1px solid #ccc;
-    border-radius: 50px;
-    cursor: pointer;
-    margin: 5px;
+	border: 1px solid #ccc;
+	border-radius: 50px;
+	cursor: pointer;
+	margin: 5px;
 }
-.f22__quest input[value="Enviar"]:active, .f22__options-button:active, .f22__schedule-input:active {
+.f22__quest input[value="button"]:active, .f22__options-button:active, .f22__schedule-input:active {
 	background: #ccc3;
 }
 .f22__develop {
 	display: flex;
 	flex-direction: column;
-    align-items: center;
-    min-height: 100%;
+	align-items: center;
+	min-height: 100%;
+	width: 100%;
 }
 .f22__develop input:focus-visible {
-     outline: #000 auto 1px;
+	outline: #000 auto 1px;
 }
 .f22__quest div input {
-	min-width: 170px;
 	padding: 6px 8px;
+	margin: 5px 0;
+	width: 100%;
 }
 .f22__quest div:nth-child(6), .f22__right-input, .f22__right-active, .f22__right-input, .f22__right-inactive {
 	border: 1px solid #ccc;
 }
+.f22__quest .f22__ERR {
+	min-width: 170px;
+}
 .f22__time {
 	margin: 10px 0;
 }
-.f22__time-Button, .f22__commit-Button, .f22__object-Button {
-    border: 1px solid #ccc;
-    border-radius: 50px;
-    cursor: pointer;
-    background: none;
-    margin: 5px 0;
+.f22__time-content, .f22__commit-content, .f22__object-content, .f22__options-Button {
+	width: 100%;
 }
-.f22__time-Button:active, .f22__commit-Button:active, .f22__object-Button:active {
+.f22__time-Button, .f22__commit-Button, .f22__object-Button {
+	border: 1px solid #ccc;
+	cursor: pointer;
+	background: none;
+	border-radius: 50px;
+}
+.f22__time-Button:active, .f22__commit-Button:active, .f22__object-Button:active, .f22__options-Button input:active {
 	background: #ccc3;
 }
 .f22__time input, .f22__right-input-number {
 	padding: 3px 4px;
-    border: 1px solid #ccc;
-    border-radius: 50px;
-    background: none;
-    width: 30px;
-    text-align: center;
+	border: 1px solid #ccc;
+	border-radius: 50px;
+	background: none;
+	width: 30px;
+	text-align: center;
 }
-.f22__quest .f22__ERR {
-	min-width: 170px;
+.f22__options-Button {
+	display: grid;
+	grid-template-columns: repeat(2,1fr);
+	grid-gap: 5px;
+}
+.f22__options-Button input {
+	border: 1px solid #ccc;
+	cursor: pointer;
+	background: none;
+	border-radius: 50px;
 }
 .f22__ERR {
-    background: #300;
-    border: 1px solid #a00;
-    border-radius: 50px;
+	background: #300;
+	border: 1px solid #a00;
 	color: #f77;
 	text-align: center;
-	margin: 5px 0;
+	border-radius: 50px;
 }
 .f22__ERR[type="button"] {
 	cursor: pointer;
@@ -800,11 +814,11 @@
 }
 .f22__commit__left-button, .f22__object__left-button {
 	padding: 5px 10px;
-    border: 1px solid #ccc;
-    border-radius: 50px;
-    cursor: pointer;
-    background: none;
-    font-size: 20px;
+	border: 1px solid #ccc;
+	border-radius: 50px;
+	cursor: pointer;
+	background: none;
+	font-size: 20px;
 	position: sticky;
 }
 .f22__commit__left-button:active, .f22__object__left-button:active {
@@ -826,13 +840,13 @@
 	grid-gap: 5px;
 	align-items: center;
 	padding: 10px 14px;
-    border-bottom: 1px solid #ccc;
-    background: none;
-    margin: 15px 0;
+	border-bottom: 1px solid #ccc;
+	background: none;
+	margin: 15px 0;
 }
 .f22__right-div input[type="button"], .f22__right-div select {
 	margin: 3px 2px;
-    border-radius: 50px;
+	border-radius: 50px;
 	overflow-wrap: anywhere;
 	padding: 3px 8px;
 }
@@ -841,7 +855,7 @@
 }
 .f22__right-div .f22__right-input {
 	border: 1px solid #ccc;
-    border-radius: 15px;
+	border-radius: 15px;
 	margin: 3px 2px;
 	padding: 4px 10px;
 	overflow-wrap: anywhere;
@@ -851,17 +865,17 @@
 	border: none;
 }
 .f22__right-div div:nth-child(10) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    border: none;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	border: none;
 }
 .f22__right-inactive {
-    cursor: pointer;
-    background: none;
+	cursor: pointer;
+	background: none;
 }
 .f22__right-active {
-    cursor: pointer;
+	cursor: pointer;
 	background: #ccc;
 	color: #000;
 }
@@ -869,8 +883,8 @@
 	cursor: pointer;
 	translate: 0 15px;
 	transform: scale(3.4);
-    height: 15px;
-    width: 15px;
+	height: 15px;
+	width: 15px;
 }
 .f22__right__delete:hover > path:nth-child(1) {
 	rotate: 30deg;
@@ -886,26 +900,41 @@
 	translate: 1px 4px;
 	transition: all .4s;
 }
+.f22__import, .f22__import-title, .f22__import-box {
+	width: 100%;
+}
+.f22__import, .f22__import-box {
+	height: 90%;
+}
+.f22__import-title {
+	text-align: center;
+}
+.f22__import-box {
+	display: flex;
+	align-items: center;
+   justify-content: center;
+	border: 4px dashed #222;
+	font-size: 1.2em;
+}
 .f22__admin {
 	width: 100%;
 }
 .f22__admin__time {
-	min-width: 80px;
 	text-align: center;
 	position: sticky;
-    top: 10px;
+	top: 10px;
 	height: 20px;
 }
 .f22__admin__date {
 	display: grid;
 	grid-gap: 10px 5px;
 	align-items: center;
-    justify-items: center;
+	justify-items: center;
 	width: 100%;
 	padding-top: 10px;
 	font-size: 13px;
 	position: sticky;
-    top: 30px;
+	top: 30px;
 }
 .f22__admin__date div {
 	width: 100%;
@@ -928,59 +957,66 @@
 	grid-column: 1 / 3;
 	width: calc(100vw - 54px);
 }
+.f22__schedule-buttons {
+	display: grid;
+   grid-template-columns: repeat(3,1fr);
+}
 .f22__days-content {
-    display: grid;
-    grid-template-columns: 65px repeat(7,1fr);
-    margin: 0 10px;
+	display: grid;
+	grid-template-columns: 65px repeat(7,1fr);
+	margin: 0 10px;
 	text-align: center;
-/*	grid-gap: 5px;*/
+	color: #333;
+	overflow-x: auto;
+   background: #555;
 }
 .f22__days-day {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    padding: 0 5px;
-    overflow-wrap: anywhere;
+   border-bottom: 1px solid #ccc;
+   padding: 0 5px;
+	background: #333;
+   overflow-wrap: break-word;
 }
 .f22__modal-background {
 	background: #0006;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
+   width: 100%;
+   height: 100%;
+   position: fixed;
+   left: 0;
+   top: 0;
 	padding: 100px 80px;
 }
 .f22__modal {
 	background: #555;
 	display: grid;
-	grid-template-columns: 1fr min-content;
-	grid-template-rows: min-content 1fr;
+	grid-template: 
+	"title 	button"  min-content
+	"content content" 1fr
+	/1fr min-content;
 	grid-row-gap: 10px;
 	align-items: center;
-    width: 100%;
+   width: 100%;
 	height: 100%;
 	padding: 10px;
 	max-width: 900px;
 	margin: auto;
 }
 .f22__modal h2 {
-	grid-column: 1 / 2;
-	grid-row: 1 / 2;
+	grid-area: title;
 	padding-left: 43px;
 }
 .f22__modal input[type="button"] {
+	grid-area: button;
 	border-radius: 10px;
-    padding: 5px 9px;
-    font-weight: 900;
-	grid-column: 2 / 3;
+   padding: 5px 9px;
+   font-weight: 900;
 	cursor: pointer;
 }
 .f22__modal-content {
-	grid-row: 2 / 3;
-	grid-column: 1 / 3;
+	grid-area: content;
 	grid-template-columns: min-content 1fr;
 	grid-gap: 10px;
 	padding: 10px;
@@ -991,7 +1027,7 @@
 }
 .f22__modal__name {
 	display: inline-flex;
-    height: min-content;
+	height: min-content;
 }
 .f22__modal__name-container {
 	border-radius: 15px;
@@ -1029,8 +1065,8 @@
 .f22__modal-complete {
 	grid-column: 1 / 3;
 	display: flex;
-    align-items: center;
-    justify-content: center;
+	align-items: center;
+	justify-content: center;
 }
 .f22__modal-complete input {
 	border-radius: 50px;
@@ -1074,34 +1110,42 @@
 	}
 	.f19__update-name {
 		grid-column: 2 / 3;
-    	grid-row: 1 / 2;
+		grid-row: 1 / 2;
 	}
 	.f19__update-optionsButtons {
 		grid-gap: initial;
 		height: 60px;
 	}
 }
-@media screen and (max-width: 800px) {
+/* @media screen and (max-width: 800px) {
 	.f22 {
 		grid-template-columns: initial;
 		Justify-content: center;
 	}
 	.f22__schedule {
-		display: flex;
-		height: 780px;
-		flex-wrap: wrap;
-		align-items: center;
+		display: grid;
+		height: 740px;
 		justify-content: center;
+		justify-items: center;
 	}
 	.f22__days-content {
 		transform: rotate(90deg);
 		width: 700px;
-		margin-top: 170px;
+		margin-top: 125px;
 	}
-	.f22__schedule-input {
-		margin-top: 180px;
+	.f22__schedule-buttons {
+		margin-top: 130px;
+		align-self: center;
 	}
-}
+	.f22__modal-background {
+		display: flex;
+		padding: 0;
+	}
+	.f22__modal {
+		rotate: 90deg;
+		width: calc(100vh - 90px);
+	}
+} */
 @media screen and (max-width: 650px) {
 	.f4 {
 		grid-template: 
@@ -1143,15 +1187,15 @@
 }
 @keyframes animate-stripes {
 	0% {
-	    background-position: 0 0;
+		background-position: 0 0;
 	}
 	100% {
-	    background-position: 60px 0;
+		background-position: 60px 0;
 	}
 }
 @keyframes animate-rotate {
 	from {
-	    transform: rotateZ(0deg);
+		transform: rotateZ(0deg);
 	}
 	to {
 		transform: rotateZ(200deg);

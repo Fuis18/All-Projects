@@ -3458,7 +3458,6 @@ const clickboton22 = () => {'use strict';
 		// Recomendación
 		let div_recomendation = document.createElement("div");
 		div_recomendation.classList.add("f22__modal-recomendation");
-		div_recomendation.textContent = "Consejo"
 		let div_recomendation_content = document.createElement("div");
 		div_recomendation_content.classList.add("f22__modal-recomendation-content");
 		div_recomendation_content.textContent = "NULL";

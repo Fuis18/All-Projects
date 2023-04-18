@@ -996,7 +996,7 @@
    position: fixed;
    left: 0;
    top: 0;
-	padding: 100px 60px;
+	padding: 40px 60px;
 }
 .f22__modal {
 	background: #555;
@@ -1138,7 +1138,7 @@
 		Justify-content: center;
 	}
 	.f22__import-box {
-		width: calc(100vw - 51px)
+		width: calc(100vw - 51px);
 	}
 	.f22__modal-content {
 		grid-template: 
@@ -1150,7 +1150,7 @@
 		/100%;
 	}
 	.f22__modal-background {
-		padding: 70px 30px;
+		padding: 20px 30px;
 	}
 }
 @media screen and (max-width: 650px) {

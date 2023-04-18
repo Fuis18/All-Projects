@@ -1,5 +1,5 @@
 {"content": [
-	{"nombre": "Lucas Dalto",
+	{"nombre": "Lorem ipsum",
 	"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
 	{"nombre": "Lorem ipsum",
 	"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},

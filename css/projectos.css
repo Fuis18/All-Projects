@@ -1008,10 +1008,10 @@
 	grid-row-gap: 10px;
 	align-items: center;
    width: 100%;
-	height: 100%;
 	padding: 10px;
 	max-width: 900px;
 	margin: auto;
+	max-height: 550px;
 }
 .f22__modal h2 {
 	grid-area: title;
@@ -1150,7 +1150,7 @@
 		/100%;
 	}
 	.f22__modal-background {
-		padding: 100px 30px;
+		padding: 70px 30px;
 	}
 }
 @media screen and (max-width: 650px) {

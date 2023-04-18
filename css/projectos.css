@@ -996,7 +996,7 @@
    position: fixed;
    left: 0;
    top: 0;
-	padding: 100px 80px;
+	padding: 100px 60px;
 }
 .f22__modal {
 	background: #555;
@@ -1148,6 +1148,9 @@
 		"recomend"	1fr
 		"complete"	1fr
 		/100%;
+	}
+	.f22__modal-background {
+		padding: 100px 30px;
 	}
 }
 @media screen and (max-width: 650px) {

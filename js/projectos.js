@@ -1208,21 +1208,32 @@ const clickboton17 = () => {'use strict';
 	let contador = 0;
 	const filetxt = {
 		"content": [
-			{"nombre": "Lucas Dalto",
+			{"nombre": "Lorem ipsum",
 			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-			{"nombre": "Rancio Dalto",
+			{"nombre": "Lorem ipsium",
 			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-			{"nombre": "Luis Román",
+			{"nombre": "Lorem ipsium",
 			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-			{"nombre": "Cofla Cofla",
+			{"nombre": "Lorem ipsium",
 			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-			{"nombre": "Fuis18 Larc",
+			{"nombre": "Lorem ipsium",
 			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
-			{"nombre": "Eres Tu Danilo Montero",
-			"contenido": "Declaralo esta noche así. Jesús tu eres el amigo que me ama, Jesús tu eres la esperanza de mi vida, Eer."},
-			{"nombre": "Te veo",
-			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."
-			}
+			{"nombre": "Lorem ipsium",
+			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
+			{"nombre": "Lorem ipsium",
+			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
+			{"nombre": "Lorem ipsium",
+			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
+			{"nombre": "Lorem ipsium",
+			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
+			{"nombre": "Lorem ipsium",
+			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
+			{"nombre": "Lorem ipsium",
+			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
+			{"nombre": "Lorem ipsium",
+			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
+			{"nombre": "Lorem ipsium",
+			"contenido": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et."},
 		]
 	}
 	const createPublicationCode = (name,content) => {'use strict';

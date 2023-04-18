@@ -996,6 +996,7 @@
    position: fixed;
    left: 0;
    top: 0;
+	display: flex;
 	padding: 40px 60px;
 }
 .f22__modal {
@@ -1005,7 +1006,7 @@
 	"title 	button"  min-content
 	"content content" 1fr
 	/1fr min-content;
-	grid-row-gap: 10px;
+	grid-row-gap: 5px;
 	align-items: center;
    width: 100%;
 	padding: 10px;
@@ -1053,7 +1054,7 @@
 	padding: 4px 8px;
 }
 .f22__modal__name-content {
-	font-size: 1.25em;
+	font-size: 1.05em;
 	border: none;
 }
 .f22__modal__name svg {
@@ -1072,10 +1073,10 @@
 	grid-area: recomend;
 }
 .f22__modal-recomendation-content {
-	margin: 10px;
+	margin: 8px;
 	border: 1px solid #ccc;
-	border-radius: 50px;
-	padding: 10px;
+	border-radius: 18px;
+	padding: 4px 6px;
 }
 .f22__modal-complete {
 	grid-area: complete;
@@ -1140,26 +1141,27 @@
 	.f22__import-box {
 		width: calc(100vw - 51px);
 	}
-	.f22__modal-content {
-		grid-template: 
-		"name "		1fr
-		"descript"	1fr
-		"technical"	1fr
-		"recomend"	1fr
-		"complete"	1fr
-		/100%;
-	}
-	.f22__modal-background {
-		padding: 20px 30px;
-	}
 }
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 700px) {
 	.f4 {
 		grid-template: 
 		"window" 53px
 		"button" auto
 		"history" auto
 		/1fr;
+	}
+	.f22__modal-content {
+		grid-template: 
+		"name "		min-content
+		"descript"	1fr
+		"technical"	min-content
+		"recomend"	min-content
+		"complete"	min-content
+		/100%;
+		grid-gap: 5px;
+	}
+	.f22__modal-background {
+		padding: 20px 30px;
 	}
 }
 @media screen and (max-width: 600px) {

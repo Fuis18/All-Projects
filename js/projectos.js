@@ -1796,7 +1796,7 @@ const clickboton19 = () => {'use strict';
 		// Calcular el rendimiento
 		let performance = calculatePerformance(amount, yearToDay, monthToDay, newDay);
 
-		// Complementaciòn
+		// Complementación
 		let arrayFraccionEficiency = new Fraccion(performance[0],performance[1]);
 		arrayFraccionEficiency = arrayFraccionEficiency.simplifica();
 
@@ -3051,7 +3051,7 @@ const clickboton22 = () => {'use strict';
 			if (date.children.length != 0) date.querySelectorAll("div").forEach(event => event.remove())
 			let row = [1,2];
 			for (let i = 0; i < 7; i++) {
-				let active = true
+				let active = true;
 				let min = 2;
 				let div = document.createElement("div");
 				div.style.gridRow = `${row[0]} / ${row[1]}`;
@@ -3129,12 +3129,49 @@ const clickboton22 = () => {'use strict';
 		}
 	}
 	const obeserver = (name) => {
-		// console.log(name);
-		// let input = document.createElement("input");
-		// input.classList.add(`${e.className}__left-button`);
-		// input.type = "button"
-		// input.value = ">"
-		// document.querySelector(`.${e.className}__left`).appendChild(input);
+	}
+	const changeStyle = (obj, color) => {'use strict';
+		obj.style.color = color;
+		obj.style.border = `4px dashed ${color}`
+	}
+	const importarSchedule = () => {'use strict';
+		let develop = document.querySelector(".f22__develop");
+		if (develop.hasChildNodes() == true) {
+			develop.children[1].remove();
+			develop.children[0].remove();
+		} else {
+			let divImport = document.createElement("div");
+			divImport.classList.add("f22__import")
+			let title = document.createElement("h3");
+			title.classList.add("f22__import-title");
+			title.textContent = "Suba su horario";
+			let box = document.createElement("div");
+			box.classList.add("f22__import-box");
+			box.textContent = "Arrastre o suba un archivo";
+			let resultado = document.createElement("div");
+			divImport.appendChild(title);
+			divImport.appendChild(box);
+			develop.appendChild(divImport);
+			develop.appendChild(resultado);
+			box.addEventListener("dragover", e => {'use strict';
+				e.preventDefault();
+				changeStyle(e.target, "#444");
+			});
+			box.addEventListener("dragleave", e => {'use strict';
+				e.preventDefault();
+				changeStyle(e.target, "#888");
+			});
+			box.addEventListener("drop", e => {'use strict';
+				e.preventDefault();
+				changeStyle(e.target, "#888");
+				box.style.border = "4px solid #888";
+				const reader = new FileReader();
+				reader.readAsText(e.dataTransfer.files[0]);
+				reader.addEventListener("load", e => {'use strict';
+					addObject(JSON.parse(e.currentTarget.result));
+				});
+			});
+		}
 	}
 	const validarExistencia = e => {
 		let develop = document.querySelector(".f22__develop");
@@ -3174,7 +3211,7 @@ const clickboton22 = () => {'use strict';
 							if (document.querySelector(".f22__time-content").children.length == 1) {
 								document.querySelector(".f22__time-content").appendChild(divInfo);
 							} else {
-								document.querySelector(".f22__time-data").remove()
+								document.querySelector(".f22__time-data").remove();
 								document.querySelector(".f22__time-content").appendChild(divInfo);
 							}
 							data[0] = [parseInt(info[0]),parseInt(info[1]) - 1,parseInt(info[2])];
@@ -3392,8 +3429,11 @@ const clickboton22 = () => {'use strict';
 		div_technical.appendChild(div_technical_type);
 		// Descripciones
 		let div_description = document.createElement("div");
-		div_description.classList.add("f22__modal-description")
-		div_description.textContent = "Descripción: " + element[2];
+		div_description.classList.add("f22__modal-description");
+		let div_description_text = document.createElement("div");
+		div_description.textContent = "Descripción:"
+		div_description_text.textContent = element[2];
+		div_description.appendChild(div_description_text);
 		// Recomendación
 		let div_recomendation = document.createElement("div");
 		div_recomendation.classList.add("f22__modal-recomendation");
@@ -3422,7 +3462,7 @@ const clickboton22 = () => {'use strict';
 		container.appendChild(background);
 	}
 	const crearSchedule = (key,information) => {'use strict';
-		let inf = information
+		let inf = information;
 		document.querySelector(`.f22__develop`).remove();
 		document.querySelector(`.f22__quest`).remove();
 		document.querySelector(`.f22__admin`).remove();
@@ -3566,17 +3606,6 @@ const clickboton22 = () => {'use strict';
 						let objetivos_por_dia = allPriritys[0] + allPriritys[1] + allPriritys[2] + allPriritys[3];
 						// Definiendo objetivos
 						if (free[0] == "Libre") {
-							// parseInt(object[1]) <= duration,memoryFree + parseInt(object[1]) <= time[2]
-							// Objetivo efimero: object[0] object[1] object[2] object[3] object[4]
-							// Duración del tiempo libre: duration
-							// día: j - 1
-							// Nombres ya puestos: memory
-							// tamaño: memory.length
-							// Última fila: memoryFree
-							// Fila máxima: time[2]
-							// allPriritys last_priority
-							// ajuste perfecto: ajuste_perfecto
-							// Se intentaron todos: objectives objetivos_por_dia
 							let time = free[1].split(" / ");
 							let memoryFree = parseInt(time[0]);
 							let duration = parseInt(time[2]) - parseInt(time[0]);
@@ -3593,21 +3622,15 @@ const clickboton22 = () => {'use strict';
 												objectives++;
 												if (parseInt(object[1]) == duration && !memory.includes(object[0])) {
 													// Prioridades
-													let all_priorities_perfects = [0,0,0,0]
-													for (let m = 0; m < inf[2].length; m++) {
-														if (inf[2][m][4].includes(`${j - 1}`) && parseInt(inf[2][m][1]) == duration) {
-															let num = parseInt(inf[2][m][3]);
-															all_priorities_perfects[num] += 1;
-														}
-													}
 													let n_priority = 0;
-													for (let m = 0; m < object[3]; m++) n_priority += all_priorities_perfects[m] - last_priority[m];
-													if (n_priority == 0) {
+													let last = last_priority[0] + last_priority[1] + last_priority[2] + last_priority[3];
+													n_priority = objetivos_por_dia - last;
+													if (n_priority != 0) {
 														let day = createElementDiv(object[0],
 															"f22__days-day",`${memoryFree} / ${time[1]} / ${memoryFree + parseInt(object[1])} / ${time[3]}`);
 														day.style.cursor = "pointer";
 														day.style.transition = "background .5s";
-														day.id = l
+														day.id = l;
 														day.addEventListener("mouseover", () => day.style.background = "#444");
 														day.addEventListener("mouseout", () => day.style.background = "#333");
 														let hour = free[2].split("/");
@@ -3633,7 +3656,7 @@ const clickboton22 = () => {'use strict';
 														"f22__days-day",`${memoryFree} / ${time[1]} / ${memoryFree + parseInt(object[1])} / ${time[3]}`);
 													day.style.cursor = "pointer";
 													day.style.transition = "background .5s";
-													day.id = l
+													day.id = l;
 													day.addEventListener("mouseover", () => day.style.background = "#444");
 													day.addEventListener("mouseout", () => day.style.background = "#333");
 													let hour = free[2].split("/");
@@ -3685,6 +3708,8 @@ const clickboton22 = () => {'use strict';
 		schedule.classList.add("f22__schedule");
 		schedule.id = key;
 		schedule.appendChild(dayContent);
+		let div_schedule = document.createElement("div");
+		div_schedule.classList.add("f22__schedule-buttons")
 		let edit_schedule = document.createElement("input");
 		edit_schedule.classList.add("f22__schedule-input");
 		edit_schedule.type = "button";
@@ -3724,9 +3749,10 @@ const clickboton22 = () => {'use strict';
 				URL.revokeObjectURL(url);
 			}
 		})
-		schedule.appendChild(export_schedule);
-		schedule.appendChild(edit_schedule);
-		schedule.appendChild(delete_schedule);
+		div_schedule.appendChild(export_schedule);
+		div_schedule.appendChild(edit_schedule);
+		div_schedule.appendChild(delete_schedule);
+		schedule.appendChild(div_schedule)
 		document.querySelector(".f22").appendChild(schedule);
 	}
 	const validarCampo = () => {'use strict';
@@ -3783,20 +3809,28 @@ const clickboton22 = () => {'use strict';
 		objectives.classList.add("f22__object-Button");
 		objectives.type = "button";
 		objectives.value = "Objetivos";
+		let divButtons = document.createElement("div");
+		divButtons.classList.add("f22__options-Button")
 		let submit = document.createElement("input");
 		submit.type = "button";
 		submit.value = "Enviar";
+		let import_Input = document.createElement("input");
+		import_Input.type = "button";
+		import_Input.value = "Importar";
 		divTime.appendChild(time);
 		divCommitments.appendChild(commitments);
 		divObjectives.appendChild(objectives);
+		divButtons.appendChild(submit);
+		divButtons.appendChild(import_Input);
 		quest.appendChild(divTime);
 		quest.appendChild(divCommitments);
 		quest.appendChild(divObjectives);
-		quest.appendChild(submit);
-		time.addEventListener("click",()=>validarExistencia(createQuestTime()));
-		commitments.addEventListener("click",()=>validarExistencia(createQuestCommitments()));
-		objectives.addEventListener("click",()=>validarExistencia(createQuestObjectives()));
-		submit.addEventListener("click",()=>validarCampo());
+		quest.appendChild(divButtons);
+		time.addEventListener("click", () => validarExistencia(createQuestTime()));
+		commitments.addEventListener("click", () => validarExistencia(createQuestCommitments()));
+		objectives.addEventListener("click", () => validarExistencia(createQuestObjectives()));
+		submit.addEventListener("click",() => validarCampo());
+		import_Input.addEventListener("click", () => importarSchedule());
 		let develop = document.createElement("div");
 		develop.classList.add("f22__develop");
 		let admin = document.createElement("div");

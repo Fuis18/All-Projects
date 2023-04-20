@@ -2868,7 +2868,7 @@ const clickboton22 = () => {'use strict';
 		}
 		let description = document.createElement("div");
 		description.textContent = "Propósito:";
-		let descriptionInput = document.createElement("div");
+		let descriptionInput = document.createElement("textarea");
 		descriptionInput.classList.add("f22__right-input");
 		descriptionInput.setAttribute("contenteditable","true");
 		let type = document.createElement("div");
@@ -2876,25 +2876,42 @@ const clickboton22 = () => {'use strict';
 		let typeInput = document.createElement("select");
 		typeInput.classList.add("f22__right-input");
 		let zeroOption = document.createElement("option");
-		zeroOption.value = 2;
-		zeroOption.textContent = "Ejercicitar";
+		zeroOption.value = 0;
+		zeroOption.textContent = "Meditar";
 		let oneOption = document.createElement("option");
 		oneOption.value = 1;
-		oneOption.textContent = "Estudiar";
+		oneOption.textContent = "Ejercicitar";
 		let twoOption = document.createElement("option");
-		twoOption.value = 0;
+		twoOption.value = 2;
 		twoOption.textContent = "Limpiar";
 		let threeOption = document.createElement("option");
-		threeOption.value = 4;
-		threeOption.textContent = "Procrastinar";
+		threeOption.value = 3;
+		threeOption.textContent = "Estudiar";
 		let fourOption = document.createElement("option");
-		fourOption.value = 3;
+		fourOption.value = 4;
 		fourOption.textContent = "Trabajar";
+		let fiveOption = document.createElement("option");
+		fiveOption.value = 5;
+		fiveOption.textContent = "Aprender algo";
+		let sixOption = document.createElement("option");
+		sixOption.value = 6;
+		sixOption.textContent = "Administrar";
+		let sevenOption = document.createElement("option");
+		sevenOption.value = 7;
+		sevenOption.textContent = "Social";
+		let eightOption = document.createElement("option");
+		eightOption.value = 8;
+		eightOption.textContent = "Ocio";
 		typeInput.appendChild(zeroOption);
 		typeInput.appendChild(oneOption);
 		typeInput.appendChild(twoOption);
 		typeInput.appendChild(threeOption);
 		typeInput.appendChild(fourOption);
+		typeInput.appendChild(fiveOption);
+		typeInput.appendChild(sixOption);
+		typeInput.appendChild(sevenOption);
+		typeInput.appendChild(eightOption);
+		if (data[modo] && n != -1) setTimeout(() => typeInput.selectedIndex = parseInt(data[modo][n][3][0]),200);
 		let weekName = document.createElement("div");
 		weekName.textContent = "Días:";
 		let weekInputs = document.createElement("div");
@@ -3276,9 +3293,9 @@ const clickboton22 = () => {'use strict';
 									if (e.className == "f22__commit") temporal[2] = parseInt(content.children[i].querySelector(`.${e.className}-get`).textContent.split(" ")[2]);
 									subinfo.push(temporal);
 								} else if (i == 5) {
-									subinfo.push(content.children[i].textContent);
+									subinfo.push(content.children[i].value.split("\n"));
 								} else if (i == 7) {
-									subinfo.push(content.children[i].value);
+									subinfo.push([content.children[i].value,content.children[i].value]);
 								} else if (i == 9) {
 									let temporal = [];
 									content.children[i].querySelectorAll(".f22__right-active").forEach(input => {
@@ -3437,13 +3454,17 @@ const clickboton22 = () => {'use strict';
 		else if (modo == 2 && element[1][0] > 1) div_technical_description.textContent = `Duración: ${element[1][0]} horas`;
 		else div_technical_description.textContent = `Duración: ${element[1][0]} hora`;
 		let div_technical_type = document.createElement("div");
-		switch (parseInt(element[3])) {
-			case 0:	div_technical_type.textContent = "Tipo: Limpiar";		break;
-			case 1:	div_technical_type.textContent = "Tipo: Estudiar";		break;
-			case 2:	div_technical_type.textContent = "Tipo: Ejercitar";		break;
-			case 3:	div_technical_type.textContent = "Tipo: Trabajar";		break;
-			case 4:	div_technical_type.textContent = "Tipo: Procrastinar";	break;
-			default:div_technical_type.textContent = "Tipo: None";			break;
+		switch (parseInt(element[3][0])) {
+			case 0:	div_technical_type.textContent = "Tipo: Meditar";			break;
+			case 1:	div_technical_type.textContent = "Tipo: Ejercitar";		break;
+			case 2:	div_technical_type.textContent = "Tipo: Limpieza";			break;
+			case 3:	div_technical_type.textContent = "Tipo: Estudiar";			break;
+			case 4:	div_technical_type.textContent = "Tipo: Trabajar";			break;
+			case 5:	div_technical_type.textContent = "Tipo: Aprender algo";	break;
+			case 6:	div_technical_type.textContent = "Tipo: Administrar";		break;
+			case 7:	div_technical_type.textContent = "Tipo: Social";			break;
+			case 8:	div_technical_type.textContent = "Tipo: Ocio";				break;
+			default:div_technical_type.textContent = "Tipo: None";				break;
 		}
 		div_technical.appendChild(div_technical_hour);
 		div_technical.appendChild(div_technical_description);
@@ -3522,8 +3543,8 @@ const clickboton22 = () => {'use strict';
 		dayContent.appendChild(saturday);
 		let divDay = document.createElement("div");
 		// console.log(inf[0]); // Complete
-		// console.log(inf[1]); // Complete
-		// console.log(inf[2]); // Complete
+		console.log(inf[1]); // Complete
+		console.log(inf[2]); // Complete
 		let hour = inf[0][0];
 		// Crear Filas configuradas
 		for (let k = 0; k < inf[0][2]; k++) {
@@ -3543,14 +3564,14 @@ const clickboton22 = () => {'use strict';
 							if (comit[4].includes(`${j - 1}`) && comit[1][0] <= comit[1][1] && (comit[1][0] <= hour - 1 && hour - 1 <= comit[1][1])) {
 								if (comit[1][0] == hour - 1) {
 									let day = createElementDiv(comit[0],`f22__days-day-${j}`,`${k + 2} / ${j + 1} / ${comit[1][2] - 1 + k + 3} / ${j + 2}`);
-									day.id = `${comit[1][0]}/${comit[1][1]}/${l}`;
+									day.id = `${comit[1][0]}/${comit[1][1] + 1}/${l}`;
 									divDay.appendChild(day);
 								}
 								break all;
 							} else if (comit[4].includes(`${j - 1}`) && comit[1][0] > comit[1][1] && (comit[1][0] <= hour - 1 || hour - 1 <= comit[1][1])) {
 								if (comit[1][0] == hour - 1) {
 									let day = createElementDiv(comit[0],`f22__days-day-${j}`,`${k + 2} / ${j + 1} / ${comit[1][2] - 1 + k + 3} / ${j + 2}`);
-									day.id = `${comit[1][0]}/${comit[1][1]}/${l}`;
+									day.id = `${comit[1][0]}/${comit[1][1] + 1}/${l}`;
 									divDay.appendChild(day);
 								}
 								break all;
@@ -3608,22 +3629,23 @@ const clickboton22 = () => {'use strict';
 			let max = parseInt(inf[0][2]);
 			for (let j = 0; j <= 7; j++) {
 				if (info[j].length != 0) {
-					let last_priority = [0,0,0,0];
+					let last_priority = [0,0,0,0,0,0,0,0];
 					let memory = [];
 					let lastMemory = 1;
 					for (let k = 0; k < info[j].length; k++) {
 						let free = info[j][k];
-						let allPriritys = [0,0,0,0];
+						let allPriritys = [0,0,0,0,0,0,0,0];
 						// Suma total del maximo de objetivos en un día
 						let stop = 0;
 						for (let l = 0; l < inf[2].length; l++) {
 							if (inf[2][l][4].includes(`${j - 1}`)) {
-								let num = parseInt(inf[2][l][3]);
+								let num = parseInt(inf[2][l][3][1]);
 								allPriritys[num] += 1;
 								stop++;
 							}
 						}
-						let objetivos_por_dia = allPriritys[0] + allPriritys[1] + allPriritys[2] + allPriritys[3];
+						let objetivos_por_dia = 0;
+						allPriritys.forEach((arr) => objetivos_por_dia += arr);
 						// Definiendo objetivos
 						if (free[0] == "Libre") {
 							let time = free[1].split(" / ");
@@ -3643,7 +3665,8 @@ const clickboton22 = () => {'use strict';
 												if (parseInt(object[1]) == duration && !memory.includes(object[0])) {
 													// Prioridades
 													let n_priority = 0;
-													let last = last_priority[0] + last_priority[1] + last_priority[2] + last_priority[3];
+													let last = 0;
+													last_priority.forEach((arr) => last += arr);
 													n_priority = objetivos_por_dia - last;
 													if (n_priority != 0) {
 														let day = createElementDiv(object[0],
@@ -3653,13 +3676,13 @@ const clickboton22 = () => {'use strict';
 														day.id = l;
 														day.addEventListener("mouseover", () => day.style.background = "#444");
 														day.addEventListener("mouseout", () => day.style.background = "#333");
-														let hour = free[2].split("/");
-														day.addEventListener("click", () => create__modal(inf,2,day.id,j-1,key,hour[0],hour[1]));
+														let moment = [inf[0][0] + memoryFree - 2,inf[0][0] + memoryFree + parseInt(object[1]) - 2];
+														day.addEventListener("click", () => create__modal(inf,2,day.id,j-1,key,moment[0],moment[1]));
 														dayContent.appendChild(day);
 														memory.push(object[0]);
-														lastMemory = object[3];
+														lastMemory = object[3][1];
 														memoryFree += parseInt(object[1]);
-														last_priority[object[3]]++;
+														last_priority[object[3][1]]++;
 														l = 0;
 													}
 												} else if (objectives == objetivos_por_dia) {
@@ -3668,7 +3691,7 @@ const clickboton22 = () => {'use strict';
 											// Prioridades
 											} else if (!ajuste_perfecto && !memory.includes(object[0])) {
 												let n_priority = 0;
-												for (let m = 0; m < object[3]; m++) {
+												for (let m = 0; m < object[3][1]; m++) {
 													n_priority += allPriritys[m] - last_priority[m];
 												}
 												if (n_priority == 0) {
@@ -3679,13 +3702,13 @@ const clickboton22 = () => {'use strict';
 													day.id = l;
 													day.addEventListener("mouseover", () => day.style.background = "#444");
 													day.addEventListener("mouseout", () => day.style.background = "#333");
-													let hour = free[2].split("/");
-													day.addEventListener("click", () => create__modal(inf,2,day.id,j-1,key,hour[0],hour[1]));
+													let moment = [inf[0][0] + memoryFree - 2,inf[0][0] + memoryFree + parseInt(object[1]) - 2];
+													day.addEventListener("click", () => create__modal(inf,2,day.id,j-1,key,moment[0],moment[1]));
 													dayContent.appendChild(day);
 													memory.push(object[0]);
-													lastMemory = object[3];
+													lastMemory = object[3][1];
 													memoryFree += parseInt(object[1]);
-													last_priority[object[3]]++;
+													last_priority[object[3][1]]++;
 													l = 0;
 												}
 											}
@@ -3718,7 +3741,9 @@ const clickboton22 = () => {'use strict';
 			for (let j = 0; j <= 7; j++) {
 				if (info[j].length != 0) {
 					for (let k = 0; k < info[j].length; k++) {
-						let day = createElementDiv(info[j][k][0],"f22__days-day",info[j][k][1]);
+						let obj = info[j][k];
+						let day = createElementDiv(obj[0],"f22__days-day",obj[1]);
+						day.addEventListener("click", () => create__modal(inf,1,obj[2].split("/")[2],j-1,key,obj[2].split("/")[0],obj[2].split("/")[1]));
 						dayContent.appendChild(day);
 					}
 				}

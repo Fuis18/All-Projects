@@ -759,6 +759,16 @@
 .f22__quest div:nth-child(6), .f22__right-input, .f22__right-active, .f22__right-input, .f22__right-inactive {
 	border: 1px solid #ccc;
 }
+textarea.f22__right-input {
+	height: 52px;
+	overflow-y: auto;
+	resize: none;
+	background: none;
+   color: rgb(204, 204, 204);
+}
+textarea.f22__right-input::-webkit-scrollbar-thumb {
+	background-color: #ccc;
+}
 .f22__quest .f22__ERR {
 	min-width: 170px;
 }
@@ -836,7 +846,7 @@
 }
 .f22__right-div {
 	display: grid;
-	grid-template-columns: 2fr 7fr;
+	grid-template-columns: 1fr 8fr;
 	grid-gap: 5px;
 	align-items: center;
 	padding: 10px 14px;
@@ -855,7 +865,7 @@
 }
 .f22__right-div .f22__right-input {
 	border: 1px solid #ccc;
-	border-radius: 15px;
+	/* border-radius: 15px; */
 	margin: 3px 2px;
 	padding: 4px 10px;
 	overflow-wrap: anywhere;
@@ -1013,6 +1023,7 @@
 	max-width: 900px;
 	margin: auto;
 	max-height: 550px;
+	min-height: 60vh;
 }
 .f22__modal h2 {
 	grid-area: title;
@@ -1029,8 +1040,8 @@
 	grid-area: content;
 	grid-template: 
 	"name 		descript"	1fr
-	"technical 	descript"	min-content
-	"recomend	recomend"	min-content
+	"technical 	descript"	1fr
+	"recomend	recomend"	1fr
 	"complete 	complete"	min-content
 	/min-content 1fr;
 	column-gap: 10px;
@@ -1162,6 +1173,9 @@
 	}
 	.f22__modal-background {
 		padding: 0 30px;
+	}
+	.f22__days-day {
+		font-size: .85em;
 	}
 }
 @media screen and (max-width: 600px) {

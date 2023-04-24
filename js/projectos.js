@@ -2676,6 +2676,8 @@ const clickboton22 = () => {'use strict';
 		object[modo][key][space] = rename;
 		IDBData.put(object, id);
 	}
+	// Workers for NOtifications
+	// const worker = new Worker("sw22.js");
 	const rangeTime = (input,modo) => {
 		if (input == 25) input = 1;
 		else if (input == -1) input = 23;
@@ -3293,7 +3295,7 @@ const clickboton22 = () => {'use strict';
 									if (e.className == "f22__commit") temporal[2] = parseInt(content.children[i].querySelector(`.${e.className}-get`).textContent.split(" ")[2]);
 									subinfo.push(temporal);
 								} else if (i == 5) {
-									subinfo.push(content.children[i].value.split("\n"));
+									subinfo.push(content.children[i].value);
 								} else if (i == 7) {
 									subinfo.push([content.children[i].value,content.children[i].value]);
 								} else if (i == 9) {
@@ -3473,8 +3475,9 @@ const clickboton22 = () => {'use strict';
 		let div_description = document.createElement("div");
 		div_description.classList.add("f22__modal-description");
 		let div_description_text = document.createElement("div");
-		div_description.textContent = "Descripción:"
-		div_description_text.textContent = element[2];
+		div_description.textContent = "Descripción:";
+		div_description_text.style.whiteSpace = "pre-wrap";
+		div_description_text.innerHTML = element[2];
 		div_description.appendChild(div_description_text);
 		// Recomendación
 		let div_recomendation = document.createElement("div");
@@ -3543,8 +3546,8 @@ const clickboton22 = () => {'use strict';
 		dayContent.appendChild(saturday);
 		let divDay = document.createElement("div");
 		// console.log(inf[0]); // Complete
-		console.log(inf[1]); // Complete
-		console.log(inf[2]); // Complete
+		// console.log(inf[1]); // Complete
+		// console.log(inf[2]); // Complete
 		let hour = inf[0][0];
 		// Crear Filas configuradas
 		for (let k = 0; k < inf[0][2]; k++) {

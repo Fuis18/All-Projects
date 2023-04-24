@@ -1164,8 +1164,8 @@ textarea.f22__right-input::-webkit-scrollbar-thumb {
 	.f22__modal-content {
 		grid-template: 
 		"name "		min-content
-		"descript"	1fr
-		"technical"	min-content
+		"descript"	6fr
+		"technical"	5fr
 		"recomend"	min-content
 		"complete"	min-content
 		/100%;
@@ -1175,7 +1175,14 @@ textarea.f22__right-input::-webkit-scrollbar-thumb {
 		padding: 0 30px;
 	}
 	.f22__days-day {
+		font-size: .78em;
+	}
+	.f22__schedule-input {
 		font-size: .85em;
+		padding: 4px 6px;
+	}
+	.f22__modal__name {
+		justify-content: center;
 	}
 }
 @media screen and (max-width: 600px) {

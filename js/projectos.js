@@ -2897,13 +2897,16 @@ const clickboton22 = () => {'use strict';
 		fiveOption.textContent = "Aprender algo";
 		let sixOption = document.createElement("option");
 		sixOption.value = 6;
-		sixOption.textContent = "Administrar";
+		sixOption.textContent = "Descansar";
 		let sevenOption = document.createElement("option");
 		sevenOption.value = 7;
-		sevenOption.textContent = "Social";
+		sevenOption.textContent = "Administrar";
 		let eightOption = document.createElement("option");
 		eightOption.value = 8;
-		eightOption.textContent = "Ocio";
+		eightOption.textContent = "Social";
+		let nineOption = document.createElement("option");
+		nineOption.value = 9;
+		nineOption.textContent = "Ocio";
 		typeInput.appendChild(zeroOption);
 		typeInput.appendChild(oneOption);
 		typeInput.appendChild(twoOption);
@@ -2913,6 +2916,7 @@ const clickboton22 = () => {'use strict';
 		typeInput.appendChild(sixOption);
 		typeInput.appendChild(sevenOption);
 		typeInput.appendChild(eightOption);
+		typeInput.appendChild(nineOption);
 		if (data[modo] && n != -1) setTimeout(() => typeInput.selectedIndex = parseInt(data[modo][n][3][0]),200);
 		let weekName = document.createElement("div");
 		weekName.textContent = "Días:";
@@ -3463,9 +3467,10 @@ const clickboton22 = () => {'use strict';
 			case 3:	div_technical_type.textContent = "Tipo: Estudiar";			break;
 			case 4:	div_technical_type.textContent = "Tipo: Trabajar";			break;
 			case 5:	div_technical_type.textContent = "Tipo: Aprender algo";	break;
-			case 6:	div_technical_type.textContent = "Tipo: Administrar";		break;
-			case 7:	div_technical_type.textContent = "Tipo: Social";			break;
-			case 8:	div_technical_type.textContent = "Tipo: Ocio";				break;
+			case 6:	div_technical_type.textContent = "Tipo: Descansar";		break;
+			case 7:	div_technical_type.textContent = "Tipo: Administrar";		break;
+			case 8:	div_technical_type.textContent = "Tipo: Social";			break;
+			case 9:	div_technical_type.textContent = "Tipo: Ocio";				break;
 			default:div_technical_type.textContent = "Tipo: None";				break;
 		}
 		div_technical.appendChild(div_technical_hour);
@@ -3632,12 +3637,12 @@ const clickboton22 = () => {'use strict';
 			let max = parseInt(inf[0][2]);
 			for (let j = 0; j <= 7; j++) {
 				if (info[j].length != 0) {
-					let last_priority = [0,0,0,0,0,0,0,0];
+					let last_priority = [0,0,0,0,0,0,0,0,0];
 					let memory = [];
 					let lastMemory = 1;
 					for (let k = 0; k < info[j].length; k++) {
 						let free = info[j][k];
-						let allPriritys = [0,0,0,0,0,0,0,0];
+						let allPriritys = [0,0,0,0,0,0,0,0,0];
 						// Suma total del maximo de objetivos en un día
 						let stop = 0;
 						for (let l = 0; l < inf[2].length; l++) {

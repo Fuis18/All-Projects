@@ -1,0 +1,26 @@
+.container {
+   display: block;
+}
+.f1 {
+	display: flex;
+}
+.f1__container {
+	display: grid;
+	grid-template-columns: 70px 70px;
+	max-width: 300px;
+}
+.f1__container input {
+	padding: 10px;
+}
+.f1__answer {
+	padding: 15px;
+}
+.f1__answer button {
+	width: 35px;
+	height: 38px;
+	font-size: 35px;
+	padding: 0;
+}
+.f1__input1-down {
+	grid-column: 1 / 3;
+}

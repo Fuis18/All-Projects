@@ -1,0 +1,23 @@
+.container {
+   display: block;
+}
+.f21 {
+	display: grid;
+	grid-template-columns: 3fr 5fr 3fr;
+}
+.f21__container input {
+	padding: 6px 8px;
+	cursor: pointer;
+	border: 1px solid var(--border);
+	border-radius: 20px;
+	margin: 4px 1px;
+}
+.f21__container input:hover {
+   background: var(--hover);
+}
+.f21__container input:active {
+   background: var(--active);
+}
+.f21__develop h3, .f21__history h3 {
+	text-align: center;
+}

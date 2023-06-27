@@ -135,7 +135,7 @@ textarea.f22__right-input::-webkit-scrollbar-thumb {
 	grid-template-columns: 1fr 8fr;
 	grid-gap: 5px;
 	align-items: center;
-	padding: 10px 14px;
+	padding: 0 20px 5px 0;
 	border-bottom: 1px solid var(--border);
 	background: none;
 	margin: 15px 0;
@@ -396,4 +396,45 @@ textarea.f22__right-input::-webkit-scrollbar-thumb {
 }
 .f22__modal-complete input {
 	border-radius: 50px;
+}
+@media screen and (max-width: 850px) {
+	.f22 {
+		grid-template-columns: initial;
+		Justify-content: center;
+	}
+	.f22__import-box {
+		width: calc(100vw - 51px);
+	}
+}
+@media screen and (max-width: 700px) {
+	.f4 {
+		grid-template: 
+		"window" 53px
+		"button" auto
+		"history" auto
+		/1fr;
+	}
+	.f22__modal-content {
+		grid-template: 
+		"name "		min-content
+		"descript"	6fr
+		"technical"	5fr
+		"recomend"	min-content
+		"complete"	min-content
+		/100%;
+		grid-gap: 5px;
+	}
+	.f22__modal-background {
+		padding: 0 30px;
+	}
+	.f22__days-day {
+		font-size: .78em;
+	}
+	.f22__schedule-input {
+		font-size: .85em;
+		padding: 4px 6px;
+	}
+	.f22__modal__name {
+		justify-content: center;
+	}
 }

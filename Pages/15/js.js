@@ -63,7 +63,7 @@ document.querySelector(".desarrollo15").innerHTML = `
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.addEventListener("progress", e => {'use strict';
-               let max_width = document.querySelector(".content").clientWidth - 8;
+               let max_width = document.querySelector(".content").clientWidth;
                let carga = Math.round(e.loaded / file.size * 100);
                loadingBar.style.width = `${max_width * carga/100}px`;
                if (50 < carga) {
@@ -97,7 +97,7 @@ document.querySelector(".desarrollo15").innerHTML = `
          const reader = new FileReader();
          reader.readAsDataURL(file);
          reader.addEventListener("progress", e => {'use strict';
-            let max_width = document.querySelector(".content").clientWidth - 8;
+            let max_width = document.querySelector(".content").clientWidth;
             let carga = Math.round(e.loaded / file.size * 100);
             loadingBar.style.width = `${max_width * carga/100}px`;
             if (50 < carga) {
@@ -133,7 +133,7 @@ document.querySelector(".desarrollo15").innerHTML = `
             const reader = new FileReader();
             reader.readAsArrayBuffer(file);
             reader.addEventListener("progress", e => {'use strict';
-               let max_width = document.querySelector(".content").clientWidth - 8;
+               let max_width = document.querySelector(".content").clientWidth;
                let carga = Math.round(e.loaded / file.size * 100);
                loadingBar.style.width = `${max_width * carga/100}px`;
                if (50 < carga) {
@@ -170,7 +170,7 @@ document.querySelector(".desarrollo15").innerHTML = `
          const reader = new FileReader();
          reader.readAsArrayBuffer(file);
          reader.addEventListener("progress", e => {'use strict';
-            let max_width = document.querySelector(".content").clientWidth - 8;
+            let max_width = document.querySelector(".content").clientWidth;
             let carga = Math.round(e.loaded / file.size * 100);
             loadingBar.style.width = `${max_width * carga/100}px`;
             if (50 < carga) {

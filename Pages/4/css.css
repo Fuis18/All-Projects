@@ -72,3 +72,16 @@
 		filter: opacity(1);
 	}
 }
+@media screen and (max-width: 500px) {
+	.f4 {
+		grid-template: 
+		"windows" 53px
+		"buttons" auto
+		"history" auto
+		/1fr;
+	}
+	.f4__history-div {
+		display: flex;
+		flex-direction: column-reverse;
+	}
+}

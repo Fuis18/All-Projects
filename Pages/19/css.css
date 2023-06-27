@@ -251,3 +251,48 @@
 		background-position: 60px 0;
 	}
 }
+@media screen and (max-width: 942px) {
+	.flex, .f19 {
+		flex-direction: column;
+	}
+	.f19 {
+		align-items: center;
+	}
+	.f19__add {
+		margin: initial;
+		text-align: center;
+	}
+	.f19__update-div {
+		height: 238px;
+		grid-template-columns: none;
+		justify-items: center;
+		margin: 0 10px;
+		width: 200px;
+	}
+	.f19__update__title, .f19__update__save__title {
+		display: none;
+	}
+	.f19__update__head-container, .f19__update__saved-content {
+		max-height: 476px;
+		/*238 * 2*/
+		flex-direction: row;
+		justify-content: space-around;
+		flex-wrap: wrap;
+	}
+	.f19__update-optionsMaths {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+	}
+	.f19__update-main {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	.f19__update-name {
+		grid-column: 2 / 3;
+		grid-row: 1 / 2;
+	}
+	.f19__update-optionsButtons {
+		grid-gap: initial;
+		height: 60px;
+	}
+}

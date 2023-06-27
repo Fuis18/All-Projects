@@ -48,3 +48,9 @@
 .history p {
 	white-space: nowrap;
 }
+@media screen and (max-width: 500px) {
+	.f2 {
+		flex-direction: column;
+		align-items: center;
+	}
+}

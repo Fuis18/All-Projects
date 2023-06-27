@@ -28,7 +28,6 @@ body {
 	min-width: 340px;
 }
 .content {
-	margin: 8px 20px 0 20px;
 	display: flex;
 	flex-wrap: wrap;
 	background: var(--back);
@@ -52,10 +51,6 @@ body {
 }
 .incorrect {
 	color: var(--err-color);
-}
-h1 {
-	width: 100%;
-	margin: 10px auto 0 auto;
 }
 .Group{
 	display: flex;
@@ -88,7 +83,7 @@ label {
 }
 .form {
 	width:  100%;
-	margin: 16px 30px;
+	margin: 16px 20px;
 	background: var(--main);
 	display: flex;
 	flex-direction: column;
@@ -182,79 +177,28 @@ input[class="submit"]:active, input[id="submit"]:active {
 	justify-content: space-around;
 	flex-wrap: wrap;
 }
-
-
-
-
-
-
-
-/*input {
-	display: block;
-	width: 90%;
-	padding: 9px;
-	margin: 10px auto;
-	border: none;
-	outline: none;
-	border-top: 2px solid #48e;
-	background: transparent;
-	color: #fff;
+.deuda-input input {
+	border-top: 2px solid var(--border);
+	/* #48e */
 }
-input::placeholder {
-	color: #fff;
-}
-input[type="submit"] {
+.deuda-input input[type="submit"] {
 	border-radius: 10px;
 	width: 55%;
 	margin-top: 18px;
 	padding: 9px;
 }
-input[type="submit"]:hover {
-	background: #48e;
+.deuda-input input[type="submit"]:hover {
+	background: var(--hover);
 }
-form {
-	width: 90%;
-	border-radius: 15px;
-	margin: auto;
-	padding: 30px;
-	background: #238;
-	border: 1px solid #445;
+@media screen and (max-width: 500px) {
+	.content {
+		background: none;
+	}
+	.form {
+		margin: 0;
+	}
+	.deuda-input {
+		flex-direction: column;
+		align-items: center;
+  }
 }
-h2 {
-	color: #fff;
-	text-align: center;
-}
-.green {
-	color: #0a0;
-	background: #030;
-	border: 1px solid #0a0;
-}
-.red {
-	color: #a00;
-	background: #300;
-	border: 1px solid #a00;
-}
-.resultado {
-	padding: 10px;
-	text-align: center;
-	font-size: 13px;
-	width: 40%;
-	margin: auto;
-	border-radius: 10px;
-}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Calculadora</title>
+	<title>Admisión</title>
 	<link rel="stylesheet" href="../../fonts/fonts.css">
 	<link rel="stylesheet" href="../../css/header.css">
 	<link rel="stylesheet" href="../../css/main.css">
@@ -53,51 +53,85 @@
 		</nav>
 	</header>
 	<main>
-		<h1>Calculadora</h1>
+		<h1>Admisión</h1>
 		<div class="container">
-			<div class="f4">
-				<div class="f4__window">
-					<div class="f4__window-quest">
-						<div class="f4__window-operation"></div>
-						<div class="f4__window-text">_</div>
+			<div class="content">
+				<h1>Fromularios para la admisión 2023 para Larc War</h1>
+			<form autocomplete="off" class="form">
+				<div class="Group__first_name Group">
+					<label><b>Nombre del alumno:</b></label>
+					<div class="Group-items">
+						<input type="text" name="first_name" class="firstName">
+						<i class="fas cambiarI"></i>
 					</div>
-					<div class="f4__window-answer">0</div>
+					<p class="input-error">El nombre tiene que ser de 1 a 30 dígitos y solo puede contener letras.</p>
 				</div>
-				<div class="f4__history">
-					<h3 class="f4__history-h3">Historial</h3>
-					<div class="f4__history-div"></div>
+				<div class="Group__last_name Group">
+					<label><b>Apellido del alumno:</b></label>
+					<div class="Group-items">
+						<input type="text" name="last_name" class="lastName">
+						<i class="fas cambiarI"></i>
+					</div>
+					<p class="input-error">El apellido tiene que ser de 1 a 30 dígitos y solo puede contener letras.</p>
 				</div>
-				<div class="f4__buttons">
-					<button class="f4__button-n"   value="7"  >7</button>
-					<button class="f4__button-n"   value="8"  >8</button>
-					<button class="f4__button-n"   value="9"  >9</button>
-					<button class="f4__button-del" value="DEL">DEL</button>
-					<button class="f4__button-ac" value="AC"  >AC</button>
-					<button class="f4__button-n"   value="4"  >4</button>
-					<button class="f4__button-n"   value="5"  >5</button>
-					<button class="f4__button-n"   value="6"  >6</button>
-					<button class="f4__button-n"   value="x"  >x</button>
-					<button class="f4__button-n"   value="/"  >/</button>
-					<button class="f4__button-n"   value="1"  >1</button>
-					<button class="f4__button-n"   value="2"  >2</button>
-					<button class="f4__button-n"   value="3"  >3</button>
-					<button class="f4__button-n"   value="+"  >+</button>
-					<button class="f4__button-n"   value="-"  >-</button>
-					<button class="f4__button-n"   value="0"  >0</button>
-					<button class="f4__button-n"   value="."  >•</button>
-					<button class="f4__button-n"   value="("  >(</button>
-					<button class="f4__button-n"   value=")"  >)</button>
-					<button class="f4__button-n"   value="="  >=</button>
-					<button class="f4__button-n"   value=" "  >√</button>
-					<button class="f4__button-n"   value=" "  >x²</button>
-					<button class="f4__button-n"   value=" "  >^</button>
-					<button class="f4__button-n"   value=" "  >Exp</button>
-					<button class="f4__button-n"   value="ANS">ANS</button>
+				<div class="Group__materia Group">
+					<label><b>Nombre de la Materia:</b></label>
+					<div class="Group-items">
+						<input type="text" name="materia" class="materia">
+						<i class="fas cambiarI"></i>
+					</div>
+					<p class="input-error">El nombre de la materia esta mal escrito</p>
 				</div>
+				<div class="Group__mail Group">
+					<label><b>Correo Electronico:</b></label>
+					<div class="Group-items">
+						<input type="text" name="mail" class="mail">
+						<i class="fas cambiarI"></i>
+					</div>
+					<p class="input-error">El correo solo puede contener letras, numeros, puntos, guiones y guion bajo.</p>
+				</div>
+				<div class="Group__checkbox Group">
+					<div>
+						<input type="checkbox" name="checkbox" class="checkbox">
+						<label><b>Acepto los terminos y condiciones</b></label>
+					</div>
+					<p class="input-error">Rellenar los terminos y condiciones</p>
+				</div>
+				<div class="Group Group__submit">
+					<input type="submit" name="submit" value="Enviar" class="submit">
+					<div class="Group Notification">
+						<p class="form__error" id="form__error">
+							<i class="fa fa-exclamation-triangle"></i><b>Error:</b> Por favor rellena el formulario correctamente.
+						</p>
+						<p class="form__exito" id="form__exito">Formulario enviado</p>
+						<p class="form__materia" id="form__materia">
+							<i class="fa fa-exclamation-triangle"></i><b>Error:</b> Materia no disponible
+						</p>
+					</div>
+				</div>
+				<!-- attribut: onclick="javascript:clickboton()" -->
+			</form>
+		</div>
+		<div class="twice"></div>
+		<div class="joined-content">
+			<h1>Alumnos registrados en las materias indicadas</h1>
+		</div>
+		<div class="twice"></div>
+		<form autocomplete="off" class="deuda">
+			<h2>INSCRIPCIÓN A MATERIAS ADEUDADAS</h2>
+			<div class="deuda-input">
+				<input type="text" placeholder="Nombre" id="nombre">
+				<input type="text" placeholder="Mail" id="mail">
+				<input type="text" placeholder="Materia deudada" id="materia">
+				<input type="submit" value="Solicitar" id="submit"/>
+			</div>
+			<div class="resultado"></div>
+		</form>
 			</div>
 		</div>
 	</main>
 	<script type="text/javascript" src="../../js/header.js"></script>
 	<script type="text/javascript" src="js.js"></script>
+	<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 </body>
 </html>

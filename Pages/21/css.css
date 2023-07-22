@@ -1,23 +1,49 @@
 .container {
    display: block;
 }
-.f21 {
-	display: grid;
-	grid-template-columns: 3fr 5fr 3fr;
+h3, h4 {
+	text-align: center;
 }
-.f21__container input {
+.content {
+	display: grid;
+	grid-template-columns: 140px 1fr;
+}
+input {
 	padding: 6px 8px;
 	cursor: pointer;
 	border: 1px solid var(--border);
 	border-radius: 20px;
 	margin: 4px 1px;
 }
-.f21__container input:hover {
+input:hover {
    background: var(--hover);
 }
-.f21__container input:active {
+input:active {
    background: var(--active);
 }
-.f21__develop h3, .f21__history h3 {
+.develop {
+	grid-column: 2 / 3;
+	grid-row: 2 / 3;
+	position: relative;
+}
+.history__title {
+	grid-column: 3 / 4;
+	grid-row: 1 / 2;
+}
+.history {
+	grid-column: 3 / 4;
+	grid-row: 2 / 3;
+}
+.develop h3, .history h3 {
 	text-align: center;
+}
+#canvas {
+	border: 1px solid var(--border);
+}
+.canvas__input {
+	position: absolute;
+}
+.canvas__input input {
+	background: transparent;
+	width: 50px;
 }

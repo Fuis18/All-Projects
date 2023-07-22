@@ -74,92 +74,167 @@ const color_run = () => {
    div.style.borderStyle = "solid";
    div.style.borderColor = end;
 }
-let network = new brain.NeuralNetwork();
+let network = new brain.NeuralNetwork({
+   // Número de neuronas en cada capa oculta
+   hiddenLayers: [6,6]
+   // [3] inicial
+   // Candidatos: 24,18,12,9,6
+});
+// console.log(network)
 network.train([
-   // Fondo negro, texto blanco
-   {input: {rojo:0, verde:0, azul:0}, output: {rojo:1, verde:1, azul:1}},
-   // Fondo gris (32), texto blanco
-   {input: {rojo:0.125, verde:0.125, azul:0.125}, output: {rojo:1, verde:1, azul:1}},
-   // Fondo gris (48), texto blanco
-   {input: {rojo:0.1875, verde:0.1875, azul:0.1875}, output: {rojo:1, verde:1, azul:1}},
-   // Fondo gris (64), texto blanco
-   {input: {rojo:0.25, verde:0.25, azul:0.25}, output: {rojo:1, verde:1, azul:1}},
-   // Fondo gris (80), texto blanco
-   {input: {rojo:0.3125, verde:0.3125, azul:0.3125}, output: {rojo:1, verde:1, azul:1}},
-   // Fondo gris (96), texto blanco
-   {input: {rojo:0.325, verde:0.325, azul:0.325}, output: {rojo:1, verde:1, azul:1}},
-   // Fondo gris (128), texto negro
-   {input: {rojo:0.5, verde:0.5, azul:0.5}, output: {rojo:0, verde:0, azul:0}},
-   // Fondo gris (192), texto negro
-   {input: {rojo:0.75, verde:0.75, azul:0.75}, output: {rojo:0, verde:0, azul:0}},
    // Fondo blanco, texto negro
    {input: {rojo:1, verde:1, azul:1}, output: {rojo:0, verde:0, azul:0}},
+   // Fondo gris (192), texto negro
+   {input: {rojo:0.75, verde:0.75, azul:0.75}, output: {rojo:0, verde:0, azul:0}},
+   // Fondo gris (128), texto negro
+   {input: {rojo:0.5, verde:0.5, azul:0.5}, output: {rojo:0, verde:0, azul:0}},
+   // Fondo gris (96), texto blanco
+   {input: {rojo:0.325, verde:0.375, azul:0.375}, output: {rojo:1, verde:1, azul:1}},
+   // Fondo gris (80), texto blanco
+   {input: {rojo:0.3125, verde:0.3125, azul:0.3125}, output: {rojo:1, verde:1, azul:1}},
+   // Fondo gris (64), texto blanco
+   {input: {rojo:0.25, verde:0.25, azul:0.25}, output: {rojo:1, verde:1, azul:1}},
+   // Fondo gris (48), texto blanco
+   {input: {rojo:0.1875, verde:0.1875, azul:0.1875}, output: {rojo:1, verde:1, azul:1}},
+   // Fondo gris (32), texto blanco
+   {input: {rojo:0.125, verde:0.125, azul:0.125}, output: {rojo:1, verde:1, azul:1}},
+   // Fondo negro, texto blanco
+   {input: {rojo:0, verde:0, azul:0}, output: {rojo:1, verde:1, azul:1}},
    // Fondo rojo
-   {input: {rojo:1, verde:0, azul:0}, output: {rojo:0.203921, verde:0, azul:0}},
+   {input: {rojo:1, verde:0, azul:0}, output: {rojo:0.21875, verde:0, azul:0}},
    // Fondo rojo rojo oscuro
-   {input: {rojo:.75, verde:0, azul:0}, output: {rojo:1, verde:0.803921, azul:0.803921}},
+   {input: {rojo:.75, verde:0, azul:0}, output: {rojo:1, verde:0.8125, azul:0.8125}},
    // Fondo rojo oscuro
-   {input: {rojo:.5, verde:0, azul:0}, output: {rojo:1, verde:0.513725, azul:0.513725}},
+   {input: {rojo:.5, verde:0, azul:0}, output: {rojo:1, verde:0.53125, azul:0.53125}},
    // Fondo rojo oscuro oscuro
-   {input: {rojo:.25, verde:0, azul:0}, output: {rojo:1, verde:0.160784, azul:0.160784}},
+   {input: {rojo:.25, verde:0, azul:0}, output: {rojo:1, verde:0.15625, azul:0.15625}},
    // Fondo rojo oscuro oscuro oscuro
-   {input: {rojo:.125, verde:0, azul:0}, output: {rojo:0.960784, verde:0, azul:0}},
+   {input: {rojo:.125, verde:0, azul:0}, output: {rojo:0.96875, verde:0, azul:0}},
    // Fondo rojo rojo claro
-   {input: {rojo:1, verde:.25, azul:.25}, output: {rojo:0.305882, verde:0, azul:0}},
+   {input: {rojo:1, verde:.25, azul:.25}, output: {rojo:0.3125, verde:0, azul:0}},
+   // Fondo rojo rojo mid
+   {input: {rojo:.75, verde:.1875, azul:.1875}, output: {rojo:1, verde:0.875, azul:0.875}},
+   // Fondo rojo rojo mid oscuro
+   {input: {rojo:.5, verde:.125, azul:.125}, output: {rojo:1, verde:0.5625, azul:0.5625}},
+   // Fondo rojo rojo mid oscuro oscuro
+   {input: {rojo:.25, verde:.0625, azul:.0625}, output: {rojo:1, verde:0.25, azul:0.25}},
+   // Fondo rojo rojo mid oscuro oscuro oscuro
+   {input: {rojo:.125, verde:.03125, azul:.03125}, output: {rojo:0.96875, verde:0, azul:0}},
    // Fondo rojo claro
    {input: {rojo:1, verde:.5, azul:.5}, output: {rojo:0.5, verde:0, azul:0}},
+   // Fondo rojo rojo mid claro
+   {input: {rojo:.75, verde:.375, azul:.375}, output: {rojo:0.15625, verde:0, azul:0}},
+   // Fondo rojo mid mid
+   {input: {rojo:.5, verde:.25, azul:.25}, output: {rojo:1, verde:0.71875, azul:0.71875}},
+   // Fondo rojo mid mid oscuro
+   {input: {rojo:.25, verde:.125, azul:.125}, output: {rojo:1, verde:0.328125, azul:0.328125}},
+   // Fondo rojo mid mid oscuro oscuro
+   {input: {rojo:.125, verde:.0625, azul:.0625}, output: {rojo:1, verde:0, azul:0}},
    // Fondo rojo claro claro
-   {input: {rojo:1, verde:.75, azul:.75}, output: {rojo:0.705882, verde:0, azul:0}},
-   // Fondo midrojo
-   {input: {rojo:.5, verde:.25, azul:.25}, output: {rojo:1, verde:0.709803, azul:0.709803}},
+   {input: {rojo:1, verde:.75, azul:.75}, output: {rojo:0.71875, verde:0, azul:0}},
+   // Fondo rojo rojo mid claro claro
+   {input: {rojo:.75, verde:.5625, azul:.5625}, output: {rojo:0.4375, verde:0, azul:0}},
+   // Fondo rojo mid claro
+   {input: {rojo:.75, verde:.375, azul:.375}, output: {rojo:0.25, verde:0, azul:0}},
+   // Fondo rojo mid mid mid
+   {input: {rojo:.25, verde:.1875, azul:.1875}, output: {rojo:1, verde:0.375, azul:0.375}},
+   // Fondo rojo mid mid mid oscuro
+   {input: {rojo:.125, verde:.09375, azul:.09375}, output: {rojo:1, verde:0.625, azul:0.625}},
    // Fondo verde
    {input: {rojo:0, verde:1, azul:0}, output: {rojo:0, verde:0.4375, azul:0}},
    // Fondo verde verde oscuro
-   {input: {rojo:0, verde:.75, azul:0}, output: {rojo:0, verde:0.270588, azul:0}},
+   {input: {rojo:0, verde:.75, azul:0}, output: {rojo:0, verde:0.28125, azul:0}},
    // Fondo verde oscuro
-   {input: {rojo:0, verde:.5, azul:0}, output: {rojo:0, verde:0.913725, azul:0}},
+   {input: {rojo:0, verde:.5, azul:0}, output: {rojo:0.8125, verde:1, azul:0.8125}},
    // Fondo verde oscuro oscuro
-   {input: {rojo:0, verde:.25, azul:0}, output: {rojo:0, verde:0.725490, azul:0}},
+   {input: {rojo:0, verde:.25, azul:0}, output: {rojo:0, verde:0.71875, azul:0}},
    // Fondo verde oscuro oscuro oscuro
-   {input: {rojo:0, verde:.125, azul:0}, output: {rojo:0, verde:0.6, azul:0}},
+   {input: {rojo:0, verde:.125, azul:0}, output: {rojo:0, verde:0.59375, azul:0}},
    // Fondo verde verde claro
-   {input: {rojo:.25, verde:1, azul:.25}, output: {rojo:0, verde:0.270588, azul:0}},
+   {input: {rojo:.25, verde:1, azul:.25}, output: {rojo:0, verde:0.28125, azul:0}},
+   // Fondo verde verde mid
+   {input: {rojo:.1875, verde:.75, azul:.1875}, output: {rojo:0, verde:0.28125, azul:0}},
+   // Fondo verde verde mid oscuro
+   {input: {rojo:.125, verde:.5, azul:.125}, output: {rojo:0, verde:0.90625, azul:0}},
+   // Fondo verde verde mid oscuro oscuro
+   {input: {rojo:.0625, verde:.25, azul:.0625}, output: {rojo:0, verde:0.72875, azul:0}},
+   // Fondo verde verde mid oscuro oscuro oscuro
+   {input: {rojo:.03125, verde:.125, azul:.03125}, output: {rojo:0, verde:0.59375, azul:0}},
    // Fondo verde claro
-   {input: {rojo:.5, verde:1, azul:.5}, output: {rojo:0, verde:0.462745, azul:0}},
+   {input: {rojo:.5, verde:1, azul:.5}, output: {rojo:0, verde:0.46875, azul:0}},
+   // Fondo verde verde mid claro
+   {input: {rojo:.375, verde:.75, azul:.375}, output: {rojo:0, verde:0.28125, azul:0}},
+   // Fondo verde mid mid
+   {input: {rojo:.25, verde:.5, azul:.25}, output: {rojo:0.9375, verde:1, azul:0.9375}},
+   // Fondo verde mid mid oscuro
+   {input: {rojo:.125, verde:.25, azul:.125}, output: {rojo:0, verde:0.75, azul:0}},
+   // Fondo verde mid mid oscuro oscuro
+   {input: {rojo:.0625, verde:.125, azul:.0625}, output: {rojo:0, verde:0.59375, azul:0}},
    // Fondo verde claro claro
    {input: {rojo:.75, verde:1, azul:.75}, output: {rojo:0, verde:0.5, azul:0}},
-   // Fondo midverde
-   {input: {rojo:.25, verde:.5, azul:.25}, output: {rojo:0.929411, verde:1, azul:0.929411}},
+   // Fondo verde verde mid claro claro
+   {input: {rojo:.5625, verde:.75, azul:.5625}, output: {rojo:0, verde:0.3125, azul:0}},
+   // Fondo verde mid mid claro
+   {input: {rojo:.375, verde:.5, azul:.375}, output: {rojo:0, verde:0.21875, azul:0}},
+   // Fondo verde mid mid mid
+   {input: {rojo:.1875, verde:.25, azul:.1875}, output: {rojo:0.375, verde:1, azul:0.375}},
+   // Fondo verde mid mid mid oscuro
+   {input: {rojo:.09375, verde:.125, azul:.09375}, output: {rojo:0.625, verde:1, azul:0.625}},
    // Fondo azul
-   {input: {rojo:0, verde:0, azul:1}, output: {rojo:0.717647, verde:0.717647, azul:1}},
+   {input: {rojo:0, verde:0, azul:1}, output: {rojo:0.71875, verde:0.71875, azul:1}},
    // Fondo azul azul oscuro
-   {input: {rojo:0, verde:0, azul:.75}, output: {rojo:0.588235, verde:0.588235, azul:1}},
+   {input: {rojo:0, verde:0, azul:.75}, output: {rojo:0.59375, verde:0.59375, azul:1}},
    // Fondo azul oscuro
-   {input: {rojo:0, verde:0, azul:.5}, output: {rojo:0.474509, verde:0.474509, azul:1}},
+   {input: {rojo:0, verde:0, azul:.5}, output: {rojo:0.46875, verde:0.46875, azul:1}},
    // Fondo azul oscuro oscuro
-   {input: {rojo:0, verde:0, azul:.25}, output: {rojo:0.403921, verde:0.403921, azul:1}},
+   {input: {rojo:0, verde:0, azul:.25}, output: {rojo:0.40625, verde:0.40625, azul:1}},
    // Fondo azul oscuro oscuro oscuro
-   {input: {rojo:0, verde:0, azul:.125}, output: {rojo:0.384313, verde:0.384313, azul:1}},
+   {input: {rojo:0, verde:0, azul:.125}, output: {rojo:0.375, verde:0.375, azul:1}},
    // Fondo azul azul claro
-   {input: {rojo:.25, verde:.25, azul:1}, output: {rojo:0, verde:0, azul:0.290119}},
+   {input: {rojo:.25, verde:.25, azul:1}, output: {rojo:0, verde:0, azul:0.28125}},
+   // Fondo azul azul mid
+   {input: {rojo:.1875, verde:.1875, azul:.75}, output: {rojo:0.6875, verde:0.6875, azul:1}},
+   // Fondo azul azul mid oscuro
+   {input: {rojo:.125, verde:.125, azul:.5}, output: {rojo:0.53125, verde:0.53125, azul:1}},
+   // Fondo azul azul mid oscuro oscuro
+   {input: {rojo:.0625, verde:.0625, azul:.25}, output: {rojo:0.4375, verde:0.4375, azul:1}},
+   // Fondo azul azul mid oscuro oscuro oscuro
+   {input: {rojo:.03125, verde:.03125, azul:.125}, output: {rojo:0.40625, verde:0.40625, azul:1}},
    // Fondo azul claro
-   {input: {rojo:.5, verde:.5, azul:1}, output: {rojo:0, verde:0, azul:0.568627}},
-   // Fondo midazul
-   {input: {rojo:.5, verde:.5, azul:1}, output: {rojo:0.686274, verde:0.686274, azul:1}},
+   {input: {rojo:.5, verde:.5, azul:1}, output: {rojo:0, verde:0, azul:0.5625}},
+   // Fondo azul azul mid claro
+   {input: {rojo:.375, verde:.375, azul:.75}, output: {rojo:0, verde:0, azul:0.46875}},
+   // Fondo azul mid mid
+   {input: {rojo:.25, verde:.25, azul:.5}, output: {rojo:0.6875, verde:0.6875, azul:1}},
+   // Fondo azul mid mid oscuro
+   {input: {rojo:.125, verde:.125, azul:.25}, output: {rojo:0.484375, verde:0.484375, azul:1}},
+   // Fondo azul mid mid oscuro oscuro
+   {input: {rojo:.0625, verde:.0625, azul:.125}, output: {rojo:0.40625, verde:0.40625, azul:1}},
+   // Fondo azul claro claro
+   {input: {rojo:.75, verde:.75, azul:1}, output: {rojo:0.125, verde:0.125, azul:1}},
+   // Fondo azul azul mid claro claro
+   {input: {rojo:.5625, verde:.5625, azul:.75}, output: {rojo:0, verde:0, azul:0.625}},
+   // Fondo azul mid mid claro
+   {input: {rojo:.375, verde:.375, azul:.5}, output: {rojo:0, verde:0, azul:0.328125}},
+   // Fondo azul mid mid mid
+   {input: {rojo:.1875, verde:.1875, azul:.25}, output: {rojo:0.375, verde:0.375, azul:1}},
+   // Fondo azul mid mid mid oscuro
+   {input: {rojo:.5, verde:.5, azul:1}, output: {rojo:0.625, verde:0.625, azul:1}},
+
    // Fondo rojo verde
-   {input: {rojo:1, verde:1, azul:0}, output: {rojo:0.454901, verde:0.454901, azul:0}},
+   {input: {rojo:1, verde:1, azul:0}, output: {rojo:0.453125, verde:0.453125, azul:0}},
    // Fondo rojo verde rojo verde oscuro
-   {input: {rojo:.75, verde:.75, azul:0}, output: {rojo:0.298039, verde:0.298039, azul:0}},
+   {input: {rojo:.75, verde:.75, azul:0}, output: {rojo:0.28125, verde:0.28125, azul:0}},
    // Fondo rojo verde oscuro
    {input: {rojo:.5, verde:.5, azul:0}, output: {rojo:0.050980, verde:0.050980, azul:0}},
    // Fondo rojo verde oscuro oscuro
-   {input: {rojo:.25, verde:.25, azul:0}, output: {rojo:0.686274, verde:0.686274, azul:0}},
+   {input: {rojo:.25, verde:.25, azul:0}, output: {rojo:0.6875, verde:0.6875, azul:0}},
    // Fondo rojo verde oscuro oscuro oscuro
-   {input: {rojo:.125, verde:.125, azul:0}, output: {rojo:0.686274, verde:0.686274, azul:0}},
+   {input: {rojo:.125, verde:.125, azul:0}, output: {rojo:0.6875, verde:0.6875, azul:0}},
    // Fondo rojo verde rojo verde claro
-   {input: {rojo:1, verde:1, azul:.25}, output: {rojo:0.454901, verde:0.454901, azul:0}},
+   {input: {rojo:1, verde:1, azul:.25}, output: {rojo:0.453125, verde:0.453125, azul:0}},
    // Fondo rojo verde claro
-   {input: {rojo:1, verde:1, azul:.5}, output: {rojo:0.454901, verde:0.454901, azul:0}},
+   {input: {rojo:1, verde:1, azul:.5}, output: {rojo:0.453125, verde:0.453125, azul:0}},
    // Fondo rojo verde claro claro
    {input: {rojo:1, verde:1, azul:.75}, output: {rojo:0.458823, verde:0.458823, azul:0}},
    // Fondo mid rojo verde
@@ -181,7 +256,7 @@ network.train([
    // Fondo rojo azul claro claro
    {input: {rojo:1, verde:.75, azul:1}, output: {rojo:0.639215, verde:0, azul:0.639215}},
    // Fondo mid rojo azul
-   {input: {rojo:.5, verde:.25, azul:.5}, output: {rojo:1, verde:0.725490, azul:1}},
+   {input: {rojo:.5, verde:.25, azul:.5}, output: {rojo:1, verde:0.71875, azul:1}},
    // Fondo verde azul
    {input: {rojo:0, verde:1, azul:1}, output: {rojo:0, verde:0.4375, azul:0.4375}},
    // Fondo verde azul verde azul oscuro
@@ -229,7 +304,7 @@ network.train([
    // Fondo rojo rojo azul claro
    {input: {rojo:1, verde:.5, azul:.75}, output: {rojo:0.478431, verde:0, azul:0.360784}},
    // Fondo rojo rojo azul claro claro
-   {input: {rojo:1, verde:.75, azul:.875}, output: {rojo:0.647058, verde:0, azul:0.568627}},
+   {input: {rojo:1, verde:.75, azul:.875}, output: {rojo:0.647058, verde:0, azul:0.5625}},
    // Fondo mid rojo rojo azul
    {input: {rojo:.5, verde:.25, azul:.375}, output: {rojo:1, verde:0.694117, azul:1}},
    // Fondo rojo verde verde
@@ -239,7 +314,7 @@ network.train([
    // Fondo rojo verde verde oscuro
    {input: {rojo:.25, verde:.5, azul:0}, output: {rojo:0.886274, verde:1, azul:0.982222}},
    // Fondo rojo verde verde oscuro oscuro
-   {input: {rojo:.125, verde:.25, azul:0}, output: {rojo:0.360784, verde:0.717647, azul:0}},
+   {input: {rojo:.125, verde:.25, azul:0}, output: {rojo:0.360784, verde:0.71875, azul:0}},
    // Fondo rojo verde verde rojo verde verde claro
    {input: {rojo:.5, verde:1, azul:.25}, output: {rojo:0.223539, verde:0.443137, azul:0}},
    // Fondo rojo verde verde claro
@@ -255,7 +330,7 @@ network.train([
    // Fondo verde verde azul oscuro
    {input: {rojo:0, verde:.5, azul:.25}, output: {rojo:0, verde:0.164705, azul:0.082352}},
    // Fondo verde verde azul oscuro oscuro
-   {input: {rojo:0, verde:.25, azul:.125}, output: {rojo:0, verde:0.725490, azul:0.360784}},
+   {input: {rojo:0, verde:.25, azul:.125}, output: {rojo:0, verde:0.71875, azul:0.360784}},
    // Fondo verde verde azul verde verde azul claro
    {input: {rojo:.25, verde:1, azul:.5}, output: {rojo:0, verde:0.447058, azul:0.223529}},
    // Fondo verde verde azul claro
@@ -269,7 +344,7 @@ network.train([
    // Fondo rojo azul azul rojo azul azul oscuro
    {input: {rojo:.375, verde:0, azul:.75}, output: {rojo:0.819607, verde:0.639215, azul:1}},
    // Fondo rojo azul azul oscuro
-   {input: {rojo:.25, verde:0, azul:.5}, output: {rojo:0.729411, verde:0.454901, azul:1}},
+   {input: {rojo:.25, verde:0, azul:.5}, output: {rojo:0.729411, verde:0.453125, azul:1}},
    // Fondo rojo azul azul oscuro oscuro
    {input: {rojo:.125, verde:0, azul:.25}, output: {rojo:0.654901, verde:0.309803, azul:1}},
    // Fondo rojo azul azul rojo azul azul claro
@@ -293,12 +368,18 @@ network.train([
    // Fondo verde azul azul claro
    {input: {rojo:.5, verde:.75, azul:1}, output: {rojo:0, verde:0.313725, azul:0.419607}},
    // Fondo verde azul azul claro claro
-   {input: {rojo:.75, verde:.875, azul:1}, output: {rojo:0, verde:0.415686, azul:0.474509}},
+   {input: {rojo:.75, verde:.875, azul:1}, output: {rojo:0, verde:0.415686, azul:0.46875}},
    // Fondo mid verde azul azul
-   {input: {rojo:.25, verde:.375, azul:.5}, output: {rojo:0.717647, verde:0.839215, azul:1}},
+   {input: {rojo:.25, verde:.375, azul:.5}, output: {rojo:0.71875, verde:0.839215, azul:1}},
    // Fondo negro, texto blanco
    {input: {rojo:0, verde:0, azul:0}, output: {rojo:1, verde:1, azul:1}}
-]);
+],{
+   // learningRate: 0.03, // Tasa de aprendizaje
+   // errorThresh: 0.0005, // Umbral de error para detener el entrenamiento
+   // iterations: 200000, // Número de iteraciones/épocas de entrenamiento
+   // log: true, // Mostrar información de entrenamiento en la consola
+   // logPeriod: 500 // Mostrar información de entrenamiento cada 10 iteraciones
+});
 // 0 143 0, 0 128 0, 128 64 64, 34 28 130, 128 64 0
 
 let in_color = document.querySelector(".text input");
@@ -315,3 +396,14 @@ input.addEventListener("change",(e)=>{
    color_run()
 })
 // https://www.youtube.com/watch?v=UNFFLJPW7KQ
+
+// const trainedModel = net.toJSON();
+// 'trainedModel' contiene toda la configuración y los pesos del modelo entrenado
+
+// Puedes guardar 'trainedModel' en un archivo o en una base de datos para su uso posterior
+
+// const savedModel = ... // Carga 'trainedModel' desde el archivo o la base de datos
+
+// const net = new brain.NeuralNetwork();
+// net.fromJSON(savedModel);
+// El modelo se carga y está listo para ser utilizado para inferencia sin necesidad de entrenamiento adicional

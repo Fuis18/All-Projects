@@ -4,260 +4,201 @@ let quest = [];
 let ac = false;
 let ans = 0;
 let history = 0;
-const separatOperators = array => {'use strict';
-   // Seprar en multiplicación y división, atraves de la suma y resta
-   let k = 0, temporal = [], retornar = [];
-   for (let i = 0; i <= array.length - 1; i++) {
-      if (array[i] == "+" || array[i] == "-") {
-         // Signo en medio de números
+
+const num = (quest) => {
+   // Juntar números
+   return quest.reduce(
+     (arr, item) => {
+       let last = arr.length - 1;
+       // Es un número o un punto
+       if (!isNaN(item) || item === ".") {
+         if (!isNaN(arr[last])) {
+           arr[last] = (arr[last] || "") + item;
+         } else {
+           arr.push(item);
+         }
+       } else {
+         if (arr[last] !== undefined && arr[last] !== "") {
+           arr.push(item);
+         } else {
+           arr[last] = item;
+         }
+       }
+       return arr;
+     },
+     [""]
+   );
+ };
+ 
+ const calculate = (quest,answer) => {
+   console.log("Inicio ",quest);
+ 
+   const separator = (arr) => {
+     // Resolver problemas
+     let k = 0
+     let temporal = []
+     let result = [];
+     for (let i = 0; i < arr.length; i++) {
+       if (["+", "-"].includes(arr[i])) {
+         // Si son las operaciones
          if (i !== 0) k++;
          temporal = [];
-         temporal.push(array[i]);
-         retornar[k] = temporal;
-      } else if (array[i] == "") {
-         console.log("Error: " + temporal);
-         // retornar[k] = temporal;
-      } else {
-         // Número
-         temporal.push(array[i]);
-         retornar[k] = temporal;
-      }
-   }
-   return retornar;
-}
-const operateArrays = array => {'use strict';
-   // Multiplicar y Divividir con signos Arrays
-   let multiples = false, divisors = false, retornar = [], var1 = 1;
-   for (let i = 0; i <= array.length - 1; i++) {
-      var1 = 1;
-      for (let a = 0; a <= array[i].length - 1; a++) {
-         if (array[i][a] == "x" && array[i].length != 1) {
-            multiples = true;
-         } else if (array[i][a] == "/" && array[i].length != 1) {
-            divisors = true;
-         } else if (!a == 0 && array[i][a] == "(") {
-            // Todo se invierte o mantiene
-            var1 = 0;
-         } else if (array[i][a] == ")" || array[i][a] == "(") {
-            // Error
-         } else if (array[i][a] == "-" && array[i].length != 1) {
-            var1 = var1 * -1;
-         } else if (array[i][a] == "+" && array[i].length != 1) {
-            var1 = var1 * 1;
-         } else if (multiples == true) {
-            var1 = var1 * parseFloat(array[i][a]);
-            multiples = false;
-         } else if (divisors == true) {
-            var1 = var1 / parseFloat(array[i][a]);
-            divisors = false;
-         } else if ((array[i][a] == "+" || array[i][a] == "-" || array[i][a] == "x" || array[i][a] == "/") && array[i].length == 1) {
-            var1 = array[i][a];
-         } else if (array[i][a] == "ANS") {
-            var1 = ans;
+         temporal.push(arr[i]);
+         result[k] = temporal;
+       } else {
+         // Si es un número
+         temporal.push(arr[i]);
+         result[k] = temporal;
+       }
+     }
+     return result;
+   };
+   
+   const operator = (arr) => {
+     // Hacer operaciones
+     let signo = "+";
+     let op = "";
+     let num = 0;
+     for (let i = 0; i < arr.length; i++) {
+       if (["+","-"].includes(arr[i])) {
+         if (arr[i] == "-" && signo == "-") signo = "+";
+         else signo = arr[i];
+       } else if (["x","/"].includes(arr[i])) {
+         op = arr[i];
+       } else if (!isNaN(arr[i])) {
+         if (op == "x" || op == "/") {
+           let num1 = num.toString().split(".")
+           let num2 = arr[i].toString().split(".")
+           if (op == "x") {
+             if (Math.sign(arr[i]) == 1) {
+               num = parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * parseInt(signo.concat(num2[0].concat(num2[1] ? num2[1] : ""))) / Math.pow(10, num1[1] ? num1[1].length : 0 + num2[1] ? num2[1].length : 0);
+             } else if (signo == "+") {
+               num = parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * parseInt(num2[0].concat(num2[1] ? num2[1] : "")) / Math.pow(10, num1[1] ? num1[1].length : 0 + num2[1] ? num2[1].length : 0)
+             } else if (signo == "-") {
+               num = parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * parseInt(num2[0].concat(num2[1] ? num2[1] : "")) * -1 / Math.pow(10, num1[1] ? num1[1].length : 0 + num2[1] ? num2[1].length : 0)
+             }
+           } else{
+             if (Math.sign(arr[i]) == 1) {
+               num = (parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * Math.pow(10,num2[1] ? num2[1].length : 0)) / (parseInt(signo.concat(num2[0].concat(num2[1] ? num2[1] : ""))) * Math.pow(10,num1[1] ? num1[1].length : 0));
+             } else if (signo == "+") {
+               num = (parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * Math.pow(10,num2[1] ? num2[1].length : 0)) / (parseInt(num2[0].concat(num2[1] ? num2[1] : "")) * Math.pow(10,num1[1] ? num1[1].length : 0));
+             } else if (signo == "-") {
+               num = (parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * Math.pow(10,num2[1] ? num2[1].length : 0)) / (parseInt(num2[0].concat(num2[1] ? num2[1] : "")) * Math.pow(10,num1[1] ? num1[1].length : 0)) * -1;
+             }
+           }
+         } else if (signo == "+" || signo == "-") {
+           if (Math.sign(arr[i]) == 1) {
+             num += parseFloat(signo.concat(arr[i]))
+           } else if (signo == "+") {
+             num += parseFloat(arr[i])
+           } else if (signo == "-") {
+             num += parseFloat(arr[i]) * -1
+           }
+           signo = "+";
          } else {
-            var1 = var1 * parseFloat(array[i][a]);
+           console.log("Error: ",arr[i])
          }
-      }
-      retornar.push(var1);
+       } else {
+         console.log("Error: ",arr[i])
+       }
+     }
+     if (arr.length == 1 && ["+","-"].includes(arr[0])) return signo;
+     else if (arr.length == 1 && isNaN(arr[0])) return op;
+     else if (isNaN(arr[arr.length - 1])) return [num,op];
+     else return num;
+   };
+ 
+   const  processParentheses = (arr) => {
+     // Separar en parentesis
+     let stack = [];
+     let startIdx = 0;
+     let bParenthesis = false;
+     let nParenthesis = 0;
+     for (let i = 0; i < arr.length; i++) {
+       if (arr[i] == "(") {
+         if (nParenthesis == 0) startIdx = i; // Guardar el índice de inicio del paréntesis
+         bParenthesis = true;
+         nParenthesis++;
+       } else if (arr[i] == ")") {
+         nParenthesis--;
+         if (nParenthesis == 0 && bParenthesis) {
+           stack.push(calculate(arr.slice(startIdx + 1,i)))
+           bParenthesis = false;
+         }
+       } else if (!bParenthesis) {
+         stack.push(arr[i] === "ANS" ? answer : arr[i]);
+       }
+     }
+     return stack;
    }
-   return retornar;
-}
-const determine = array => {'use strict';
-   // Sumar y Restar
-   let var1 = 0, retornar = [];
-   for (let i = 0; i <= array.length - 1; i++) {
-      if (array.length == 1) {
-         var1 = array[i];
-      } else {
-         var1 += array[i];
+ 
+   // Separar parentesis
+   quest = processParentheses(quest);
+   console.log("Respuesta ",quest);
+ 
+   // Separar en Suma y resta
+   quest = separator(quest);
+   console.log("Respuesta ",quest);
+ 
+   // Resuelve
+   quest = quest.map(operator);
+   console.log("Respuesta ",quest);
+ 
+   // Aplanar Arrays
+   quest = quest.reduce((accumulate, value) => accumulate.concat(value), [])
+   console.log("Respuesta ",quest);
+ 
+   // Suma y Resta
+   quest = operator(quest)
+   console.log("Respuesta ",quest);
+
+   document.querySelector(".f4__window-answer").textContent = quest;
+ 
+   return quest;
+ };
+ 
+
+const options = btn => {'use strict';
+   if (btn === "AC") {
+      quest = []; // Reiniciar la operación
+      ans = "0"; // Reiniciar la respuesta a 0
+    } else if (btn === "DEL" || btn === "Backspace") {
+      const updatedQuest = [...quest];
+      updatedQuest.pop(); // Eliminar el último valor
+      quest = updatedQuest; // Actualizar el estado de la operación
+    } else if (btn === "Enter" || btn === "=") {
+      try {
+        history = ans;
+        ans = calculate(num(quest),ans);
+        quest = []
+      } catch (err) {
+        ans = "ERROR"
       }
-   }
-   return var1;
+    }
 }
+
 const buttonValue = (btn,ctrl) => {'use strict';
-   // detectar el valor del boton o key
-   if (btn == "Backspace" || btn == "Enter" || btn == "DEL" || btn == "AC" || btn == "=") {
-      if (btn == "Backspace" && ctrl == true) {
+   console.log(btn,ctrl,quest);
+   if (btn === "Backspace" || btn === "Enter" || btn === "DEL" || btn === "AC" || btn === "=") {
+      if (btn === "Backspace" && ctrl) {
          options("AC");
       } else {
          options(btn);
       }
-   } else if (btn == "0" || btn == "1" || btn == "2" || btn == "3" || btn == "4" || btn == "5" || btn == "6" || btn == "7" || btn == "8" || btn == "9" || btn == "/" || btn == "*"|| btn == "-" || btn == "+" || btn == "." || btn == "(" || btn == ")" || btn == "x" || btn == "ANS") {
-      let info = "", j = 0;
-      if (ans && !quest.length && !ac && (btn == "/" || btn == "*" || btn == "-" || btn == "+")) {
-         quest.push("ANS");
-         if (btn == "*") {
-            quest.push("x");
-         } else quest.push(btn);
-         for (let i = quest.length; i > 0; i--) {
-            info += quest[j];
-            j++;
-         }
+      } else if (["0","1","2","3","4","5","6","7","8","9",".","/","*","-","+","(",")","x","X","ANS","a","A","^"].includes(btn)) {
+      let info = "";
+      if (btn === "X" || btn === "*") btn = "x";
+      if (ans && !quest.length && ["x", "/", "-", "+", "^"].includes(btn)) {
+         quest = [...quest, "ANS", btn];
+         info = ["ANS", btn].join("");
       } else {
-         ac = false;
-         if (btn == "*") {
-            quest.push("x");
-         } else quest.push(btn);
-         for (let i = quest.length; i > 0; i--) {
-            info += quest[j];
-            j++;
-         }
+         quest = ([...quest, btn]);
+         info = quest.join("");
       }
       document.querySelector(".f4__window-operation").textContent = info;
-   }
+      }
 }
-const options = btn => {'use strict';
-   if (btn == "AC") {
-      // Borrar Todo
-      quest = [];
-      ac = true;
-      document.querySelector(".f4__window-operation").textContent = "";
-      document.querySelector(".f4__window-answer").textContent = "0";
-   } else if (btn == "DEL" || btn == "Backspace") {
-      // Borrar
-      quest.pop();
-      let info = "", j = 0;
-      for (let i = quest.length; i > 0; i--) {
-         info += quest[j];
-         j++;
-      }
-      document.querySelector(".f4__window-operation").textContent = info;
-   } else if (btn == "Enter" || btn == "=") {
-      // Operar
-      let arr = [], answer = [];
-      ac = false;
-      if (quest.length == 0) {
-         arr = history;
-      } else if (quest.length > 0) {
-      history = quest;
-      arr = quest;
-      quest = [];
-      }
-      // Juntar números
-      let operation = [], text = "", j = 0, temporal = [];
-      for (let i = 0; i < arr.length; i++) {
-         if (!isNaN(parseFloat(arr[i])) || arr[i] == ".") {
-            text += arr[i];
-         } else {
-            if (!text == "") {
-               operation.push(text);
-            }
-            operation.push(arr[i]);
-            text = "";
-         }
-         if (i == arr.length - 1) {
-            operation.push(text);
-         }
-      }
-      // Separar en parentesis
-      let parentesis = false, number = false, sign = false, postSign = "";
-      arr = [];
-      for (let i = 0; i < operation.length; i++) {
-         if ((operation[i] == "+" || operation[i] == "-" || operation[i] == "x" || operation[i] == "/") && parentesis == false) {
-            // Si es una operación
-            postSign = operation[i];
-            sign = true;
-         } else if ((operation[i] == "+"||operation[i] == "-"||operation[i] == "x" || operation[i] == "/")&&parentesis == true) {
-            // Si es una operación luego de un parentesis
-            j++;
-            temporal = [];
-            postSign = operation[i];
-            temporal.push(postSign);
-            arr[j] = postSign;
-            j++;
-            sign = true;
-            temporal = [];
-         } else if (operation[i] == "(" && sign == true && parentesis == false && number == false) {
-            // Signo antes del parentesis. Principio
-            temporal = [];
-            temporal.push(postSign);
-            arr[j] = temporal;
-            temporal = [];
-            sign = false;
-            j++;
-         } else if (operation[i] == "(" && sign == true && parentesis == false) {
-            // Signo antes del parentesis
-            j++;
-            temporal = [];
-            temporal.push(postSign);
-            arr[j] = temporal;
-            temporal = [];
-            sign = false;
-            j++;
-         } else if (operation[i] == "(" && sign == true && parentesis == true) {
-            // Signo en medio de parentesis
-            parentesis = false;
-         } else if (operation[i] == "(" && sign == false && i != 0) {
-            // Multiplicación implicita
-            arr[j] = temporal;
-            j++;
-            temporal = [];
-            temporal.push("x");
-            arr[j] = temporal;
-            temporal = [];
-            j++;
-         } else if (operation[i] == ")") {
-            // Activar el cierre de parentesis
-            parentesis = true;
-         } else if (operation[i] == "" || (operation[i] == "(" && sign == false && i == 0)) {
-            // Ignorar. Manejo de errores
-         } else if (sign == true && parentesis == true) {
-            // número despues de un signo y parentesis
-            temporal.push(operation[i]);
-            arr[j] = temporal;
-         } else if (sign == true) {
-            // número despues de un signo
-            temporal.push(postSign);
-            temporal.push(operation[i]);
-            arr[j] = temporal;
-            number = true;
-         } else {
-            // Si es un número
-            temporal.push(operation[i]);
-            arr[j] = temporal;
-            number = true;
-         }
-      }
-      console.log(arr)
-      // Operaciónes si hay parentesis
-      let var1 = 1, k = 0, arrEnding = [];
-      operation = [];
-      // console.log("Array:", arr);
-      for (let n = 0; n < arr.length; n++) {
-         // Separar en Multiplicación y División
-         operation = separatOperators(arr[n]);
-         // console.log("Answer:", operation);
-         // Multiplicar y Divividir con signos
-         temporal = operateArrays(operation);
-         // console.log("Answer:", temporal);
-         operation = [];
-         // Sumar y Restar
-         var1 = determine(temporal);
-         // console.log("Answer:", var1);
-         arrEnding.push(var1);
-         // console.log("Temporal: ", temporal);
-      }
-      console.log("Answer:", arrEnding);
-      // Separar en Multiplicación y División
-      answer = separatOperators(arrEnding);
-      // console.log("Answer:", answer);
-      // Multiplicar y Divividir con signos
-      answer = operateArrays(answer);
-      // console.log("Answer:", answer);
-      // Sumar y Restar
-      answer = determine(answer);
-      // console.log("Answer:", answer);
-      if (answer == 0 && history == 0) {
-         // Error
-      } else {
-      document.querySelector(".f4__window-answer").textContent = answer;
-      ans = answer;
-      let div = document.createElement("div");
-      div.textContent = answer;
-      document.querySelector(".f4__history-div").appendChild(div);
-      }
-   }
-}
+
 document.querySelectorAll(".f4__buttons button").forEach(button => {
    button.addEventListener("click",()=>{
       buttonValue(button.value);

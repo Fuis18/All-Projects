@@ -1,0 +1,87 @@
+.container {
+   display: block;
+}
+.f4, .f4__buttons {
+	display: grid;
+	grid-gap: 10px;
+	align-items: start;
+}
+.f4 {
+	grid-template: 
+	"windows history" 53px
+	"buttons history" auto
+	/7fr	4fr;
+}
+.f4__window {
+	grid-area: windows;
+	background: #cfc;
+	border-radius: 8px;
+	padding: 5px 14px;
+	overflow-y: overlay;
+}
+.f4__window-operation, .f4__window-text, .f4__window-answer {
+	color: #000;
+}
+.f4__window-quest {
+	width: 100%;
+	display: flex;
+	font-family: monospace;
+	font-size: 16px;
+}
+.f4__window-text {
+	font-weight: 700;
+	animation: animate-blink 1s forwards infinite;
+}
+.f4__window-answer {
+	text-align: right;
+	font-family: DS-DIGI;
+	font-size: 20px;
+}
+.f4__history {
+	grid-area: history;
+}
+.f4__buttons {
+	grid-area: buttons;
+	grid-template-columns: repeat(5,1fr);
+}
+.f4__buttons button {
+	cursor: pointer;
+	border: none;
+	background: #777;
+	border-radius: 3px;
+	height: 30px;
+	font-size: 15px;
+	font-weight: 700;
+	color: #fff;
+	box-shadow: 1px 1px 5px 0 #000;
+}
+.f4__buttons button:nth-child(4), .f4__buttons button:nth-child(5) {
+	background: #c55;
+}
+@keyframes animate-blink {
+	0% {
+		filter: opacity(1);
+	}
+	50% {
+		filter: opacity(0);
+	}
+	90% {
+		filter: opacity(1);
+	}
+	100% {
+		filter: opacity(1);
+	}
+}
+@media screen and (max-width: 500px) {
+	.f4 {
+		grid-template: 
+		"windows" 53px
+		"buttons" auto
+		"history" auto
+		/1fr;
+	}
+	.f4__history-div {
+		display: flex;
+		flex-direction: column-reverse;
+	}
+}

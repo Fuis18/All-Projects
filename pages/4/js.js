@@ -175,7 +175,7 @@ const options = btn => {'use strict';
         ans = "ERROR"
       }
     }
-   document.querySelector(".f4__window-operation").textContent = quest;
+   document.querySelector(".f4__window-operation").textContent = quest.join("");
    quest = []
 }
 

@@ -37,7 +37,7 @@ for (let i = 1; i <= veces; i++) {
   div.textContent = buildH3(i);
   div.addEventListener("click", () => {
     let a = document.createElement("a");
-    a.href = `pages/${i}/index.html`;
+    a.href = `Pages/${i}/index.html`;
     a.click();
   });
   form.appendChild(div);

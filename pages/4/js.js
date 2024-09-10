@@ -175,7 +175,8 @@ const options = btn => {'use strict';
         ans = "ERROR"
       }
     }
-   document.querySelector(".f4__window-operation").textContent = quest.join("");
+   if (typeof quest == 'object') document.querySelector(".f4__window-operation").textContent = quest.join("");
+   else document.querySelector(".f4__window-operation").textContent = quest;
 }
 
 const buttonValue = (btn,ctrl) => {'use strict';

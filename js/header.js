@@ -14,9 +14,7 @@ const actualizarHora = () => {
   }
 };
 document.querySelector(".home").addEventListener("click", () =>
-    location.assign(
-      "file:///C:/Users/usuario/Escritorio/Web/New%20Projects/index.html"
-    )
+    window.location.assign("/All-Projects")
   );
 actualizarHora();
 setInterval(actualizarHora, 1000);

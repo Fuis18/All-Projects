@@ -169,12 +169,14 @@ const options = btn => {'use strict';
     } else if (btn === "Enter" || btn === "=") {
       try {
         history = ans;
-        ans = calculate(num(quest),ans);
-        quest = []
+        quest = calculate(num(quest),ans);
+        ans = quest;
       } catch (err) {
         ans = "ERROR"
       }
     }
+   document.querySelector(".f4__window-operation").textContent = quest;
+   quest = []
 }
 
 const buttonValue = (btn,ctrl) => {'use strict';

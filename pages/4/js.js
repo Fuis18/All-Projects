@@ -133,26 +133,26 @@ const num = (quest) => {
    }
  
    // Separar parentesis
-   quest = processParentheses(quest);
-   console.log("Respuesta ",quest);
+   stack = processParentheses(quest);
+   console.log("Respuesta ",stack);
  
    // Separar en Suma y resta
-   quest = separator(quest);
-   console.log("Respuesta ",quest);
+   stack = separator(stack);
+   console.log("Respuesta ",stack);
  
    // Resuelve
-   quest = quest.map(operator);
-   console.log("Respuesta ",quest);
+   stack = stack.map(operator);
+   console.log("Respuesta ",stack);
  
    // Aplanar Arrays
-   quest = quest.reduce((accumulate, value) => accumulate.concat(value), [])
-   console.log("Respuesta ",quest);
+   stack = stack.reduce((accumulate, value) => accumulate.concat(value), [])
+   console.log("Respuesta ",stack);
  
    // Suma y Resta
-   quest = operator(quest)
-   console.log("Respuesta ",quest);
+   stack = operator(stack)
+   console.log("Respuesta ",stack);
 
-   document.querySelector(".f4__window-answer").textContent = quest;
+   document.querySelector(".f4__window-answer").textContent = stack;
  
    return quest;
  };
@@ -170,13 +170,12 @@ const options = btn => {'use strict';
     } else if (btn === "Enter" || btn === "=") {
       try {
         history = ans;
-        quest = calculate(num(quest),ans);
-        ans = quest;
+        ans = calculate(num(quest),ans);
       } catch (err) {
         ans = "ERROR"
       }
     }
-   if (typeof quest == 'object') document.querySelector(".f4__window-operation").textContent = quest.join("");
+   document.querySelector(".f4__window-operation").textContent = quest.join("");
 }
 
 const buttonValue = (btn,ctrl) => {'use strict';

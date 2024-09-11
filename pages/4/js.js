@@ -133,26 +133,26 @@ const num = (quest) => {
    }
  
    // Separar parentesis
-   stack = processParentheses(quest);
-   console.log("Respuesta ",stack);
+   quest = processParentheses(quest);
+   console.log("Respuesta ",quest);
  
    // Separar en Suma y resta
-   stack = separator(stack);
-   console.log("Respuesta ",stack);
+   quest = separator(quest);
+   console.log("Respuesta ",quest);
  
    // Resuelve
-   stack = stack.map(operator);
-   console.log("Respuesta ",stack);
+   quest = quest.map(operator);
+   console.log("Respuesta ",quest);
  
    // Aplanar Arrays
-   stack = stack.reduce((accumulate, value) => accumulate.concat(value), [])
-   console.log("Respuesta ",stack);
+   quest = quest.reduce((accumulate, value) => accumulate.concat(value), [])
+   console.log("Respuesta ",quest);
  
    // Suma y Resta
-   stack = operator(stack)
-   console.log("Respuesta ",stack);
+   quest = operator(quest)
+   console.log("Respuesta ",quest);
 
-   document.querySelector(".f4__window-answer").textContent = stack;
+   document.querySelector(".f4__window-answer").textContent = quest;
  
    return quest;
  };
@@ -166,16 +166,15 @@ const options = btn => {'use strict';
       const updatedQuest = [...quest];
       updatedQuest.pop(); // Eliminar el último valor
       quest = updatedQuest; // Actualizar el estado de la operación
-      document.querySelector(".f4__window-operation").textContent = quest;
     } else if (btn === "Enter" || btn === "=") {
       try {
         history = ans;
         ans = calculate(num(quest),ans);
+        quest = []
       } catch (err) {
         ans = "ERROR"
       }
     }
-   document.querySelector(".f4__window-operation").textContent = quest.join("");
 }
 
 const buttonValue = (btn,ctrl) => {'use strict';

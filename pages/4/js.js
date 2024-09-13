@@ -166,6 +166,7 @@ const options = btn => {'use strict';
       const updatedQuest = [...quest];
       updatedQuest.pop(); // Eliminar el último valor
       quest = updatedQuest; // Actualizar el estado de la operación
+      document.querySelector(".f4__window-operation").textContent = quest .join("")
     } else if (btn === "Enter" || btn === "=") {
       try {
         history = ans;

@@ -162,11 +162,12 @@ const options = btn => {'use strict';
    if (btn === "AC") {
       quest = []; // Reiniciar la operación
       ans = "0"; // Reiniciar la respuesta a 0
+      document.querySelector(".f4__window-operation").textContent = quest.join("")
     } else if (btn === "DEL" || btn === "Backspace") {
       const updatedQuest = [...quest];
       updatedQuest.pop(); // Eliminar el último valor
       quest = updatedQuest; // Actualizar el estado de la operación
-      document.querySelector(".f4__window-operation").textContent = quest .join("")
+      document.querySelector(".f4__window-operation").textContent = quest.join("")
     } else if (btn === "Enter" || btn === "=") {
       try {
         history = ans;
@@ -179,7 +180,6 @@ const options = btn => {'use strict';
 }
 
 const buttonValue = (btn,ctrl) => {'use strict';
-   console.log(btn,ctrl,quest);
    if (btn === "Backspace" || btn === "Enter" || btn === "DEL" || btn === "AC" || btn === "=") {
       if (btn === "Backspace" && ctrl) {
          options("AC");

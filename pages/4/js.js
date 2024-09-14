@@ -70,21 +70,21 @@ const num = (quest) => {
            let num1 = num.toString().split(".")
            let num2 = arr[i].toString().split(".")
            if (op == "x") {
-             if (Math.sign(arr[i]) == 1) {
-               num = parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * parseInt(signo.concat(num2[0].concat(num2[1] ? num2[1] : ""))) / Math.pow(10, num1[1] ? num1[1].length : 0 + num2[1] ? num2[1].length : 0);
-             } else if (signo == "+") {
-               num = parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * parseInt(num2[0].concat(num2[1] ? num2[1] : "")) / Math.pow(10, num1[1] ? num1[1].length : 0 + num2[1] ? num2[1].length : 0)
-             } else if (signo == "-") {
-               num = parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * parseInt(num2[0].concat(num2[1] ? num2[1] : "")) * -1 / Math.pow(10, num1[1] ? num1[1].length : 0 + num2[1] ? num2[1].length : 0)
-             }
-           } else{
-             if (Math.sign(arr[i]) == 1) {
-               num = (parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * Math.pow(10,num2[1] ? num2[1].length : 0)) / (parseInt(signo.concat(num2[0].concat(num2[1] ? num2[1] : ""))) * Math.pow(10,num1[1] ? num1[1].length : 0));
-             } else if (signo == "+") {
-               num = (parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * Math.pow(10,num2[1] ? num2[1].length : 0)) / (parseInt(num2[0].concat(num2[1] ? num2[1] : "")) * Math.pow(10,num1[1] ? num1[1].length : 0));
-             } else if (signo == "-") {
-               num = (parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * Math.pow(10,num2[1] ? num2[1].length : 0)) / (parseInt(num2[0].concat(num2[1] ? num2[1] : "")) * Math.pow(10,num1[1] ? num1[1].length : 0)) * -1;
-             }
+            if (Math.sign(arr[i]) == 1) {
+              num = parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * parseInt(signo.concat(num2[0].concat(num2[1] ? num2[1] : ""))) / Math.pow(10, (num1[1] ? num1[1].length : 0) + (num2[1] ? num2[1].length : 0));
+            } else if (signo == "+") {
+              num = parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * parseInt(num2[0].concat(num2[1] ? num2[1] : "")) / Math.pow(10, (num1[1] ? num1[1].length : 0) + (num2[1] ? num2[1].length : 0))
+            } else if (signo == "-") {
+              num = parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * parseInt(num2[0].concat(num2[1] ? num2[1] : "")) * -1 / Math.pow(10, (num1[1] ? num1[1].length : 0) + (num2[1] ? num2[1].length : 0))
+            }
+          } else{
+            if (Math.sign(arr[i]) == 1) {
+              num = (parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * Math.pow(10,num2[1] ? num2[1].length : 0)) / (parseInt(signo.concat(num2[0].concat(num2[1] ? num2[1] : ""))) * Math.pow(10,num1[1] ? num1[1].length : 0));
+            } else if (signo == "+") {
+              num = (parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * Math.pow(10,num2[1] ? num2[1].length : 0)) / (parseInt(num2[0].concat(num2[1] ? num2[1] : "")) * Math.pow(10,num1[1] ? num1[1].length : 0));
+            } else if (signo == "-") {
+              num = (parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * Math.pow(10,num2[1] ? num2[1].length : 0)) / (parseInt(num2[0].concat(num2[1] ? num2[1] : "")) * Math.pow(10,num1[1] ? num1[1].length : 0)) * -1;
+            }
            }
          } else if (signo == "+" || signo == "-") {
            if (Math.sign(arr[i]) == 1) {

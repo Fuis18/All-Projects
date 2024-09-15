@@ -54,59 +54,67 @@ const num = (quest) => {
      return result;
    };
    
-   const operator = (arr) => {
-     // Hacer operaciones
-     let signo = "+";
-     let op = "";
-     let num = 0;
-     for (let i = 0; i < arr.length; i++) {
-       if (["+","-"].includes(arr[i])) {
-         if (arr[i] == "-" && signo == "-") signo = "+";
-         else signo = arr[i];
-       } else if (["x","/"].includes(arr[i])) {
-         op = arr[i];
-       } else if (!isNaN(arr[i])) {
-         if (op == "x" || op == "/") {
-           let num1 = num.toString().split(".")
-           let num2 = arr[i].toString().split(".")
-           if (op == "x") {
+  const operator = (arr) => {
+    // Hacer operaciones
+    let sign = "+";
+    let op = "";
+    let num = 0;
+    for (let i = 0; i < arr.length; i++) {
+      if (["+","-"].includes(arr[i])) {
+        if (arr[i] == "-" && sign == "-") sign = "+";
+        else sign = arr[i];
+      } else if (["x","/"].includes(arr[i])) {
+        op = arr[i];
+      } else if (!isNaN(arr[i])) {
+        let [NI1,ND1] = num.toString().split(".")
+        let [NI2,ND2] = arr[i].toString().split(".")
+        ND2 = ND2 ? ND2 : "";
+        ND1 = ND1 ? ND1 : "";
+        let NF1 = ND1.length;
+        let NF2 = ND2.length;
+        if (op == "x" || op == "/") {
+          if (op == "x") {
             if (Math.sign(arr[i]) == 1) {
-              num = parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * parseInt(signo.concat(num2[0].concat(num2[1] ? num2[1] : ""))) / Math.pow(10, (num1[1] ? num1[1].length : 0) + (num2[1] ? num2[1].length : 0));
-            } else if (signo == "+") {
-              num = parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * parseInt(num2[0].concat(num2[1] ? num2[1] : "")) / Math.pow(10, (num1[1] ? num1[1].length : 0) + (num2[1] ? num2[1].length : 0))
-            } else if (signo == "-") {
-              num = parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * parseInt(num2[0].concat(num2[1] ? num2[1] : "")) * -1 / Math.pow(10, (num1[1] ? num1[1].length : 0) + (num2[1] ? num2[1].length : 0))
+              num = parseInt(NI1.concat(ND1)) * parseInt(sign.concat(NI2.concat(ND2))) / Math.pow(10, (NF1) + (NF2));
+            } else {
+              num = parseInt(NI1.concat(ND1)) * parseInt(NI2.concat(ND2)) / Math.pow(10, (NF1) + (NF2))
+              if (sign == "-") num *= -1;
             }
-          } else{
+          } else {
             if (Math.sign(arr[i]) == 1) {
-              num = (parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * Math.pow(10,num2[1] ? num2[1].length : 0)) / (parseInt(signo.concat(num2[0].concat(num2[1] ? num2[1] : ""))) * Math.pow(10,num1[1] ? num1[1].length : 0));
-            } else if (signo == "+") {
-              num = (parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * Math.pow(10,num2[1] ? num2[1].length : 0)) / (parseInt(num2[0].concat(num2[1] ? num2[1] : "")) * Math.pow(10,num1[1] ? num1[1].length : 0));
-            } else if (signo == "-") {
-              num = (parseInt(num1[0].concat(num1[1] ? num1[1] : "")) * Math.pow(10,num2[1] ? num2[1].length : 0)) / (parseInt(num2[0].concat(num2[1] ? num2[1] : "")) * Math.pow(10,num1[1] ? num1[1].length : 0)) * -1;
+              num = (parseInt(NI1.concat(ND1)) * Math.pow(10,NF2)) / (parseInt(sign.concat(NI2.concat(ND2))) * Math.pow(10,NF1));
+            } else {
+              num = (parseInt(NI1.concat(ND1)) * Math.pow(10,NF2)) / (parseInt(NI2.concat(ND2)) * Math.pow(10,NF1));
+              if (sign == "-") num *= -1;
             }
-           }
-         } else if (signo == "+" || signo == "-") {
-           if (Math.sign(arr[i]) == 1) {
-             num += parseFloat(signo.concat(arr[i]))
-           } else if (signo == "+") {
-             num += parseFloat(arr[i])
-           } else if (signo == "-") {
-             num += parseFloat(arr[i]) * -1
-           }
-           signo = "+";
-         } else {
-           console.log("Error: ",arr[i])
-         }
-       } else {
-         console.log("Error: ",arr[i])
-       }
-     }
-     if (arr.length == 1 && ["+","-"].includes(arr[0])) return signo;
-     else if (arr.length == 1 && isNaN(arr[0])) return op;
-     else if (isNaN(arr[arr.length - 1])) return [num,op];
-     else return num;
-   };
+          }
+        } else if (sign == "+" || sign == "-") {
+          let float = 0; // Llevarse una
+          ND1 = ND1 == "" ? 0 : parseInt(ND1);
+          ND2 = ND2 == "" ? 0 : parseInt(ND2);
+          if (NF1 < NF2) ND1 *= Math.pow(10,NF2 - 1);
+          else ND2 *= Math.pow(10,NF1 - 1);
+          float = ND2 == 0 ? 0 : ND2.toString().length;
+          // Desarrollar
+          if (Math.sign(arr[i]) == 1) {
+            num = parseFloat(`${sign}${(parseInt(`${NI1}${ND1}`) + parseInt(`${NI2}${ND2}`)) / Math.pow(10,float)}`);
+          } else {
+            num = parseFloat(`${(parseInt(`${NI1}${ND1}`) + parseInt(`${NI2}${ND2}`)) / Math.pow(10,float)}`);
+            if (sign == "-") num *= -1;
+          }
+          sign = "+";
+        } else {
+          console.log("Error: ",arr[i]);
+        }
+      } else {
+        console.log("Error: ",arr[i]);
+      }
+    }
+    if (arr.length == 1 && ["+","-"].includes(arr[0])) return sign;
+    else if (arr.length == 1 && isNaN(arr[0])) return op;
+    else if (isNaN(arr[arr.length - 1])) return [num,op];
+    else return num;
+  };
  
    const  processParentheses = (arr) => {
      // Separar en parentesis

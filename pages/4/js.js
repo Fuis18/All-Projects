@@ -97,9 +97,9 @@ const num = (quest) => {
           float = ND2 == 0 ? 0 : ND2.toString().length;
           // Desarrollar
           if (Math.sign(arr[i]) == 1) {
-            num = parseFloat(`${sign}${(parseInt(`${NI1}${ND1}`) + parseInt(`${NI2}${ND2}`)) / Math.pow(10,float)}`);
+            num = parseFloat(`${sign}${((parseInt(`${NI1}${ND1}`) + parseInt(`${NI2}${ND2 == 0 ? "" : ND2}`))) / Math.pow(10,float)}`);
           } else {
-            num = parseFloat(`${(parseInt(`${NI1}${ND1}`) + parseInt(`${NI2}${ND2}`)) / Math.pow(10,float)}`);
+            num = parseFloat(`${((parseInt(`${NI1}${ND1}`) + parseInt(`${NI2}${ND2 == 0 ? "" : ND2}`))) / Math.pow(10,float)}`);
             if (sign == "-") num *= -1;
           }
           sign = "+";

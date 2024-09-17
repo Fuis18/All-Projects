@@ -186,7 +186,6 @@ const options = btn => {'use strict';
       try {
         history = ans;
         ans = calculate(num(quest),ans);
-        quest = []
       } catch (err) {
         ans = "ERROR"
       }
@@ -201,9 +200,13 @@ const buttonValue = (btn,ctrl) => {'use strict';
          options(btn);
       }
       } else if (["0","1","2","3","4","5","6","7","8","9",".","/","*","-","+","(",")","x","X","ANS","a","A","^"].includes(btn)) {
+      if (result) {
+        quest = []
+        result = false
+      }
       let info = "";
       if (btn === "X" || btn === "*") btn = "x";
-      if (ans && !quest.length && ["x", "/", "-", "+", "^"].includes(btn)) {
+      if (history && ["x", "/", "-", "+", "^"].includes(btn) && !quest.length) {
          quest = [...quest, "ANS", btn];
          info = ["ANS", btn].join("");
       } else {

@@ -30,30 +30,60 @@ const num = (quest) => {
    );
  };
  
- const calculate = (quest,answer) => {
-   console.log("Inicio ",quest);
- 
-   const separator = (arr) => {
-     // Resolver problemas
-     let k = 0
-     let temporal = []
-     let result = [];
-     for (let i = 0; i < arr.length; i++) {
-       if (["+", "-"].includes(arr[i])) {
-         // Si son las operaciones
-         if (i !== 0) k++;
-         temporal = [];
-         temporal.push(arr[i]);
-         result[k] = temporal;
-       } else {
-         // Si es un número
-         temporal.push(arr[i]);
-         result[k] = temporal;
-       }
-     }
-     return result;
-   };
-   
+const calculate = (quest,answer) => {
+  console.log("Inicio ",quest);
+  
+  const  processParentheses = (arr) => {
+    // Separar en parentesis
+    let stack = [];
+    let startIdx = 0;
+    let bParenthesis = false;
+    let nParenthesis = 0;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] == "(") {
+        if (nParenthesis == 0) startIdx = i; // Guardar el índice de inicio del paréntesis
+        bParenthesis = true;
+        nParenthesis++;
+      } else if (arr[i] == ")") {
+        nParenthesis--;
+        if (nParenthesis == 0 && bParenthesis) {
+          let temporal = calculate(arr.slice(startIdx + 1,i));
+          if (isNaN(stack[stack.length-1])) stack.push(temporal);
+          else stack.push("x",temporal);
+          bParenthesis = false;
+        }
+      } else if (!bParenthesis) {
+        stack.push(arr[i] === "ANS" ? answer : arr[i]);
+      } else if (bParenthesis && arr.length - 1 == i) {
+        let temporal = calculate(arr.slice(startIdx + 1,i + 1));
+        if (isNaN(stack[stack.length-1])) stack.push(temporal);
+        else stack.push("x",temporal);
+      }
+    }
+    return stack;
+  }
+
+  const separator = (arr) => {
+    // Resolver problemas
+    let k = 0
+    let temporal = []
+    let result = [];
+    for (let i = 0; i < arr.length; i++) {
+      if (["+", "-"].includes(arr[i])) {
+        // Si son las operaciones
+        if (i !== 0) k++;
+        temporal = [];
+        temporal.push(arr[i]);
+        result[k] = temporal;
+      } else {
+        // Si es un número
+        temporal.push(arr[i]);
+        result[k] = temporal;
+      }
+    }
+    return result;
+  };
+  
   const operator = (arr) => {
     // Hacer operaciones
     let sign = "+";
@@ -92,14 +122,14 @@ const num = (quest) => {
           let float = 0; // Llevarse una
           ND1 = ND1 == "" ? 0 : parseInt(ND1);
           ND2 = ND2 == "" ? 0 : parseInt(ND2);
-          if (NF1 < NF2) ND1 *= Math.pow(10,NF2 - 1);
-          else ND2 *= Math.pow(10,NF1 - 1);
+          if (NF1 < NF2) ND1 *= Math.pow(10,NF2 - NF1);
+          else ND2 *= Math.pow(10,NF1 - NF2);
           float = ND2 == 0 ? 0 : ND2.toString().length;
           // Desarrollar
           if (Math.sign(arr[i]) == 1) {
-            num = parseFloat(`${sign}${((parseInt(`${NI1}${ND1}`) + parseInt(`${NI2}${ND2 == 0 ? "" : ND2}`))) / Math.pow(10,float)}`);
+            num = parseFloat(`${sign}${((parseInt(`${NI1}${ND1 == 0 ? "" : ND1}`) + parseInt(`${NI2}${ND2 == 0 ? "" : ND2}`))) / Math.pow(10,float)}`);
           } else {
-            num = parseFloat(`${((parseInt(`${NI1}${ND1}`) + parseInt(`${NI2}${ND2 == 0 ? "" : ND2}`))) / Math.pow(10,float)}`);
+            num = parseFloat(`${((parseInt(`${NI1}${ND1 == 0 ? "" : ND1}`) + parseInt(`${NI2}${ND2 == 0 ? "" : ND2}`))) / Math.pow(10,float)}`);
             if (sign == "-") num *= -1;
           }
           sign = "+";
@@ -115,55 +145,29 @@ const num = (quest) => {
     else if (isNaN(arr[arr.length - 1])) return [num,op];
     else return num;
   };
- 
-   const  processParentheses = (arr) => {
-     // Separar en parentesis
-     let stack = [];
-     let startIdx = 0;
-     let bParenthesis = false;
-     let nParenthesis = 0;
-     for (let i = 0; i < arr.length; i++) {
-       if (arr[i] == "(") {
-         if (nParenthesis == 0) startIdx = i; // Guardar el índice de inicio del paréntesis
-         bParenthesis = true;
-         nParenthesis++;
-       } else if (arr[i] == ")") {
-         nParenthesis--;
-         if (nParenthesis == 0 && bParenthesis) {
-           stack.push(calculate(arr.slice(startIdx + 1,i)))
-           bParenthesis = false;
-         }
-       } else if (!bParenthesis) {
-         stack.push(arr[i] === "ANS" ? answer : arr[i]);
-       }
-     }
-     return stack;
-   }
- 
-   // Separar parentesis
-   quest = processParentheses(quest);
-   console.log("Respuesta ",quest);
- 
-   // Separar en Suma y resta
-   quest = separator(quest);
-   console.log("Respuesta ",quest);
- 
-   // Resuelve
-   quest = quest.map(operator);
-   console.log("Respuesta ",quest);
- 
-   // Aplanar Arrays
-   quest = quest.reduce((accumulate, value) => accumulate.concat(value), [])
-   console.log("Respuesta ",quest);
- 
-   // Suma y Resta
-   quest = operator(quest)
-   console.log("Respuesta ",quest);
 
-   document.querySelector(".f4__window-answer").textContent = quest;
- 
-   return quest;
- };
+  // Separar parentesis
+  quest = processParentheses(quest);
+  console.log("Respuesta ",quest);
+
+  // Separar en Suma y resta
+  quest = separator(quest);
+  console.log("Respuesta ",quest);
+
+  // Resuelve
+  quest = quest.map(operator);
+  console.log("Respuesta ",quest);
+
+  // Aplanar Arrays
+  quest = quest.reduce((accumulate, value) => accumulate.concat(value), [])
+  console.log("Respuesta ",quest);
+
+  // Suma y Resta
+  quest = operator(quest)
+  console.log("Respuesta ",quest);
+
+  return quest;
+};
  
 
 const options = btn => {'use strict';

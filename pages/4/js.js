@@ -165,6 +165,8 @@ const calculate = (quest,answer) => {
   // Suma y Resta
   quest = operator(quest)
   console.log("Respuesta ",quest);
+  
+  document.querySelector(".f4__window-answer").textContent = quest;
 
   return quest;
 };

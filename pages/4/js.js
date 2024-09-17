@@ -4,6 +4,7 @@ let quest = [];
 let ac = false;
 let ans = 0;
 let history = 0;
+let result = false
 
 const num = (quest) => {
    // Juntar números
@@ -186,6 +187,7 @@ const options = btn => {'use strict';
       try {
         history = ans;
         ans = calculate(num(quest),ans);
+        result = true
       } catch (err) {
         ans = "ERROR"
       }

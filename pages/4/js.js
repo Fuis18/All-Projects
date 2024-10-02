@@ -7,29 +7,31 @@ let history = 0;
 let result = false
 
 const num = (quest) => {
-   // Juntar números
-   return quest.reduce(
-     (arr, item) => {
-       let last = arr.length - 1;
-       // Es un número o un punto
-       if (!isNaN(item) || item === ".") {
-         if (!isNaN(arr[last])) {
-           arr[last] = (arr[last] || "") + item;
-         } else {
-           arr.push(item);
-         }
-       } else {
-         if (arr[last] !== undefined && arr[last] !== "") {
-           arr.push(item);
-         } else {
-           arr[last] = item;
-         }
-       }
-       return arr;
-     },
-     [""]
-   );
- };
+  // Juntar números
+  return quest.reduce(
+    (arr, item) => {
+      let last = arr.length - 1;
+      // Es un número o un punto
+      if (!isNaN(item) || item === ".") {
+        if (!isNaN(arr[last])) {
+          arr[last] = (arr[last] || "") + item;
+        } else if (arr[last] == ".") {
+          arr[last] = arr[last] + item;
+        } else {
+          arr.push(item);
+        }
+      } else {
+        if (arr[last] !== undefined && arr[last] !== "") {
+          arr.push(item);
+        } else {
+          arr[last] = item;
+        }
+      }
+      return arr;
+    },
+    [""]
+  );
+};
  
 const calculate = (quest,answer) => {
   console.log("Inicio ",quest);
@@ -121,16 +123,15 @@ const calculate = (quest,answer) => {
           }
         } else if (sign == "+" || sign == "-") {
           let float = 0; // Llevarse una
-          ND1 = ND1 == "" ? 0 : parseInt(ND1);
-          ND2 = ND2 == "" ? 0 : parseInt(ND2);
-          if (NF1 < NF2) ND1 *= Math.pow(10,NF2 - NF1);
-          else ND2 *= Math.pow(10,NF1 - NF2);
-          float = ND2 == 0 ? 0 : ND2.toString().length;
+          if (NF1 < NF2) ND1 = `${ND1}${"0".repeat(NF2 - NF1)}`
+          else ND2 = `${ND2}${"0".repeat(NF1 - NF2)}`
+          float = ND2.toString().length;
           // Desarrollar
+          console.log(parseInt(`${NI1}${ND1}`),parseInt(`${NI2}${ND2}`))
           if (Math.sign(arr[i]) == 1) {
-            num = parseFloat(`${sign}${((parseInt(`${NI1}${ND1 == 0 ? "" : ND1}`) + parseInt(`${NI2}${ND2 == 0 ? "" : ND2}`))) / Math.pow(10,float)}`);
+            num = parseFloat(`${sign}${((parseInt(`${NI1}${ND1}`) + parseInt(`${NI2}${ND2}`))) / Math.pow(10,float)}`);
           } else {
-            num = parseFloat(`${((parseInt(`${NI1}${ND1 == 0 ? "" : ND1}`) + parseInt(`${NI2}${ND2 == 0 ? "" : ND2}`))) / Math.pow(10,float)}`);
+            num = parseFloat(`${((parseInt(`${NI1}${ND1}`) + parseInt(`${NI2}${ND2}`))) / Math.pow(10,float)}`);
             if (sign == "-") num *= -1;
           }
           sign = "+";

@@ -42,6 +42,7 @@ const calculate = (quest,answer) => {
     let startIdx = 0;
     let bParenthesis = false;
     let nParenthesis = 0;
+    let mParenthesis = false;
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] == "(") {
         if (nParenthesis == 0) startIdx = i; // Guardar el índice de inicio del paréntesis
@@ -54,9 +55,12 @@ const calculate = (quest,answer) => {
           if (isNaN(stack[stack.length-1])) stack.push(temporal);
           else stack.push("x",temporal);
           bParenthesis = false;
+          mParenthesis = true;
         }
       } else if (!bParenthesis) {
+        if (mParenthesis && !isNaN(arr[i])) stack.push("x");
         stack.push(arr[i] === "ANS" ? answer : arr[i]);
+        mParenthesis = false;
       } else if (bParenthesis && arr.length - 1 == i) {
         let temporal = calculate(arr.slice(startIdx + 1,i + 1));
         if (isNaN(stack[stack.length-1])) stack.push(temporal);
@@ -88,8 +92,6 @@ const calculate = (quest,answer) => {
   };
   
   const operator = (arr) => {
-    console.log("arr: ")
-    console.log(arr)
     // Hacer operaciones
     let sign = "+";
     let op = "";

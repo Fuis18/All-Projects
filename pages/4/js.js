@@ -168,6 +168,8 @@ const calculate = (quest,answer) => {
   quest = operator(quest)
   console.log("Respuesta ",quest);
   
+  document.querySelector(".f4__window-answer").textContent = quest;
+
   return quest;
 };
 

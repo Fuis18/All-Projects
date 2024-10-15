@@ -88,6 +88,8 @@ const calculate = (quest,answer) => {
   };
   
   const operator = (arr) => {
+    console.log("arr: ")
+    console.log(arr)
     // Hacer operaciones
     let sign = "+";
     let op = "";
@@ -107,14 +109,14 @@ const calculate = (quest,answer) => {
         let NF2 = ND2.length;
         if (op == "x" || op == "/") {
           if (op == "x") {
-            if (Math.sign(arr[i]) == 1) {
+            if (Math.sign(arr[i])) {
               num = parseInt(NI1.concat(ND1)) * parseInt(sign.concat(NI2.concat(ND2))) / Math.pow(10, (NF1) + (NF2));
             } else {
               num = parseInt(NI1.concat(ND1)) * parseInt(NI2.concat(ND2)) / Math.pow(10, (NF1) + (NF2))
               if (sign == "-") num *= -1;
             }
           } else {
-            if (Math.sign(arr[i]) == 1) {
+            if (Math.sign(arr[i])) {
               num = (parseInt(NI1.concat(ND1)) * Math.pow(10,NF2)) / (parseInt(sign.concat(NI2.concat(ND2))) * Math.pow(10,NF1));
             } else {
               num = (parseInt(NI1.concat(ND1)) * Math.pow(10,NF2)) / (parseInt(NI2.concat(ND2)) * Math.pow(10,NF1));
@@ -128,12 +130,8 @@ const calculate = (quest,answer) => {
           float = ND2.toString().length;
           // Desarrollar
           console.log(parseInt(`${NI1}${ND1}`),parseInt(`${NI2}${ND2}`))
-          if (Math.sign(arr[i]) == 1) {
-            num = parseFloat(`${sign}${((parseInt(`${NI1}${ND1}`) + parseInt(`${NI2}${ND2}`))) / Math.pow(10,float)}`);
-          } else {
-            num = parseFloat(`${((parseInt(`${NI1}${ND1}`) + parseInt(`${NI2}${ND2}`))) / Math.pow(10,float)}`);
-            if (sign == "-") num *= -1;
-          }
+          num = parseFloat(`${((parseInt(`${NI1}${ND1}`) + parseInt(`${NI2}${ND2}`))) / Math.pow(10,float)}`);
+          if (sign == "-") num *= -1;
           sign = "+";
         } else {
           console.log("Error: ",arr[i]);
@@ -168,11 +166,8 @@ const calculate = (quest,answer) => {
   quest = operator(quest)
   console.log("Respuesta ",quest);
   
-  document.querySelector(".f4__window-answer").textContent = quest;
-
   return quest;
 };
- 
 
 const options = btn => {'use strict';
    if (btn === "AC") {

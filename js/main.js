@@ -2,7 +2,7 @@
 // Variables
 let form = document.querySelector(".container");
 let fragment = document.createDocumentFragment();
-let veces = 22;
+let veces = 24;
 // Funciones
 // Contrucción del titulo de cada boton
 const buildH3 = (i) => {
@@ -29,6 +29,8 @@ const buildH3 = (i) => {
   if (i == 20) return "Web Paint";
   if (i == 21) return "Geometría";
   if (i == 22) return "Horario";
+  if (i == 23) return "...";
+  if (i == 24) return "POST DE ACCIONES";
 };
 // Ejecucción
 for (let i = 1; i <= veces; i++) {

@@ -8,7 +8,7 @@
   {
     "nombre": "ING. SISTEMAS - DENUNCIA",
     "contenido":
-      "En casos de acoso sexual en redes sociales, la recomendación es denunciar el incidente a las autoridades correspondientes, como la Policía Nacional del Perú, mediante su central telefónica 105 o en la comisaría más cercana. Si la víctima está recibiendo mensajes inapropiados, amenazas o si se están difundiendo "contenido"s íntimos sin su consentimiento, se debe tomar evidencia (capturas de pantalla, enlaces) y presentarla en la denuncia. Las autoridades pueden asesorar y, en casos graves, iniciar investigaciones para proteger a la víctima y tomar acciones legales contra el acosador.",
+      En casos de acoso sexual en redes sociales, la recomendación es denunciar el incidente a las autoridades correspondientes, como la Policía Nacional del Perú, mediante su central telefónica 105 o en la comisaría más cercana. Si la víctima está recibiendo mensajes inapropiados, amenazas o si se están difundiendo contenidos íntimos sin su consentimiento, se debe tomar evidencia (capturas de pantalla, enlaces) y presentarla en la denuncia. Las autoridades pueden asesorar y, en casos graves, iniciar investigaciones para proteger a la víctima y tomar acciones legales contra el acosador.,
     "img": "img/2.png"
   },
   {

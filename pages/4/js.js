@@ -371,7 +371,15 @@ const options = (btn) => {
 		try {
 			document.querySelector(".f4__window-history").textContent = ans;
 			let pack = calculate(num(quest), ans);
-			isNaN(pack[0]) ? (ans = "ERROR") : (ans = pack[0]);
+			if (isNaN(pack[0])) {
+				document.querySelector(".f4__window-answer").textContent =
+					"ERROR";
+				ans = "ERROR";
+			} else {
+				document.querySelector(".f4__window-answer").textContent =
+					pack[0];
+				ans = pack[0];
+			}
 			setProcess(pack[1]);
 			result = true;
 		} catch (err) {

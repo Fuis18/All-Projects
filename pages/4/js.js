@@ -100,13 +100,19 @@ const calculate = (quest, answer) => {
 		// Hacer operaciones
 		let sign = "+";
 		let op = "";
+		let jocker = false;
 		let num = 0;
+		console.log(arr);
 		for (let i = 0; i < arr.length; i++) {
+			console.log(arr[i]);
 			if (["+", "-"].includes(arr[i])) {
 				if (arr[i] == "-" && sign == "-") sign = "+";
 				else sign = arr[i];
 			} else if (["x", "/", "√"].includes(arr[i])) {
 				op = arr[i];
+			} else if (["%"].includes(arr[i])) {
+				num = num * 0.01;
+				jocker = true;
 			} else if (!isNaN(arr[i])) {
 				let [NI1, ND1] = num.toString().split(".");
 				let [NI2, ND2] = arr[i].toString().split(".");
@@ -187,6 +193,7 @@ const calculate = (quest, answer) => {
 		}
 		if (arr.length == 1 && ["+", "-"].includes(arr[0])) return sign;
 		else if (arr.length == 1 && isNaN(arr[0])) return op;
+		else if (isNaN(arr[arr.length - 1]) && jocker == true) return num;
 		else if (isNaN(arr[arr.length - 1])) return [num, op];
 		else return num;
 	};
@@ -195,16 +202,16 @@ const calculate = (quest, answer) => {
 
 	// Separar parentesis
 	quest = processParentheses(quest);
-	// console.log("Respuesta ", quest);
+	console.log("Respuesta ", quest);
 	progress.push(quest);
 
 	// Separar en Suma y resta
 	quest = separator(quest);
-	// console.log("Respuesta ", quest);
+	console.log("Respuesta ", quest);
 
 	// Resuelve
 	quest = quest.map(operator);
-	// console.log("Respuesta ", quest);
+	console.log("Respuesta ", quest);
 	progress.push(quest);
 
 	// Aplanar Arrays
